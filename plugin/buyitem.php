@@ -31,7 +31,7 @@ if(isset($_POST['id'])){
 
             date_default_timezone_set("Asia/Bangkok");
             $date = date("Y-m-d H:i:s");
-            $expire = date("Y-m-d H:i:s", strtotime("+1 day"));
+            $expire = date("Y-m-d H:i:s", strtotime("+30 day"));
 
             $data_sql = "SELECT * FROM game_data WHERE card_id = $id AND selled = 0 LIMIT 1";
             $data = $hyper->connect->query($data_sql)->fetch_array();
