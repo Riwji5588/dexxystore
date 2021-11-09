@@ -65,6 +65,13 @@ if ($total_game_row <= 0) {
                 } ?>
               </select>
             </div>
+            <div class="input-group input-group-sm">
+              <div class="input-group-prepend">
+                <span class="input-group-text hyper-bg-dark border-dark">รายละเอียด</span>
+              </div>
+              <textarea id="detailnew" name="detailnew" class="form-control form-control-sm hyper-form-control" style="height: 100px;min-height: 100px;max-height: 100px;"></textarea>
+            </div>
+
 
             <div class="input-group input-group-sm">
               <div class="input-group-prepend">
