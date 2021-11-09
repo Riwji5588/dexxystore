@@ -74,7 +74,7 @@ $page = $_GET['thispage'];
   </style>
 </head>
 <body>
-
+a
 
     <!-- User Navbar -->
     <?php
