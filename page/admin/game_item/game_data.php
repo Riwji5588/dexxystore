@@ -40,7 +40,7 @@ if ($total_game_row <= 0) {
               <div class="input-group-prepend">
                 <span class="input-group-text hyper-bg-dark border-dark">ID</span>
               </div>
-              <textarea id="usernamenew" name="stockId" type="text" class="form-control form-control-sm hyper-form-control " placeholder="Stock ID" required autocomplete="off"></textarea>
+              <textarea id="stockId" name="stockId" type="text" class="form-control form-control-sm hyper-form-control " placeholder="Stock ID" required autocomplete="off"></textarea>
             </div>
 
 
