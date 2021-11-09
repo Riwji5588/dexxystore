@@ -34,15 +34,15 @@
         <div class="card mt-4 shadow-dark radius-border hyper-bg-white">
         <div class="card-body">
         <div class="media">
-            <img src="assets/img/<?= $webimage; ?>" class="mr-3 img-fluid rounded-circle shadow-dark" style="width:17%;max-width: 130px;">
+            <img src="assets/img/logo.jpg" class="mr-3 img-fluid rounded-circle shadow-dark" style="width:17%;max-width: 130px;">
             <div class="media-body">
               <div class="mt-0 d-none d-lg-block">
-                  <h1 class="mt-0 mb-1"><b><?= strtoupper($webname) ?></b> เว็บไซต์บริการจำหน่ายไอดีมากมาย</h1>
+                  <h1 class="mt-0 mb-1"><b>Dexy Store</b> เว็บไซต์บริการจำหน่าย ID Netflix มากมาย</h1>
 <pre>
-<?= $webdetail; ?>
+Welcome to Dexy Store
 </pre>
               </div>
-              <div class="d-block d-lg-none"><h1 class="mt-0 mb-2"><b>HYPER STUDIO</b></h1><h4>เว็บไซต์บริการจำหน่ายไอดีมากมาย</h4></div>
+              <div class="d-block d-lg-none"><h1 class="mt-0 mb-2"><b></b></h1><h4>เว็บไซต์บริการจำหน่าย ID Netflix มากมาย</h4></div>
               
             </div>
         </div>

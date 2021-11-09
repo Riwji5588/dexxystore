@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-md navbar-light bg-light fixed-top">
-        <a class="navbar-brand" href="#">
-            <img src="assets/img/<?= $webimage; ?>" width="64" height="64" class="d-inline-block align-top rounded-circle">
+        <a class="navbar-brand" href="้home">
+            <img src="assets/img/logo.jpg" width="64" height="64" class="d-inline-block align-top rounded-circle">
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
