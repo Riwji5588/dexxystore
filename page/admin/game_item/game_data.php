@@ -39,17 +39,12 @@ if($total_game_row <= 0){
 
                 <div class="input-group input-group-sm mb-3 mt-4">
                   <div class="input-group-prepend">
-                    <span class="input-group-text hyper-bg-dark border-dark">ชื่อผู้ใช้งาน</span>
+                    <span class="input-group-text hyper-bg-dark border-dark">ID</span>
                   </div>
-                  <input id="usernamenew" name="usernamenew" type="text" class="form-control form-control-sm hyper-form-control" placeholder="ชื่อผู้ใช้งาน" required autocomplete="off">
+                  <textarea id="usernamenew" name="usernamenew" type="text" class="form-control form-control-sm hyper-form-control " placeholder="Stock ID" required autocomplete="off"></textarea>
                 </div>
 
-                <div class="input-group input-group-sm mb-3">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text hyper-bg-dark border-dark">รหัสผ่าน</span>
-                  </div>
-                  <input id="passwordnew" name="passwordnew" type="password" class="form-control form-control-sm hyper-form-control" placeholder="รหัสผ่าน" required autocomplete="off">
-                </div>
+                
 
                 <div class="input-group input-group-sm mb-3">
                   <div class="input-group-prepend">

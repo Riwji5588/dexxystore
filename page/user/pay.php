@@ -11,7 +11,7 @@
             <input type="text" id="ref" class="text-center form-control form-control-sm hyper-form-control ml-auto mr-auto" placeholder="กรอกลิ้งซองอั่งเปา" style="max-width:350px;width:80%;border: 1px solid #343a40;" autocomplete="off">
             <small id="giftlinkHelp" class="form-text" style="opacity: 0.7;">ตัวอย่างลิ้ง : https://gift.truemoney.com/campaign/?v=cofi9...</small>
             <button onclick="Pay()" type="button" class="btn btn-sm hyper-btn-success mt-3 ml-auto mr-auto w-100 mb-3" style="max-width:350px;"><i class="far fa-check-circle pr-1 pt-1"></i> ตรวจสอบการทำรายการ</button></br>
-            <small style="opacity: 0.7;">Truewallet Gift API By <a href="https://www.facebook.com/pagehyperstudio" class="text-sky" target="_blank" >Hyper Studio</a>.</small>
+           
             <div class="mt-4"></div>
       </div>
       </div>
