@@ -55,7 +55,6 @@ if ($total_game_row <= 0) {
                 $sql_select_type_card = "SELECT * FROM game_card WHERE game_id = '$id'";
                 $query_type_card = $hyper->connect->query($sql_select_type_card);
                 $total_type_card_row = mysqli_num_rows($query_type_card);
-
                 if ($total_type_card_row > 0) {
                   $cardtype = mysqli_fetch_array($query_type_card);
                   do {
@@ -71,15 +70,6 @@ if ($total_game_row <= 0) {
               </div>
               <textarea id="detailnew" name="detailnew" class="form-control form-control-sm hyper-form-control" style="height: 100px;min-height: 100px;max-height: 100px;"></textarea>
             </div>
-
-
-            <div class="input-group input-group-sm">
-              <div class="input-group-prepend">
-                <span class="input-group-text hyper-bg-dark border-dark">รายละเอียด</span>
-              </div>
-              <textarea id="detailnew" name="detailnew" class="form-control form-control-sm hyper-form-control" style="height: 100px;min-height: 100px;max-height: 100px;"></textarea>
-            </div>
-
             <input type="hidden" id="gameidnew" name="gameidnew" value="<?= $game['game_id']; ?>" />
 
             <button type="submit" id="submitdatanew" class="d-none"></button>
