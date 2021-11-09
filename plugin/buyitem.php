@@ -31,6 +31,7 @@ if(isset($_POST['id'])){
 
             date_default_timezone_set("Asia/Bangkok");
             $date = date("Y-m-d H:i:s");
+            $expire = date("Y-m-d H:i:s", strtotime("+1 day"));
 
             $data_sql = "SELECT * FROM game_data WHERE card_id = $id AND selled = 0 LIMIT 1";
             $data = $hyper->connect->query($data_sql)->fetch_array();
@@ -41,7 +42,7 @@ if(isset($_POST['id'])){
             $updatedata_query = $hyper->connect->query($updatedata);
             if($updatedata_query){
 
-                $selled_sql = "INSERT INTO data_selled (data_id, ac_id, selled_date) VALUE ('$data_id', '$uid', '$date')";
+                $selled_sql = "INSERT INTO data_selled (data_id, ac_id, selled_date, exp_date) VALUE ('$data_id', '$uid', '$date', '$expire')";
                 $selled_query = $hyper->connect->query($selled_sql);
                 if(!$selled_query){
                     $errorMSG = 'ซื้อสินค้า ไม่สำเร็จ!';

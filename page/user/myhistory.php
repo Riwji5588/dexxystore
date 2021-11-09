@@ -63,7 +63,7 @@
                               <input class="w3-input w3-border detail" type="text" value="<?= $selled_data['detail']; ?>" readonly> </input>
                               <span><b>วันหมดอายุ</b></span>
                               <br>
-                              <input class="w3-input w3-border expdate" type="text" value="<?= $selled_data['exp_date']; ?>" readonly> </input>
+                              <input class="w3-input w3-border expdate" type="text" value="<?= $selled['exp_date']; ?>" readonly> </input>
                             </div>
                             <div class="modal-footer p-2 border-0">
                               <button type="button" class="btn hyper-btn-notoutline-success"><i class="fad fa-times-circle mr-1"></i>Claim</button>
