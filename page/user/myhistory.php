@@ -7,7 +7,8 @@
             <th scope="col">เกม</th>
             <th scope="col">บัญชีผู้ใช้</th>
             <th scope="col">เมนู</th>
-            <th scope="col">วันที่-เวลา</th>
+            <th scope="col">วันที่-เวลา ที่ซื้อ</th>
+            <th scope="col">วันที่-เวลา หมดอายุ</th>
             </tr>
         </thead>
         <tbody>
@@ -34,7 +35,7 @@
             $selled_game = mysqli_fetch_array($query_selled_game);
         ?>
             <tr>
-              <td>500<?= $selled['selled_id']; ?></td>
+              <td><?= $selled['selled_id']; ?></td>
               <td><?php if($selled_game['game_name'] == null){echo 'unknow'; }else{echo $selled_game['game_name'];} ?></td>
               <td><?= $selled_data['username']; ?></td>
               <td>
@@ -69,6 +70,7 @@
 
               </td>
               <td><?= $selled['selled_date']; ?></td>
+              <td><?= $selled['exp_date']; ?></td>
             </tr>
         <?php }while ($selled = mysqli_fetch_array($query_selled));} ?>
 

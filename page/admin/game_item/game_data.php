@@ -72,6 +72,7 @@ if($total_game_row <= 0){
                   </div>
                   <textarea id="detailnew" name="detailnew" class="form-control form-control-sm hyper-form-control" style="height: 100px;min-height: 100px;max-height: 100px;"></textarea>
                 </div>
+                
 
                 <input type="hidden" id="gameidnew" name="gameidnew" value="<?= $game['game_id']; ?>"/>
 
