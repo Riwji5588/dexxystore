@@ -45,6 +45,7 @@
                   <td><?= $selled_data['username']; ?></td>
                   <td>
                     <button class="btn btn-sm hyper-btn-notoutline-danger" type="button" data-toggle="modal" data-target="#datamodal<?= $selled['selled_id']; ?>"><i class="fal fa-info-circle mr-1"></i> เพิ่มเติม</button>
+                    <button class="btn btn-sm hyper-btn-notoutline-danger" type="button" data-toggle="modal" data-target="#datamodal1<?= $selled['selled_id']; ?>"><i class="fal fa-info-circle mr-1"></i> เคลม</button>
 
                     <!-- Data Modal -->
                     <div class="modal fade" id="datamodal<?= $selled['selled_id']; ?>" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-hidden="true">
@@ -66,7 +67,32 @@
                               <input class="w3-input w3-border expdate" type="text" value="<?= $selled['exp_date']; ?>" readonly> </input>
                             </div>
                             <div class="modal-footer p-2 border-0">
-                              <button type="button" class="btn hyper-btn-notoutline-success"><i class="fad fa-times-circle mr-1"></i>Claim</button>
+                              <button type="button" class="btn hyper-btn-notoutline-danger" data-dismiss="modal"><i class="fad fa-times-circle mr-1"></i>ปิดหน้าต่าง</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- End Data Modal -->
+
+                    <!-- Claim Modal -->
+                    <div class="modal fade" id="datamodal1<?= $selled['selled_id']; ?>" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-hidden="true">
+                      <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content border-0 radius-border-2 hyper-bg-white">
+                          <div class="modal-header hyper-bg-dark">
+                            <h6 class="modal-title"><i class="fal fa-info-circle mr-1"></i> เคลมไอดี</h6>
+                          </div>
+                          <div class="modal-body text-left">
+                            <div class="col-md-6">
+                              <span><b>ชื่อผู้ใช้งาน</b></span>
+                              <input class="w3-input w3-border user" type="text" value=" <?= $selled_data['username']; ?>" readonly></input>
+                              <span><b>รหัสผ่าน</b></span>
+                              <input class="w3-input w3-border pass" type="text" value="<?= base64_decode($selled_data['password']); ?>" readonly> </input>
+                              <span><b>รายละเอียด</b></span>
+                              <input class="w3-input w3-border detail" type="text" value="<?= $selled_data['detail']; ?>" readonly> </input>
+                              <span><b>วันหมดอายุ</b></span>
+                              <br>
+                              <input class="w3-input w3-border expdate" type="text" value="<?= $selled['exp_date']; ?>" readonly> </input>
                             </div>
                             <div class="modal-footer p-2 border-0">
                               <button type="button" class="btn hyper-btn-notoutline-danger" data-dismiss="modal"><i class="fad fa-times-circle mr-1"></i>ปิดหน้าต่าง</button>
