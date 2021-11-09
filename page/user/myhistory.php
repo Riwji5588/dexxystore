@@ -101,6 +101,7 @@
 
         input.detail {
           width:auto ;
+          
         }
         input.pass {
           width:45%;

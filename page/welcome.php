@@ -66,7 +66,7 @@ Welcome to Dexy Store
                 <div class="card shadow-dark radius-border-6 hyper-bg-white text-center p-3">
                     <h1 class="mt-0 mb-0" style="font-size: 3.5rem;"><i class="fal fa-gamepad"></i></h1>
                     <h1 class="mt-0 mb-0"><?= number_format($game_type_row['totalgame'],0); ?></h1>
-                    <font class="text-muted">เกมทั้งหมดในระบบ</font>
+                    <font class="text-muted">Accounts</font>
                 </div>
             </div>
             
