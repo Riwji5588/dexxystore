@@ -95,7 +95,7 @@
                             <!--conternt !-->
                             <div class="tab-content">
                               <div id="user<?= $selled['selled_id']; ?>" class="container tab-pane active"><br>
-                                <h4>ปัญหาการใช้งานด้านผู้ใช้ </h4> <b>!---กรุณาติดต่อแอดมินผ่านLine---!</b><br>
+                                <h4>ปัญหาการใช้งานด้านผู้ใช้ </h4> <b style="color: red;">!---กรุณาติดต่อแอดมินผ่านLine---!</b><br>
                                 <img src="assets/img/line.jpg" style="width:auto; max-width: 130px;">
                               </div>
 
