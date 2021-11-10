@@ -180,6 +180,13 @@ a
             $page = 'home';
             include('page/welcome.php'); 
           }
+        }elseif($page == 'report'){
+          if($data_user['role'] == '779'){
+            include('page/admin/aleart.php');
+          }else{
+            $page = 'home';
+            include('page/welcome.php'); 
+          }
         }
         
         

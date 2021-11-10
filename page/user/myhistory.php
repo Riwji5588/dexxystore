@@ -44,8 +44,8 @@
                       } ?></td>
                   <td><?= $selled_data['username']; ?></td>
                   <td>
-                    <button class="btn btn-sm hyper-btn-notoutline-danger" type="button" data-toggle="modal" data-target="#datamodal<?= $selled['selled_id']; ?>"><i class="fal fa-info-circle mr-1"></i> เพิ่มเติม</button>
-                    <button class="btn btn-sm hyper-btn-notoutline-danger" type="button" data-toggle="modal" data-target="#datamodal1<?= $selled['selled_id']; ?>"><i class="fal fa-info-circle mr-1"></i> เคลม</button>
+                    <button class="btn btn-sm btn-info" type="button" data-toggle="modal" data-target="#datamodal<?= $selled['selled_id']; ?>"><i class="fal fa-info-circle mr-1"></i> เพิ่มเติม</button>
+                    <button class="btn btn-sm btn-warning " type="button" data-toggle="modal" data-target="#datamodal1<?= $selled['selled_id']; ?>" style="color: ;"><i class="fas fa-exclamation-triangle"></i> เคลม</button>
 
                     <!-- Data Modal -->
                     <div class="modal fade" id="datamodal<?= $selled['selled_id']; ?>" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-hidden="true">
@@ -55,7 +55,7 @@
                             <h6 class="modal-title"><i class="fal fa-info-circle mr-1"></i> ข้อมูลเพิ่มเติม</h6>
                           </div>
                           <div class="modal-body text-left">
-                            <div class="col-md-6">
+                            
                               <span><b>ชื่อผู้ใช้งาน</b></span>
                               <input class="w3-input w3-border user" type="text" value=" <?= $selled_data['username']; ?>" readonly></input>
                               <span><b>รหัสผ่าน</b></span>
@@ -65,7 +65,7 @@
                               <span><b>วันหมดอายุ</b></span>
                               <br>
                               <input class="w3-input w3-border expdate" type="text" value="<?= $selled['exp_date']; ?>" readonly> </input>
-                            </div>
+                            
                             <div class="modal-footer p-2 border-0">
                               <button type="button" class="btn hyper-btn-notoutline-danger" data-dismiss="modal"><i class="fad fa-times-circle mr-1"></i>ปิดหน้าต่าง</button>
                             </div>
@@ -79,11 +79,11 @@
                     <div class="modal fade" id="datamodal1<?= $selled['selled_id']; ?>" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-hidden="true">
                       <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content border-0 radius-border-2 hyper-bg-white">
-                          <div class="modal-header hyper-bg-dark">
-                            <h6 class="modal-title"><i class="fal fa-info-circle mr-1"></i> เคลมไอดี</h6>
+                          <div class="modal-header hyper-modal-header">
+                            <h6 class="modal-title"><i class="fal fa-info-circle mr-1"></i> แจ้งปัญหาในการใช้งาน</h6>
                           </div>
                           <div class="modal-body text-left">
-                            <div class="col-md-6">
+                           
                               <span><b>ชื่อผู้ใช้งาน</b></span>
                               <input class="w3-input w3-border user" type="text" value=" <?= $selled_data['username']; ?>" readonly></input>
                               <span><b>รหัสผ่าน</b></span>
@@ -93,7 +93,14 @@
                               <span><b>วันหมดอายุ</b></span>
                               <br>
                               <input class="w3-input w3-border expdate" type="text" value="<?= $selled['exp_date']; ?>" readonly> </input>
-                            </div>
+                              <br>
+                              <div class="input-group   input-group-sm">
+                                <span><b>แจ้งปัญหาการใช้งาน</b></span><br>
+
+                                </div>
+                                <textarea id="detailnew" name="detailnew" class="form-control form-control-sm hyper-form-control h"></textarea>
+                            
+                            
                             <div class="modal-footer p-2 border-0">
                               <button type="button" class="btn hyper-btn-notoutline-danger" data-dismiss="modal"><i class="fad fa-times-circle mr-1"></i>ปิดหน้าต่าง</button>
                             </div>
@@ -122,17 +129,34 @@
         }
 
         input.expdate {
-          width: 70%;
+          width: 35%;
         }
 
         input.detail {
-          width:auto ;
+          width: auto;
+
+        }
+
+        input.pass {
+          width: 45%;
+        }
+
+        input.user {
+          width: 45%;
+        }
+
+        .modal-header {
+          background-color: #ffc107;
+
+       
+        }
+
+        #detailnew {
+          height: 70px;
+          min-height: 70px;
+          max-height: 120px;
+          width: 300px;
           
         }
-        input.pass {
-          width:45%;
-        }
-        input.user {
-          width:45%;
-        }
+        
       </style>
