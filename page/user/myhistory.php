@@ -55,17 +55,17 @@
                             <h6 class="modal-title"><i class="fal fa-info-circle mr-1"></i> ข้อมูลเพิ่มเติม</h6>
                           </div>
                           <div class="modal-body text-left">
-                            
-                              <span><b>ชื่อผู้ใช้งาน</b></span>
-                              <input class="w3-input w3-border user" type="text" value=" <?= $selled_data['username']; ?>" readonly></input>
-                              <span><b>รหัสผ่าน</b></span>
-                              <input class="w3-input w3-border pass" type="text" value="<?= base64_decode($selled_data['password']); ?>" readonly> </input>
-                              <span><b>รายละเอียด</b></span>
-                              <input class="w3-input w3-border detail" type="text" value="<?= $selled_data['detail']; ?>" readonly> </input>
-                              <span><b>วันหมดอายุ</b></span>
-                              <br>
-                              <input class="w3-input w3-border expdate" type="text" value="<?= $selled['exp_date']; ?>" readonly> </input>
-                            
+
+                            <span><b>ชื่อผู้ใช้งาน</b></span>
+                            <input class="w3-input w3-border user" type="text" value=" <?= $selled_data['username']; ?>" readonly></input>
+                            <span><b>รหัสผ่าน</b></span>
+                            <input class="w3-input w3-border pass" type="text" value="<?= base64_decode($selled_data['password']); ?>" readonly> </input>
+                            <span><b>รายละเอียด</b></span>
+                            <input class="w3-input w3-border detail" type="text" value="<?= $selled_data['detail']; ?>" readonly> </input>
+                            <span><b>วันหมดอายุ</b></span>
+                            <br>
+                            <input class="w3-input w3-border expdate" type="text" value="<?= $selled['exp_date']; ?>" readonly> </input>
+
                             <div class="modal-footer p-2 border-0">
                               <button type="button" class="btn hyper-btn-notoutline-danger" data-dismiss="modal"><i class="fad fa-times-circle mr-1"></i>ปิดหน้าต่าง</button>
                             </div>
@@ -78,30 +78,40 @@
                     <!-- Claim Modal -->
                     <div class="modal fade" id="datamodal1<?= $selled['selled_id']; ?>" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-hidden="true">
                       <div class="modal-dialog modal-dialog-centered">
-                        <div class="modal-content border-0 radius-border-2 hyper-bg-white">
-                          <div class="modal-header hyper-modal-header">
+                        <div class="modal-content">
+                          <div class="modal-header">
                             <h6 class="modal-title"><i class="fal fa-info-circle mr-1"></i> แจ้งปัญหาในการใช้งาน</h6>
                           </div>
-                          <div class="modal-body text-left">
-                           
+                          <div class="modal-body text-left" style="width: auto;">
+                            <div class="form-group">
                               <span><b>ชื่อผู้ใช้งาน</b></span>
-                              <input class="w3-input w3-border user" type="text" value=" <?= $selled_data['username']; ?>" readonly></input>
+                              <div><?= $selled_data['username']; ?></div>
+                            </div>
+                            <div class="form-group">
                               <span><b>รหัสผ่าน</b></span>
-                              <input class="w3-input w3-border pass" type="text" value="<?= base64_decode($selled_data['password']); ?>" readonly> </input>
+                              <div><?= base64_decode($selled_data['password']); ?></div>
+                            </div>
+                            <div class="form-group">
                               <span><b>รายละเอียด</b></span>
-                              <input class="w3-input w3-border detail" type="text" value="<?= $selled_data['detail']; ?>" readonly> </input>
+                              <div><?php if ($selled_data['detail'] != "") {
+                                      echo $selled_data['detail'];
+                                    } else {
+                                      echo "-";
+                                    } ?></div>
+                            </div>
+                            <div class="form-group">
                               <span><b>วันหมดอายุ</b></span>
-                              <br>
-                              <input class="w3-input w3-border expdate" type="text" value="<?= $selled['exp_date']; ?>" readonly> </input>
-                              <br>
-                              <div class="input-group   input-group-sm">
-                                <span><b>แจ้งปัญหาการใช้งาน</b></span><br>
+                              <div><?= $selled['exp_date']; ?></div>
+                            </div>
+                            <div class="form-group">
+                              <span><b>แจ้งปัญหาการใช้งาน</b></span>
+                              <textarea style="width: 90%;" class="form-control" id="detailnew" name="detailnew"></textarea>
+                            </div>
 
-                                </div>
-                                <textarea id="detailnew" name="detailnew" class="form-control form-control-sm hyper-form-control h"></textarea>
-                            
-                            
+
+
                             <div class="modal-footer p-2 border-0">
+                              <button type="button" class="btn hyper-btn-notoutline-danger" onclick="claim(<?= $selled['selled_id']; ?>)"><i class="fad fa-times-circle mr-1"></i>ส่งเคลม</button>
                               <button type="button" class="btn hyper-btn-notoutline-danger" data-dismiss="modal"><i class="fad fa-times-circle mr-1"></i>ปิดหน้าต่าง</button>
                             </div>
                           </div>
@@ -122,6 +132,48 @@
         </table>
       </div>
       <!-- End MyID -->
+
+      <script>
+        function claim(id) {
+          var detail = document.getElementById("detailnew").value;
+          $.ajax({
+            url: "plugin/claim.php",
+            type: "POST",
+            data: {
+              id: id,
+              detail: detail
+            },
+            beforeSend: function() {
+              swal("กำลังส่งเคลม กรุณารอสักครู่...", {
+                button: false,
+                closeOnClickOutside: false,
+                timer: 1900,
+              });
+
+            },
+            success: function(data) {
+              setTimeout(function() {
+                if (data.code == "200") {
+                  swal("ส่งเคลม สำเร็จ!", "ระบบกำลังพาท่านไป...", "success", {
+                    button: false,
+                    closeOnClickOutside: false,
+                  });
+                  setTimeout(function() {
+                    window.location.reload();
+                  }, 2000);
+                } else {
+                  swal(data.msg, "", "error", {
+                    button: {
+                      className: 'hyper-btn-notoutline-danger',
+                    },
+                    closeOnClickOutside: false,
+                  });
+                }
+              }, 2000);
+            }
+          });
+        }
+      </script>
 
       <style>
         input {
@@ -148,7 +200,7 @@
         .modal-header {
           background-color: #ffc107;
 
-       
+
         }
 
         #detailnew {
@@ -156,7 +208,6 @@
           min-height: 70px;
           max-height: 120px;
           width: 300px;
-          
+
         }
-        
       </style>
