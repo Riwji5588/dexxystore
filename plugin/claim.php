@@ -20,22 +20,28 @@ if (isset($_POST['id'])) {
         $selled = $hyper->connect->query($data_selled)->fetch_array();
 
         if ($selled['claim'] == 0) {
-            date_default_timezone_set("Asia/Bangkok");
-            $claim_date = date("Y-m-d H:i:s");
-            $sendClaim = "INSERT INTO data_claim(claim_id, data_id, ac_id, claim_date) VALUES ('{$selled['selled_id']}', '{$selled['data_id']}', '{$selled['ac_id']}', '$claim_date')";
-            if ($hyper->connect->query($sendClaim)) {
-                $data_game = "SELECT * FROM game_data WHERE selled = 0 LIMIT 1";
-                $game = $hyper->connect->query($data_game)->fetch_array();
-                $data_selled_update = "UPDATE data_selled SET claim = 1, data_id = {$game['data_id']} WHERE selled_id = {$selled['selled_id']}";
-                $data_game_update = "UPDATE game_data SET selled = 1 WHERE data_id = {$game['data_id']}";
 
-                if ($hyper->connect->query($data_selled_update) && $hyper->connect->query($data_game_update)) {
-                    
+            $data_game = "SELECT * FROM game_data WHERE selled = 0 LIMIT 1";
+            $row = $hyper->connect->query($data_game);
+            $game = $row->fetch_array();
+
+            if (mysqli_num_rows($row) == 1) {
+                date_default_timezone_set("Asia/Bangkok");
+                $claim_date = date("Y-m-d H:i:s");
+                $sendClaim = "INSERT INTO data_claim(claim_id, data_id, ac_id, claim_date) VALUES ('{$selled['selled_id']}', '{$selled['data_id']}', '{$selled['ac_id']}', '$claim_date')";
+                if ($hyper->connect->query($sendClaim)) {
+                    $data_selled_update = "UPDATE data_selled SET claim = 1, data_id = {$game['data_id']} WHERE selled_id = {$selled['selled_id']}";
+                    $data_game_update = "UPDATE game_data SET selled = 1 WHERE data_id = {$game['data_id']}";
+
+                    if ($hyper->connect->query($data_selled_update) && $hyper->connect->query($data_game_update)) {
+                    } else {
+                        $errorMSG = "เกิดข้อผิดพลาด";
+                    }
                 } else {
-                    $errorMSG = "เกิดข้อผิดพลาด";
+                    $errorMSG = "เคลมไม่สำเร็จกรุณาแจ้งแอดมิน (2)";
                 }
             } else {
-                $errorMSG = "เคลมไม่สำเร็จกรุณาแจ้งแอดมิน";
+                $errorMSG = "เคลมไม่สำเร็จกรุณาแจ้งแอดมิน (1)";
             }
         } else {
             $errorMSG = "คุณเคยเคลมไอดีนี้ไปแล้ว";
