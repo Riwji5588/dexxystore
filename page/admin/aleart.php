@@ -19,8 +19,8 @@
                 <td></td>
                 <td></td>
                 <td>
-                    <button class="btn btn-sm hyper-btn-notoutline-success" type="button" data-toggle="modal" data-target="#editusermodal"><i class="fal fa-edit mr-1"></i> แก้ไข</button>
-                    <button type="button" class="btn btn-sm  btn-warning" data-toggle="modal" data-target="#editusermodal1"><i class="fas fa-exclamation-triangle"></i>แก้ไขปัญหา</button>
+                    <button class="btn btn-sm hyper-btn-notoutline-success" type="button" data-toggle="modal" data-target="#editusermodal"><i class="fal fa-edit mr-1"></i> ข้อมูล</button>
+             
                 </td>
                 <!-- aleart Data Modal -->
                 <div class="modal fade" id="editusermodal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-hidden="true">
@@ -56,47 +56,7 @@
                         </div>
                     </div>
                 </div>
-                <!-- End aleart Data Modal -->
-                <!-- accept Data Modal -->
-                <div class="modal fade" id="editusermodal1" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered">
-                        <div class="modal-content border-0 radius-border-2 hyper-bg-white">
-                            <div class="modal-header hyper-modal-header " style=" background-color: #36A558;">
-                                <h6 class="modal-title" style=" color: white;"><i class="fal fa-info-circle mr-1"></i> แก้ไขปัญหา</h6>
-                            </div>
-                            <div class="modal-body text-left">
-                                <span><b>ปัญหา</b></span><br>
-                                <select id="language" class="selectpicker drop">
-                                    <option value="user">ปัญหาด้านลูกค้า</option>
-                                    <option value="tec">ปัญหาด้านเทคนิค</option>
-                                </select><br><br>
-                                <div id="value">
-                                <span><b>คำแนะนำให้ลูกค้า</b></span>
-                                <textarea id="detailnew" name="detailnew" class="form-control form-control-sm hyper-form-control h" readonly></textarea>
-                                </div>
-                                <script type="text/javascript">
-                                    function update() {
-                                        var select = document.getElementById('language');
-                                        var option = select.options[select.selectedIndex];
-
-                                        document.getElementById('value').value = option.value;
-                                        document.getElementById('text').value = option.text;
-                                    }
-
-                                    update();
-                                </script>
-
-
-
-
-                                <div class="modal-footer p-2 border-0">
-                                    <button type="button" class="btn hyper-btn-notoutline-danger" data-dismiss="modal"><i class="fad fa-times-circle mr-1"></i>ปิดหน้าต่าง</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
+                
                 <!-- End accept Data Modal -->
 
                 </td>
