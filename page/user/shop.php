@@ -93,7 +93,7 @@ if ($total_game_row <= 0) {
                 <h5 class="mt-0" id="price<?= $card['card_id'] ?>">ราคา <?= number_format($card['card_price'], 0) ?> Points</h5>
                 <h6 class="mt-0 text-muted">เหลือจำนวน <?= number_format($ready_selled_row['totaldata'], 0); ?> ไอดี</h6>
                 <div class="row no-gutters ml-auto mr-auto mt-3">
-                  <button class="btn btn-sm hyper-btn-info col-12 col-md-6" type="button" data-toggle="modal" data-target="#detail<?= $card['card_id'] ?>" style="color:white; background: red;"><i class="fal fa-info-circle mr-1"></i>รายละเอียดเพิ่มเติม</button>
+                  <button class="btn btn-sm hyper-btn-info col-12 col-md-6" type="button" data-toggle="modal" data-target="#detail<?= $card['card_id'] ?>" style="color:white; background: #ff0039;"><i class="fal fa-info-circle mr-1"></i>รายละเอียดเพิ่มเติม</button>
                 </div>
               </div>
             </div>
@@ -130,10 +130,15 @@ if ($total_game_row <= 0) {
 รีวิวิร้าน <a href="https://twitter.com/hashtag/reviewdexy?src=hashtag_click">#reviewdexy</a> ⛱.⋆*
 หากมีข้อสงสัยหรือพบปัญหา สามารถสอบถามได้เลยนะครับ
           </pre>
-                  <div class="modal-footer p-2 border-0">
-                    <button onclick="BuyItem(this)" value="<?= $card['card_id'] ?>" class="btn btn-sm hyper-btn-buy col-12 col-md-5 mb-2 mb-md-0 mr-0 mr-md-2"><i class="fal fa-shopping-cart mr-1"></i>ซื้อสินค้า</button>
-                    <button type="button" class="btn hyper-btn-notoutline-danger" data-dismiss="modal"><i class="fad fa-times-circle mr-1"></i>ปิดหน้าต่าง</button>
+                  <div class="modal-footer p-2 border-0 row" style="align-items: center; display: flex;">
+                    <div class=" col-12  ">
+                      <button onclick="BuyItem(this)" value="<?= $card['card_id'] ?>" class="btn  hyper-btn-buy mb-2 mb-md-0 mr-0 mr-md-2 "><i class="fal fa-shopping-cart mr-1"></i>ซื้อสินค้า</button>
+                    
+            
+                      <button type="button" class="btn  hyper-btn-notoutline-danger  mb-2 mb-md-0 mr-0 mr-md-2" data-dismiss="modal"><i class="fad fa-times-circle mr-1"></i>ปิดหน้าต่าง</button>
+                    </div>
                   </div>
+
                 </div>
               </div>
             </div>
