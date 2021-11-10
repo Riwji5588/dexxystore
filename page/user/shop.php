@@ -93,30 +93,23 @@ if ($total_game_row <= 0) {
                 <h5 class="mt-0" id="price<?= $card['card_id'] ?>">ราคา <?= number_format($card['card_price'], 0) ?> Points</h5>
                 <h6 class="mt-0 text-muted">เหลือจำนวน <?= number_format($ready_selled_row['totaldata'], 0); ?> ไอดี</h6>
                 <div class="row no-gutters ml-auto mr-auto mt-3">
-                  <button onclick="BuyItem(this)" value="<?= $card['card_id'] ?>" class="btn btn-sm hyper-btn-buy col-12 col-md-5 mb-2 mb-md-0 mr-0 mr-md-2"><i class="fal fa-shopping-cart mr-1"></i>ซื้อสินค้า</button>
-                  <button class="btn btn-sm hyper-btn-info col-12 col-md-6" type="button" data-toggle="modal" data-target="#detail" style="color:white; background: red;"><i class="fal fa-info-circle mr-1"></i>รายละเอียดเพิ่มเติม</button>
+                  <button class="btn btn-sm hyper-btn-info col-12 col-md-6" type="button" data-toggle="modal" data-target="#detail<?= $card['card_id'] ?>" style="color:white; background: red;"><i class="fal fa-info-circle mr-1"></i>รายละเอียดเพิ่มเติม</button>
                 </div>
               </div>
             </div>
           </div>
 
-    <?php }
-      } while ($card = mysqli_fetch_array($query_game_page));
-    } ?>
+          <!--modal start Detail-->
+          <div class="modal fade" id="detail<?= $card['card_id'] ?>" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content border-0 radius-border-2 hyper-bg-white">
+                <div class="modal-header hyper-bg-dark">
+                  <h6 class="modal-title"><i class="fal fa-info-circle mr-1"></i> ข้อมูลเพิ่มเติม</h6>
+                </div>
+                <div class="modal-body text-left">
 
-  </div>
-  <!-- End ID CARD -->
-  <!--modal start Detail-->
-  <div class="modal fade" id="detail" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content border-0 radius-border-2 hyper-bg-white">
-        <div class="modal-header hyper-bg-dark">
-          <h6 class="modal-title"><i class="fal fa-info-circle mr-1"></i> ข้อมูลเพิ่มเติม</h6>
-        </div>
-        <div class="modal-body text-left">
-
-          <span><b style="color :red;">กรุณาทำตามกฏการใช้งาน</b></span>
-          <pre>NETFLIX @dexy_store •₊˚
+                  <span><b style="color :red;">กรุณาอ่านกฏก่อนซื้อ</b></span>
+                  <pre>NETFLIX @dexy_store •₊˚
 ❌ 1.ห้ามแชร์รหัสต่อให้ผู้อื่น จอเดี่ยวคือดูได้แค่คนเดียว
 
 ⚠ 2.ซับและเสียงพากย์ ให้กดเปลี่ยนขณะเล่นคลิปเท่านั้น
@@ -137,14 +130,22 @@ if ($total_game_row <= 0) {
 รีวิวิร้าน <a href="https://twitter.com/hashtag/reviewdexy?src=hashtag_click">#reviewdexy</a> ⛱.⋆*
 หากมีข้อสงสัยหรือพบปัญหา สามารถสอบถามได้เลยนะครับ
           </pre>
-          <div class="modal-footer p-2 border-0">
-            <button type="button" class="btn hyper-btn-notoutline-danger" data-dismiss="modal"><i class="fad fa-times-circle mr-1"></i>ปิดหน้าต่าง</button>
+                  <div class="modal-footer p-2 border-0">
+                    <button onclick="BuyItem(this)" value="<?= $card['card_id'] ?>" class="btn btn-sm hyper-btn-buy col-12 col-md-5 mb-2 mb-md-0 mr-0 mr-md-2"><i class="fal fa-shopping-cart mr-1"></i>ซื้อสินค้า</button>
+                    <button type="button" class="btn hyper-btn-notoutline-danger" data-dismiss="modal"><i class="fad fa-times-circle mr-1"></i>ปิดหน้าต่าง</button>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
-    </div>
+          <!--modal End Detail-->
+
+    <?php }
+      } while ($card = mysqli_fetch_array($query_game_page));
+    } ?>
+
   </div>
-  <!--modal End Detail-->
+  <!-- End ID CARD -->
   <?php
   if ($total_page > 1) {
 
@@ -195,62 +196,49 @@ if ($total_game_row <= 0) {
           closeOnClickOutside: false,
         })
         .then((willDelete) => {
-            if (willDelete) {
+          if (willDelete) {
 
-              $.ajax({
+            $.ajax({
 
-                  type: "POST",
-                  url: "plugin/buyitem.php",
-                  dataType: "json",
-                  data: {
-                    id: id
-                  },
+              type: "POST",
+              url: "plugin/buyitem.php",
+              dataType: "json",
+              data: {
+                id: id
+              },
 
-                  beforeSend: function() {
-                    swal("กำลังซื้อสินค้า กรุณารอสักครู่...", {
-                      button: false,
+              beforeSend: function() {
+                swal("กำลังซื้อสินค้า กรุณารอสักครู่...", {
+                  button: false,
+                  closeOnClickOutside: false,
+                  timer: 1900,
+                });
+
+              },
+
+              success: function(data) {
+                setTimeout(function() {
+                  if (data.code == "200") {
+                    swal({
+                      title: 'ซื้อสินค้า สำเร็จ!',
+                      icon: "success",
                       closeOnClickOutside: false,
-                      timer: 1900,
                     });
-
-                  },
-
-                  success: function(data) {
                     setTimeout(function() {
-                        if (data.code == "200") {
-                          swal("ซื้อสินค้า สำเร็จ!", "NETFLIX @dexy_store •₊˚\n\
-                          ❌1.ห้ามแชร์ รหัสต่อให้ผู้อื่นจอเดี่ยวคือดูได้แค่คนเดียว\n\
-                          ⚠2.ซับและเสียงพากย์ให้กดเปลี่ยนขณะเล่นคลิปเท่านั้น\n\
-                          📺3.ล็อกอินไว้ 2 เครื่องได้แต่ห้ามดูพร้อมกันเด็ดขาด\n\
-                          ⚠4.ในคอมใช้ แอพ Netflix จาก Microsoft Storeแทนดูเว็บ\n\
-                          🚫5.ห้ามเปลี่ยนข้อมูลทุกอย่าง เช่น ชื่อจอ รูปจอ ภาษาของเมน\n\
-                          ──────❀\n\
-                          🛒 อ่านกฎก่อนเข้าจอเท่านั้นนะครับ\n\
-                          ❌หากทำผิดกฎด้านบน เลิกเคลมทุกกรณีนะครับ❌\n\
-                          ❌ ห้ามเปลี่ยนชื่อจอ,รูปจอ❌\n\
-                          ⚠ อ่านกฎก่อนเข้าจอเท่านั้นนะครับ 5 ข้อ⚠\n\
-                          ──────❀\n\
-                          🤲🏻 ขอบคุณที่มาอุดหนุนนะครับ🙇🏼‍♀️ รีวิวิร้าน #reviewdexy ⛱.⋆*\n\
-                          หากมีข้อสงสัยหรือพบปัญหาสามารถสอบถามได้เลยนะครับ ", 
-                            "success ", {
-                            button: false,
-                            closeOnClickOutside: false,
-                          });
-                        setTimeout(function() {
-                          window.location.reload();
-                        }, 2000);
-                      } else {
-                        swal(data.msg, "", "error", {
-                          button: {
-                            className: 'hyper-btn-notoutline-danger',
-                          },
-                          closeOnClickOutside: false,
-                        });
-                      }
-                    }, 2000);
-                }
+                      window.location.reload();
+                    }, 5000);
+                  } else {
+                    swal(data.msg, "", "error", {
+                      button: {
+                        className: 'hyper-btn-notoutline-danger',
+                      },
+                      closeOnClickOutside: false,
+                    });
+                  }
+                }, 2000);
+              }
 
-              });
+            });
 
           }
         });
