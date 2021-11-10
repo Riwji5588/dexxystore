@@ -29,7 +29,7 @@
 <div class="row no-gutters mt-4">
 
     <div class="col-6 col-lg-4 p-2">
-        <a href="gametype" target="_blank"><div class="card shadow-dark radius-border-6 hyper-bg-white text-center p-3 hyper-card">
+        <a href="gametype"><div class="card shadow-dark radius-border-6 hyper-bg-white text-center p-3 hyper-card">
             <h1 class="mt-0 mb-0" style="font-size: 3.5rem;"><i class="fal fa-gamepad"></i></h1>
             <h1 class="mt-0 mb-0"><?= number_format($game_type_row['totalgame'],0); ?></h1>
             <font class="text-muted">เกมทั้งหมดในระบบ</font>
@@ -37,7 +37,7 @@
     </div>
     
     <div class="col-6 col-lg-4 p-2">
-      <a href="gameselect" target="_blank"><div class="card shadow-dark radius-border-6 hyper-bg-white text-center p-3 hyper-card">
+      <a href="gameselect"><div class="card shadow-dark radius-border-6 hyper-bg-white text-center p-3 hyper-card">
             <h1 class="mt-0 mb-0" style="font-size: 3.5rem;"><i class="fal fa-check-circle"></i></h1>
             <h1 class="mt-0 mb-0"><?= number_format($ready_selled_row['totaldata'],0); ?></h1>
             <font class="text-muted">ไอดีพร้อมจำหน่าย</font>
@@ -45,7 +45,7 @@
     </div>
     
     <div class="col-6 col-lg-4 p-2">
-      <a href="dataowner" target="_blank"><div class="card shadow-dark radius-border-6 hyper-bg-white text-center p-3 hyper-card">
+      <a href="dataowner"><div class="card shadow-dark radius-border-6 hyper-bg-white text-center p-3 hyper-card">
             <h1 class="mt-0 mb-0" style="font-size: 3.5rem;"><i class="fal fa-box-full"></i></h1>
             <h1 class="mt-0 mb-0"><?= number_format($selled_row['totalselled'],0); ?></h1>
             <font class="text-muted">ไอดีถูกจำหน่ายแล้ว</font>
@@ -53,7 +53,7 @@
     </div>
 
     <div class="col-6 col-lg-4 p-2">
-      <a href="datauser" target="_blank"><div class="card shadow-dark radius-border-6 hyper-bg-white text-center p-3 hyper-card">
+      <a href="datauser"><div class="card shadow-dark radius-border-6 hyper-bg-white text-center p-3 hyper-card">
             <h1 class="mt-0 mb-0" style="font-size: 3.5rem;"><i class="fal fa-users"></i></h1>
             <h1 class="mt-0 mb-0"><?= number_format($account_row['totalaccount'],0); ?></h1>
             <font class="text-muted">ผู้ใช้งานในระบบ</font>
@@ -61,7 +61,7 @@
     </div>
 
     <div class="col-6 col-lg-4 p-2">
-      <a href="datapay" target="_blank"><div class="card shadow-dark radius-border-6 hyper-bg-white text-center p-3 hyper-card">
+      <a href="datapay"><div class="card shadow-dark radius-border-6 hyper-bg-white text-center p-3 hyper-card">
             <h1 class="mt-0 mb-0" style="font-size: 3.5rem;"><i class="fal fa-coins"></i></h1>
             <h1 class="mt-0 mb-0"><?= number_format($pay_row['totalpay'],0); ?></h1>
             <font class="text-muted">รายได้ในเดือนนี้</font>
@@ -69,14 +69,14 @@
     </div>
 
     <div class="col-6 col-lg-4 p-2">
-      <a href="websetting" target="_blank"><div class="card shadow-dark radius-border-6 hyper-bg-white text-center p-3 hyper-card">
+      <a href="websetting"><div class="card shadow-dark radius-border-6 hyper-bg-white text-center p-3 hyper-card">
             <h1 class="mt-0 mb-0" style="font-size: 3.5rem;"><i class="fal fa-cogs"></i></h1>
             <h1 class="mt-0 mb-0">ตั้งค่า</h1>
             <font class="text-muted">ตั้งค่าเว็บไซต์</font>
         </div></a>
     </div>
     <div class="col-6 col-lg-4 p-2">
-      <a href="report" target="_blank"><div class="card shadow-dark radius-border-6 hyper-bg-white text-center p-3 hyper-card">
+      <a href="report"><div class="card shadow-dark radius-border-6 hyper-bg-white text-center p-3 hyper-card">
             <h1 class="mt-0 mb-0" style="font-size: 3.5rem;"><i class="fas fa-exclamation-triangle"></i></h1>
             <h1 class="mt-0 mb-0">จำนวนการแจ้งเตือน</h1>
             <font class="text-muted">แจ้งปัญหาการใช้งาน</font>
