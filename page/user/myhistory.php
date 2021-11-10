@@ -45,7 +45,7 @@
                   <td><?= $selled_data['username']; ?></td>
                   <td>
                     <button class="btn btn-sm btn-info" type="button" data-toggle="modal" data-target="#datamodal<?= $selled['selled_id']; ?>"><i class="fal fa-info-circle mr-1"></i> เพิ่มเติม</button>
-                    <button class="btn btn-sm btn-warning " type="button" data-toggle="modal" data-target="#datamodal1<?= $selled['selled_id']; ?>" style="color: ;"><i class="fas fa-exclamation-triangle"></i> เคลม</button>
+                    <button class="btn btn-sm btn-warning " type="button" data-toggle="modal" data-target="#datamodal1<?= $selled['selled_id']; ?>" style="color: ;"><i class="fas fa-exclamation-triangle"></i> แจ้งปัญหา</button>
 
                     <!-- Data Modal -->
                     <div class="modal fade" id="datamodal<?= $selled['selled_id']; ?>" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-hidden="true">
@@ -83,35 +83,31 @@
                             <h6 class="modal-title"><i class="fal fa-info-circle mr-1"></i> แจ้งปัญหาในการใช้งาน</h6>
                           </div>
                           <div class="modal-body text-left" style="width: auto;">
-                            <div class="form-group">
-                              <span><b>ชื่อผู้ใช้งาน</b></span>
-                              <div><?= $selled_data['username']; ?></div>
-                            </div>
-                            <div class="form-group">
-                              <span><b>รหัสผ่าน</b></span>
-                              <div><?= base64_decode($selled_data['password']); ?></div>
-                            </div>
-                            <div class="form-group">
-                              <span><b>รายละเอียด</b></span>
-                              <div><?php if ($selled_data['detail'] != "") {
-                                      echo $selled_data['detail'];
-                                    } else {
-                                      echo "-";
-                                    } ?></div>
-                            </div>
-                            <div class="form-group">
-                              <span><b>วันหมดอายุ</b></span>
-                              <div><?= $selled['exp_date']; ?></div>
-                            </div>
-                            <div class="form-group">
-                              <span><b>แจ้งปัญหาการใช้งาน</b></span>
-                              <textarea style="width: 90%;" class="form-control" id="detailnew" name="detailnew"></textarea>
-                            </div>
 
+                            <ul class="nav nav-tabs">
+                              <li class="nav-item">
+                                <a class="nav-link active" data-toggle="tab" href="#user">ปัญหาการใช้งานด้านผู้ใช้</a>
+                              </li>
+                              <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#tec">ปัญหาการใช้งานด้านเทคนิค</a>
+                              </li>
 
+                            </ul>
+                            <!--conternt !-->
+                            <div class="tab-content">
+                              <div id="user" class="container tab-pane active"><br>
+                                <h4>ปัญหาการใช้งานด้านผู้ใช้ </h4> <b>!---กรุณาติดต่อแอดมินผ่านLine---!</b><br>
+                                <img src="assets/img/line.jpg" style="width:auto; max-width: 130px;">
+                              </div>
+
+                              <div id="tec" class="container tab-pane fade"><br>
+                                <h4>ปัญหาการใช้งานด้านเทคนิค</h4>
+                                <button type="button" class="btn hyper-btn-notoutline-danger" onclick="claim(<?= $selled['selled_id']; ?>)"><i class="fad fa-times-circle mr-1"></i>ส่งเคลม</button>
+                              </div>
+                            </div>
 
                             <div class="modal-footer p-2 border-0">
-                              <button type="button" class="btn hyper-btn-notoutline-danger" onclick="claim(<?= $selled['selled_id']; ?>)"><i class="fad fa-times-circle mr-1"></i>ส่งเคลม</button>
+
                               <button type="button" class="btn hyper-btn-notoutline-danger" data-dismiss="modal"><i class="fad fa-times-circle mr-1"></i>ปิดหน้าต่าง</button>
                             </div>
                           </div>
@@ -209,5 +205,9 @@
           max-height: 120px;
           width: 300px;
 
+        }
+
+        input.question {
+          width: 45%;
         }
       </style>

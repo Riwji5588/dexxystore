@@ -19,8 +19,8 @@
                 <td></td>
                 <td></td>
                 <td>
-                    <button class="btn btn-sm hyper-btn-notoutline-success" type="button" data-toggle="modal" data-target="#editusermodal"><i class="fal fa-edit mr-1"></i> แก้ไข</button>
-                    <button type="button" class="btn btn-sm  btn-warning" data-toggle="modal" data-target="#editusermodal1"><i class="fas fa-exclamation-triangle"></i>แก้ไขปัญหา</button>
+                    <button class="btn btn-sm hyper-btn-notoutline-success" type="button" data-toggle="modal" data-target="#editusermodal"><i class="fal fa-edit mr-1"></i> ข้อมูล</button>
+             
                 </td>
                 <!-- aleart Data Modal -->
                 <div class="modal fade" id="editusermodal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-hidden="true">
@@ -56,56 +56,7 @@
                         </div>
                     </div>
                 </div>
-                <!-- End aleart Data Modal -->
-                <!-- accept Data Modal -->
-                <div class="modal fade" id="editusermodal1" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered">
-                        <div class="modal-content border-0 radius-border-2 hyper-bg-white">
-                            <div class="modal-header hyper-modal-header " style=" background-color: #36A558;">
-                                <h6 class="modal-title" style=" color: white;"><i class="fal fa-info-circle mr-1"></i> แก้ไขปัญหา</h6>
-                            </div>
-                            <div class="modal-body text-left">
-                                <ul class="nav nav-tabs">
-                                    <li class="nav-item">
-                                        <a class="nav-link active" data-toggle="tab" href="#user">ปัญหาการใช้งานด้านผู้ใช้</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" data-toggle="tab" href="#tec">ปัญหาการใช้งานด้านเทคนิค</a>
-                                    </li>
-
-                                </ul>
-
-                                <!-- Tab panes -->
-                                <div class="tab-content">
-                                    <div id="user" class="container tab-pane active"><br>
-                                        <h4>ปัญหาการใช้งานด้านผู้ใช้</h4>
-                                        <div class="input-group   input-group-sm">
-                                            <span><b>Question ?</b></span><br>
-
-                                        </div>
-                                        <input class="w3-input w3-border expdate" type="text" value="ใส่คำถามที่ผู้ใช้ส่งมา" readonly> </input>
-                                        <div class="input-group   input-group-sm">
-                                            <span><b>Answer</b></span><br>
-
-                                        </div>
-                                        <textarea id="detailnew" name="detailnew" class="form-control form-control-sm hyper-form-control h"></textarea>
-                                    </div>
-                                    <div id="tec" class="container tab-pane fade"><br>
-                                        <h3>ปัญหาการใช้งานด้านเทคนิค</h3>
-                                        <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                                    </div>
-                                </div>
-
-
-
-                                <div class="modal-footer p-2 border-0">
-                                    <button type="button" class="btn hyper-btn-notoutline-danger" data-dismiss="modal"><i class="fad fa-times-circle mr-1"></i>ปิดหน้าต่าง</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
+                
                 <!-- End accept Data Modal -->
 
                 </td>
