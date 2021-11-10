@@ -23,7 +23,7 @@
           </div>
           <!-- End Card Example -->
 
-          <input type="file" style="display:none;" id="logo" onchange="gamelogoURL(this,'new');" accept=".jpg,.png"/>
+          <input type="file" style="display:none;" id="logo" onchange="gamelogoURL(this,'new');" accept=".jpg,.png,.gif"/>
           <button onclick="uploadgamelogo('')" type="button" class="btn btn-sm hyper-btn-info w-100 mt-3"><i class="fal fa-image mr-1"></i>เปลี่ยนรูปภาพ</button>
 
           <div class="input-group input-group-sm mb-3 mt-3">
@@ -106,7 +106,7 @@
               <img id="bannerimgnew" src="assets/img/slide/bannerani2.png" class="img-fluid" style="height: 100px;"></br>
               <font class="text-muted">แนะนำขนาด 1920 x 700 Pixel</font></br>
               <input type="hidden" value="1" name="bannerpass" />
-              <input type="file" style="display:none;" id="imgbannernew" name="imgbannernew" onchange="bannerURL(this,'new');" accept=".jpg,.png"/>
+              <input type="file" style="display:none;" id="imgbannernew" name="imgbannernew" onchange="bannerURL(this,'new');" accept=".jpg,.png,.gif"/>
             </div>
             <button type="submit" id="submitdatanew" class="d-none"></button>
         </form>

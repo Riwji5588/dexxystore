@@ -55,15 +55,22 @@
                             <h6 class="modal-title"><i class="fal fa-info-circle mr-1"></i> ข้อมูลเพิ่มเติม</h6>
                           </div>
                           <div class="modal-body text-left">
-
-                            <span><b>ชื่อผู้ใช้งาน</b></span><br>
-                            <?= $selled_data['username']; ?><br>
-                            <span><b>รหัสผ่าน</b></span><br>
-                            <?= base64_decode($selled_data['password']); ?><br>
-                            <span><b>รายละเอียด</b></span><br>
-                            <span style=" color: red; "><?= $selled_data['detail']; ?></span><br>
-                            <span><b>วันหมดอายุ</b></span><br>
-                            <?= $selled['exp_date']; ?>
+                            <div class="form-group">
+                              <span><b>ชื่อผู้ใช้งาน</b></span>
+                              <?= $selled_data['username']; ?>
+                            </div>
+                            <div class="form-group">
+                              <span><b>รหัสผ่าน</b></span>
+                              <?= base64_decode($selled_data['password']); ?>
+                            </div>
+                            <div class="form-group">
+                              <span><b>รายละเอียด</b></span>
+                              <span style=" color: red;"><?= $selled_data['display']; ?></span>
+                            </div>
+                            <div class="form-group">
+                              <span><b>วันหมดอายุ</b></span>
+                              <?= $selled['exp_date']; ?>
+                            </div>
 
                             <div class="modal-footer p-2 border-0">
                               <button type="button" class="btn hyper-btn-notoutline-danger" data-dismiss="modal"><i class="fad fa-times-circle mr-1"></i>ปิดหน้าต่าง</button>

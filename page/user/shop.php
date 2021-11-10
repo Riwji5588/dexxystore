@@ -85,15 +85,15 @@ if ($total_game_row <= 0) {
         if ($ready_selled_row['totaldata'] > 0) {
       ?>
 
-          <div class="col-12 col-md-6 col-lg-4 p-2">
+          <div class="col-12 col-md-6 col-lg-4 p-2" data-toggle="modal" data-target="#detail<?= $card['card_id'] ?>" >
             <div class="card shadow-dark radius-border-6 hyper-bg-white border-0 h-100">
               <img src="assets/img/item/<?= $card_image['image_name']; ?>" class="card-img-top img-fluid" style="border-top-left-radius: 0.6rem !important;border-top-right-radius: 0.6rem !important;">
               <div class="card-body">
                 <h5 class="mt-0 mb-2" id="title<?= $card['card_id'] ?>"><?= $card['card_title'] ?></h5>
                 <h5 class="mt-0" id="price<?= $card['card_id'] ?>">ราคา <?= number_format($card['card_price'], 0) ?> Points</h5>
-                <h6 class="mt-0 text-muted">เหลือจำนวน <?= number_format($ready_selled_row['totaldata'], 0); ?> ไอดี</h6>
+                <h6 class="mt-0 text-muted">เหลือจำนวน <?= number_format($ready_selled_row['totaldata'], 0); ?> จอ</h6>
                 <div class="row no-gutters ml-auto mr-auto mt-3">
-                  <button class="btn btn-sm hyper-btn-info col-12 col-md-6" type="button" data-toggle="modal" data-target="#detail<?= $card['card_id'] ?>" style="color:white; background: #ff0039;"><i class="fal fa-info-circle mr-1"></i>รายละเอียดเพิ่มเติม</button>
+                  <button id="click<?= $card['card_id'] ?>" class="btn btn-sm hyper-btn-success col-12" type="button" data-toggle="modal" data-target="#detail<?= $card['card_id'] ?>"><i class="fal fa-shopping-cart mr-1"></i>ซื้อสินค้า</button>
                 </div>
               </div>
             </div>
@@ -133,8 +133,7 @@ if ($total_game_row <= 0) {
                   <div class="modal-footer p-2 border-0 row" style="align-items: center; display: flex;">
                     <div class=" col-12  ">
                       <button onclick="BuyItem(this)" value="<?= $card['card_id'] ?>" class="btn  hyper-btn-buy mb-2 mb-md-0 mr-0 mr-md-2 "><i class="fal fa-shopping-cart mr-1"></i>ซื้อสินค้า</button>
-                    
-            
+                  
                       <button type="button" class="btn  hyper-btn-notoutline-danger  mb-2 mb-md-0 mr-0 mr-md-2" data-dismiss="modal"><i class="fad fa-times-circle mr-1"></i>ปิดหน้าต่าง</button>
                     </div>
                   </div>
@@ -183,6 +182,11 @@ if ($total_game_row <= 0) {
   <!-- End Shop ID-->
 
   <script>
+
+    function open(id) {
+      document.getElementById(id).click
+    }
+
     function BuyItem(id) {
 
       var id = id.value;

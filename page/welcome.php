@@ -121,7 +121,7 @@ Welcome to Dexy Store
                         <div class="media-body text-center text-md-left">
                           <img src="assets/img/game/<?= $game['game_image']; ?>" class="ml-auto mr-auto rounded-circle d-block d-md-none" width="70px;">
                           <h4 class="mt-0 mb-1"><?= $game['game_name']; ?></h4>
-                          <font class="text-muted"><?= number_format($ready_selled_row['totaldata'],0); ?> ไอดี</font>
+                          <font class="text-muted">พร้อมส่ง <?= number_format($ready_selled_row['totaldata'],0); ?> จอ</font>
                         </div>
                     </div>
                 </div>

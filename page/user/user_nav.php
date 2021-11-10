@@ -15,7 +15,7 @@
             <?php if($data_user['role'] == '779'){ ?><a href="adminsys"><button class="btn btn-sm hyper-btn-pink<?php if($page == 'adminsys' || $page == 'gametype' || $page == 'gameselect' || $page == 'editgame' || $page == 'gamecard' || $page == 'gamedata' || $page == 'dataowner' || $page == 'datauser' || $page == 'datapay' || $page == 'websetting' || $page == 'report'){echo '-active'; } ?> my-2 my-sm-0 mr-2" type="button"><i class="fal fa-tools mr-1"></i> ระบบแอดมิน</button></a><?php } ?>
             <a href="history"><button class="btn btn-sm hyper-btn-perple<?php if($page == 'history'){echo '-active'; } ?> my-2 my-sm-0 mr-2" type="button"><i class="fal fa-history mr-1"></i> ประวัติการซื้อ</button></a>
             <a href="topup"><button class="btn btn-sm hyper-btn-success<?php if($page == 'topup'){echo '-active'; } ?> my-2 my-sm-0 mr-2" type="button"><i class="fal fa-credit-card mr-1"></i> เติมเงิน</button></a>
-            <a href="https://www.facebook.com/<?= $webfacebook; ?>" target="_blank"><button class="btn btn-sm hyper-btn-primary my-2 my-sm-0 mr-2" type="button"><i class="fab fa-facebook-square mr-1"></i> Facebook</button></a>
+            <a href="https://twitter.com/dexy_store/" target="_blank"><button class="btn btn-sm hyper-btn-primary my-2 my-sm-0 mr-2" type="button"><i class="fab fa-twitter-square mr-1"></i> Twitter</button></a>
             <a href="logout"><button class="btn btn-sm hyper-btn-danger my-2 my-sm-0 mr-3" type="button"><i class="fad fa-times-circle mr-1"></i> ออกจากระบบ</button></a>
             
           </div>
