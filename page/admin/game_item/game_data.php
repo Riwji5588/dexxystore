@@ -40,7 +40,7 @@ if ($total_game_row <= 0) {
               <div class="input-group-prepend">
                 <span class="input-group-text hyper-bg-dark border-dark">ID</span>
               </div>
-              <textarea id="stockId" name="stockId" type="text" class="form-control form-control-sm hyper-form-control " placeholder="Stock ID" required autocomplete="off"></textarea>
+              <textarea id="stockId" name="stockId" type="text" class="form-control form-control-sm hyper-form-control " placeholder="Stock ID" required autocomplete="off" style=" min-height: 120px ; max-height: 180px ;" ></textarea>
             </div>
 
 
@@ -68,7 +68,7 @@ if ($total_game_row <= 0) {
               <div class="input-group-prepend">
                 <span class="input-group-text hyper-bg-dark border-dark">รายละเอียด</span>
               </div>
-              <textarea id="detailnew" name="detailnew" class="form-control form-control-sm hyper-form-control" style="height: 100px;min-height: 100px;max-height: 100px;"></textarea>
+              <textarea id="detailnew" name="detailnew" class="form-control form-control-sm hyper-form-control" style="height: 70px;min-height: 70px;max-height: 70px;"></textarea>
             </div>
             <input type="hidden" id="gameidnew" name="gameidnew" value="<?= $game['game_id']; ?>" />
 
