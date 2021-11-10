@@ -56,15 +56,14 @@
                           </div>
                           <div class="modal-body text-left">
 
-                            <span><b>ชื่อผู้ใช้งาน</b></span>
-                            <input class="w3-input w3-border user" type="text" value=" <?= $selled_data['username']; ?>" readonly></input>
-                            <span><b>รหัสผ่าน</b></span>
-                            <input class="w3-input w3-border pass" type="text" value="<?= base64_decode($selled_data['password']); ?>" readonly> </input>
-                            <span><b>รายละเอียด</b></span>
-                            <input class="w3-input w3-border detail" type="text" value="<?= $selled_data['detail']; ?>" readonly> </input>
-                            <span><b>วันหมดอายุ</b></span>
-                            <br>
-                            <input class="w3-input w3-border expdate" type="text" value="<?= $selled['exp_date']; ?>" readonly> </input>
+                            <span><b>ชื่อผู้ใช้งาน</b></span><br>
+                            <?= $selled_data['username']; ?><br>
+                            <span><b>รหัสผ่าน</b></span><br>
+                            <?= base64_decode($selled_data['password']); ?><br>
+                            <span><b>รายละเอียด</b></span><br>
+                            <span style=" color: red; "><?= $selled_data['detail']; ?></span><br>
+                            <span><b>วันหมดอายุ</b></span><br>
+                            <?= $selled['exp_date']; ?>
 
                             <div class="modal-footer p-2 border-0">
                               <button type="button" class="btn hyper-btn-notoutline-danger" data-dismiss="modal"><i class="fad fa-times-circle mr-1"></i>ปิดหน้าต่าง</button>
@@ -96,7 +95,7 @@
                             <!--conternt !-->
                             <div class="tab-content">
                               <div id="user<?= $selled['selled_id']; ?>" class="container tab-pane active"><br>
-                                <h4>ปัญหาการใช้งานด้านผู้ใช้ </h4> <b>!---กรุณาติดต่อแอดมินผ่านLine---!</b><br>
+                                <h4>ปัญหาการใช้งานด้านผู้ใช้ </h4> <b style="color: red;">!---กรุณาติดต่อแอดมินผ่านLine---!</b><br>
                                 <img src="assets/img/line.jpg" style="width:auto; max-width: 130px;">
                               </div>
 
