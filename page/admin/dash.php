@@ -78,8 +78,8 @@
     <div class="col-6 col-lg-4 p-2">
       <a href="report"><div class="card shadow-dark radius-border-6 hyper-bg-white text-center p-3 hyper-card">
             <h1 class="mt-0 mb-0" style="font-size: 3.5rem;"><i class="fas fa-exclamation-triangle"></i></h1>
-            <h1 class="mt-0 mb-0">จำนวนการแจ้งเตือน</h1>
-            <font class="text-muted">แจ้งปัญหาการใช้งาน</font>
+            <h1 class="mt-0 mb-0">จำนวนการเคลม</h1>
+            <font class="text-muted">การเคลมของลูกค้า</font>
         </div></a>
     </div>
 

@@ -51,14 +51,6 @@
                                         <div class="form-group">
                                             <div><?= $data_result['display'] ?></div>
                                         </div>
-                                        <div class="form-group">
-                                            <span><b>รายละเอียด</b></span><br>
-                                            <div><?php if ($data_result['detail'] == "") {
-                                                        echo "-";
-                                                    } else {
-                                                        $data_result['detail'];
-                                                    } ?></div>
-                                        </div>
                                         <div class="modal-footer p-2 border-0">
                                             <button type="button" class="btn hyper-btn-notoutline-danger" data-dismiss="modal"><i class="fad fa-times-circle mr-1"></i>ปิดหน้าต่าง</button>
                                         </div>
