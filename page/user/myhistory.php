@@ -133,12 +133,15 @@
         function claim(id) {
           var detail = document.getElementById("detailnew").value;
           $.ajax({
-            url: "plugin/claim.php",
+
             type: "POST",
+            url: "plugin/claim.php",
+            dataType: "json",
             data: {
               id: id,
               detail: detail
             },
+
             beforeSend: function() {
               swal("กำลังส่งเคลม กรุณารอสักครู่...", {
                 button: false,
@@ -147,10 +150,11 @@
               });
 
             },
+
             success: function(data) {
               setTimeout(function() {
                 if (data.code == "200") {
-                  swal("ส่งเคลม สำเร็จ!", "ระบบกำลังพาท่านไป...", "success", {
+                  swal("ส่งเคลม สำเร็จ!", '\n', "success", {
                     button: false,
                     closeOnClickOutside: false,
                   });
@@ -167,6 +171,7 @@
                 }
               }, 2000);
             }
+
           });
         }
       </script>
