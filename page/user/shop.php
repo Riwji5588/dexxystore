@@ -91,7 +91,7 @@ if($total_game_row <= 0){
                     <h6 class="mt-0 text-muted">เหลือจำนวน <?= number_format($ready_selled_row['totaldata'],0); ?> ไอดี</h6>
                     <div class="row no-gutters ml-auto mr-auto mt-3">
                       <button onclick="BuyItem(this)" value="<?= $card['card_id'] ?>" class="btn btn-sm hyper-btn-buy col-12 col-md-5 mb-2 mb-md-0 mr-0 mr-md-2"><i class="fal fa-shopping-cart mr-1"></i>ซื้อสินค้า</button>
-                      <a href="item&itemid=<?= $card['card_id'] ?>" target="_blank" class="btn btn-sm hyper-btn-info col-12 col-md-6"><i class="fal fa-info-circle mr-1"></i>ราละเอียดเพิ่มเติม</a>
+                      <a href="item&itemid=<?= $card['card_id'] ?>" class="btn btn-sm hyper-btn-info col-12 col-md-6"><i class="fal fa-info-circle mr-1"></i>ราละเอียดเพิ่มเติม</a>
                     </div>
                   </div>
                 </div>
