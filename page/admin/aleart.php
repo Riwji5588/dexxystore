@@ -65,27 +65,36 @@
                                 <h6 class="modal-title" style=" color: white;"><i class="fal fa-info-circle mr-1"></i> แก้ไขปัญหา</h6>
                             </div>
                             <div class="modal-body text-left">
-                                <span><b>ปัญหา</b></span><br>
-                                <select id="language" class="selectpicker drop">
-                                    <option value="user">ปัญหาด้านลูกค้า</option>
-                                    <option value="tec">ปัญหาด้านเทคนิค</option>
-                                </select><br><br>
-                                <div id="value">
-                                <span><b>คำแนะนำให้ลูกค้า</b></span>
-                                <textarea id="detailnew" name="detailnew" class="form-control form-control-sm hyper-form-control h" readonly></textarea>
+                                <ul class="nav nav-tabs">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" data-toggle="tab" href="#user">ปัญหาการใช้งานด้านผู้ใช้</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" data-toggle="tab" href="#tec">ปัญหาการใช้งานด้านเทคนิค</a>
+                                    </li>
+
+                                </ul>
+
+                                <!-- Tab panes -->
+                                <div class="tab-content">
+                                    <div id="user" class="container tab-pane active"><br>
+                                        <h4>ปัญหาการใช้งานด้านผู้ใช้</h4>
+                                        <div class="input-group   input-group-sm">
+                                            <span><b>Question ?</b></span><br>
+
+                                        </div>
+                                        <input class="w3-input w3-border expdate" type="text" value="ใส่คำถามที่ผู้ใช้ส่งมา" readonly> </input>
+                                        <div class="input-group   input-group-sm">
+                                            <span><b>Answer</b></span><br>
+
+                                        </div>
+                                        <textarea id="detailnew" name="detailnew" class="form-control form-control-sm hyper-form-control h"></textarea>
+                                    </div>
+                                    <div id="tec" class="container tab-pane fade"><br>
+                                        <h3>ปัญหาการใช้งานด้านเทคนิค</h3>
+                                        <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                                    </div>
                                 </div>
-                                <script type="text/javascript">
-                                    function update() {
-                                        var select = document.getElementById('language');
-                                        var option = select.options[select.selectedIndex];
-
-                                        document.getElementById('value').value = option.value;
-                                        document.getElementById('text').value = option.text;
-                                    }
-
-                                    update();
-                                </script>
-
 
 
 
