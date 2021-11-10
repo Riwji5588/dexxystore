@@ -86,21 +86,21 @@
 
                             <ul class="nav nav-tabs">
                               <li class="nav-item">
-                                <a class="nav-link active" data-toggle="tab" href="#user">ปัญหาการใช้งานด้านผู้ใช้</a>
+                                <a class="nav-link active" data-toggle="tab" href="#user<?= $selled['selled_id']; ?>">ปัญหาการใช้งานด้านผู้ใช้</a>
                               </li>
                               <li class="nav-item">
-                                <a class="nav-link" data-toggle="tab" href="#tec">ปัญหาการใช้งานด้านเทคนิค</a>
+                                <a class="nav-link" data-toggle="tab" href="#tec<?= $selled['selled_id']; ?>">ปัญหาการใช้งานด้านเทคนิค</a>
                               </li>
 
                             </ul>
                             <!--conternt !-->
                             <div class="tab-content">
-                              <div id="user" class="container tab-pane active"><br>
+                              <div id="user<?= $selled['selled_id']; ?>" class="container tab-pane active"><br>
                                 <h4>ปัญหาการใช้งานด้านผู้ใช้ </h4> <b>!---กรุณาติดต่อแอดมินผ่านLine---!</b><br>
                                 <img src="assets/img/line.jpg" style="width:auto; max-width: 130px;">
                               </div>
 
-                              <div id="tec" class="container tab-pane fade"><br>
+                              <div id="tec<?= $selled['selled_id']; ?>" class="container tab-pane fade"><br>
                                 <h4>ปัญหาการใช้งานด้านเทคนิค</h4>
                                 <button type="button" class="btn hyper-btn-notoutline-danger" onclick="claim(<?= $selled['selled_id']; ?>)"><i class="fad fa-times-circle mr-1"></i>ส่งเคลม</button>
                               </div>
@@ -131,15 +131,13 @@
 
       <script>
         function claim(id) {
-          var detail = document.getElementById("detailnew").value;
           $.ajax({
 
             type: "POST",
             url: "plugin/claim.php",
             dataType: "json",
             data: {
-              id: id,
-              detail: detail
+              id: id
             },
 
             beforeSend: function() {
