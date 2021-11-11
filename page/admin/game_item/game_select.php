@@ -1,5 +1,5 @@
         <!-- Game Select -->
-        <h3 class="text-center mt-4 mb-4">--- เลือกเกมที่ต้องการจัดการ ---</h3>
+        <h3 class="text-center mt-4 mb-4">--- เลือกสินค้าที่ต้องการจัดการ ---</h3>
         <div class="row no-gutters">
 
             <?php

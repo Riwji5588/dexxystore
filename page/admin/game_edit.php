@@ -1,14 +1,14 @@
       <!-- Game Type -->
 
-      <h3 class="text-center mt-4 mb-4">--- เกมทั้งหมดในระบบ ---</h3>
-      <center><button class="btn hyper-btn-info my-2 my-sm-0 w-100" type="button" data-toggle="modal" data-target="#addgamemodal"><i class="fal fa-plus-square mr-1"></i> เพิ่มเกมใหม่เข้าระบบ</button></center>
+      <h3 class="text-center mt-4 mb-4">--- สินค้าทั้งหมดในระบบ ---</h3>
+      <center><button class="btn hyper-btn-info my-2 my-sm-0 w-100" type="button" data-toggle="modal" data-target="#addgamemodal"><i class="fal fa-plus-square mr-1"></i> เพิ่มสินค้าใหม่เข้าระบบ</button></center>
 
       <!-- Add Game Modal -->
       <div class="modal fade" id="addgamemodal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content border-0 radius-border-2 hyper-bg-white">
             <div class="modal-header hyper-bg-dark">
-              <h6 class="modal-title"><i class="fal fa-plus-square mr-1"></i> เพิ่มเกมใหม่เข้าระบบ</h6>
+              <h6 class="modal-title"><i class="fal fa-plus-square mr-1"></i> เพิ่มสินค้าใหม่เข้าระบบ</h6>
             </div>
             <div class="modal-body text-center">
 
@@ -17,7 +17,7 @@
                 <img id="gamelogoimgnew" src="assets/img/logoani_236x236.jpg" class="align-self-center mr-3 rounded-circle d-none d-md-block" width="70px;">
                 <div class="media-body text-center text-md-left">
                   <img id="gamelogoresimgnew" src="assets/img/logoani_236x236.jpg" class="ml-auto mr-auto rounded-circle d-block d-md-none" width="70px;">
-                  <h4 class="mt-0 mb-1" id="gamenamenew">GAMENAME</h4>
+                  <h4 class="mt-0 mb-1" id="gamenamenew">ชื่อสินค้า</h4>
                   <font class="text-muted">แนะนำขนาด 120 x 120 Pixel</font>
                 </div>
               </div>

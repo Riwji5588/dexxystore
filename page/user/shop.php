@@ -26,8 +26,8 @@ if ($total_game_row <= 0) {
   <div class="media mt-3 mb-3 pl-2">
     <img src="assets/img/game/<?= $game['game_image']; ?>" width="80px" class="mr-3 rounded-circle">
     <div class="media-body pt-2">
-      <h3 class="mt-0 d-none d-lg-block"><?= $game['game_name']; ?> <font class="ml-2 mr-2">|</font> Points คงเหลือ <?= $points; ?> Points</h3>
-      <h3 class="mt-0 d-block d-lg-none"><?= $game['game_name']; ?><h5 class="mt-0 d-block d-lg-none">Points คงเหลือ <?= $points; ?> Points</h5>
+      <h3 class="mt-0 d-none d-lg-block"><?= $game['game_name']; ?> <font class="ml-2 mr-2">|</font> เงินคงเหลือ <?= $points; ?> บาท</h3>
+      <h3 class="mt-0 d-block d-lg-none"><?= $game['game_name']; ?><h5 class="mt-0 d-block d-lg-none">เงิน  คงเหลือ <?= $points; ?> บาท</h5>
       </h3>
       <font class="text-muted">มีสินค้าทั้งหมด <?= number_format($card_row['totalcard'], 0); ?> รายการ</font>
     </div>
@@ -90,7 +90,7 @@ if ($total_game_row <= 0) {
               <img src="assets/img/item/<?= $card_image['image_name']; ?>" class="card-img-top img-fluid" style="border-top-left-radius: 0.6rem !important;border-top-right-radius: 0.6rem !important;">
               <div class="card-body">
                 <h5 class="mt-0 mb-2" id="title<?= $card['card_id'] ?>"><?= $card['card_title'] ?></h5>
-                <h5 class="mt-0" id="price<?= $card['card_id'] ?>">ราคา <?= number_format($card['card_price'], 0) ?> Points</h5>
+                <h5 class="mt-0" id="price<?= $card['card_id'] ?>">ราคา <?= number_format($card['card_price'], 0) ?> บาท</h5>
                 <h6 class="mt-0 text-muted">เหลือจำนวน <?= number_format($ready_selled_row['totaldata'], 0); ?> จอ</h6>
                 <div class="row no-gutters ml-auto mr-auto mt-3">
                   <button id="click<?= $card['card_id'] ?>" class="btn btn-sm hyper-btn-success col-12" type="button" data-toggle="modal" data-target="#detail<?= $card['card_id'] ?>"><i class="fal fa-shopping-cart mr-1"></i>ซื้อสินค้า</button>

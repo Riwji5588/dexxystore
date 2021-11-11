@@ -1,5 +1,5 @@
       <!-- Data Owner -->
-      <h3 class="text-center mt-4 mb-4">--- ไอดีถูกจำหน่ายแล้ว ---</h3>
+      <h3 class="text-center mt-4 mb-4">--- ID Netflixถูกจำหน่ายแล้ว ---</h3>
 
       <div class="table-responsive mt-3">
         <table id="datatable" class="table table-hover text-center w-100">
