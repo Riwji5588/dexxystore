@@ -69,7 +69,7 @@
                             </div>
                             <div class="form-group">
                               <span><b>วันหมดอายุ</b></span>
-                              <?= $selled['exp_date']; ?>
+                              <?= DateThai($selled['exp_date']) ?>
                             </div>
 
                             <div class="modal-footer p-2 border-0">
@@ -129,7 +129,7 @@
                     <!-- End Data Modal -->
 
                   </td>
-                  <td><?= $selled['selled_date']; ?></td>
+                  <td><?= DateThai($selled['selled_date']); ?></td>
 
                 </tr>
             <?php } while ($selled = mysqli_fetch_array($query_selled));
