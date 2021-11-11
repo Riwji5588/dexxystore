@@ -108,6 +108,12 @@
 
                               <div id="tec<?= $selled['selled_id']; ?>" class="container tab-pane fade"><br>
                                 <h4>ปัญหาการใช้งานด้านเทคนิค</h4>
+                                
+                                  
+                                    <span ><b>รายละเอียด</b></span>
+                                  
+                                <textarea id="" class="form-control form-control-sm hyper-form-control" style="width:50% ; height: 100px;min-height: 100px;max-height: 100px;"> </textarea>
+                                <br>
                                 <button type="button" class="btn hyper-btn-notoutline-danger" onclick="claim(<?= $selled['selled_id']; ?>)"><i class="fad fa-times-circle mr-1"></i>ส่งเคลม</button>
                               </div>
                             </div>

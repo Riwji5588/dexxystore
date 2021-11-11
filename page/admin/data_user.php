@@ -7,7 +7,7 @@
             <tr>
             <th scope="col" style="width:120px;">เลขที่บัญชี</th>
             <th scope="col">บัญชีผู้ใช้</th>
-            <th scope="col">Point</th>
+            <th scope="col">บาท</th>
             <th scope="col">ระดับ</th>
             <th scope="col" style="width: 170px;">เมนู</th>
             </tr>

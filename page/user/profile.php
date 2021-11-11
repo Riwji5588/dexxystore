@@ -7,8 +7,8 @@
             <img src="assets/img/logoani_236x236.jpg" width="99px" class="img-fluid rounded-circle ml-auto mr-auto mb-3">
             <font class="text-muted">Username</font>
             <h5><b><?= $username; ?></b></h5>
-            <font class="text-muted">Points คงเหลือ</font>
-            <h5><b><?= $points; ?> Points</b></h5>
+            <font class="text-muted">เงิน คงเหลือ</font>
+            <h5><b><?= $points; ?> บาท</b></h5>
             <font class="text-muted">E-mail</font>
             <h5><b>****<?= substr($email,strlen($email)/2 - 4); ?></b></h5>
             <a href="logout"><button class="btn btn-sm hyper-btn-danger w-100 mt-2" style="max-width: 250px;" type="button"><i class="fad fa-times-circle mr-1"></i> ออกจากระบบ</button></a>

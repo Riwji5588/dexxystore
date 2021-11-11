@@ -22,7 +22,7 @@ if(isset($_POST['id'])){
     $p = $data_user['points'] - $card['card_price'];
 
     if($p < 0){
-        $errorMSG = "Points ไม่พอซื้อสินค้า";
+        $errorMSG = "เงิน ไม่พอซื้อสินค้า";
     }else{
 
         $updateuser = "UPDATE accounts SET points = '".$p."' WHERE ac_id = $uid";

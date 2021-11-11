@@ -32,7 +32,7 @@
         <a href="gametype"><div class="card shadow-dark radius-border-6 hyper-bg-white text-center p-3 hyper-card">
             <h1 class="mt-0 mb-0" style="font-size: 3.5rem;"><i class="fal fa-gamepad"></i></h1>
             <h1 class="mt-0 mb-0"><?= number_format($game_type_row['totalgame'],0); ?></h1>
-            <font class="text-muted">เกมทั้งหมดในระบบ</font>
+            <font class="text-muted">Netflixทั้งหมดในระบบ</font>
         </div></a>
     </div>
     
@@ -40,7 +40,7 @@
       <a href="gameselect"><div class="card shadow-dark radius-border-6 hyper-bg-white text-center p-3 hyper-card">
             <h1 class="mt-0 mb-0" style="font-size: 3.5rem;"><i class="fal fa-check-circle"></i></h1>
             <h1 class="mt-0 mb-0"><?= number_format($ready_selled_row['totaldata'],0); ?></h1>
-            <font class="text-muted">ไอดีพร้อมจำหน่าย</font>
+            <font class="text-muted">Netflixพร้อมจำหน่าย</font>
         </div></a>
     </div>
     
@@ -48,7 +48,7 @@
       <a href="dataowner"><div class="card shadow-dark radius-border-6 hyper-bg-white text-center p-3 hyper-card">
             <h1 class="mt-0 mb-0" style="font-size: 3.5rem;"><i class="fal fa-box-full"></i></h1>
             <h1 class="mt-0 mb-0"><?= number_format($selled_row['totalselled'],0); ?></h1>
-            <font class="text-muted">ไอดีถูกจำหน่ายแล้ว</font>
+            <font class="text-muted">Netflixถูกจำหน่ายแล้ว</font>
         </div></a>
     </div>
 

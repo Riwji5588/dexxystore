@@ -30,25 +30,7 @@
         </div>
         <!-- End Image Banner -->
 
-        <!-- Site Banner Text -->
-        <div class="card mt-4 shadow-dark radius-border hyper-bg-white">
-        <div class="card-body">
-        <div class="media">
-            <img src="assets/img/logo.jpg" class="mr-3 img-fluid rounded-circle shadow-dark" style="width:17%;max-width: 130px;">
-            <div class="media-body">
-              <div class="mt-0 d-none d-lg-block">
-                  <h1 class="mt-0 mb-1"><b>Dexy Store</b> เว็บไซต์บริการจำหน่าย ID Netflix มากมาย</h1>
-<pre>
-Welcome to Dexy Store
-</pre>
-              </div>
-              <div class="d-block d-lg-none"><h1 class="mt-0 mb-2"><b></b></h1><h4>เว็บไซต์บริการจำหน่าย ID Netflix มากมาย</h4></div>
-              
-            </div>
-        </div>
-        </div>
-        </div>
-        <!-- End Site Banner Text -->
+     
 
         <!-- Status Site Bar -->
         <div class="row no-gutters mt-4">
@@ -62,15 +44,8 @@ Welcome to Dexy Store
           $data_selled = "SELECT count(data_id) AS 'totalselled' FROM game_data WHERE selled = 1";
           $selled_row = $hyper->connect->query($data_selled)->fetch_array();
         ?>
-            <div class="col-12 col-lg-4 p-2">
-                <div class="card shadow-dark radius-border-6 hyper-bg-white text-center p-3">
-                    <h1 class="mt-0 mb-0" style="font-size: 3.5rem;"><i class="fal fa-gamepad"></i></h1>
-                    <h1 class="mt-0 mb-0"><?= number_format($game_type_row['totalgame'],0); ?></h1>
-                    <font class="text-muted">Accounts</font>
-                </div>
-            </div>
             
-            <div class="col-6 col-lg-4 p-2">
+            <div class="col-6 col-lg-6 p-2">
                 <div class="card shadow-dark radius-border-6 hyper-bg-white text-center p-3">
                     <h1 class="mt-0 mb-0" style="font-size: 3.5rem;"><i class="fal fa-check-circle"></i></h1>
                     <h1 class="mt-0 mb-0"><?= number_format($ready_selled_row['totaldata'],0); ?></h1>
@@ -78,7 +53,7 @@ Welcome to Dexy Store
                 </div>
             </div>
             
-            <div class="col-6 col-lg-4 p-2">
+            <div class="col-6 col-lg-6 p-2">
                 <div class="card shadow-dark radius-border-6 hyper-bg-white text-center p-3">
                     <h1 class="mt-0 mb-0" style="font-size: 3.5rem;"><i class="fal fa-box-full"></i></h1>
                     <h1 class="mt-0 mb-0"><?= number_format($selled_row['totalselled'],0); ?></h1>
