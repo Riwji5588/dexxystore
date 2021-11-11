@@ -12,6 +12,7 @@
         </thead>
         <tbody>
             <?php
+
             $select_claim = "SELECT * FROM data_claim ORDER BY claim_id";
             $claim_result = $hyper->connect->query($select_claim);
             if (mysqli_num_rows($claim_result) > 0) {
@@ -27,7 +28,7 @@
                     <tr>
                         <td><?= $i + 1 ?></td>
                         <td><?= $ac_id ?></td>
-                        <td><?= $claim_data['claim_date'] ?></td>
+                        <td><?= DateThai($claim_data['claim_date']) ?></td>
                         <td>
                             <button class="btn btn-sm hyper-btn-notoutline-success" type="button" data-toggle="modal" data-target="#editusermodal<?= $i ?>"><i class="fal fa-edit mr-1"></i>แสดงไอดี</button>
 
@@ -49,6 +50,7 @@
                                             <div><?= $data_result['password'] ?></div>
                                         </div>
                                         <div class="form-group">
+                                            <span><b>รายละเอียด</b></span>
                                             <div><?= $data_result['display'] ?></div>
                                         </div>
                                         <div class="modal-footer p-2 border-0">
