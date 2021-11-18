@@ -112,7 +112,7 @@
                                   
                                     <span ><b>รายละเอียด</b></span>
                                   
-                                <textarea id="" class="form-control form-control-sm hyper-form-control" style="width:50% ; height: 100px;min-height: 100px;max-height: 100px;"> </textarea>
+                                <textarea id="detail<?= $selled['selled_id']; ?>" class="form-control form-control-sm hyper-form-control" style="width:50% ; height: 100px;min-height: 100px;max-height: 100px;"> </textarea>
                                 <br>
                                 <button type="button" class="btn hyper-btn-notoutline-danger" onclick="claim(<?= $selled['selled_id']; ?>)"><i class="fad fa-times-circle mr-1"></i>ส่งเคลม</button>
                               </div>
@@ -143,13 +143,15 @@
 
       <script>
         function claim(id) {
+          var detail = document.getElementById("detail" + id).value;
           $.ajax({
 
             type: "POST",
             url: "plugin/claim.php",
             dataType: "json",
             data: {
-              id: id
+              id: id,
+              detail: detail,
             },
 
             beforeSend: function() {

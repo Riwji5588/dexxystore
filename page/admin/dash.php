@@ -19,6 +19,9 @@
     $pay = "SELECT SUM(amount) AS 'totalpay' FROM history_pay WHERE date BETWEEN '$sdate' AND '$edate'";
     $pay_row = $hyper->connect->query($pay)->fetch_array();
 
+    $alert = "SELECT count(id) AS 'totalalert' FROM data_claim WHERE confirm = 0";
+    $alert_row = $hyper->connect->query($alert)->fetch_array();
+
 ?>
 
 <!-- Dashboard -->
@@ -78,8 +81,8 @@
     <div class="col-6 col-lg-4 p-2">
       <a href="report"><div class="card shadow-dark radius-border-6 hyper-bg-white text-center p-3 hyper-card">
             <h1 class="mt-0 mb-0" style="font-size: 3.5rem;"><i class="fas fa-exclamation-triangle"></i></h1>
-            <h1 class="mt-0 mb-0">จำนวนการเคลม</h1>
-            <font class="text-muted">การเคลมของลูกค้า</font>
+            <h1 class="mt-0 mb-0"><?= $alert_row['totalalert'] ?></h1>
+            <font class="text-muted">รออนุมัติการเคลม</font>
         </div></a>
     </div>
 
