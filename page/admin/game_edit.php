@@ -31,7 +31,7 @@
                   </div>
                   <input id="nametxtgamenew" name="nametxtgamenew" onkeyup="txtgamepreview(this,'new')" maxlength="32" type="text" class="form-control form-control-sm hyper-form-control" placeholder="ชื่อเกมที่ต้องการเพิ่ม" required autocomplete="off">
                 </div>
-                <input type="file" style="display:none;" id="imggamelogonew" name="imggamelogonew" onchange="gamelogoURL(this,'new');" accept=".jpg,.png"/>
+                <input type="file" style="display:none;" id="imggamelogonew" name="imggamelogonew" onchange="gamelogoURL(this,'new');" accept=".jpg,.png,.gif,"/>
                 <button id="uploadimggamelogo" onclick="uploadgamelogo('new')" type="button" class="btn btn-sm hyper-btn-info w-100"><i class="fal fa-image mr-1"></i>เพิ่มรูปภาพ</button>
                 <button type="submit" id="submitdatanew" class="d-none"></button>
               </form>
@@ -109,7 +109,7 @@
                     </div>
                     <input id="nametxtgame<?= $game['game_id']; ?>" onkeyup="txtgamepreview(this,'<?= $game['game_id']; ?>')" maxlength="32" type="text" value="<?= $game['game_name']; ?>" class="form-control form-control-sm hyper-form-control" placeholder="ชื่อเกม" required autocomplete="off">
                   </div>
-                  <input type="file" style="display:none;" id="imggamelogo<?= $game['game_id']; ?>" name="imggamelogo<?= $game['game_id']; ?>" onchange="gamelogoURL(this,'<?= $game['game_id']; ?>');" accept=".jpg,.png" />
+                  <input type="file" style="display:none;" id="imggamelogo<?= $game['game_id']; ?>" name="imggamelogo<?= $game['game_id']; ?>" onchange="gamelogoURL(this,'<?= $game['game_id']; ?>');" accept=".jpg,.png,.gif," />
                   <button id="uploadimggamelogo" onclick="uploadgamelogo('<?= $game['game_id']; ?>')" type="button" class="btn btn-sm hyper-btn-info w-100"><i class="fal fa-image mr-1"></i>เปลี่ยนรูปภาพ</button>
                   <button type="submit" id="updatedata<?= $game['game_id']; ?>" class="d-none"></button>
                 </form>
