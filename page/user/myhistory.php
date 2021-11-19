@@ -108,13 +108,15 @@
 
                               <div id="tec<?= $selled['selled_id']; ?>" class="container tab-pane fade"><br>
                                 <h4>ปัญหาการใช้งานด้านเทคนิค</h4>
-                                
-                                  
-                                    <span ><b>รายละเอียด</b></span>
-                                  
-                                <textarea id="detail<?= $selled['selled_id']; ?>" class="form-control form-control-sm hyper-form-control" style="width:50% ; height: 100px;min-height: 100px;max-height: 100px;"> </textarea>
-                                <br>
-                                <button type="button" class="btn hyper-btn-notoutline-danger" onclick="claim(<?= $selled['selled_id']; ?>)"><i class="fad fa-times-circle mr-1"></i>ส่งเคลม</button>
+
+
+                                <span><b>รายละเอียด</b></span>
+                                <div class="form-group">
+                                  <textarea required id="detail<?= $selled['selled_id']; ?>" class="form-control form-control-sm hyper-form-control" style="width:50% ; height: 100px;min-height: 100px;max-height: 100px;"></textarea>
+                                </div>
+                                <div class="form-group">
+                                  <button type="button" class="btn hyper-btn-notoutline-danger" onclick="claim(<?= $selled['selled_id']; ?>)"><i class="fad fa-times-circle mr-1"></i>ส่งเคลม</button>
+                                </div>
                               </div>
                             </div>
 
@@ -143,7 +145,9 @@
 
       <script>
         function claim(id) {
-          var detail = document.getElementById("detail" + id).value;
+          var checkdetail = document.getElementById("detail" + id).value;
+          // check detail if empty
+          detail = checkdetail.substring(0, 2) == "  " || checkdetail.substring(0, 1) == " " || checkdetail == "" ? "" : checkdetail;
           $.ajax({
 
             type: "POST",
@@ -152,6 +156,7 @@
             data: {
               id: id,
               detail: detail,
+              type: 1
             },
 
             beforeSend: function() {
@@ -166,7 +171,7 @@
             success: function(data) {
               setTimeout(function() {
                 if (data.code == "200") {
-                  swal("ส่งเคลม สำเร็จ!", '\n', "success", {
+                  swal(data.msg, '\n', "success", {
                     button: false,
                     closeOnClickOutside: false,
                   });
@@ -174,7 +179,7 @@
                     window.location.reload();
                   }, 2000);
                 } else {
-                  swal(data.msg, "", "error", {
+                  swal(data.msg, "\n", "error", {
                     button: {
                       className: 'hyper-btn-notoutline-danger',
                     },
