@@ -13,7 +13,7 @@
         <tbody>
             <?php
 
-            $select_claim = "SELECT * FROM data_claim ORDER BY claim_id";
+            $select_claim = "SELECT * FROM data_claim ORDER BY id";
             $claim_result = $hyper->connect->query($select_claim);
             if (mysqli_num_rows($claim_result) > 0) {
                 for ($i = 0; $i < mysqli_num_rows($claim_result); $i++) {
@@ -25,7 +25,7 @@
                     $data_result = $hyper->connect->query($select_data)->fetch_array();
                     $data_result['password'] = base64_decode($data_result['password']);
             ?>
-                    <tr>
+                    <tr <?php if($claim_data['confirm'] != 0) {echo 'style="background-color: #DADDE2;"';} ?>>
                         <td><?= $i + 1 ?></td>
                         <td><?= $ac_id ?></td>
                         <td><?= DateThai($claim_data['claim_date']) ?></td>
