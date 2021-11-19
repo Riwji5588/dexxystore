@@ -59,7 +59,7 @@ if ($total_game_row <= 0) {
                   $cardtype = mysqli_fetch_array($query_type_card);
                   do {
                 ?>
-                    <option value="<?= $cardtype['card_id']; ?>"><?= $cardtype['card_title']; ?></option>
+                    <option value="<?= $cardtype['card_id']; ?>"><?= $cardtype['card_title']." - ".$cardtype['card_price'] ?></option>
                 <?php } while ($cardtype = mysqli_fetch_array($query_type_card));
                 } ?>
               </select>
@@ -115,7 +115,7 @@ if ($total_game_row <= 0) {
               $query_data_card = $hyper->connect->query($sql_select_data_card);
               $data_card = mysqli_fetch_array($query_data_card);
               ?>
-              <td><?= $data_card['card_title']; ?></td>
+              <td><?= $data_card['card_title']." - ".$data_card['card_price'] ?></td>
               <td>
                 <button class="btn btn-sm hyper-btn-notoutline-success" type="button" data-toggle="modal" data-target="#editdatamodal<?= $data['data_id']; ?>"><i class="fal fa-edit mr-1"></i> แก้ไข</button>
                 <button onclick="DelData(this)" value="<?= $data['data_id']; ?>" class="btn btn-sm hyper-btn-notoutline-danger my-1 my-sm-0" type="button"><i class="fal fa-trash-alt mr-1"></i> ลบ</button>
@@ -161,7 +161,7 @@ if ($total_game_row <= 0) {
                               ?>
                                   <option <?php if ($cardtype['card_id'] == $data_card_id) {
                                             echo 'selected';
-                                          } ?> value="<?= $cardtype['card_id']; ?>"><?= $cardtype['card_title']; ?></option>
+                                          } ?> value="<?= $cardtype['card_id']; ?>"><?= $cardtype['card_title']." - ".$cardtype['card_price']; ?></option>
                               <?php } while ($cardtype = mysqli_fetch_array($query_type_card));
                               } ?>
                             </select>
