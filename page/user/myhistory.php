@@ -112,7 +112,7 @@
 
                                 <span><b>รายละเอียด</b></span>
                                 <div class="form-group">
-                                  <textarea required id="detail<?= $selled['selled_id']; ?>" class="form-control form-control-sm hyper-form-control" style="width:50% ; height: 100px;min-height: 100px;max-height: 100px;"></textarea>
+                                  <textarea id="detail<?= $selled['selled_id']; ?>" class="form-control form-control-sm hyper-form-control" style="width:50% ; height: 100px;min-height: 100px;max-height: 100px;"></textarea>
                                 </div>
                                 <div class="form-group">
                                   <button type="button" class="btn hyper-btn-notoutline-danger" onclick="claim(<?= $selled['selled_id']; ?>)"><i class="fad fa-times-circle mr-1"></i>ส่งเคลม</button>
