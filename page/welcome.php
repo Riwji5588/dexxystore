@@ -1,6 +1,6 @@
 <!-- Game Type -->
-<h1 class="text-center mt-4 mb-2" style="color: white;">Netflixพร้อมจำหน่าย</h1>
-<div class="row no-gutters">
+<h1 class="text-center mt-4 mb-2" style="color: white;">Netflixพร้อมจำหน่าย</h1><br>
+<div class="row no-gutters" style="justify-content: center;">
 
   <?php
   $sql_select_game = "SELECT * FROM game_type ORDER BY game_id DESC";
@@ -21,32 +21,51 @@
       if ($ready_selled_row['totaldata'] > 0) {
 
     ?>
-        <div class="col-6 col-lg-4 p-2">
+        <div class="col-12 col-md-6 col-lg-4 p-2">
           <a href="shop&gameid=<?= $game['game_id']; ?>">
-            <div class="card shadow-dark radius-border-6 hyper-bg-white text-center p-2 h-100 hyper-card">
-              <div class="media">
-                <img src="assets/img/game/<?= $game['game_image']; ?>" class="align-self-center mr-3 rounded-circle d-none d-md-block" width="70px;">
-                <div class="media-body text-center text-md-left">
-                  <img src="assets/img/game/<?= $game['game_image']; ?>" class="ml-auto mr-auto rounded-circle d-block d-md-none" width="70px;">
-                  <h4 class="mt-0 mb-1"><?= $game['game_name']; ?></h4>
-                  <font class="text-muted">พร้อมส่ง <?= number_format($ready_selled_row['totaldata'], 0); ?> จอ</font>
-                </div>
+            <div class="card shadow-dark radius-border-6 hyper-bg-white hyper-card">
+              <img src="assets/img/game/<?= $game['game_image']; ?>" class="card-img-top img-fluid" style="border-top-left-radius: 0.6rem !important;border-top-right-radius: 0.6rem !important;">
+              <div class="card-body">
+                <h5 class="mt-0 mb-2" id="title<?= $game['game_id']; ?>"><?= $game['game_name']; ?></h5>
+                <span style="color: green;">พร้อมส่ง <?= number_format($ready_selled_row['totaldata'], 0); ?> จอ</span>
               </div>
             </div>
           </a>
         </div>
+
   <?php }
     } while ($game = mysqli_fetch_array($query_game));
   } ?>
 
-<!-- End Game Type -->
 
-<style>
-  body {
-    background-color: #131315;
-  }
 
-  .color {
-    background-color: #131315;
-  }
-</style>
+
+  <!-- End Game Type -->
+
+  <style>
+    body {
+      background-color: #131315;
+    }
+
+    .color {
+      background-color: #131315;
+    }
+
+    /* .hover:hover {
+      box-shadow: 0px 0px 10px #fff;
+    } */
+
+    #hover:hover {
+      color: #b67bfb;
+      box-shadow:
+        0 0 1px #b67bfb,
+        0 0 4px #b67bfb,
+        0 0 5px #b67bfb,
+        0 0 6px #b67bfb,
+        0 0 8px #b67bfb,
+        0 0 10px #b67bfb,
+        0 0 20px #b67bfb,
+        0 0 25px #b67bfb;
+      animation: pulsate 1.2s infinite alternate;
+    }
+  </style>
