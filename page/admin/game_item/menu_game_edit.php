@@ -29,7 +29,7 @@
             $card_row = $hyper->connect->query($card)->fetch_array();
 
         ?>
-        <h3 class="text-center mt-4 mb-4">--- เลือกประเภทการจัดการ ---</br><b><?= $game['game_name']; ?></b></h3>
+        <h3 class="text-center mt-4 mb-4" style=" color: white  ;">--- เลือกประเภทการจัดการ ---</br><b><?= $game['game_name']; ?></b></h3>
         <!-- Status Site Bar -->
         <div class="row no-gutters mt-4">
 
@@ -52,3 +52,8 @@
         </div>
         <!-- End Status Site Bar -->
         <?php } ?>
+        <style>
+        body {
+          background-color: #131315;
+        }
+      </style>

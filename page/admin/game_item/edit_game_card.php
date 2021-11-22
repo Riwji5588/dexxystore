@@ -22,7 +22,7 @@
       }else{
       ?>
       <!-- Edit Card Shop -->
-      <h3 class="text-center mt-4 mb-4">--- การ์ดแสดงสินค้า ---</br><b><?= $game['game_name']; ?></b></h3>
+      <h3 class="text-center mt-4 mb-4" style="color: white;">--- การ์ดแสดงสินค้า ---</br><b><?= $game['game_name']; ?></b></h3>
       <center><button class="btn hyper-btn-info my-2 my-sm-0 w-100" type="button" data-toggle="modal" data-target="#addgamecardmodal"><i class="fal fa-plus-square mr-1"></i> เพิ่มการ์ดแสดงสินค้าใหม่เข้าระบบ</button></center>
 
       <!-- Add Game Modal -->
@@ -485,3 +485,8 @@
     </script>
 
     <?php } ?>
+    <style>
+        body {
+          background-color: #131315;
+        }
+      </style>
