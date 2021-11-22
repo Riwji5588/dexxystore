@@ -2,11 +2,11 @@
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
       <div class="table-responsive mt-5">
-        <table id="datatable" class="table table-hover text-center w-100">
+        <table id="datatable" class="table  text-center w-100"  >
           <thead class="hyper-bg-dark">
             <tr>
               <th scope="col" style="width:120px;">เลขที่ข้อมูล</th>
-              <th scope="col">เกม</th>
+              <th scope="col">บัญชี</th>
               <th scope="col">บัญชีผู้ใช้</th>
               <th scope="col">เมนู</th>
               <th scope="col">วันที่-เวลา ที่ซื้อ</th>
@@ -35,7 +35,7 @@
                 $query_selled_game = $hyper->connect->query($sql_select_selled_game);
                 $selled_game = mysqli_fetch_array($query_selled_game);
             ?>
-                <tr>
+                <tr class="es">
                   <td><?= $selled['selled_id']; ?></td>
                   <td><?php if ($selled_game['game_name'] == null) {
                         echo 'unknow';
@@ -231,5 +231,17 @@
 
         input.question {
           width: 45%;
+        }
+        body {
+          background-color: #131315;
+        }
+        .es:hover{
+          background-color: white;
+        }
+        label{
+          color: white;
+        }
+        #datatable_info{
+          color: white;
         }
       </style>

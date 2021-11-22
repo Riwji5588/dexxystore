@@ -1,5 +1,5 @@
       <!-- Web Config -->
-      <div class="card mt-4 shadow-dark radius-border hyper-bg-white ml-auto mr-auto">
+      <div class="card mt-4 shadow-dark radius-border ml-auto mr-auto es">
         <div class="card-body">
           <h4 class="mt-0 mb-4 text-center">ตั้งค่าเว็บไซต์</h4>
 
@@ -14,7 +14,7 @@
           ?>
           <!-- Card Example -->
           <div class="media m-auto">
-            <img id="gamelogoimgnew" src="assets/img/<?= $web['image']; ?>" class="align-self-center mr-3 rounded-circle d-none d-md-block" width="70px;" height="70px;">
+            <img id="gamelogoimgnew" src="assets/img/logo_dexyStore.jpg" class="align-self-center mr-3 rounded-circle d-none d-md-block" width="70px;" height="70px;">
             <div class="media-body text-center text-md-left">
               <img id="gamelogoresimgnew" src="assets/img/<?= $web['image']; ?>" class="ml-auto mr-auto rounded-circle d-block d-md-none" width="70px;" height="70px;">
               <h4 class="mt-0 mb-1" id="gamenamenew"><?= $web['name']; ?></h4>
@@ -319,3 +319,15 @@
         }
 
       </script>
+
+      <style>
+        body {
+          background-color: #131315;
+        }
+        .es{
+          background-color: #b8b8b8;
+        }
+        h4{
+          color: black;
+        }
+      </style>

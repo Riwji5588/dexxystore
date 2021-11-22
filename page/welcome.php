@@ -1,72 +1,12 @@
-        <!-- Image Banner -->
-          <div id="carouselExampleInterval" class="carousel slide shadow-dark radius-border" data-ride="carousel">
-            <div class="carousel-inner radius-border">
 
-            <?php
-
-            $sql_select_slide_image = "SELECT * FROM image_slide ORDER BY slide_id DESC";
-            $query_slide_image = $hyper->connect->query($sql_select_slide_image);
-            $slide_image = mysqli_fetch_array($query_slide_image);
-            $active = 1;
-            do{
-
-            ?>
-              <div class="carousel-item <?php if($active == 1){echo 'active'; } ?>" data-interval="7000">
-                <img src="assets/img/slide/<?= $slide_image['image_name'] ?>" class="d-block w-100" alt="...">
-              </div>
-            <?php $active = 0; }while ($slide_image = mysqli_fetch_array($query_slide_image)); ?>
-
-            </div>
-
-            <a class="carousel-control-prev" href="#carouselExampleInterval" role="button" data-slide="prev">
-              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-              <span class="sr-only">Previous</span>
-            </a>
-            <a class="carousel-control-next" href="#carouselExampleInterval" role="button" data-slide="next">
-              <span class="carousel-control-next-icon" aria-hidden="true"></span>
-              <span class="sr-only">Next</span>
-            </a>
-
-        </div>
-        <!-- End Image Banner -->
 
      
 
-        <!-- Status Site Bar -->
-        <div class="row no-gutters mt-4">
-        <?php
-          $game_type = "SELECT count(game_id) AS 'totalgame' FROM game_type";
-          $game_type_row = $hyper->connect->query($game_type)->fetch_array();
-
-          $data_ready_selled = "SELECT count(data_id) AS 'totaldata' FROM game_data WHERE selled = 0";
-          $ready_selled_row = $hyper->connect->query($data_ready_selled)->fetch_array();
-
-          $data_selled = "SELECT count(data_id) AS 'totalselled' FROM game_data WHERE selled = 1";
-          $selled_row = $hyper->connect->query($data_selled)->fetch_array();
-        ?>
-            
-            <div class="col-6 col-lg-6 p-2">
-                <div class="card shadow-dark radius-border-6 hyper-bg-white text-center p-3">
-                    <h1 class="mt-0 mb-0" style="font-size: 3.5rem;"><i class="fal fa-check-circle"></i></h1>
-                    <h1 class="mt-0 mb-0"><?= number_format($ready_selled_row['totaldata'],0); ?></h1>
-                    <font class="text-muted">Netflixพร้อมจำหน่าย</font>
-                </div>
-            </div>
-            
-            <div class="col-6 col-lg-6 p-2">
-                <div class="card shadow-dark radius-border-6 hyper-bg-white text-center p-3">
-                    <h1 class="mt-0 mb-0" style="font-size: 3.5rem;"><i class="fal fa-box-full"></i></h1>
-                    <h1 class="mt-0 mb-0"><?= number_format($selled_row['totalselled'],0); ?></h1>
-                    <font class="text-muted">Netflixถูกจำหน่ายแล้ว</font>
-                </div>
-            </div>
-
-        </div>
-        <!-- End Status Site Bar -->
+      
 
 
         <!-- Game Type -->
-        <h1 class="text-center mt-4 mb-2">Netflixพร้อมจำหน่าย</h1>
+        <h1 class="text-center mt-4 mb-2" style ="color: white;">Netflixพร้อมจำหน่าย</h1>
         <div class="row no-gutters">
 
         <?php
@@ -106,3 +46,12 @@
 
         </div>
         <!-- End Game Type -->
+
+        <style>
+          body {
+            background-color:#131315 ;
+          }
+          .color{
+            background-color:#131315 ;
+          }
+        </style>
