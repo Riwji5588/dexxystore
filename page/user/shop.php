@@ -17,7 +17,7 @@ $card = "SELECT count(card_id) AS 'totalcard' FROM game_card WHERE game_id = $gi
 $card_row = $hyper->connect->query($card)->fetch_array();
 
 if ($total_game_row <= 0) {
-
+  
   include('page/welcome.php');
 } else {
 ?>
