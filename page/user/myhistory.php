@@ -1,12 +1,36 @@
+      <style>
+        .modal {
+          z-index: 1052 !important;
+          /* display: none !important; */
+        }
+
+        .modal-backdrop.fade.show {
+          z-index: 1051 !important;
+          /* display: none !important; */
+        }
+
+        @media screen and (max-width: 768px) {
+          .modal {
+            z-index: 1052 !important;
+            /* display: none !important; */
+          }
+
+          .modal-backdrop.fade.show {
+            /* z-index: 1051 !important; */
+            display: none !important;
+          }
+        }
+      </style>
+
       <!-- MyID -->
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
       <div class="table-responsive mt-5">
-        <table id="datatable" class="table  text-center w-100"  >
+        <table id="datatable" class="table table-hover text-center w-100">
           <thead class="hyper-bg-dark">
             <tr>
               <th scope="col" style="width:120px;">เลขที่ข้อมูล</th>
-              <th scope="col">บัญชี</th>
+              <th scope="col">เกม</th>
               <th scope="col">บัญชีผู้ใช้</th>
               <th scope="col">เมนู</th>
               <th scope="col">วันที่-เวลา ที่ซื้อ</th>
@@ -35,7 +59,7 @@
                 $query_selled_game = $hyper->connect->query($sql_select_selled_game);
                 $selled_game = mysqli_fetch_array($query_selled_game);
             ?>
-                <tr class="es">
+                <tr>
                   <td><?= $selled['selled_id']; ?></td>
                   <td><?php if ($selled_game['game_name'] == null) {
                         echo 'unknow';
@@ -104,7 +128,7 @@
                     <!-- End Data Modal -->
 
                     <!-- Claim Modal -->
-                    <div class="modal fade" id="datamodal1<?= $selled['selled_id']; ?>" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-hidden="true">
+                    <div class="modal fade" id="datamodal1<?= $selled['selled_id']; ?>">
                       <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">
                           <div class="modal-header">
@@ -153,7 +177,7 @@
                                         <span>วิธีเปลี่ยนซับไทยและเสียงพากย์ไทย</span>
                                       </td>
                                       <td>
-                                        <a href="#" class="btn btn-danger">คลิก</a>
+                                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#sub">คลิก</button>
                                       </td>
                                     </tr>
                                     <tr>
@@ -161,7 +185,7 @@
                                         <span>วิธีเปลี่ยนความชัดของวิดีโอ</span>
                                       </td>
                                       <td>
-                                        <a href="#" class="btn btn-danger">คลิก</a>
+                                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#video">คลิก</button>
                                       </td>
                                     </tr>
                                   </table>
@@ -194,6 +218,105 @@
         </table>
       </div>
       <!-- End MyID -->
+
+      <!-- sub modal -->
+      <div class="modal fade" id="sub" data-backdrop="static">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-body">
+              <div class="row">
+                <div class="col-12">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <br>
+                <div class="col-12">
+                  <div id="insub" class="carousel slide" data-ride="carousel" style="padding: 10px;">
+                    <ol class="carousel-indicators">
+                      <li data-target="#insub" data-slide-to="0" class="active"></li>
+                      <li data-target="#insub" data-slide-to="1"></li>
+                      <li data-target="#insub" data-slide-to="2"></li>
+                    </ol>
+                    <div class="carousel-inner">
+                      <div class="carousel-item active">
+                        <img src="assets/img/line.jpg" class="d-block w-100" alt="...">
+                      </div>
+                      <div class="carousel-item">
+                        <img src="assets/img/line.jpg" class="d-block w-100" alt="...">
+                      </div>
+                      <div class="carousel-item">
+                        <img src="assets/img/line.jpg" class="d-block w-100" alt="...">
+                      </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-target="#insub" data-slide="prev">
+                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                      <span class="sr-only">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-target="#insub" data-slide="next">
+                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                      <span class="sr-only">Next</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- video modal -->
+      <div class="modal fade" id="video" data-backdrop="static">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-body">
+              <div class="row">
+                <div class="col-12">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <br>
+                <div class="col-12">
+                  <div id="invideo" class="carousel slide" data-ride="carousel" style="padding: 10px;">
+                    <ol class="carousel-indicators">
+                      <li data-target="#invideo" data-slide-to="0" class="active"></li>
+                      <li data-target="#invideo" data-slide-to="1"></li>
+                      <li data-target="#invideo" data-slide-to="2"></li>
+                    </ol>
+                    <div class="carousel-inner">
+                      <div class="carousel-item active">
+                        <img src="assets/img/logo.jpg" class="d-block w-100" alt="...">
+                      </div>
+                      <div class="carousel-item">
+                        <img src="assets/img/logo.jpg" class="d-block w-100" alt="...">
+                      </div>
+                      <div class="carousel-item">
+                        <img src="assets/img/logo.jpg" class="d-block w-100" alt="...">
+                      </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-target="#invideo" data-slide="prev">
+                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                      <span class="sr-only">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-target="#invideo" data-slide="next">
+                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                      <span class="sr-only">Next</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
 
       <script>
         function copy(input) {
@@ -291,17 +414,5 @@
 
         input.question {
           width: 45%;
-        }
-        body {
-          background-color: #131315;
-        }
-        .es:hover{
-          background-color: white;
-        }
-        label{
-          color: white;
-        }
-        #datatable_info{
-          color: white;
         }
       </style>
