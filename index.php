@@ -97,6 +97,108 @@ function DateThai($strDate)
     });
   </script>
   <style>
+    .btn {
+      color: white;
+    }
+
+    a .pu:hover {
+      color: #b67bfb;
+      text-shadow:
+        0 0 7px #b67bfb,
+        0 0 10px #b67bfb,
+        0 0 21px #b67bfb,
+        0 0 42px #b67bfb,
+        0 0 82px #b67bfb,
+        0 0 92px #b67bfb,
+        0 0 102px #b67bfb,
+        0 0 151px #b67bfb;
+      animation: pulsate 1.2s infinite alternate;
+    }
+
+    a .gr:hover {
+      color: #40ff56;
+      text-shadow:
+        0 0 7px #40ff56,
+        0 0 10px #40ff56,
+        0 0 21px #40ff56,
+        0 0 42px #40ff56,
+        0 0 82px #40ff56,
+        0 0 92px #40ff56,
+        0 0 102px #40ff56,
+        0 0 151px #40ff56;
+      animation: pulsate 1.2s infinite alternate;
+    }
+
+    a .pk:hover {
+      color: pink;
+      text-shadow:
+        0 0 7px #fc2c84,
+        0 0 10px #fc2c84,
+        0 0 21px #fc2c84,
+        0 0 42px #fc2c84,
+        0 0 82px #fc2c84,
+        0 0 92px #fc2c84,
+        0 0 102px #fc2c84,
+        0 0 151px #fc2c84;
+      animation: pulsate 1.2s infinite alternate;
+    }
+
+    a .yl:hover {
+      color: #f7ff24;
+      text-shadow:
+        0 0 7px #f7ff24,
+        0 0 10px #f7ff24,
+        0 0 21px #f7ff24,
+        0 0 42px #f7ff24,
+        0 0 82px #f7ff24,
+        0 0 92px #f7ff24,
+        0 0 102px #f7ff24,
+        0 0 151px #f7ff24;
+      animation: pulsate 1.2s infinite alternate;
+    }
+
+    a .or:hover {
+      color: #ffaa56;
+      text-shadow:
+        0 0 7px #ffaa56,
+        0 0 10px #ffaa56,
+        0 0 21px #ffaa56,
+        0 0 42px #ffaa56,
+        0 0 82px #ffaa56,
+        0 0 92px #ffaa56,
+        0 0 102px #ffaa56,
+        0 0 151px #ffaa56;
+      animation: pulsate 1.2s infinite alternate;
+    }
+
+    a .bl:hover {
+      color: #00c0ff;
+      text-shadow:
+        0 0 7px #00c0ff,
+        0 0 10px #00c0ff,
+        0 0 21px #00c0ff,
+        0 0 42px #00c0ff,
+        0 0 82px #00c0ff,
+        0 0 92px #00c0ff,
+        0 0 102px #00c0ff,
+        0 0 151px #00c0ff;
+      animation: pulsate 1.2s infinite alternate;
+    }
+
+    a .rd:hover {
+      color: #ff3434;
+      text-shadow:
+        0 0 7px#ff3434,
+        0 0 10px#ff3434,
+        0 0 21px #ff3434,
+        0 0 42px#ff3434,
+        0 0 82px #ff3434,
+        0 0 92px#ff3434,
+        0 0 102px #ff3434,
+        0 0 151px #ff3434;
+      animation: pulsate 1.2s infinite alternate;
+    }
+
     .swal-modal .swal-text {
       text-align: center;
     }
