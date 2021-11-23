@@ -39,7 +39,7 @@
                         <td><?= $ac_id ?></td>
                         <td><?= DateThai($claim_data['claim_date']) ?></td>
                         <td><?php if ($claim_data['confirm'] == 0) {
-                                echo '<span class="text-warning">รอดำเนินงาน</span>';
+                                echo '<span class="text-warning">รอดำเนินการ</span>';
                             } else if ($claim_data['confirm'] == 1) {
                                 echo '<span class="text-success">อนุมัติ</span>';
                             } else if ($claim_data['confirm'] == 2) {

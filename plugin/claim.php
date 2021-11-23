@@ -89,7 +89,7 @@ if (isset($_POST['id'])) {
             if ($_POST['type'] == 2) {
 
                 date_default_timezone_set("Asia/Bangkok");
-                $claim_date = date("Y-m-d H:i:s");
+                $claim_date = date("Y-m-d H:i:s", strtotime("+30 day"));
 
                 $data_game = "SELECT * FROM game_data WHERE selled = 0 LIMIT 1";
                 $row = $hyper->connect->query($data_game);
