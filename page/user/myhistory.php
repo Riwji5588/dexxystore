@@ -1,26 +1,4 @@
-      <style>
-        .modal {
-          z-index: 1052 !important;
-          /* display: none !important; */
-        }
 
-        .modal-backdrop.fade.show {
-          z-index: 1051 !important;
-          /* display: none !important; */
-        }
-
-        @media screen and (max-width: 768px) {
-          .modal {
-            z-index: 1052 !important;
-            /* display: none !important; */
-          }
-
-          .modal-backdrop.fade.show {
-            /* z-index: 1051 !important; */
-            display: none !important;
-          }
-        }
-      </style>
 
       <!-- MyID -->
       <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -68,15 +46,15 @@
                       } ?></td>
                   <td><?= $selled_data['username']; ?></td>
                   <td>
-                    <button class="btn btn-success btn-sm" type="button" data-toggle="modal" data-target="#datamodal<?= $selled['selled_id']; ?>"><i class="fal fa-info-circle mr-1"></i>แสดงไอดี</button>
-                    <button class="btn btn-warning btn-sm" type="button" data-toggle="modal" data-target="#datamodal1<?= $selled['selled_id']; ?>" style="color: ;"><i class="fas fa-exclamation-triangle"></i>แจ้งปัญหา</button>
+                    <button class="btn btn-success btn-sm" type="button" data-toggle="modal" data-target="#datamodal<?= $selled['selled_id']; ?>">แสดงไอดี</button>
+                    <button class="btn btn-warning btn-sm" type="button" data-toggle="modal" data-target="#datamodal1<?= $selled['selled_id']; ?>" style="color: ;"><i class="fas fa-exclamation-triangle"></i> แจ้งปัญหา</button>
 
                     <!-- Data Modal -->
                     <div class="modal fade" id="datamodal<?= $selled['selled_id']; ?>" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-hidden="true">
                       <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content border-0 radius-border-2 hyper-bg-white">
                           <div class="modal-header hyper-bg-dark">
-                            <h5 class="modal-title"><i class="fal fa-info-circle mr-1"></i> ไอดีของคุณ</h5>
+                            <h5 class="modal-title"> ไอดีของคุณ</h5>
                             <button type="button" class="close p-4" data-dismiss="modal" aria-label="Close">
                               <span aria-hidden="true">&times;</span>
                             </button>
@@ -87,8 +65,9 @@
                                 <span>ชื่อผู้ใช้งาน</span>
                               </div>
                               <div class="col-8">
-                                <input type="text" id="username<?= $selled['selled_id']; ?>" value="<?= $selled_data['username']; ?>" readonly style="background-color: #fff;border-radius: 0px;border: 0px">
-                                <button class="btn btn-dark btn-sm" onclick="copy('username<?= $selled['selled_id']; ?>')"> คัดลอก </button>
+                                <input type="text" id="username<?= $selled['selled_id']; ?>1" value="<?= $selled_data['username']; ?>" readonly style="background-color: #fff;border-radius: 0px;border: 0px">
+                                <button id="username<?= $selled['selled_id']; ?>" class="btn btn-dark btn-sm" onclick="copy(this)"> คัดลอก </button>
+                                <!-- 'username<?= $selled['selled_id']; ?>' -->
                               </div>
                             </div>
                             <div class="row" style="padding: 5px 2px 0px 2px;">
@@ -96,8 +75,8 @@
                                 <span>รหัสผ่าน</span>
                               </div>
                               <div class="col-8">
-                                <input type="text" id="password<?= $selled['selled_id']; ?>" value="<?= base64_decode($selled_data['password']); ?>" readonly style="background-color: #fff;border-radius: 0px;border: 0px">
-                                <button class="btn btn-dark btn-sm" onclick="copy('password<?= $selled['selled_id']; ?>')"> คัดลอก </button>
+                                <input type="text" id="password<?= $selled['selled_id']; ?>1" value="<?= base64_decode($selled_data['password']); ?>" readonly style="background-color: #fff;border-radius: 0px;border: 0px">
+                                <button id="password<?= $selled['selled_id']; ?>" class="btn btn-dark btn-sm" onclick="copy(this)"> คัดลอก </button>
                               </div>
                             </div>
                             <div class="row" style="padding: 5px 2px 0px 2px;">
@@ -131,8 +110,8 @@
                     <div class="modal fade" id="datamodal1<?= $selled['selled_id']; ?>">
                       <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">
-                          <div class="modal-header">
-                            <h5 class="modal-title"><i class="fal fa-info-circle mr-1"></i> แจ้งปัญหาในการใช้งาน</h5>
+                          <div class="modal-header" style="background-color: #ffc107;">
+                            <h5 class="modal-title"><i class="fas fa-exclamation-triangle"></i> แจ้งปัญหาในการใช้งาน</h5>
                             <button type="button" class="close p-4" data-dismiss="modal" aria-label="Close">
                               <span aria-hidden="true">&times;</span>
                             </button>
@@ -260,10 +239,10 @@
                   </div>
                 </div>
               </div>
-              
+
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">ปิด</button>
             </div>
           </div>
         </div>
@@ -309,10 +288,10 @@
                   </div>
                 </div>
               </div>
-              
+
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">ปิด</button>
             </div>
           </div>
         </div>
@@ -320,10 +299,17 @@
 
       <script>
         function copy(input) {
-          var copyText = document.getElementById(input);
+          let id = input.id+'1';
+          var copyText = document.getElementById(id);
           copyText.select();
           copyText.setSelectionRange(0, 99999)
           document.execCommand("copy");
+          input.innerHTML = "คัดลอกแล้ว";
+          input.className = "btn btn-success btn-sm";
+          setTimeout(function() {
+            input.innerHTML = "คัดลอก";
+            input.className = "btn btn-dark btn-sm";
+          }, 2000);
         }
 
 
@@ -396,12 +382,6 @@
 
         input.user {
           width: 45%;
-        }
-
-        .modal-header {
-          background-color: #ffc107;
-
-
         }
 
         #detailnew {

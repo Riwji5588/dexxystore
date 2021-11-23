@@ -98,6 +98,28 @@ function DateThai($strDate)
     });
   </script>
   <style>
+    .modal {
+      z-index: 1052 !important;
+      /* display: none !important; */
+    }
+
+    .modal-backdrop.fade.show {
+      z-index: 1051 !important;
+      /* display: none !important; */
+    }
+
+    @media screen and (max-width: 768px) {
+      .modal {
+        z-index: 1052 !important;
+        /* display: none !important; */
+      }
+
+      .modal-backdrop.fade.show {
+        /* z-index: 1051 !important; */
+        display: none !important;
+      }
+    }
+
     .btn {
       color: white;
     }
@@ -211,7 +233,7 @@ function DateThai($strDate)
 
   <!-- User Navbar -->
   <?php
-  if ($loged == 1) {
+  if ($loged == 1 && isset($_COOKIE['USER_SID'])) {
     include('page/user/user_nav.php');
   } else {
     include('page/nav.php');
@@ -223,7 +245,7 @@ function DateThai($strDate)
   <div class="container" style="padding-top: 110px;">
 
     <?php
-    if ($loged == 1) {
+    if ($loged == 1 && isset($_COOKIE['USER_SID'])) {
 
       if ($page == 'home') {
         include('page/welcome.php');
@@ -329,8 +351,16 @@ function DateThai($strDate)
       } elseif ($page == 'resetpassword') {
         include('page/resetpassword.php');
       } else {
-        $page = 'home';
-        include('page/welcome.php');
+        if ($page == 'shop') {
+          echo "<script>";
+          echo "swal('คุณยังไม่ได้เข้าสู่ระบบ', '', 'error');";
+          echo "</script>";
+          $page = 'home';
+          include('page/welcome.php');
+        } else {
+          $page = 'home';
+          include('page/welcome.php');
+        }
       }
     }
     ?>
