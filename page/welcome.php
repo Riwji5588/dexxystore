@@ -40,6 +40,7 @@
 
 
 
+
   <!-- End Game Type -->
 
   <style>
