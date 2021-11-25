@@ -154,7 +154,14 @@
                               <li>จอซ้อน / หน้าจอเต็ม</li>
                             </ol>
                             <textarea id="detail<?= $selled['selled_id']; ?>" class="form-control" style="width: 88%;min-height: 100px" autofocus></textarea>
-                            <span style="color: red;"><b>*หมายเหตุ </b>หลังกดปุ่มเคลม ไอดีใหม่จะแสดงแทนไอดีเก่าในเลขออเดอร์เดิม</span>
+                            <span style="color: red;">
+                              <b>*หมายเหตุ </b>
+                              <ol>
+                                <li>หากเคลม<u>ครั้งแรก</u> จะได้รับไอดีใหม่ทันที</li>
+                                <li>หากเคลม<u>ครั้งที่ 2 ขึ้นไป</u> จะต้องรอแอดมินมาอนุมัติ</li>
+                                <li>หาก<u>ถูกปฏิเสธ</u> เหตุผลในการส่งเคลมไม่เป็นจริง หรือเป็นเท็จ แต่ถ้าหากต้องการส่งเคลมอีกครั้งก็สามารถส่งได้</li>
+                              </ol>
+                            </span>
                           </div>
                           <div class="modal-footer p-2 border-0 form-group">
                             <button type="button" class="btn btn-primary" onclick="claim(<?= $selled['selled_id']; ?>)"><i class="fad fa-times-circle mr-1"></i>ส่งเคลม</button>

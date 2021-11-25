@@ -33,7 +33,12 @@ if (isset($_POST['id'])) {
         $uid = $data_user['ac_id'];
 
         $data_selled = "SELECT * FROM data_selled WHERE selled_id = $id";
+
+
         $selled = $hyper->connect->query($data_selled)->fetch_array();
+
+        $sql = "SELECT * FROM game_data WHERE data_id = {$selled['data_id']}";
+        $card_id = $hyper->connect->query($sql)->fetch_array();
 
         if ($_POST['type'] == 1) { // send claim
 
@@ -43,7 +48,7 @@ if (isset($_POST['id'])) {
 
                 if ($selled['claim'] == 0) { // send first time
 
-                    $data_game = "SELECT * FROM game_data WHERE selled = 0 LIMIT 1";
+                    $data_game = "SELECT * FROM game_data WHERE selled=0 AND card_id={$card_id['card_id']} LIMIT 1";
                     $row = $hyper->connect->query($data_game);
                     $game = $row->fetch_array();
 
@@ -56,6 +61,7 @@ if (isset($_POST['id'])) {
                             $data_game_update = "UPDATE game_data SET selled = 1 WHERE data_id = {$game['data_id']}";
 
                             if ($hyper->connect->query($data_selled_update) && $hyper->connect->query($data_game_update)) {
+                                sendNotify($selled['ac_id'], 'admin', 'claim', $selled['selled_id']);
                                 $successMSG = "เคลม สำเร็จ!";
                             } else {
                                 $errorMSG = "เคลมไม่สำเร็จ... กรุณาแจ้งแอดมิน (2)";
@@ -73,6 +79,7 @@ if (isset($_POST['id'])) {
                     if ($hyper->connect->query($sendClaim)) {
                         $data_selled_update = "UPDATE data_selled SET claim = 2 WHERE selled_id = {$selled['selled_id']}"; // set claim 2 = send claim and waiting for confirm
                         if ($hyper->connect->query($data_selled_update)) {
+                            sendNotify($selled['ac_id'], 'admin', 'claim', $selled['selled_id']);
                             $successMSG = "ส่งเคลม สำเร็จ!";
                         } else {
                             $errorMSG = "ส่งเคลมไม่สำเร็จ... กรุณาแจ้งแอดมิน (2)";
@@ -91,7 +98,7 @@ if (isset($_POST['id'])) {
                 date_default_timezone_set("Asia/Bangkok");
                 $claim_date = date("Y-m-d H:i:s", strtotime("+30 day"));
 
-                $data_game = "SELECT * FROM game_data WHERE selled = 0 LIMIT 1";
+                $data_game = "SELECT * FROM game_data WHERE selled=0 AND card_id={$card_id['card_id']} LIMIT 1";
                 $row = $hyper->connect->query($data_game);
                 $game = $row->fetch_array();
 
@@ -118,6 +125,7 @@ if (isset($_POST['id'])) {
                     $errorMSG = "เกิดข้อผิดพลาด... กรุณาติดต่อผู้ดูแลระบบ";
                 }
             }
+            sendNotify((int)$uid, (int)$selled['ac_id'], 'confirm', (int)$selled['selled_id']);
         }
     } else {
         $errorMSG = "เกิดปัญหาในการส่งเคลม";

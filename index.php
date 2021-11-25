@@ -78,17 +78,27 @@ function DateThai($strDate)
   <link rel="shortcut icon" href="assets/img/<?= $webimage; ?>" type="image/png">
   <link href="https://fonts.googleapis.com/css2?family=Kanit&display=swap" rel="stylesheet">
   <link href="assets/css/bootstrap.css" rel="stylesheet">
+
   <link rel="stylesheet" type="text/css" href="assets/css/jquery.dataTables.min.css">
   <link rel="stylesheet" type="text/css" href="assets/css/dataTables.bootstrap4.min.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+
   <link href="assets/css/animate.css" rel="stylesheet">
   <script src="assets/js/sweetalert.min.js"></script>
+
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
   <link href="assets/css/hyper.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js" integrity="sha384-VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2" crossorigin="anonymous"></script>
+
   <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.14.0/css/all.css" integrity="sha384-VhBcF/php0Z/P5ZxlxaEx1GwqTQVIBu4G4giRWxTKOCjTxsPFETUDdVL5B6vYvOt" crossorigin="anonymous">
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+
+  <!-- <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script> -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+
   <script type="text/javascript" src="assets/js/jquery.dataTables.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
   <script>
@@ -229,8 +239,6 @@ function DateThai($strDate)
 </head>
 
 <body>
-  a
-
   <!-- User Navbar -->
   <?php
   if ($loged == 1 && isset($_COOKIE['USER_SID'])) {
@@ -352,11 +360,13 @@ function DateThai($strDate)
         include('page/resetpassword.php');
       } else {
         if ($page == 'shop') {
-          echo "<script>";
-          echo "swal('คุณยังไม่ได้เข้าสู่ระบบ', '', 'error');";
-          echo "</script>";
           $page = 'home';
           include('page/welcome.php');
+          echo "<script>";
+          echo "swal('คุณยังไม่ได้เข้าสู่ระบบ', '', 'error').then(function() {
+            window.location.replace('./home');
+          });";
+          echo "</script>";
         } else {
           $page = 'home';
           include('page/welcome.php');
