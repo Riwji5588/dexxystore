@@ -21,7 +21,7 @@
       if ($ready_selled_row['totaldata'] > 0) {
 
     ?>
-        <div class="col-12 col-md-6 col-lg-4 p-2">
+        <div class="col-10 col-md-6 col-lg-4 p-2">
           <a href="shop&gameid=<?= $game['game_id']; ?>">
             <div class="card shadow-dark radius-border-6 hyper-bg-white hyper-card">
               <img src="assets/img/game/<?= $game['game_image']; ?>" class="card-img-top img-fluid" style="border-top-left-radius: 0.6rem !important;border-top-right-radius: 0.6rem !important;">
