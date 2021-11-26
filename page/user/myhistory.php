@@ -112,7 +112,7 @@
                       </div>
 
                       <div class="modal-footer p-2 border-0">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fad fa-times-circle mr-1"></i>ปิด</button>
+                        <button type="button" class="btn btn-secondary  btn-danger" data-dismiss="modal"><i class="fad fa-times-circle mr-1"></i>ปิด</button>
                       </div>
                     </div>
                   </div>
@@ -164,8 +164,8 @@
                             </span>
                           </div>
                           <div class="modal-footer p-2 border-0 form-group">
-                            <button type="button" class="btn btn-primary" onclick="claim(<?= $selled['selled_id']; ?>)"><i class="fad fa-times-circle mr-1"></i>ส่งเคลม</button>
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal" aria-label="Close"><i class="fad fa-times-circle mr-1"></i>ปิด</button>
+                            <button type="button" class="btn btn-success" onclick="claim(<?= $selled['selled_id']; ?>)"><i class="fad fa-times-circle mr-1"></i>ส่งเคลม</button>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal" aria-label="Close"><i class="fad fa-times-circle mr-1"></i>ปิด</button>
                           </div>
                         </div>
                         <!-- other tab -->
