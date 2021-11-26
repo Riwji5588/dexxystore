@@ -28,7 +28,11 @@
             ?>
                     <tr <?php if ($claim_data['confirm'] != 0) {
                             echo 'style="background-color: #DADDE2;"';
-                        } ?>>
+                        } else if (isset($_GET['id']) && $_GET['id'] == $claim_data['claim_id']) {
+                            echo 'style="background-color: red;"';
+                        }
+
+                        ?>>
                         <td>
                             <?php
                             if ($claim_data['confirm'] != 0) {

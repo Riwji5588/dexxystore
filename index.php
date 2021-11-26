@@ -154,6 +154,20 @@ if (isset($_COOKIE['USER_SID'])) {
     });
   </script>
   <style>
+    /* Now the super main part */
+    /* this gets the whole scrollbar including the scrollbar area */
+    ::-webkit-scrollbar {
+      background: transparent;
+      width: 7px;
+    }
+
+    /* webkit scrollbar thumb is the part of the scrollbar which we hold to scroll  */
+    ::-webkit-scrollbar-thumb {
+      background: #606060;
+      /* we got the background now lets make it round */
+      border-radius: 100px;
+    }
+
     .modal {
       z-index: 1052 !important;
       /* display: none !important; */

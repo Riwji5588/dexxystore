@@ -1,5 +1,5 @@
 <!-- Game Type -->
-<h1 class="text-center mt-4 mb-2" style="color: white;">Netflixพร้อมจำหน่าย</h1><br>
+<h1 class="text-center mt-4 mb-2" style="color: white;">Netflix พร้อมจำหน่าย</h1><br>
 <div class="row no-gutters" style="justify-content: center;">
 
   <?php

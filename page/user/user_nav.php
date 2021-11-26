@@ -117,7 +117,7 @@ $notify = $hyper->connect->query($select_noti);
 										<?= $msg ?>
 									</div>
 									<div class="col-4 col-md-3 mb-2" style="margin-top: 4px;">
-										<a href="report?id=<?= $order_id ?>" class="btn btn-sm btn-warning " style=" color :black ; ">
+										<a href="report&id=<?= $order_id ?>" class="btn btn-sm btn-warning " style=" color :black ; ">
 											รายละเอียด
 										</a>
 									</div>
@@ -141,7 +141,7 @@ $notify = $hyper->connect->query($select_noti);
 											<?= $msg ?>
 										</div>
 										<div class="col-4 col-md-3 mb-2" style="margin-top: 4px;">
-											<a href="history?id=<?= $order_id ?>" class="btn btn-sm btn-warning " style=" color :black ; ">
+											<a href="history&id=<?= $order_id ?>" class="btn btn-sm btn-warning " style=" color :black ; ">
 												รายละเอียด
 											</a>
 										</div>
@@ -164,7 +164,7 @@ $notify = $hyper->connect->query($select_noti);
 											<?= $msg ?>
 										</div>
 										<div class="col-4 col-md-3 mb-2" style="margin-top: 4px;">
-											<a href="history?id=<?= $order_id ?>" class="btn btn-sm btn-warning " style=" color :black ; ">
+											<a href="history&id=<?= $order_id ?>" class="btn btn-sm btn-warning " style=" color :black ; ">
 												รายละเอียด
 											</a>
 										</div>
