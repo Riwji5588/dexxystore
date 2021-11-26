@@ -1,34 +1,16 @@
-<!-- <nav class="navbar navbar-expand-md navbar-dark fixed-top" style="background-color: #131315;">
-	<div class="d-flex w-50 order-0">
-		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar">
-			<span class="navbar-toggler-icon"></span>
-		</button>
-		<a class="navbar-brand ml-5" href="home">
-			<img src="assets/img/logo_dexyStore.jpg" width="64" height="64" class="d-inline-block align-top rounded-circle">
-		</a>
-	</div>
-	<div class="navbar-collapse collapse justify-content-center order-1" id="collapsingNavbar" style="width: 100%;">
-		<ul class="navbar-nav ml-auto mr-auto">
-			<li><a href="home"><button class="btn btn-sm pu <?php if ($page == 'home' || $page == 'shop' || $page == 'item') {
-																echo '-active';
-															} ?> my-2 my-sm-0 mr-2" type="button"><i class="fal fa-home-lg-alt mr-1"></i> หน้าแรก</button></a></li>
-			<li><a href="profile"><button class="btn btn-sm gr <?php if ($page == 'profile') {
-																	echo '-active';
-																} ?> my-2 my-sm-0 mr-2" type="butt><i class=" fal fa-user mr-1"></i> บัญชีของฉัน</button></a></li>
-			<?php if ($data_user['role'] == '779') { ?><li><a href="adminsys"><button class="btn btn-sm pk <?php if ($page == 'adminsys' || $page == 'gametype' || $page == 'gameselect' || $page == 'editgame' || $page == 'gamecard' || $page == 'gamedata' || $page == 'dataowner' || $page == 'datauser' || $page == 'datapay' || $page == 'websetting' || $page == 'report') {
-																												echo '-active';
-																											} ?> my-2 my-sm-0 mr-2" type="button"><i class="fal fa-tools mr-1"></i> ระบบแอดมิน</button></a></li><?php } ?>
-			<li><a href="history"><button class="btn btn-sm yl <?php if ($page == 'history') {
-																	echo '-active';
-																} ?> my-2 my-sm-0 mr-2" type="button"><i class="fal fa-history mr-1"></i> ประวัติการซื้อ</button></a></li>
-			<li><a href="topup"><button class="btn btn-sm or <?php if ($page == 'topup') {
-																	echo '-active';
-																} ?> my-2 my-sm-0 mr-2" type="button"><i class="fal fa-credit-card mr-1" style="color: white;"></i> เติมเงิน</button></a></li>
-			<li><a href="https://twitter.com/dexy_store" target="_blank"><button class="btn btn-sm bl my-2 my-sm-0 mr-2" type="button"><i class="fab fa-twitter-square mr-1"></i> Twitter</button></a></li>
-			<li><a href="logout"><button class="btn btn-sm rd  my-2 my-sm-0 mr-3" type="button"><i class="fad fa-times-circle mr-1"></i> ออกจากระบบ</button></a></li>
-		</ul>
-	</div>
-</nav> -->
+<?php
+
+$noti_count = 0;
+$sid = $_COOKIE['USER_SID'];
+$var = "SELECT * FROM accounts WHERE sid = '" . $sid . "' ";
+$user_query = $hyper->connect->query($var);
+$total_user = mysqli_num_rows($user_query);
+$data_user = $hyper->connect->query($var)->fetch_array();
+$select_noti = "SELECT * FROM notify_log WHERE _to={$data_user['ac_id']} ORDER BY id DESC";
+
+$notify = $hyper->connect->query($select_noti);
+
+?>
 
 <nav class="navbar navbar-expand-md navbar-dark fixed-top" style="background-color: #131315;">
 	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar6">
@@ -74,7 +56,15 @@
 	<!-- On PC -->
 	<ul id="onpc" class="navbar-nav ml-auto align-items-center" style="display:inline-flex;">
 		<li class="nav-item">
-			<div style="color: #fff;"> <?= $points; ?> บาท</div>
+			<div class="mx-1" style="color: #fff;"> <?= $points; ?> บาท</div>
+		</li>
+		<li class="nav-item">
+			<button class="btn" data-toggle="modal" data-target="#notification">
+				<svg xmlns="http://www.w3.org/2000/svg" style="color: #DFC107;" width="20" height="20" fill="currentColor" class="bi bi-bell-fill" viewBox="0 0 16 16">
+					<path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zm.995-14.901a1 1 0 1 0-1.99 0A5.002 5.002 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901z" />
+				</svg>
+				<span style="color: #fff;"><?= mysqli_num_rows($notify) ?></span>
+			</button>
 		</li>
 		<li class="nav-item">
 			<a class="nav-link" href="logout">
@@ -88,6 +78,37 @@
 		</li>
 	</ul>
 </nav>
+
+<div class="modal fade" id="notification" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<div>
+					<?php
+					while ($row = mysqli_fetch_assoc($notify)) {
+						echo '<div class="card">
+								<div class="card-body">
+									<p>' . base64_decode($row['message']) . '</p>
+								</div>
+							</div>';
+					}
+					?>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-primary">Save changes</button>
+			</div>
+		</div>
+	</div>
+</div>
+
 
 <style>
 	@media screen and (max-width: 770px) {
