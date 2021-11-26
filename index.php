@@ -206,6 +206,19 @@ if (isset($_COOKIE['USER_SID'])) {
         0 0 151px #f7ff24;
       animation: pulsate 1.2s infinite alternate;
     }
+    .yl:hover {
+      color: #f7ff24;
+      text-shadow:
+        0 0 7px #f7ff24,
+        0 0 10px #f7ff24,
+        0 0 21px #f7ff24,
+        0 0 42px #f7ff24,
+        0 0 82px #f7ff24,
+        0 0 92px #f7ff24,
+        0 0 102px #f7ff24,
+        0 0 151px #f7ff24;
+      animation: pulsate 1.2s infinite alternate;
+    }
 
     a .or:hover {
       color: #ffaa56;
