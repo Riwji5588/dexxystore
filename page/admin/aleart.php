@@ -44,7 +44,6 @@
                                 echo '<span class="text-success">อนุมัติ</span>';
                             } else if ($claim_data['confirm'] == 2) {
                                 echo '<span class="text-danger">ปฏิเสธ</span>';
-
                             } ?></td>
                         <td>
                             <button class="btn btn-sm hyper-btn-notoutline-success" type="button" data-toggle="modal" data-target="#editusermodal<?= $i ?>"><i class="fal fa-info-circle mr-1"></i> แสดงไอดี</button>
@@ -125,6 +124,10 @@
     </table>
 </div>
 <style>
+    .table-hover:hover {
+        background-color: #ddd;
+    }
+
     input {
         border-radius: 15px;
 
@@ -157,6 +160,18 @@
         max-height: 120px;
         width: 300px;
 
+    }
+
+    body {
+        background-color: #131315;
+    }
+
+    label {
+        color: white;
+    }
+
+    #datatable_info {
+        color: white;
     }
 </style>
 

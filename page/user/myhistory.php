@@ -2,7 +2,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <div class="table-responsive mt-5">
-  <table id="datatable" class="table  text-center w-100">
+  <table id="datatable" class="table table-hover  text-center w-100">
     <thead class="hyper-bg-dark">
       <tr>
         <th scope="col" style="width:120px;">เลขที่ข้อมูล</th>
@@ -193,7 +193,7 @@
                           </div>
                           <div class="form-group" align="center">
                             <p>สอบถามเพิ่มเติม โดยตรงกับทางร้าน</p>
-                            <img src="assets/img/line.jpg" style="width:auto; max-width: 130px;">
+                            <img src="assets/img/line1.jpg" style="width:auto; max-width: 130px;">
                           </div>
                           <div class="modal-footer p-2 border-0 form-group">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal" aria-label="Close"><i class="fad fa-times-circle mr-1"></i>ปิด</button>
@@ -426,4 +426,7 @@ color : white;
   #datatable_info{
           color: white;
         }
+    .table-hover:hover {
+    background-color: #ddd;
+    }
 </style>

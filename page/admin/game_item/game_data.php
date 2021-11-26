@@ -22,7 +22,7 @@ if ($total_game_row <= 0) {
 ?>
   <!-- Game Data -->
 
-  <h3 class="text-center mt-4 mb-4">--- ข้อมูลทั้งหมดใน <?= $game['game_name']; ?> ---</h3>
+  <h3 class="text-center mt-4 mb-4" style="color: white;">--- ข้อมูลทั้งหมดใน <?= $game['game_name']; ?> ---</h3>
   <center><button class="btn hyper-btn-info my-2 my-sm-0 w-100" type="button" data-toggle="modal" data-target="#addgamemodal"><i class="fal fa-plus-square mr-1"></i> เพิ่มข้อมูลใหม่เข้าระบบ</button></center>
 
   <!-- Add Game Data Modal -->
@@ -40,7 +40,7 @@ if ($total_game_row <= 0) {
               <div class="input-group-prepend">
                 <span class="input-group-text hyper-bg-dark border-dark">ID</span>
               </div>
-              <textarea id="stockId" name="stockId" type="text" class="form-control form-control-sm hyper-form-control " placeholder="Stock ID" required autocomplete="off" style=" min-height: 120px ; max-height: 180px ;" ></textarea>
+              <textarea id="stockId" name="stockId" type="text" class="form-control form-control-sm hyper-form-control " placeholder="Stock ID" required autocomplete="off" style=" min-height: 120px ; max-height: 180px ;"></textarea>
             </div>
 
 
@@ -59,7 +59,7 @@ if ($total_game_row <= 0) {
                   $cardtype = mysqli_fetch_array($query_type_card);
                   do {
                 ?>
-                    <option value="<?= $cardtype['card_id']; ?>"><?= $cardtype['card_title']." - ".$cardtype['card_price'] ?></option>
+                    <option value="<?= $cardtype['card_id']; ?>"><?= $cardtype['card_title'] . " - " . $cardtype['card_price'] ?></option>
                 <?php } while ($cardtype = mysqli_fetch_array($query_type_card));
                 } ?>
               </select>
@@ -115,7 +115,7 @@ if ($total_game_row <= 0) {
               $query_data_card = $hyper->connect->query($sql_select_data_card);
               $data_card = mysqli_fetch_array($query_data_card);
               ?>
-              <td><?= $data_card['card_title']." - ".$data_card['card_price'] ?></td>
+              <td><?= $data_card['card_title'] . " - " . $data_card['card_price'] ?></td>
               <td>
                 <button class="btn btn-sm hyper-btn-notoutline-success" type="button" data-toggle="modal" data-target="#editdatamodal<?= $data['data_id']; ?>"><i class="fal fa-edit mr-1"></i> แก้ไข</button>
                 <button onclick="DelData(this)" value="<?= $data['data_id']; ?>" class="btn btn-sm hyper-btn-notoutline-danger my-1 my-sm-0" type="button"><i class="fal fa-trash-alt mr-1"></i> ลบ</button>
@@ -161,7 +161,7 @@ if ($total_game_row <= 0) {
                               ?>
                                   <option <?php if ($cardtype['card_id'] == $data_card_id) {
                                             echo 'selected';
-                                          } ?> value="<?= $cardtype['card_id']; ?>"><?= $cardtype['card_title']." - ".$cardtype['card_price']; ?></option>
+                                          } ?> value="<?= $cardtype['card_id']; ?>"><?= $cardtype['card_title'] . " - " . $cardtype['card_price']; ?></option>
                               <?php } while ($cardtype = mysqli_fetch_array($query_type_card));
                               } ?>
                             </select>
@@ -405,3 +405,20 @@ if ($total_game_row <= 0) {
   </script>
   <!-- End Game Data -->
 <?php } ?>
+
+<style>
+  body {
+    background-color: #131315;
+  }
+
+  label {
+    color: white;
+  }
+
+  #datatable_info {
+    color: white;
+  }
+  .table-hover:hover {
+        background-color: #ddd;
+    }
+</style>
