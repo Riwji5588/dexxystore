@@ -232,10 +232,11 @@ if ($total_game_row <= 0) {
                       title: 'ซื้อสินค้า สำเร็จ!',
                       icon: "success",
                       closeOnClickOutside: false,
+                      button: false,
                     });
                     setTimeout(function() {
                       window.location.reload();
-                    }, 5000);
+                    }, 2000);
                   } else {
                     swal(data.msg, "", "error", {
                       button: {
