@@ -28,7 +28,11 @@
             ?>
                     <tr <?php if ($claim_data['confirm'] != 0) {
                             echo 'style="background-color: #DADDE2;"';
-                        } ?>>
+                        } else if (isset($_GET['id']) && $_GET['id'] == $claim_data['claim_id']) {
+                            echo 'style="background-color: red;"';
+                        }
+
+                        ?>>
                         <td>
                             <?php
                             if ($claim_data['confirm'] != 0) {
@@ -44,7 +48,6 @@
                                 echo '<span class="text-success">อนุมัติ</span>';
                             } else if ($claim_data['confirm'] == 2) {
                                 echo '<span class="text-danger">ปฏิเสธ</span>';
-
                             } ?></td>
                         <td>
                             <button class="btn btn-sm hyper-btn-notoutline-success" type="button" data-toggle="modal" data-target="#editusermodal<?= $i ?>"><i class="fal fa-info-circle mr-1"></i> แสดงไอดี</button>

@@ -1,6 +1,11 @@
 <!-- MyID -->
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" >
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+<style>
+  
+</style>
+
 <div class="table-responsive">
   <table id="datatable" class="table  text-center w-100">
     <thead class="hyper-bg-dark">
@@ -322,6 +327,24 @@
 </div>
 
 <script>
+  function search(filler, data) {
+    var search = $(filler).val();
+    // console.log(search);
+    $('#result').html('<b>'+search+'</b>');
+    // $.ajax({
+    //   url: "search.php",
+    //   method: "post",
+    //   data: {
+    //     search: search,
+    //     data: data
+    //   },
+    //   dataType: "json",
+    //   success: function(data) {
+    //     $('#result').html(data);
+    //   }
+    // });
+  }
+
   function copy(input) {
     let id = input.id + '1';
     var copyText = document.getElementById(id);
