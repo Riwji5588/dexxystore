@@ -65,12 +65,14 @@ $notify = $hyper->connect->query($select_noti);
 			<div class="mx-1" style="color: #fff;"> <?= $points; ?> บาท</div>
 		</li>
 		<li class="nav-item">
-			<button class="btn" data-toggle="modal" data-target="#notification">
-				<svg xmlns="http://www.w3.org/2000/svg" style="color: #DFC107;" width="20" height="20" fill="currentColor" class="bi bi-bell-fill" viewBox="0 0 16 16">
-					<path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zm.995-14.901a1 1 0 1 0-1.99 0A5.002 5.002 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901z" />
+
+			<button class="btn yl" data-toggle="modal" data-target="#notification">
+				<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bell " viewBox="0 0 16 16">
+					<path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zM8 1.918l-.797.161A4.002 4.002 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4.002 4.002 0 0 0-3.203-3.92L8 1.917zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5.002 5.002 0 0 1 13 6c0 .88.32 4.2 1.22 6z" />
 				</svg>
 				<span style="color: #fff;"><?= mysqli_num_rows($notify) ?></span>
 			</button>
+
 		</li>
 		<li class="nav-item" style="margin-left: -10px;">
 			<a class="nav-link" href="logout">
@@ -88,9 +90,9 @@ $notify = $hyper->connect->query($select_noti);
 <div class="modal fade" id="notification" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			<div class="modal-header " style=" background : #486d7e;">
+				<h5 class="modal-title" id="exampleModalLabel" style=" color : white;">การแจ้งเตือน</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close" style="color : white;">
 					<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
@@ -98,18 +100,21 @@ $notify = $hyper->connect->query($select_noti);
 				<div>
 					<?php
 					while ($row = mysqli_fetch_assoc($notify)) {
-						echo '<div class="card">
-								<div class="card-body">
-									<p>' . base64_decode($row['message']) . '</p>
+						echo '<div class="alert alert-success" >
+								<div class="row">
+								&nbsp;&nbsp;	<i class="fas fa-bell"></i>&nbsp;&nbsp;<p>' . base64_decode($row['message']) . '
+								<a href="history"><button type="button" class="btn btn-sm btn-warning " style=" color :black ; ">รายละเอียด</button>
+								</a>
+							</p>   
 								</div>
-							</div>';
+							</div> ';
 					}
 					?>
 				</div>
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-				<button type="button" class="btn btn-primary">Save changes</button>
+				<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+
 			</div>
 		</div>
 	</div>

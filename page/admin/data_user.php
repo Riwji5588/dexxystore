@@ -55,7 +55,7 @@
 
                         <div class="input-group input-group-sm mb-3">
                           <div class="input-group-prepend">
-                            <span class="input-group-text hyper-bg-dark border-dark">Point</span>
+                            <span class="input-group-text hyper-bg-dark border-dark">บาท</span>
                           </div>
                           <input id="point<?= $account['ac_id']; ?>" value="<?= $account['points']; ?>" type="number" class="form-control form-control-sm hyper-form-control" placeholder="Point" required>
                         </div>
