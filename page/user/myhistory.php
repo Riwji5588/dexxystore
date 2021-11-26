@@ -9,7 +9,7 @@
   <div class="card col-12 col-md-3 col-sm-2">
     <div class="card-body">
       <span>Order : <b>111</b> </span>
-      <span>สินค้า : <b>111</b> </span><br> <span>วันที่ซื้อสินค้า : <b>111</b> </span>
+      <span>สินค้า : <b>111</b> </span><br> <spasn>วันที่ซื้อสินค้า : <b>111</b> </span>
       <p> สถานะ : ยังไม่หมดอายุ</p>
     
         <button class="btn btn-success btn-sm" type="button" data-toggle="modal" data-target="#datamodal<?= $selled['selled_id']; ?>">แสดงไอดี</button>

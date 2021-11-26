@@ -34,7 +34,7 @@ if ($total_game_row <= 0) {
   </div>
 
   <!-- ID CARD -->
-  <div class="row no-gutters">
+  <div class="row no-gutters justify-content-center">
     <?php
 
     $perpage = 9;
@@ -85,7 +85,7 @@ if ($total_game_row <= 0) {
         if ($ready_selled_row['totaldata'] > 0) {
       ?>
 
-          <div class="col-12 col-md-6 col-lg-4 p-2" data-toggle="modal" data-target="#detail<?= $card['card_id'] ?>">
+          <div class="col-10 col-md-6 col-lg-4 p-2" data-toggle="modal" data-target="#detail<?= $card['card_id'] ?>">
             <div class="card shadow-dark radius-border-6 hyper-bg-white border-0 h-100">
               <img src="assets/img/item/<?= $card_image['image_name']; ?>" class="card-img-top img-fluid" style="border-top-left-radius: 0.6rem !important;border-top-right-radius: 0.6rem !important;">
               <div class="card-body">
@@ -229,14 +229,16 @@ if ($total_game_row <= 0) {
                   if (data.code == "200") {
                     swal({
                       title: 'ซื้อสินค้า สำเร็จ!',
+                      text: '\n',
                       icon: "success",
                       closeOnClickOutside: false,
+                      button: false,
                     });
                     setTimeout(function() {
                       window.location.reload();
-                    }, 5000);
+                    }, 2000);
                   } else {
-                    swal(data.msg, "", "error", {
+                    swal(data.msg, "\n", "error", {
                       button: {
                         className: 'hyper-btn-notoutline-danger',
                       },
