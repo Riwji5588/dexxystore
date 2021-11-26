@@ -96,18 +96,89 @@ $notify = $hyper->connect->query($select_noti);
 					<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
-			<div class="modal-body">
+			<div class="modal-body" style="font-size: 15px">
 				<div>
 					<?php
 					while ($row = mysqli_fetch_assoc($notify)) {
-						echo '<div class="alert alert-success" >
-								<div class="row">
-								&nbsp;&nbsp;	<i class="fas fa-bell"></i>&nbsp;&nbsp;<p>' . base64_decode($row['message']) . '
-								<a href="history"><button type="button" class="btn btn-sm btn-warning " style=" color :black ; ">รายละเอียด</button>
-								</a>
-							</p>   
+						$msg = base64_decode($row['message']);
+						$order_id = (int) filter_var($msg, FILTER_SANITIZE_NUMBER_INT);
+
+						$datetime = $row['datetime'];
+						$datetime7 = date_add(date_create($datetime), date_interval_create_from_date_string('7 days'));
+						$date_diff = date_diff(date_create($datetime), $datetime7)->format("%a");
+
+						if ($row['isadmin']) {
+					?>
+							<div class="alert alert-info">
+								<div class="row align-items-center mb-1">
+									<div class="col-1 col-md-1 " style="padding-right: 0;">
+										<i class="fas fa-bell"></i>
+									</div>
+									<div class="col-12 col-md-8 " align="start" style="padding-right: 0;">
+										<?= $msg ?>
+									</div>
+									<div class="col-4 col-md-3 mb-2" style="margin-top: 4px;">
+										<a href="report?id=<?= $order_id ?>" class="btn btn-sm btn-warning " style=" color :black ; ">
+											รายละเอียด
+										</a>
+									</div>
+									<div class="col-12 mt-5" align="right" style="position: absolute;">
+										<small class="text-muted">
+											เหลือเวลาอีก <?= $date_diff ?> วัน
+										</small>
+									</div>
 								</div>
-							</div> ';
+							</div>
+							<?php
+						} else {
+							if ($row['status'] == 1) {
+							?>
+								<div class="alert alert-success">
+									<div class="row align-items-center mb-1">
+										<div class="col-1 col-md-1 ">
+											<i class="fas fa-bell"></i>
+										</div>
+										<div class="col-12 col-md-8" align="start">
+											<?= $msg ?>
+										</div>
+										<div class="col-4 col-md-3 mb-2" style="margin-top: 4px;">
+											<a href="history?id=<?= $order_id ?>" class="btn btn-sm btn-warning " style=" color :black ; ">
+												รายละเอียด
+											</a>
+										</div>
+										<div class="col-12 mt-5" align="right" style="position: absolute;">
+											<small class="text-muted">
+												เหลือเวลาอีก <?= $date_diff ?> วัน
+											</small>
+										</div>
+									</div>
+								</div>
+							<?php
+							} else {
+							?>
+								<div class="alert alert-danger">
+									<div class="row align-items-center mb-1">
+										<div class="col-1 col-md-1 ">
+											<i class="fas fa-bell"></i>
+										</div>
+										<div class="col-12 col-md-8 " align="start">
+											<?= $msg ?>
+										</div>
+										<div class="col-4 col-md-3 mb-2" style="margin-top: 4px;">
+											<a href="history?id=<?= $order_id ?>" class="btn btn-sm btn-warning " style=" color :black ; ">
+												รายละเอียด
+											</a>
+										</div>
+										<div class="col-12 mt-5" align="right" style="position: absolute;">
+											<small class="text-muted">
+												เหลือเวลาอีก <?= $date_diff ?> วัน
+											</small>
+										</div>
+									</div>
+								</div>
+					<?php
+							}
+						}
 					}
 					?>
 				</div>

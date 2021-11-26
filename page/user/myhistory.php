@@ -1,14 +1,14 @@
 <!-- MyID -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<div class="table-responsive mt-5">
+<div class="table-responsive">
   <table id="datatable" class="table  text-center w-100">
     <thead class="hyper-bg-dark">
       <tr>
-        <th scope="col" style="width:120px;">เลขที่ข้อมูล</th>
+        <th scope="col" style="width:120px;">ออเดอร์</th>
         <th scope="col">สินค้า</th>
-        <th scope="col">บัญชีผู้ใช้</th>
-        <th scope="col">วันที่-เวลา ที่ซื้อ</th>
+        <!-- <th scope="col">บัญชีผู้ใช้</th> -->
+        <th scope="col">วันที่ซื้อ</th>
         <th scope="col">สถานะ</th>
         <th scope="col">เมนู</th>
       </tr>
@@ -30,21 +30,22 @@
           $query_selled_data = $hyper->connect->query($sql_select_selled_data);
           $selled_data = mysqli_fetch_array($query_selled_data);
 
-          $selled_game_id = $selled_data['game_id'];
+          $selled_card_id = $selled_data['card_id'];
 
-          $sql_select_selled_game = "SELECT * FROM game_type WHERE game_id = '$selled_game_id'";
-          $query_selled_game = $hyper->connect->query($sql_select_selled_game);
-          $selled_game = mysqli_fetch_array($query_selled_game);
+          $sql_select_selled_card = "SELECT * FROM game_card WHERE card_id = '$selled_card_id'";
+          $query_selled_game = $hyper->connect->query($sql_select_selled_card);
+          $selled_card = mysqli_fetch_array($query_selled_game);
+
       ?>
           <tr>
             <td><?= $selled['selled_id']; ?></td>
-            <td><?php if ($selled_game['game_name'] == null) {
+            <td><?php if ($selled_card['card_title'] == null) {
                   echo 'unknow';
                 } else {
-                  echo $selled_game['game_name'];
+                  echo $selled_card['card_title'] . " - " . $selled_card['card_price'];
                 } ?></td>
-            <td><?= $selled_data['username']; ?></td>
-            <td><?= DateThai($selled['selled_date']); ?></td>
+            <!-- <td><?= $selled_data['username']; ?></td> -->
+            <td><?= DateThai1($selled['selled_date']); ?></td>
             <td>
               <?php
               if ($selled['claim'] == 1) {
@@ -61,8 +62,9 @@
               ?>
             </td>
             <td>
-              <button class="btn btn-success btn-sm" type="button" data-toggle="modal" data-target="#datamodal<?= $selled['selled_id']; ?>">แสดงไอดี</button>
-              <button class="btn btn-warning btn-sm" type="button" data-toggle="modal" data-target="#datamodal1<?= $selled['selled_id']; ?>" style="color: ;"><i class="fas fa-exclamation-triangle"></i> แจ้งปัญหา</button>
+              <button style="width: 80%;" class="btn btn-success btn-sm col-12 col-md-3" type="button" data-toggle="modal" data-target="#datamodal<?= $selled['selled_id']; ?>">แสดงไอดี</button>
+              <button style="width: 80%;" class="btn btn-warning btn-sm col-12 col-md-3" type="button" data-toggle="modal" data-target="#datamodal1<?= $selled['selled_id']; ?>"><i class="fas fa-exclamation-triangle"></i> แจ้งปัญหา</button>
+
 
               <!-- Data Modal -->
               <div class="modal fade" id="datamodal<?= $selled['selled_id']; ?>" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-hidden="true">
@@ -417,13 +419,16 @@
   input.question {
     width: 45%;
   }
+
   body {
-                background-color: #131315;
-            }
-  label {
-color : white;
+    background-color: #131315;
   }
-  #datatable_info{
-          color: white;
-        }
+
+  label {
+    color: white;
+  }
+
+  #datatable_info {
+    color: white;
+  }
 </style>
