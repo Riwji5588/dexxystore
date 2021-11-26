@@ -66,6 +66,23 @@ function DateThai($strDate)
   return "$strdayThai $strDay $strMonthThai $strYear เวลา $strHour:$strMinute";
 }
 
+if (isset($_COOKIE['USER_SID'])) {
+  $sid = $_COOKIE['USER_SID'];
+  $var = "SELECT * FROM accounts WHERE sid = '" . $sid . "' ";
+  $user_query = $hyper->connect->query($var);
+  $total_user = mysqli_num_rows($user_query);
+  $data_user = $hyper->connect->query($var)->fetch_array();
+  $select_noti = "SELECT * FROM notify_log WHERE _to={$data_user['ac_id']}";
+
+  $notify = $hyper->connect->query($select_noti);
+
+  for ($i = 0; $i < $notify->num_rows; $i++) {
+    $datetime = $notify->fetch_array()['datetime'];
+    if (date_diff(date_create($datetime), date_create('now'))->format("%a") > 7) {
+      $hyper->connect->query("DELETE FROM notify_log WHERE _to='{$data_user['ac_id']}' AND datetime='$datetime'");
+    }
+  }
+}
 ?>
 <!doctype html>
 <html>
@@ -251,7 +268,6 @@ function DateThai($strDate)
 
   <!-- Container Start -->
   <div class="container" style="padding-top: 110px;">
-
     <?php
     if ($loged == 1 && isset($_COOKIE['USER_SID'])) {
 
