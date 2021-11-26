@@ -10,9 +10,14 @@ $hyper = (object) array(
 
 function sendNotify($from, $to, $type, $orderid)
 {
+    // claim    -> status = 0
+    // confirm  -> status = 1
+    // reject   -> status = 2
+
     global $hyper;
     date_default_timezone_set("Asia/Bangkok");
     $datetime = date("Y-m-d H:i:s");
+    $admin = 1;
 
     if (is_string($to)) {
         if ($to == 'admin') {
@@ -30,16 +35,22 @@ function sendNotify($from, $to, $type, $orderid)
 
     if ($type == "claim") { //when user send claim then admin will recept it
         for ($i = 0; $i < $row; $i++) {
-            $msg = "<b>{$from_user_data['username']}</b> ทำการขอเคลมสินค้าออเดอร์ที่<b> {$orderid}</b>" ; // to admin
+            $msg = "<b>{$from_user_data['username']}</b> ทำการขอเคลมสินค้าออเดอร์ที่<b> {$orderid}</b> " ; // to admin
             $encode = base64_encode($msg);
-            $sql = "INSERT INTO notify_log(_from, _to, message, datetime) VALUES ({$from_user_data['ac_id']}, {$to_user_data[$i][0]}, '{$encode}', '{$datetime}')";
+            $sql = "INSERT INTO notify_log(_from, _to, message, isadmin, datetime) VALUES ({$from_user_data['ac_id']}, {$to_user_data[$i][0]}, '{$encode}', $admin, '{$datetime}')";
             $hyper->connect->query($sql);
         }
         // echo $hyper->connect->error;
     } else if ($type == "confirm") { //when admin confirm claim then user will recept it
-        $msg = "ออเดอร์ <b>{$orderid}</b> ของคุณได้ถูกดำเนินการแล้ว <br> กรุณาเช็คผลได้ที่ประวัติการซื้อของคุณได้เลย <br>"; // to user
+        $msg = "ออเดอร์ <b>{$orderid}</b> ของคุณได้รับการอนุมัติแล้ว! "; // to user
         $encode = base64_encode($msg);
-        $sql = "INSERT INTO notify_log(_from, _to, message, datetime) VALUES ({$from_user_data['ac_id']}, {$to_user_data[0][0]}, '{$encode}', '{$datetime}')";
+        $sql = "INSERT INTO notify_log(_from, _to, message, status, datetime) VALUES ({$from_user_data['ac_id']}, {$to_user_data[0][0]}, '{$encode}', 1, '{$datetime}')";
+        $hyper->connect->query($sql);
+    }
+    else if ($type == "reject") { //when admin confirm claim then user will recept it
+        $msg = "ออเดอร์ <b>{$orderid}</b> ของคุณได้ถูกปฏิเสธ! "; // to user
+        $encode = base64_encode($msg);
+        $sql = "INSERT INTO notify_log(_from, _to, message, status, datetime) VALUES ({$from_user_data['ac_id']}, {$to_user_data[0][0]}, '{$encode}', 2, '{$datetime}')";
         $hyper->connect->query($sql);
     }
 }

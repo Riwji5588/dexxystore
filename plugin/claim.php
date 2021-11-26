@@ -109,6 +109,7 @@ if (isset($_POST['id'])) {
                     $data_game_update = "UPDATE game_data SET selled = 1 WHERE data_id = {$game['data_id']}";
 
                     if ($hyper->connect->query($confirm) && $hyper->connect->query($data_selled_update) && $hyper->connect->query($data_game_update)) {
+                        sendNotify((int)$uid, (int)$selled['ac_id'], 'confirm', (int)$selled['selled_id']);
                         $successMSG = "อนุมัติ สำเร็จ!";
                     } else {
                         $errorMSG = "เคลมไม่สำเร็จ... กรุณาติดต่อผู้ดูแลระบบ";
@@ -120,12 +121,13 @@ if (isset($_POST['id'])) {
                 $reject = "UPDATE data_claim SET confirm = 2 WHERE claim_id={$selled['selled_id']} AND confirm=0";
                 $reject_selled = "UPDATE data_selled SET claim = 3 WHERE selled_id = {$selled['selled_id']}";
                 if ($hyper->connect->query($reject) && $hyper->connect->query($reject_selled)) {
+                    sendNotify((int)$uid, (int)$selled['ac_id'], 'reject', (int)$selled['selled_id']);
                     $successMSG = "ปฏิเสธ สำเร็จ!";
                 } else {
                     $errorMSG = "เกิดข้อผิดพลาด... กรุณาติดต่อผู้ดูแลระบบ";
                 }
             }
-            sendNotify((int)$uid, (int)$selled['ac_id'], 'confirm', (int)$selled['selled_id']);
+            
         }
     } else {
         $errorMSG = "เกิดปัญหาในการส่งเคลม";
