@@ -6,7 +6,7 @@
         <thead class="hyper-bg-dark">
             <tr>
             <th scope="col" style="width:120px;">เลขที่ข้อมูล</th>
-            <th scope="col">เกม</th>
+            <th scope="col">สินค้า</th>
             <th scope="col">บัญชีผู้ใช้</th>
             <th scope="col">เจ้าของ</th>
             <th scope="col" style="width: 170px;">เมนู</th>

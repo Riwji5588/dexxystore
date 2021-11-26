@@ -2,11 +2,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <div class="table-responsive mt-5">
-  <table id="datatable" class="table table-hover text-center w-100">
+  <table id="datatable" class="table  text-center w-100">
     <thead class="hyper-bg-dark">
       <tr>
         <th scope="col" style="width:120px;">เลขที่ข้อมูล</th>
-        <th scope="col">เกม</th>
+        <th scope="col">สินค้า</th>
         <th scope="col">บัญชีผู้ใช้</th>
         <th scope="col">วันที่-เวลา ที่ซื้อ</th>
         <th scope="col">สถานะ</th>
@@ -417,4 +417,13 @@
   input.question {
     width: 45%;
   }
+  body {
+                background-color: #131315;
+            }
+  label {
+color : white;
+  }
+  #datatable_info{
+          color: white;
+        }
 </style>

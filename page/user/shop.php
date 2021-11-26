@@ -17,7 +17,7 @@ $card = "SELECT count(card_id) AS 'totalcard' FROM game_card WHERE game_id = $gi
 $card_row = $hyper->connect->query($card)->fetch_array();
 
 if ($total_game_row <= 0) {
-  
+
   include('page/welcome.php');
 } else {
 ?>
@@ -25,11 +25,11 @@ if ($total_game_row <= 0) {
   <!-- Shop ID -->
   <div class="media mt-3 mb-3 pl-2">
     <img src="assets/img/game/<?= $game['game_image']; ?>" width="80px" class="mr-3 rounded-circle">
-    <div class="media-body pt-2">
+    <div class="media-body pt-2" style=" color : white; ">
       <h3 class="mt-0 d-none d-lg-block"><?= $game['game_name']; ?> <font class="ml-2 mr-2">|</font> เงินคงเหลือ <?= $points; ?> บาท</h3>
-      <h3 class="mt-0 d-block d-lg-none"><?= $game['game_name']; ?><h5 class="mt-0 d-block d-lg-none">เงิน  คงเหลือ <?= $points; ?> บาท</h5>
+      <h3 class="mt-0 d-block d-lg-none"><?= $game['game_name']; ?><h5 class="mt-0 d-block d-lg-none">เงิน คงเหลือ <?= $points; ?> บาท</h5>
       </h3>
-      <font class="text-muted">มีสินค้าทั้งหมด <?= number_format($card_row['totalcard'], 0); ?> รายการ</font>
+      <font class="text-muted" style=" color: white; ">มีสินค้าทั้งหมด <?= number_format($card_row['totalcard'], 0); ?> รายการ</font>
     </div>
   </div>
 
@@ -85,7 +85,7 @@ if ($total_game_row <= 0) {
         if ($ready_selled_row['totaldata'] > 0) {
       ?>
 
-          <div class="col-12 col-md-6 col-lg-4 p-2" data-toggle="modal" data-target="#detail<?= $card['card_id'] ?>" >
+          <div class="col-12 col-md-6 col-lg-4 p-2" data-toggle="modal" data-target="#detail<?= $card['card_id'] ?>">
             <div class="card shadow-dark radius-border-6 hyper-bg-white border-0 h-100">
               <img src="assets/img/item/<?= $card_image['image_name']; ?>" class="card-img-top img-fluid" style="border-top-left-radius: 0.6rem !important;border-top-right-radius: 0.6rem !important;">
               <div class="card-body">
@@ -93,7 +93,7 @@ if ($total_game_row <= 0) {
                 <h5 class="mt-0" id="price<?= $card['card_id'] ?>">ราคา <?= number_format($card['card_price'], 0) ?> บาท</h5>
                 <h6 class="mt-0 text-muted">เหลือจำนวน <?= number_format($ready_selled_row['totaldata'], 0); ?> จอ</h6>
                 <div class="row no-gutters ml-auto mr-auto mt-3">
-                  <button id="click<?= $card['card_id'] ?>" class="btn btn-sm hyper-btn-success col-12" type="button" data-toggle="modal" data-target="#detail<?= $card['card_id'] ?>"><i class="fal fa-shopping-cart mr-1"></i>ซื้อสินค้า</button>
+                  <button id="click<?= $card['card_id'] ?>" class="btn btn-sm hyper-btn-success col-12" type="button" data-toggle="modal" data-target="#detail<?= $card['card_id'] ?>" style=" color: black;"><i class="fal fa-shopping-cart mr-1"></i>ซื้อสินค้า</button>
                 </div>
               </div>
             </div>
@@ -133,7 +133,7 @@ if ($total_game_row <= 0) {
                   <div class="modal-footer p-2 border-0 row" style="align-items: center; display: flex;">
                     <div class=" col-12  ">
                       <button onclick="BuyItem(this)" value="<?= $card['card_id'] ?>" class="btn  hyper-btn-buy mb-2 mb-md-0 mr-0 mr-md-2 "><i class="fal fa-shopping-cart mr-1"></i>ซื้อสินค้า</button>
-                  
+
                       <button type="button" class="btn  hyper-btn-notoutline-danger  mb-2 mb-md-0 mr-0 mr-md-2" data-dismiss="modal"><i class="fad fa-times-circle mr-1"></i>ปิดหน้าต่าง</button>
                     </div>
                   </div>
@@ -182,7 +182,6 @@ if ($total_game_row <= 0) {
   <!-- End Shop ID-->
 
   <script>
-
     function open(id) {
       document.getElementById(id).click
     }
@@ -256,3 +255,9 @@ if ($total_game_row <= 0) {
   </script>
 
 <?php } ?>
+
+<style>
+  body {
+    background-color: #131315;
+  }
+</style>
