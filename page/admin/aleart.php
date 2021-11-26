@@ -128,6 +128,10 @@
     </table>
 </div>
 <style>
+    .table-hover:hover {
+        background-color: #ddd;
+    }
+
     input {
         border-radius: 15px;
 
@@ -160,6 +164,18 @@
         max-height: 120px;
         width: 300px;
 
+    }
+
+    body {
+        background-color: #131315;
+    }
+
+    label {
+        color: white;
+    }
+
+    #datatable_info {
+        color: white;
     }
 </style>
 

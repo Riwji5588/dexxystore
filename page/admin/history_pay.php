@@ -2,7 +2,7 @@
       <h3 class="text-center mt-4 mb-4" style= "color: white;">--- ประวัติรายได้ทั้งหมด ---</h3>
 
       <div class="table-responsive mt-3">
-        <table id="datatable" class="table text-center w-100">
+        <table id="datatable" class="table table-hover text-center w-100">
         <thead class="hyper-bg-dark">
             <tr>
             <th scope="col" style="width:120px;">เลขที่รายการ</th>
@@ -51,4 +51,7 @@
         .es:hover{
           background-color: white;
         }
+        .table-hover:hover {
+        background-color: #ddd;
+    }
       </style>
