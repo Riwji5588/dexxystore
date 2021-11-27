@@ -510,7 +510,7 @@ if (isset($_COOKIE['USER_SID'])) {
     font-weight: 600;
   }
   span{
-    color: black;
+    color: white;
   }
   a span:hover{
     color : #027310;
