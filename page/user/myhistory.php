@@ -61,8 +61,10 @@ $total_selled_row = mysqli_num_rows($query_selled);
                         echo '<span class="text-danger">หมดอายุ</span>';
                       }
                       ?></p>
-          <button class='btn btn-sm' style="background-color: #363E64;color:white;" type='button' data-toggle='modal' data-target='#datamodal<?= $selled['selled_id']; ?>'>แสดงไอดี</button>
-          <button class='btn btn-sm' style="background-color: #FF3131;color:white;" type='button' data-toggle='modal' data-target='#datamodal1<?= $selled['selled_id']; ?>' style='color:black ;'><i class='fas fa-exclamation-triangle'></i> แจ้งปัญหา</button>
+          <div class="row justify-content-center">
+            <button class='btn btn-sm mx-1' style="background-color: #363E64;color:white;" type='button' data-toggle='modal' data-target='#datamodal<?= $selled['selled_id']; ?>'>แสดงไอดี</button>
+            <button class='btn btn-sm mx-1' style="background-color: #FF3131;color:white;" type='button' data-toggle='modal' data-target='#datamodal1<?= $selled['selled_id']; ?>' style='color:black ;'><i class='fas fa-exclamation-triangle'></i> แจ้งปัญหา</button>
+          </div>
         </div>
       </div>
 
@@ -155,7 +157,21 @@ $total_selled_row = mysqli_num_rows($query_selled);
                       <li>ไอดีหมดอายุ ขึ้นให้จ่าย / Update Payment</li>
                       <li>จอซ้อน / หน้าจอเต็ม</li>
                     </ol>
-                    <textarea id="detail<?= $selled['selled_id']; ?>" class="form-control" style="width: 88%;min-height: 100px" autofocus></textarea>
+                    <div class="form-group align-items-center">
+                      <table style="width: 100%;">
+                        <tr align="center">
+                          <td>
+                            <span>วิธีการเพิ่มรูปภาพ</span>
+                          </td>
+                          <td>
+                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#addimg">คลิก</button>
+                          </td>
+                        </tr>
+                      </table>
+                    </div>
+                    <div class="form-group" align="center">
+                      <textarea id="detail<?= $selled['selled_id']; ?>" class="form-control" style="width: 88%;min-height: 100px" autofocus></textarea>
+                    </div>
                     <span style="color: red;">
                       <b>*หมายเหตุ </b>
                       <ol style="color: black;">
@@ -198,7 +214,7 @@ $total_selled_row = mysqli_num_rows($query_selled);
                     <h5 style="color: green;margin-top: 0px;">สอบถามเพิ่มเติม โดยตรงกับทางร้าน</h5>
                   </div>
                   <div class="modal-footer p-2 border-0 form-group">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal" aria-label="Close"><i class="fad fa-times-circle mr-1"></i>ปิด</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal" aria-label="Close"><i class="fad fa-times-circle mr-1"></i>ปิด</button>
                   </div>
                 </div>
               </div>
@@ -213,7 +229,52 @@ $total_selled_row = mysqli_num_rows($query_selled);
   while ($selled = mysqli_fetch_array($query_selled)); ?>
 </div>
 
+<!-- add img modal -->
+<div class="modal fade" id="addimg" data-backdrop="static">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-12">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <br>
+          <div class="col-12">
+            <div id="inaddimg" class="carousel slide" data-ride="carousel" style="padding: 10px;">
+              <ol class="carousel-indicators">
+                <li data-target="#inaddimg" data-slide-to="0" class="active"></li>
+                <li data-target="#inaddimg" data-slide-to="1"></li>
+              </ol>
+              <div class="carousel-inner">
+                <div class="carousel-item active" align="center">
+                  <img src="assets/img/howtoaddimg1.png" class="d-block w-100 carousel" alt="...">
+                </div>
+                <div class="carousel-item" align="center">
+                  <img src="assets/img/howtoaddimg2.png" class="d-block w-100 carousel" alt="...">
+                </div>
+              </div>
+              <button class="carousel-control-prev" type="button" data-target="#inaddimg" data-slide="prev">
+                <span class="carousel-control-prev-icon color-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+              </button>
+              <button class="carousel-control-next" type="button" data-target="#inaddimg" data-slide="next">
+                <span class="carousel-control-next-icon color-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+              </button>
+            </div>
+          </div>
+        </div>
 
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-primary" href="https://img.in.th" target="_blank">ไปที่เว็บ</a>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">ปิด</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- sub modal -->
 <div class="modal fade" id="sub" data-backdrop="static">
@@ -231,18 +292,10 @@ $total_selled_row = mysqli_num_rows($query_selled);
             <div id="insub" class="carousel slide" data-ride="carousel" style="padding: 10px;">
               <ol class="carousel-indicators">
                 <li data-target="#insub" data-slide-to="0" class="active"></li>
-                <li data-target="#insub" data-slide-to="1"></li>
-                <li data-target="#insub" data-slide-to="2"></li>
               </ol>
               <div class="carousel-inner">
-                <div class="carousel-item active">
-                  <img src="assets/img/line.jpg" class="d-block w-100" alt="...">
-                </div>
-                <div class="carousel-item">
-                  <img src="assets/img/line.jpg" class="d-block w-100" alt="...">
-                </div>
-                <div class="carousel-item">
-                  <img src="assets/img/line.jpg" class="d-block w-100" alt="...">
+                <div class="carousel-item active" align="center">
+                  <img src="assets/img/changeSub.png" class="d-block w-100 carousel" alt="...">
                 </div>
               </div>
               <button class="carousel-control-prev" type="button" data-target="#insub" data-slide="prev">
@@ -259,7 +312,7 @@ $total_selled_row = mysqli_num_rows($query_selled);
 
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">ปิด</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">ปิด</button>
       </div>
     </div>
   </div>
@@ -268,47 +321,17 @@ $total_selled_row = mysqli_num_rows($query_selled);
 <div class="modal fade" id="video" data-backdrop="static">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
-      <div class="modal-body">
-        <div class="row">
-          <div class="col-12">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <br>
-          <div class="col-12">
-            <div id="invideo" class="carousel slide" data-ride="carousel" style="padding: 10px;">
-              <ol class="carousel-indicators">
-                <li data-target="#invideo" data-slide-to="0" class="active"></li>
-                <li data-target="#invideo" data-slide-to="1"></li>
-                <li data-target="#invideo" data-slide-to="2"></li>
-              </ol>
-              <div class="carousel-inner">
-                <div class="carousel-item active">
-                  <img src="assets/img/logo.jpg" class="d-block w-100" alt="...">
-                </div>
-                <div class="carousel-item">
-                  <img src="assets/img/logo.jpg" class="d-block w-100" alt="...">
-                </div>
-                <div class="carousel-item">
-                  <img src="assets/img/logo.jpg" class="d-block w-100" alt="...">
-                </div>
-              </div>
-              <button class="carousel-control-prev" type="button" data-target="#invideo" data-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="sr-only">Previous</span>
-              </button>
-              <button class="carousel-control-next" type="button" data-target="#invideo" data-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="sr-only">Next</span>
-              </button>
-            </div>
-          </div>
-        </div>
-
+      <div class="modal-body" align="start">
+        <h4 class="mt-5 tabcenter">การเปลี่ยนความชัดวิดีโอ</h4>
+        <p class="tabcenter showmb" style="font-weight: bold;">
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ความชัดของวิดีโอจะขึ้นอยู่กับความเร็วของตัวเครื่อง <u>ไม่สามารถปรับเองได้</u>
+        </p>
+        <p class="tabcenter showpc" style="font-weight: bold;">
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ความชัดของวิดีโอจะขึ้นอยู่กับความเร็วของตัวเครื่อง <br><u>ไม่สามารถปรับเองได้</u>
+        </p>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">ปิด</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">ปิด</button>
       </div>
     </div>
   </div>
@@ -399,6 +422,24 @@ $total_selled_row = mysqli_num_rows($query_selled);
 </script>
 
 <style>
+  @media screen and (min-width: 1200px) {
+    .tabcenter {
+      padding-left: 60px;
+    }
+
+    .showmb {
+      display: none;
+    }
+
+  }
+
+  @media screen and (max-width: 1199px) {
+    .showpc {
+      display: none;
+    }
+
+  }
+
   body {
     background-color: #131315;
   }
@@ -419,12 +460,12 @@ $total_selled_row = mysqli_num_rows($query_selled);
     margin-bottom: 12px;
     margin-left: 12px;
   }
-  .color{
-    background-color:#cfcfcf ;
+
+  .color {
+    background-color: #cfcfcf;
   }
-  u{
+
+  u {
     color: #b80000;
   }
-  
-  
 </style>
