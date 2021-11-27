@@ -108,34 +108,43 @@ if ($total_game_row <= 0) {
                 </div>
                 <div class="modal-body text-left">
 
-                  <span><b style="color :red;">กรุณาอ่านกฏก่อนซื้อ</b></span>
-                  <pre>NETFLIX @dexy_store •₊˚
-❌ 1.ห้ามแชร์รหัสต่อให้ผู้อื่น จอเดี่ยวคือดูได้แค่คนเดียว
-
-⚠ 2.ซับและเสียงพากย์ ให้กดเปลี่ยนขณะเล่นคลิปเท่านั้น
-
-📺 3.ล็อกอินไว้ 2 เครื่องได้ แต่ห้ามดูพร้อมกันเด็ดขาด
-
-⚠ 4.ในคอมใช้แอพ Netflix จาก Microsoft Store แทนดูเว็บ
-
-🚫 5.ห้ามเปลี่ยนข้อมูลทุกอย่าง เช่น ชื่อจอ รูปจอ ภาษาของเมนู
-
-────── ❀
-🛒 อ่านกฎก่อนเข้าจอเท่านั้นนะครับ
-❌ หากทำผิดกฎด้านบน เลิกเคลมทุกกรณีนะครับ ❌
-❌ ห้ามเปลี่ยนชื่อจอ , รูปจอ ❌
-⚠ อ่านกฎก่อนเข้าจอเท่านั้นนะครับ 5 ข้อ ⚠
-────── ❀
-🤲🏻 ขอบคุณที่มาอุดหนุนนะครับ 🙇🏼‍♀️
-รีวิวิร้าน <a href="https://twitter.com/hashtag/reviewdexy?src=hashtag_click">#reviewdexy</a> ⛱.⋆*
-หากมีข้อสงสัยหรือพบปัญหา สามารถสอบถามได้เลยนะครับ
-          </pre>
-                  <div class="modal-footer p-2 border-0 row" style="align-items: center; display: flex;">
-                    <div class=" col-12  ">
-                      <button onclick="BuyItem(this)" value="<?= $card['card_id'] ?>" class="btn  hyper-btn-buy mb-2 mb-md-0 mr-0 mr-md-2 "><i class="fal fa-shopping-cart mr-1"></i>ซื้อสินค้า</button>
-
-                      <button type="button" class="btn  hyper-btn-notoutline-danger  mb-2 mb-md-0 mr-0 mr-md-2" data-dismiss="modal"><i class="fad fa-times-circle mr-1"></i>ปิดหน้าต่าง</button>
+                  <div class="col-12">
+                    <div id="insub" class="carousel slide" data-ride="carousel" style="padding: 10px;">
+                      <ol class="carousel-indicators">
+                        <li data-target="#insub" data-slide-to="0" class="active"></li>
+                        <li data-target="#insub" data-slide-to="1"></li>
+                        <li data-target="#insub" data-slide-to="2"></li>
+                      </ol>
+                      <div class="carousel-inner">
+                        <div class="carousel-item active">
+                          <img src="assets/img/1.png" class="d-block w-100" alt="...">
+                        </div>
+                        <div class="carousel-item">
+                          <img src="assets/img/2.png" class="d-block w-100" alt="...">
+                        </div>
+                        <div class="carousel-item">
+                          <img src="assets/img/3.png" class="d-block w-100" alt="...">
+                        </div>
+                        <div class="carousel-item">
+                          <img src="assets/img/4.png" class="d-block w-100" alt="...">
+                        </div>
+                      </div>
+                      <button class="carousel-control-prev" type="button" data-target="#insub" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                      </button>
+                      <button class="carousel-control-next" type="button" data-target="#insub" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                      </button>
                     </div>
+                  </div>
+                  </pre>
+                  <div class="modal-footer p-2 border-0 row">
+                    
+                      <button onclick="BuyItem(this)" value="<?= $card['card_id'] ?>" class="btn  hyper-btn-buy mb-2 mb-md-0 mr-0 mr-md-2 "><i class="fal fa-shopping-cart mr-1"></i>ซื้อสินค้า</button>
+                      <button type="button" class="btn  hyper-btn-notoutline-danger  mb-2 mb-md-0 mr-0 mr-md-2" data-dismiss="modal"><i class="fad fa-times-circle mr-1"></i>ปิดหน้าต่าง</button>
+                   
                   </div>
 
                 </div>

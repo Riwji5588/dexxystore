@@ -178,7 +178,7 @@ if (isset($_GET)) {
                 <div class="modal fade" id="datamodal1<?= $selled['selled_id']; ?>">
                     <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">
-                            <div class="modal-header" style="background-color: #ffc107;">
+                            <div class="modal-header" style="background-color: #FFBD59;">
                                 <h5 class="modal-title"><i class="fas fa-exclamation-triangle"></i> แจ้งปัญหาในการใช้งาน</h5>
                                 <button type="button" class="close p-4" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
