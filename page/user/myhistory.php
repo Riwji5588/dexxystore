@@ -14,7 +14,7 @@ $total_selled_row = mysqli_num_rows($query_selled);
 <h1 class="text-center mt-4 mb-2" style="color: white;">ประวัติการซื้อ</h1><br>
 <div class="input-group mb-3 col-12 align-items-center">
   <span style="color: #fff">ค้นหา : &nbsp;</span>
-  <input type="text" class="form-control col-3" onkeyup="search(this, '<?= $sql_select_selled ?>')">
+  <input type="text" class="form-control col-6 col-md-3 " onkeyup="search(this, '<?= $sql_select_selled ?>')">
 </div>
 <!--card-->
 
@@ -39,7 +39,7 @@ $total_selled_row = mysqli_num_rows($query_selled);
       $selled_card = mysqli_fetch_array($query_selled_game);
 
   ?>
-      <div class='card col-10 col-md-3' style="width: 100%;">
+      <div class='card col-10 col-md-3 color' style="width: 100%; background-color : white; border-color: black;">
         <div class='card-body'>
           <span>Order : <b><?= $selled['selled_id']; ?></b> </span> <br>
           <span>สินค้า : <b><?php if ($selled_card['card_title'] == null) {
@@ -61,8 +61,8 @@ $total_selled_row = mysqli_num_rows($query_selled);
                         echo '<span class="text-danger">หมดอายุ</span>';
                       }
                       ?></p>
-          <button class='btn btn-success btn-sm' type='button' data-toggle='modal' data-target='#datamodal<?= $selled['selled_id']; ?>'>แสดงไอดี</button>
-          <button class='btn btn-warning btn-sm' type='button' data-toggle='modal' data-target='#datamodal1<?= $selled['selled_id']; ?>' style='color: ;'><i class='fas fa-exclamation-triangle'></i> แจ้งปัญหา</button>
+          <button class='btn btn-success btn-sm' type='button' data-toggle='modal' data-target='#datamodal<?= $selled['selled_id']; ?>' style="color: white;">แสดงไอดี</button>
+          <button class='btn btn-warning btn-sm' type='button' data-toggle='modal' data-target='#datamodal1<?= $selled['selled_id']; ?>' style='color:black ;'><i class='fas fa-exclamation-triangle'></i> แจ้งปัญหา</button>
         </div>
       </div>
 
@@ -78,7 +78,7 @@ $total_selled_row = mysqli_num_rows($query_selled);
             </div>
             <div class="modal-body text-left">
               <div class="row" style="padding: 5px 2px 0px 2px;">
-                <div class="col-2">
+                <div class="col-4">
                   <span>ชื่อผู้ใช้งาน</span>
                 </div>
                 <div class="col-8">
@@ -88,7 +88,7 @@ $total_selled_row = mysqli_num_rows($query_selled);
                 </div>
               </div>
               <div class="row" style="padding: 5px 2px 0px 2px;">
-                <div class="col-2">
+                <div class="col-4">
                   <span>รหัสผ่าน</span>
                 </div>
                 <div class="col-8">
@@ -97,7 +97,7 @@ $total_selled_row = mysqli_num_rows($query_selled);
                 </div>
               </div>
               <div class="row" style="padding: 5px 2px 0px 2px;">
-                <div class="col-2">
+                <div class="col-4">
                   <span>จอ</span>
                 </div>
                 <div class="col-8">
@@ -105,7 +105,7 @@ $total_selled_row = mysqli_num_rows($query_selled);
                 </div>
               </div>
               <div class="row" style="padding: 5px 2px 0px 2px;">
-                <div class="col-2">
+                <div class="col-4">
                   <span>วันหมดอายุ</span>
                 </div>
                 <div class="col-8">
@@ -127,7 +127,7 @@ $total_selled_row = mysqli_num_rows($query_selled);
       <div class="modal fade" id="datamodal1<?= $selled['selled_id']; ?>">
         <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content">
-            <div class="modal-header" style="background-color: #ffc107;">
+            <div class="modal-header" style="background-color: #FFBD59;">
               <h5 class="modal-title"><i class="fas fa-exclamation-triangle"></i> แจ้งปัญหาในการใช้งาน</h5>
               <button type="button" class="close p-4" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
@@ -158,10 +158,10 @@ $total_selled_row = mysqli_num_rows($query_selled);
                     <textarea id="detail<?= $selled['selled_id']; ?>" class="form-control" style="width: 88%;min-height: 100px" autofocus></textarea>
                     <span style="color: red;">
                       <b>*หมายเหตุ </b>
-                      <ol>
+                      <ol style="color: black;">
                         <li>หากเคลม<u>ครั้งแรก</u> จะได้รับไอดีใหม่ทันที</li>
                         <li>หากเคลม<u>ครั้งที่ 2 ขึ้นไป</u> จะต้องรอแอดมินมาอนุมัติ</li>
-                        <li>หาก<u>ถูกปฏิเสธ</u> เหตุผลในการส่งเคลมไม่เป็นจริง หรือเป็นเท็จ แต่ถ้าหากต้องการส่งเคลมอีกครั้งก็สามารถส่งได้</li>
+                        <li>ในกรณี<u>ถูกปฏิเสธ</u> โปรดติดต่อไลน์ร้านเพื่อแก้ไขปัญหา</li>
                       </ol>
                     </span>
                   </div>
@@ -419,4 +419,12 @@ $total_selled_row = mysqli_num_rows($query_selled);
     margin-bottom: 12px;
     margin-left: 12px;
   }
+  .color{
+    background-color:#cfcfcf ;
+  }
+  u{
+    color: #b80000;
+  }
+  
+  
 </style>

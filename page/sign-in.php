@@ -62,3 +62,8 @@
       
         });
       </script>
+      <style>
+        .btn {
+          color : black;
+        }
+      </style>

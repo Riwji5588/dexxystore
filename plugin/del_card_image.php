@@ -1,10 +1,17 @@
 <?php
 
+
+
+
 include("hyper_api.php");
+
 $errorMSG = "";
 
+
+
 if(isset($_POST['id'])){
-   
+
+    
     $id = $_POST['id'];
 
     $select_sql = "SELECT * FROM card_image WHERE image_id = $id";
