@@ -473,6 +473,14 @@ if (isset($_COOKIE['USER_SID'])) {
     margin-left: 80%;
   }
 
+  .color-icon {
+    width: 50px;
+    height: 50px;
+
+    background-color: #000;
+    border-radius: 50%;
+  }
+
   body {
     background-color: #131315;
   }
@@ -498,6 +506,7 @@ if (isset($_COOKIE['USER_SID'])) {
     min-width: none;
     max-width: 80%;
   }
+
   img.logo {
     min-width: none;
     max-width: 100%;
@@ -515,8 +524,9 @@ if (isset($_COOKIE['USER_SID'])) {
     font-size: 28px;
     font-weight: 600;
   }
-  a span:hover{
-    color : #027310;
+
+  a span:hover {
+    color: #027310;
   }
 </style>
 

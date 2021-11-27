@@ -271,11 +271,4 @@ if ($total_game_row <= 0) {
   body {
     background-color: #131315;
   }
-  .color-icon{
-                  width: 60%;
-                  height: 5%;
-                  
-                  background-color: #000;
-                  border-radius: 50%;
-            }
 </style>

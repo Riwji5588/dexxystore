@@ -206,7 +206,21 @@ if (isset($_GET)) {
                                                 <li>ไอดีหมดอายุ ขึ้นให้จ่าย / Update Payment</li>
                                                 <li>จอซ้อน / หน้าจอเต็ม</li>
                                             </ol>
-                                            <textarea id="detail<?= $selled['selled_id']; ?>" class="form-control" style="width: 88%;min-height: 100px" autofocus></textarea>
+                                            <div class="form-group align-items-center">
+                                                <table style="width: 100%;">
+                                                    <tr align="center">
+                                                        <td>
+                                                            <span>วิธีการเพิ่มรูปภาพ</span>
+                                                        </td>
+                                                        <td>
+                                                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#addimg">คลิก</button>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                            <div class="form-group" align="center">
+                                                <textarea id="detail<?= $selled['selled_id']; ?>" class="form-control" style="width: 88%;min-height: 100px" autofocus></textarea>
+                                            </div>
                                             <span style="color: red;">
                                                 <b>*หมายเหตุ </b>
                                                 <ol style="color: black;">
@@ -249,7 +263,7 @@ if (isset($_GET)) {
                                             <h5 style="color: green;margin-top: 0px;">สอบถามเพิ่มเติม โดยตรงกับทางร้าน</h5>
                                         </div>
                                         <div class="modal-footer p-2 border-0 form-group">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal" aria-label="Close"><i class="fad fa-times-circle mr-1"></i>ปิด</button>
+                                            <button type="button" class="btn btn-danger" data-dismiss="modal" aria-label="Close"><i class="fad fa-times-circle mr-1"></i>ปิด</button>
                                         </div>
                                     </div>
                                 </div>
