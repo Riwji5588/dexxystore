@@ -83,11 +83,11 @@ if (isset($_GET)) {
             $query_selled_game = $hyper->connect->query($sql_select_selled_card);
             $selled_card = mysqli_fetch_array($query_selled_game);
 
-            $word = $_GET['search'];
+            $word = strtolower($_GET['search']);
             $buy_date = DateThai1($selled['selled_date']);
-            $str = "{$selled['selled_id']} {$selled_card['card_title']} - {$selled_card['card_price']} เคลมสำเร็จ รอดำเนินการ ถูกปฏิเสธ ยังไม่หมดอายุ {$buy_date}";
+            $str = strtolower("{$selled['selled_id']} {$selled_card['card_title']} - {$selled_card['card_price']} {$buy_date}");
 
-            if (strpos($str, $word) !== false || $_GET['search'] == 'ttt') :
+            if (strpos($str, $word) !== false || strpos('เคลมสำเร็จ', $word) !== false || strpos('รอดำเนินการ', $word) !== false || strpos('ถูกปฏิเสธ', $word) !== false || strpos('ยังไม่หมดอายุ', $word) !== false || $_GET['search'] == 'ttt') :
 
 ?>
                 <div class='card col-10 col-md-3' style="width: 100%;">

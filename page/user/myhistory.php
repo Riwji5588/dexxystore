@@ -328,7 +328,7 @@ $total_selled_row = mysqli_num_rows($query_selled);
         }
       };
       xhttp.open("GET", "plugin/search.php?search=" + search + "&sql=" + sql, false);
-      xhttp.send(null);
+      xhttp.send(200);
       document.getElementById("result").innerHTML = XMLHttp.responseText;
     }
   }
