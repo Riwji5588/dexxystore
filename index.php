@@ -454,9 +454,15 @@ if (isset($_COOKIE['USER_SID'])) {
   </div>
   <!-- Container End -->
   <a href="https://lin.ee/4YASD6R">
+<<<<<<< HEAD
     <div class="br-icon justify-content-center align-items-center">
       <img src="assets/img/LINE.png">
       <span style="font-size:13px;width:100%">Contact Line</span>
+=======
+    <div class="br-icon">
+      <img src="assets/img/LINE.png ">
+      <span style="font-size:13px; color: white;">Contact Line</span>
+>>>>>>> 26c4d9ce5d8d8f424c7ecec7215caaba47147b6a
     </div>
   </a>
 </body>
@@ -486,7 +492,7 @@ if (isset($_COOKIE['USER_SID'])) {
     width: 75px;
     border-radius: 0%;
     background: rgba(76, 175, 80, 0);
-    box-shadow: 2px 2px 10px 1px rgba(0, 0, 0, 0.58);
+    box-shadow : 2px 2px 10px 1px rgba(0, 0, 0, 0.58);
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
     -webkit-transform: scale(0.92);
@@ -510,9 +516,6 @@ if (isset($_COOKIE['USER_SID'])) {
     /* color: #fff; */
     font-size: 28px;
     font-weight: 600;
-  }
-  span{
-    color: white;  
   }
   a span:hover{
     color : #027310;
