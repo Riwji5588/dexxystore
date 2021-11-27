@@ -29,7 +29,7 @@
                     <tr <?php if ($claim_data['confirm'] != 0) {
                             echo 'style="background-color: #DADDE2;"';
                         } else if (isset($_GET['id']) && $_GET['id'] == $claim_data['claim_id']) {
-                            echo 'style="background-color: red;"';
+                            echo 'style="background-color: #E7B91F"';
                         }
 
                         ?>>
@@ -42,7 +42,9 @@
                         </td>
                         <td><?= $ac_id ?></td>
                         <td><?= DateThai($claim_data['claim_date']) ?></td>
-                        <td><?php if ($claim_data['confirm'] == 0) {
+                        <td><?php if (isset($_GET['id']) && $_GET['id'] == $claim_data['claim_id'] && $claim_data['confirm'] == 0) {
+                                echo '<span style="color: #fff;">รอดำเนินการ</span>';
+                            } else if ($claim_data['confirm'] == 0) {
                                 echo '<span class="text-warning">รอดำเนินการ</span>';
                             } else if ($claim_data['confirm'] == 1) {
                                 echo '<span class="text-success">อนุมัติ</span>';
