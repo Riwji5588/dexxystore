@@ -119,7 +119,7 @@ if (isset($_COOKIE['USER_SID'])) {
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>HYPER STUDIO</title>
+  <title>DEXY STORE</title>
 
   <link rel="shortcut icon" href="assets/img/<?= $webimage; ?>" type="image/png">
   <link href="https://fonts.googleapis.com/css2?family=Kanit&display=swap" rel="stylesheet">
