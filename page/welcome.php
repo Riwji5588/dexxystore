@@ -23,7 +23,7 @@
     ?>
         <div class="col-10 col-md-6 col-lg-4 p-2">
           <a href="shop&gameid=<?= $game['game_id']; ?>">
-            <div class="card shadow-dark radius-border-6 hyper-bg-white hyper-card">
+            <div class="card shadow-dark radius-border-6 hyper-bg-white hyper-card" style="border:3px solid #2E384D !important;">
               <img src="assets/img/game/<?= $game['game_image']; ?>" class="card-img-top img-fluid" style="border-top-left-radius: 0.6rem !important;border-top-right-radius: 0.6rem !important;">
               <div class="card-body">
                 <h5 class="mt-0 mb-2" id="title<?= $game['game_id']; ?>"><?= $game['game_name']; ?></h5>

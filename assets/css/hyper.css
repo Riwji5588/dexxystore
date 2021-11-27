@@ -245,8 +245,9 @@ box-shadow: 0 10px 12px 0 rgba(46, 56, 77, 0.2), 0 6px 12px 0 rgba(46, 56, 77, 0
   box-shadow: 0 10px 12px 0 rgba(88,179,104, 0.2), 0 6px 12px 0 rgba(88,179,104, 0.19);
 }
 
-.hyper-card{transition: all 0.25s; border:3px solid rgba(0, 0, 0, 0);}
-.hyper-card:hover{ border:3px solid #2E384D;}
+.hyper-card{transition: all 0.25s; border:3px solid #2E384D;}
+.hyper-card:hover{ border:3px solid #ffffff;}
+/* .borderr {border:3px solid #9da9c4 !important;} */
 
 
 .hyper-form-control{

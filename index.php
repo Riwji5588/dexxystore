@@ -454,9 +454,9 @@ if (isset($_COOKIE['USER_SID'])) {
   </div>
   <!-- Container End -->
   <a href="https://lin.ee/4YASD6R">
-    <div class="br-icon">
-      <img src="assets/img/LINE.png ">
-      <span style="font-size:13px;">Contact Line</span>
+    <div class="br-icon justify-content-center align-items-center">
+      <img src="assets/img/LINE.png">
+      <span style="font-size:13px;width:100%">Contact Line</span>
     </div>
   </a>
 </body>
@@ -479,18 +479,19 @@ if (isset($_COOKIE['USER_SID'])) {
 
   .br-icon {
     position: fixed;
-    bottom: 30px;
-    right: 30px;
+    bottom: 50px;
+    right: 50px;
     z-index: 100;
     height: 75px;
     width: 75px;
     border-radius: 0%;
-    background: rgba(76, 175, 80, 0)
+    background: rgba(76, 175, 80, 0);
     box-shadow: 2px 2px 10px 1px rgba(0, 0, 0, 0.58);
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
     -webkit-transform: scale(0.92);
     transform: scale(0.92);
+    border-radius: 50%;
   }
 
   img {
@@ -499,18 +500,19 @@ if (isset($_COOKIE['USER_SID'])) {
   }
 
   .br-icon::before {
-    content: "+";
+    /* content: "+"; */
+    border-radius: 50%;
     position: absolute;
     top: 50%;
     left: 50%;
     -webkit-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
-    color: #fff;
+    /* color: #fff; */
     font-size: 28px;
     font-weight: 600;
   }
   span{
-    color: white;
+    color: white;  
   }
   a span:hover{
     color : #027310;

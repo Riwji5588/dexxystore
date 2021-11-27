@@ -86,7 +86,7 @@ if ($total_game_row <= 0) {
       ?>
 
           <div class="col-10 col-md-6 col-lg-4 p-2" data-toggle="modal" data-target="#detail<?= $card['card_id'] ?>">
-            <div class="card shadow-dark radius-border-6 hyper-bg-white border-0 h-100">
+            <div class="card shadow-dark radius-border-6 hyper-bg-white hyper-card h-100" style="border:3px solid #2E384D !important;">
               <img src="assets/img/item/<?= $card_image['image_name']; ?>" class="card-img-top img-fluid" style="border-top-left-radius: 0.6rem !important;border-top-right-radius: 0.6rem !important;">
               <div class="card-body">
                 <h5 class="mt-0 mb-2" id="title<?= $card['card_id'] ?>"><?= $card['card_title'] ?></h5>
@@ -238,7 +238,7 @@ if ($total_game_row <= 0) {
                   if (data.code == "200") {
                     swal({
                       title: 'ซื้อสินค้า สำเร็จ!',
-                      text: '\n',
+                      text: 'ออเดอร์ที่ '+ data.order +' สินค้าของคุณจะไปอยู้ในหน้าประวัติการซื้อ',
                       icon: "success",
                       closeOnClickOutside: false,
                       button: false,
