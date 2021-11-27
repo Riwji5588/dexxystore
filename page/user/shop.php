@@ -130,11 +130,11 @@ if ($total_game_row <= 0) {
                         </div>
                       </div>
                       <button class="carousel-control-prev" type="button" data-target="#insub" data-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="carousel-control-prev-icon color-icon" aria-hidden="true"></span>
                         <span class="sr-only">Previous</span>
                       </button>
                       <button class="carousel-control-next" type="button" data-target="#insub" data-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="carousel-control-next-icon color-icon" aria-hidden="true"></span>
                         <span class="sr-only">Next</span>
                       </button>
                     </div>
@@ -271,4 +271,11 @@ if ($total_game_row <= 0) {
   body {
     background-color: #131315;
   }
+  .color-icon{
+                  width: 60%;
+                  height: 5%;
+                  
+                  background-color: #000;
+                  border-radius: 50%;
+            }
 </style>
