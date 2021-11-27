@@ -61,7 +61,7 @@ $total_selled_row = mysqli_num_rows($query_selled);
                         echo '<span class="text-danger">หมดอายุ</span>';
                       }
                       ?></p>
-          <button class='btn btn-success btn-sm' type='button' data-toggle='modal' data-target='#datamodal<?= $selled['selled_id']; ?>' style="color: white;">แสดงไอดี</button>
+          <button class='btn btn btn-sm' type='button' data-toggle='modal' data-target='#datamodal<?= $selled['selled_id']; ?>' style="color: white;background: #2B1854;">แสดงไอดี</button>
           <button class='btn btn-warning btn-sm' type='button' data-toggle='modal' data-target='#datamodal1<?= $selled['selled_id']; ?>' style='color:black ;'><i class='fas fa-exclamation-triangle'></i> แจ้งปัญหา</button>
         </div>
       </div>
@@ -166,7 +166,7 @@ $total_selled_row = mysqli_num_rows($query_selled);
                     </span>
                   </div>
                   <div class="modal-footer p-2 border-0 form-group">
-                    <button type="button" class="btn btn-success" onclick="claim(<?= $selled['selled_id']; ?>)"><i class="fad fa-times-circle mr-1"></i>ส่งเคลม</button>
+                    <button type="button" class="btn btn-success" onclick="claim(<?= $selled['selled_id']; ?>)"><i class="fas fa-check-circle"></i> ส่งเคลม</button>
                     <button type="button" class="btn btn-danger" data-dismiss="modal" aria-label="Close"><i class="fad fa-times-circle mr-1"></i>ปิด</button>
                   </div>
                 </div>
