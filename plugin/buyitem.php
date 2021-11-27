@@ -22,7 +22,7 @@ if(isset($_POST['id'])){
     $p = $data_user['points'] - $card['card_price'];
 
     if($p < 0){
-        $errorMSG = "Points ไม่พอซื้อสินค้า";
+        $errorMSG = "เงิน ไม่พอซื้อสินค้า";
     }else{
 
         $updateuser = "UPDATE accounts SET points = '".$p."' WHERE ac_id = $uid";
@@ -31,6 +31,7 @@ if(isset($_POST['id'])){
 
             date_default_timezone_set("Asia/Bangkok");
             $date = date("Y-m-d H:i:s");
+            $expire = date("Y-m-d H:i:s", strtotime("+30 day"));
 
             $data_sql = "SELECT * FROM game_data WHERE card_id = $id AND selled = 0 LIMIT 1";
             $data = $hyper->connect->query($data_sql)->fetch_array();
@@ -41,8 +42,13 @@ if(isset($_POST['id'])){
             $updatedata_query = $hyper->connect->query($updatedata);
             if($updatedata_query){
 
-                $selled_sql = "INSERT INTO data_selled (data_id, ac_id, selled_date) VALUE ('$data_id', '$uid', '$date')";
+                $selled_sql = "INSERT INTO data_selled (data_id, ac_id, selled_date, exp_date) VALUE ('$data_id', '$uid', '$date', '$expire')";
                 $selled_query = $hyper->connect->query($selled_sql);
+
+                $selled_id_sql = "SELECT selled_id FROM data_selled WHERE data_id='$data_id'";
+                $selled_id_query = $hyper->connect->query($selled_id_sql);
+                $selled_id = $selled_id_query->fetch_array();
+
                 if(!$selled_query){
                     $errorMSG = 'ซื้อสินค้า ไม่สำเร็จ!';
                 }
@@ -66,7 +72,7 @@ if(isset($_POST['id'])){
     
     /* result */
     if(empty($errorMSG)){
-        echo json_encode(['code'=>200,]);
+        echo json_encode(['code'=>200, 'order'=>$selled_id['selled_id']]);
     }else{
         echo json_encode(['code'=>500, 'msg'=>$errorMSG]);
     }

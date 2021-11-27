@@ -1,5 +1,5 @@
       <!-- Data Pay -->
-      <h3 class="text-center mt-4 mb-4">--- ประวัติรายได้ทั้งหมด ---</h3>
+      <h3 class="text-center mt-4 mb-4" style= "color: white;">--- ประวัติรายได้ทั้งหมด ---</h3>
 
       <div class="table-responsive mt-3">
         <table id="datatable" class="table table-hover text-center w-100">
@@ -37,3 +37,21 @@
         </table>
       </div>
       <!-- End Pay  -->
+
+      <style>
+        body {
+          background-color: #131315;
+        }
+        label{
+          color: white;
+        }
+        #datatable_info{
+          color: white;
+        }
+        .es:hover{
+          background-color: white;
+        }
+        .table-hover:hover {
+        background-color: #ddd;
+    }
+      </style>

@@ -1,5 +1,5 @@
       <!-- Web Config -->
-      <div class="card mt-4 shadow-dark radius-border hyper-bg-white ml-auto mr-auto">
+      <div class="card mt-4 shadow-dark radius-border ml-auto mr-auto es">
         <div class="card-body">
           <h4 class="mt-0 mb-4 text-center">ตั้งค่าเว็บไซต์</h4>
 
@@ -14,7 +14,7 @@
           ?>
           <!-- Card Example -->
           <div class="media m-auto">
-            <img id="gamelogoimgnew" src="assets/img/<?= $web['image']; ?>" class="align-self-center mr-3 rounded-circle d-none d-md-block" width="70px;" height="70px;">
+            <img id="gamelogoimgnew" src="assets/img/logo_dexyStore.jpg" class="align-self-center mr-3 rounded-circle d-none d-md-block" width="70px;" height="70px;">
             <div class="media-body text-center text-md-left">
               <img id="gamelogoresimgnew" src="assets/img/<?= $web['image']; ?>" class="ml-auto mr-auto rounded-circle d-block d-md-none" width="70px;" height="70px;">
               <h4 class="mt-0 mb-1" id="gamenamenew"><?= $web['name']; ?></h4>
@@ -23,7 +23,7 @@
           </div>
           <!-- End Card Example -->
 
-          <input type="file" style="display:none;" id="logo" onchange="gamelogoURL(this,'new');" accept=".jpg,.png"/>
+          <input type="file" style="display:none;" id="logo" onchange="gamelogoURL(this,'new');" accept=".jpg,.png,.gif"/>
           <button onclick="uploadgamelogo('')" type="button" class="btn btn-sm hyper-btn-info w-100 mt-3"><i class="fal fa-image mr-1"></i>เปลี่ยนรูปภาพ</button>
 
           <div class="input-group input-group-sm mb-3 mt-3">
@@ -106,7 +106,7 @@
               <img id="bannerimgnew" src="assets/img/slide/bannerani2.png" class="img-fluid" style="height: 100px;"></br>
               <font class="text-muted">แนะนำขนาด 1920 x 700 Pixel</font></br>
               <input type="hidden" value="1" name="bannerpass" />
-              <input type="file" style="display:none;" id="imgbannernew" name="imgbannernew" onchange="bannerURL(this,'new');" accept=".jpg,.png"/>
+              <input type="file" style="display:none;" id="imgbannernew" name="imgbannernew" onchange="bannerURL(this,'new');" accept=".jpg,.png,.gif"/>
             </div>
             <button type="submit" id="submitdatanew" class="d-none"></button>
         </form>
@@ -319,3 +319,15 @@
         }
 
       </script>
+
+      <style>
+        body {
+          background-color: #131315;
+        }
+        .es{
+          background-color: #b8b8b8;
+        }
+        h4{
+          color: black;
+        }
+      </style>

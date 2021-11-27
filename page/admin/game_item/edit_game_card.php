@@ -22,7 +22,7 @@
       }else{
       ?>
       <!-- Edit Card Shop -->
-      <h3 class="text-center mt-4 mb-4">--- การ์ดแสดงสินค้า ---</br><b><?= $game['game_name']; ?></b></h3>
+      <h3 class="text-center mt-4 mb-4" style="color: white;">--- การ์ดแสดงสินค้า ---</br><b><?= $game['game_name']; ?></b></h3>
       <center><button class="btn hyper-btn-info my-2 my-sm-0 w-100" type="button" data-toggle="modal" data-target="#addgamecardmodal"><i class="fal fa-plus-square mr-1"></i> เพิ่มการ์ดแสดงสินค้าใหม่เข้าระบบ</button></center>
 
       <!-- Add Game Modal -->
@@ -40,7 +40,7 @@
                     <div class="ml-auto mr-auto mb-3 text-center">
                       <img id="gamecardimgnew" src="assets/img/item/card.jpg" class="img-fluid" style="height: 170px;"></br>
                       <font class="text-muted">แนะนำขนาด 1920 x 1080 Pixel</font></br>
-                      <input type="file" style="display:none;" id="imggamecardnew" name="imggamecardnew" onchange="gamecardURL(this,'new');" accept=".jpg,.png"/>
+                      <input type="file" style="display:none;" id="imggamecardnew" name="imggamecardnew" onchange="gamecardURL(this,'new');" accept=".jpg,.png,.gif,"/>
                       <button  onclick="uploadcardgame('new')"class="btn btn-sm hyper-btn-info mb-2 mb-md-0 mr-0 mr-md-2 w-100" type="button"><i class="fal fa-images mr-1"></i>เพิ่มรูปภาพ</button>
                     </div>
 
@@ -193,7 +193,7 @@
                       <div class="ml-auto mr-auto mb-3 text-center mt-3">
                         <img id="gamecardimg<?= $card['card_id'] ?>" src="assets/img/item/card.jpg" class="img-fluid" style="height: 170px;"></br>
                         <font class="text-muted">แนะนำขนาด 1920 x 1080 Pixel</font></br>
-                        <input type="file" style="display:none;" id="imggamecard<?= $card['card_id'] ?>" name="imggamecard<?= $card['card_id'] ?>" onchange="gamecardURL(this,'<?= $card['card_id'] ?>');" accept=".jpg,.png"/>
+                        <input type="file" style="display:none;" id="imggamecard<?= $card['card_id'] ?>" name="imggamecard<?= $card['card_id'] ?>" onchange="gamecardURL(this,'<?= $card['card_id'] ?>');" accept=".jpg,.png,.gif,"/>
                         <button  onclick="uploadcardgame('<?= $card['card_id'] ?>')"class="btn btn-sm hyper-btn-info mb-2 mb-md-0 mr-0 mr-md-2 w-100" type="button"><i class="fal fa-images mr-1"></i>เพิ่มรูปภาพ</button>
                       </div>
 
@@ -485,3 +485,8 @@
     </script>
 
     <?php } ?>
+    <style>
+        body {
+          background-color: #131315;
+        }
+      </style>
