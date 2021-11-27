@@ -10,8 +10,9 @@
                   <h6 class="text-color">คงเหลือ <?= $points; ?> บาท</h6>
                   <input type="text" id="ref" class="text-center form-control form-control-sm hyper-form-control ml-auto mr-auto" placeholder="กรอกลิ้งซองอั่งเปา" style="max-width:350px;width:80%;border: 1px solid #343a40;" autocomplete="off">
                   <small id="giftlinkHelp" class="form-text text-color" style="opacity: 0.7;">ตัวอย่างลิ้ง : https://gift.truemoney.com/campaign/?v=cofi9...</small>
-                  <button type="button" class="btn btn-sm edit" data-toggle="modal" data-target="#sub">วิธีการเติมเงิน</button><br>
-                  <button onclick="Pay()" type="button" class="btn btn-sm hyper-btn-success mt-3 ml-auto mr-auto w-100 mb-3" style="max-width:350px;"><i class="far fa-check-circle pr-1 pt-1"></i> ตรวจสอบการทำรายการ</button></br>
+                        
+                  <button type="button" class="btn btn-sm btn-sm btn-warning edit mt-3 ml-auto mr-auto w-100 mb-3 "  data-toggle="modal" data-target="#sub" style="max-width:350px; color:black;">วิธีการเติมเงิน</button>
+                  <button onclick="Pay()" type="button" class="btn btn-sm btn-success mt-3 ml-auto mr-auto w-100 mb-3" style="max-width:350px;"><i class="far fa-check-circle pr-1 pt-1"></i> ตรวจสอบการทำรายการ</button></br>
 
                   <div class="mt-4"></div>
             </div>
@@ -115,12 +116,12 @@
                                                       </div>
                                                 </div>
                                                 <button class="carousel-control-prev" type="button" data-target="#insub" data-slide="prev">
-                                                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                                      <span class="carousel-control-prev-icon color-icon" aria-hidden="true"></span>
                                                       <span class="sr-only">Previous</span>
                                                 </button>
                                                 <button class="carousel-control-next" type="button" data-target="#insub" data-slide="next">
-                                                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                                      <span class="sr-only">Next</span>
+                                                      <span class="carousel-control-next-icon color-icon" aria-hidden="true" ></span>
+                                                      <span class="sr-only color-icon" >Next</span>
                                                 </button>
                                           </div>
                                     </div>
@@ -147,5 +148,14 @@
             }
             .edit{ 
                   color: white;
+
+            }
+
+            .color-icon{
+                  width: 60%;
+                  height: 5%;
+                  
+                  background-color: #000;
+                  border-radius: 50%;
             }
       </style>

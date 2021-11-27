@@ -195,7 +195,7 @@ $total_selled_row = mysqli_num_rows($query_selled);
                   </div>
                   <div class="form-group" align="center">
                     <p>สอบถามเพิ่มเติม โดยตรงกับทางร้าน</p>
-                    <img src="assets/img/line.jpg" style="width:auto; max-width: 130px;">
+                    <img src="assets/img/line1.jpg" style="width:auto; max-width: 130px;">
                   </div>
                   <div class="modal-footer p-2 border-0 form-group">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal" aria-label="Close"><i class="fad fa-times-circle mr-1"></i>ปิด</button>
