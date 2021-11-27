@@ -1,5 +1,6 @@
 <!-- Game Type -->
-<h1 class="text-center mt-4 mb-2" style="color: white;">Netflix พร้อมจำหน่าย</h1><br>
+<h1 class="text-center mt-4" style="color: white;">เว็บไซต์ซื้อสินค้าอัตโนมัติ บริการ 24 ชั่วโมง !</h1><br>
+<h2 class="text-center mb-2" style="color: white;">สินค้าแนะนำ</h2><br>
 <div class="row no-gutters" style="justify-content: center;">
 
   <?php
@@ -23,7 +24,7 @@
     ?>
         <div class="col-10 col-md-6 col-lg-4 p-2">
           <a href="shop&gameid=<?= $game['game_id']; ?>">
-            <div class="card shadow-dark radius-border-6 hyper-bg-white hyper-card">
+            <div class="card shadow-dark radius-border-6 hyper-bg-white hyper-card" style="border:3px solid #2E384D !important;">
               <img src="assets/img/game/<?= $game['game_image']; ?>" class="card-img-top img-fluid" style="border-top-left-radius: 0.6rem !important;border-top-right-radius: 0.6rem !important;">
               <div class="card-body">
                 <h5 class="mt-0 mb-2" id="title<?= $game['game_id']; ?>"><?= $game['game_name']; ?></h5>

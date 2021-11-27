@@ -7,12 +7,23 @@
                   </p>
 
                   <h4 class="text-color">ใส่ลิ้งซองของขวัญ</h4>
-                  <h6 class="text-color">คงเหลือ <?= $points; ?> บาท</h6>
+                  <h6 class="text-color m-3">คงเหลือ <?= $points; ?> บาท</h6>
                   <input type="text" id="ref" class="text-center form-control form-control-sm hyper-form-control ml-auto mr-auto" placeholder="กรอกลิ้งซองอั่งเปา" style="max-width:350px;width:80%;border: 1px solid #343a40;" autocomplete="off">
                   <small id="giftlinkHelp" class="form-text text-color" style="opacity: 0.7;">ตัวอย่างลิ้ง : https://gift.truemoney.com/campaign/?v=cofi9...</small>
-                        
-                  <button type="button" class="btn btn-sm btn-sm btn-warning edit mt-3 ml-auto mr-auto w-100 mb-3 "  data-toggle="modal" data-target="#sub" style="max-width:350px; color:black;">วิธีการเติมเงิน</button>
-                  <button onclick="Pay()" type="button" class="btn btn-sm btn-success mt-3 ml-auto mr-auto w-100 mb-3" style="max-width:350px;"><i class="far fa-check-circle pr-1 pt-1"></i> ตรวจสอบการทำรายการ</button></br>
+
+                  <div class="form-group mt-5">
+                        <div class="row justify-content-center">
+                              <div class="col-12 col-md-4">
+                                    <button type="button" class="btn btn-sm hyper-btn-orange my-2 my-sm-0 mr-2 w-100" data-toggle="modal" data-target="#sub" style="max-width:350px;"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-question-circle" viewBox="0 0 16 16">
+                                                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                                                <path d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286zm1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94z" />
+                                          </svg>&nbsp; วิธีการเติมเงิน</button>
+                              </div>
+                              <div class="col-12 col-md-4">
+                                    <button onclick="Pay()" type="button" class="btn btn-sm hyper-btn-success my-2 my-sm-0 mr-2 w-100" style="max-width:350px;"><i class="far fa-check-circle pr-1 pt-1"></i> ตรวจสอบการทำรายการ</button></br>
+                              </div>
+                        </div>
+                  </div>
 
                   <div class="mt-4"></div>
             </div>
@@ -101,18 +112,18 @@
                                                       <li data-target="#insub" data-slide-to="1"></li>
                                                       <li data-target="#insub" data-slide-to="2"></li>
                                                 </ol>
-                                                <div class="carousel-inner">
-                                                      <div class="carousel-item active">
-                                                            <img src="assets/img/pay1.png" class="d-block w-100" alt="...">
+                                                <div class="carousel-inner" align="center">
+                                                      <div class="carousel-item active" align="center">
+                                                            <img src="assets/img/pay1.png" class="d-block w-100 carousel" alt="...">
                                                       </div>
-                                                      <div class="carousel-item">
-                                                            <img src="assets/img/pay2.png" class="d-block w-100" alt="...">
+                                                      <div class="carousel-item" align="center">
+                                                            <img src="assets/img/pay2.png" class="d-block w-100 carousel" alt="...">
                                                       </div>
-                                                      <div class="carousel-item">
-                                                            <img src="assets/img/pay3.png" class="d-block w-100" alt="...">
+                                                      <div class="carousel-item" align="center">
+                                                            <img src="assets/img/pay3.png" class="d-block w-100 carousel" alt="...">
                                                       </div>
-                                                      <div class="carousel-item">
-                                                            <img src="assets/img/pay4.png" class="d-block w-100" alt="...">
+                                                      <div class="carousel-item" align="center">
+                                                            <img src="assets/img/pay4.png" class="d-block w-100 carousel" alt="...">
                                                       </div>
                                                 </div>
                                                 <button class="carousel-control-prev" type="button" data-target="#insub" data-slide="prev">
@@ -120,8 +131,8 @@
                                                       <span class="sr-only">Previous</span>
                                                 </button>
                                                 <button class="carousel-control-next" type="button" data-target="#insub" data-slide="next">
-                                                      <span class="carousel-control-next-icon color-icon" aria-hidden="true" ></span>
-                                                      <span class="sr-only color-icon" >Next</span>
+                                                      <span class="carousel-control-next-icon color-icon" aria-hidden="true"></span>
+                                                      <span class="sr-only color-icon">Next</span>
                                                 </button>
                                           </div>
                                     </div>
@@ -146,15 +157,16 @@
             .text-color {
                   color: white;
             }
-            .edit{ 
+
+            .edit {
                   color: white;
 
             }
 
-            .color-icon{
+            .color-icon {
                   width: 60%;
                   height: 5%;
-                  
+
                   background-color: #000;
                   border-radius: 50%;
             }

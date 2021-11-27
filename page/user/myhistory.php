@@ -41,7 +41,7 @@ $total_selled_row = mysqli_num_rows($query_selled);
   ?>
       <div class='card col-10 col-md-3 color' style="width: 100%; background-color : white; border-color: black;">
         <div class='card-body'>
-          <span>Order : <b><?= $selled['selled_id']; ?></b> </span> <br>
+          <span>ออเดอร์ : <b style="color: #F55DA1;"><?= $selled['selled_id']; ?></b> </span> <br>
           <span>สินค้า : <b><?php if ($selled_card['card_title'] == null) {
                               echo 'unknow';
                             } else {
@@ -52,7 +52,7 @@ $total_selled_row = mysqli_num_rows($query_selled);
                       if ($selled['claim'] == 1) {
                         echo '<span class="text-success">เคลมสำเร็จ</span>';
                       } else if ($selled['claim'] == 2) {
-                        echo '<span class="text-warning">รอดำเนินการ</span>';
+                        echo "<span  style='color: #E1B623;'>รอดำเนินการ</span>";
                       } else if ($selled['claim'] == 3) {
                         echo '<span class="text-danger">ถูกปฏิเสธ</span>';
                       } else if ((int)date_diff(date_create(date("Y-m-d H:i:s")), date_create($selled['exp_date']))->format('%a') > 0) {
@@ -61,8 +61,8 @@ $total_selled_row = mysqli_num_rows($query_selled);
                         echo '<span class="text-danger">หมดอายุ</span>';
                       }
                       ?></p>
-          <button class='btn btn btn-sm' type='button' data-toggle='modal' data-target='#datamodal<?= $selled['selled_id']; ?>' style="color: white;background: #2B1854;">แสดงไอดี</button>
-          <button class='btn btn-warning btn-sm' type='button' data-toggle='modal' data-target='#datamodal1<?= $selled['selled_id']; ?>' style='color:black ;'><i class='fas fa-exclamation-triangle'></i> แจ้งปัญหา</button>
+          <button class='btn btn-sm' style="background-color: #363E64;color:white;" type='button' data-toggle='modal' data-target='#datamodal<?= $selled['selled_id']; ?>'>แสดงไอดี</button>
+          <button class='btn btn-sm' style="background-color: #FF3131;color:white;" type='button' data-toggle='modal' data-target='#datamodal1<?= $selled['selled_id']; ?>' style='color:black ;'><i class='fas fa-exclamation-triangle'></i> แจ้งปัญหา</button>
         </div>
       </div>
 
@@ -82,7 +82,7 @@ $total_selled_row = mysqli_num_rows($query_selled);
                   <span>ชื่อผู้ใช้งาน</span>
                 </div>
                 <div class="col-8">
-                  <input type="text" id="username<?= $selled['selled_id']; ?>1" value="<?= $selled_data['username']; ?>" readonly style="background-color: #fff;border-radius: 0px;border: 0px">
+                  <input type="text" class="hyper-form-control" id="username<?= $selled['selled_id']; ?>1" value="<?= $selled_data['username']; ?>" readonly style="background-color: #fff;border-radius: 0px;border: 0px">
                   <button id="username<?= $selled['selled_id']; ?>" class="btn btn-dark btn-sm" onclick="copy(this)"> คัดลอก </button>
                   <!-- 'username<?= $selled['selled_id']; ?>' -->
                 </div>
@@ -92,7 +92,7 @@ $total_selled_row = mysqli_num_rows($query_selled);
                   <span>รหัสผ่าน</span>
                 </div>
                 <div class="col-8">
-                  <input type="text" id="password<?= $selled['selled_id']; ?>1" value="<?= base64_decode($selled_data['password']); ?>" readonly style="background-color: #fff;border-radius: 0px;border: 0px">
+                  <input type="text" class="hyper-form-control" id="password<?= $selled['selled_id']; ?>1" value="<?= base64_decode($selled_data['password']); ?>" readonly style="background-color: #fff;border-radius: 0px;border: 0px">
                   <button id="password<?= $selled['selled_id']; ?>" class="btn btn-dark btn-sm" onclick="copy(this)"> คัดลอก </button>
                 </div>
               </div>
@@ -101,7 +101,7 @@ $total_selled_row = mysqli_num_rows($query_selled);
                   <span>จอ</span>
                 </div>
                 <div class="col-8">
-                  <input type="text" value="<?= $selled_data['display']; ?>" readonly style="background-color: #fff;border-radius: 0px;border: 0px">
+                  <input type="text" class="hyper-form-control" value="<?= $selled_data['display']; ?>" readonly style="background-color: #fff;border-radius: 0px;border: 0px">
                 </div>
               </div>
               <div class="row" style="padding: 5px 2px 0px 2px;">
@@ -193,9 +193,9 @@ $total_selled_row = mysqli_num_rows($query_selled);
                       </tr>
                     </table>
                   </div>
-                  <div class="form-group" align="center">
-                    <p>สอบถามเพิ่มเติม โดยตรงกับทางร้าน</p>
-                    <img src="assets/img/line1.jpg" style="width:auto; max-width: 130px;">
+                  <div class="form-group mt-3 justify-content-center" align="center">
+                    <img src="assets/img/line1.jpg" style="width:auto; max-width: 200px;margin-bottom:0px">
+                    <h5 style="color: green;margin-top: 0px;">สอบถามเพิ่มเติม โดยตรงกับทางร้าน</h5>
                   </div>
                   <div class="modal-footer p-2 border-0 form-group">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal" aria-label="Close"><i class="fad fa-times-circle mr-1"></i>ปิด</button>
@@ -328,7 +328,7 @@ $total_selled_row = mysqli_num_rows($query_selled);
         }
       };
       xhttp.open("GET", "plugin/search.php?search=" + search + "&sql=" + sql, false);
-      xhttp.send(null);
+      xhttp.send(200);
       document.getElementById("result").innerHTML = XMLHttp.responseText;
     }
   }

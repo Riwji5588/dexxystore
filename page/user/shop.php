@@ -86,12 +86,12 @@ if ($total_game_row <= 0) {
       ?>
 
           <div class="col-10 col-md-6 col-lg-4 p-2" data-toggle="modal" data-target="#detail<?= $card['card_id'] ?>">
-            <div class="card shadow-dark radius-border-6 hyper-bg-white border-0 h-100">
+            <div class="card shadow-dark radius-border-6 hyper-bg-white hyper-card h-100" style="border:3px solid #2E384D !important;">
               <img src="assets/img/item/<?= $card_image['image_name']; ?>" class="card-img-top img-fluid" style="border-top-left-radius: 0.6rem !important;border-top-right-radius: 0.6rem !important;">
               <div class="card-body">
                 <h5 class="mt-0 mb-2" id="title<?= $card['card_id'] ?>"><?= $card['card_title'] ?></h5>
                 <h5 class="mt-0" id="price<?= $card['card_id'] ?>">ราคา <?= number_format($card['card_price'], 0) ?> บาท</h5>
-                <h6 class="mt-0 text-muted">เหลือจำนวน <?= number_format($ready_selled_row['totaldata'], 0); ?> จอ</h6>
+                <h6 class="mt-0" style="color: green;">เหลือจำนวน <?= number_format($ready_selled_row['totaldata'], 0); ?> จอ</h6>
                 <div class="row no-gutters ml-auto mr-auto mt-3">
                   <button id="click<?= $card['card_id'] ?>" class="btn btn-sm hyper-btn-success col-12" type="button" data-toggle="modal" data-target="#detail<?= $card['card_id'] ?>" style=" color: black;"><i class="fal fa-shopping-cart mr-1"></i>ซื้อสินค้า</button>
                 </div>
@@ -115,18 +115,18 @@ if ($total_game_row <= 0) {
                         <li data-target="#insub" data-slide-to="1"></li>
                         <li data-target="#insub" data-slide-to="2"></li>
                       </ol>
-                      <div class="carousel-inner">
-                        <div class="carousel-item active">
-                          <img src="assets/img/1.png" class="d-block w-100" alt="...">
+                      <div class="carousel-inner align-items-center">
+                        <div class="carousel-item active" align="center">
+                          <img src="assets/img/1.png"  class="d-block w-70 carousel" alt="...">
                         </div>
-                        <div class="carousel-item">
-                          <img src="assets/img/2.png" class="d-block w-100" alt="...">
+                        <div class="carousel-item" align="center">
+                          <img src="assets/img/2.png" class="d-block w-70 carousel" alt="...">
                         </div>
-                        <div class="carousel-item">
-                          <img src="assets/img/3.png" class="d-block w-100" alt="...">
+                        <div class="carousel-item" align="center">
+                          <img src="assets/img/3.png" class="d-block w-70 carousel" alt="...">
                         </div>
-                        <div class="carousel-item">
-                          <img src="assets/img/4.png" class="d-block w-100" alt="...">
+                        <div class="carousel-item" align="center">
+                          <img src="assets/img/4.png" class="d-block w-70 carousel" alt="...">
                         </div>
                       </div>
                       <button class="carousel-control-prev" type="button" data-target="#insub" data-slide="prev">
@@ -238,7 +238,7 @@ if ($total_game_row <= 0) {
                   if (data.code == "200") {
                     swal({
                       title: 'ซื้อสินค้า สำเร็จ!',
-                      text: '\n',
+                      text: 'ออเดอร์ที่ '+ data.order +' สินค้าของคุณจะไปอยู้ในหน้าประวัติการซื้อ',
                       icon: "success",
                       closeOnClickOutside: false,
                       button: false,

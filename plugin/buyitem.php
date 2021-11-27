@@ -44,6 +44,11 @@ if(isset($_POST['id'])){
 
                 $selled_sql = "INSERT INTO data_selled (data_id, ac_id, selled_date, exp_date) VALUE ('$data_id', '$uid', '$date', '$expire')";
                 $selled_query = $hyper->connect->query($selled_sql);
+
+                $selled_id_sql = "SELECT selled_id FROM data_selled WHERE data_id='$data_id'";
+                $selled_id_query = $hyper->connect->query($selled_id_sql);
+                $selled_id = $selled_id_query->fetch_array();
+
                 if(!$selled_query){
                     $errorMSG = 'ซื้อสินค้า ไม่สำเร็จ!';
                 }
@@ -67,7 +72,7 @@ if(isset($_POST['id'])){
     
     /* result */
     if(empty($errorMSG)){
-        echo json_encode(['code'=>200,]);
+        echo json_encode(['code'=>200, 'order'=>$selled_id['selled_id']]);
     }else{
         echo json_encode(['code'=>500, 'msg'=>$errorMSG]);
     }
