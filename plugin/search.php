@@ -92,7 +92,7 @@ if (isset($_GET)) {
 ?>
                 <div class='card col-10 col-md-3 color' style="width: 100%; background-color : white; border-color: black;">
                     <div class='card-body'>
-                        <span>Order : <b><?= $selled['selled_id']; ?></b> </span> <br>
+                        <span>ออเดอร์ : <b style="color: #F55DA1;"><?= $selled['selled_id']; ?></b> </span> <br>
                         <span>สินค้า : <b><?php if ($selled_card['card_title'] == null) {
                                                 echo 'unknow';
                                             } else {
@@ -112,8 +112,8 @@ if (isset($_GET)) {
                                         echo '<span class="text-danger">หมดอายุ</span>';
                                     }
                                     ?></p>
-                        <button class='btn btn-success btn-sm' type='button' data-toggle='modal' data-target='#datamodal<?= $selled['selled_id']; ?>' style="color: white;">แสดงไอดี</button>
-                        <button class='btn btn-warning btn-sm' type='button' data-toggle='modal' data-target='#datamodal1<?= $selled['selled_id']; ?>' style='color:black ;'><i class='fas fa-exclamation-triangle'></i> แจ้งปัญหา</button>
+                        <button class='btn btn-sm' style="background-color: #363E64;color:white;" type='button' data-toggle='modal' data-target='#datamodal<?= $selled['selled_id']; ?>'>แสดงไอดี</button>
+                        <button class='btn btn-sm' style="background-color: #FF3131;color:white;" type='button' data-toggle='modal' data-target='#datamodal1<?= $selled['selled_id']; ?>' style='color:black ;'><i class='fas fa-exclamation-triangle'></i> แจ้งปัญหา</button>
                     </div>
                 </div>
 
@@ -133,7 +133,7 @@ if (isset($_GET)) {
                                         <span>ชื่อผู้ใช้งาน</span>
                                     </div>
                                     <div class="col-8">
-                                        <input type="text" id="username<?= $selled['selled_id']; ?>1" value="<?= $selled_data['username']; ?>" readonly style="background-color: #fff;border-radius: 0px;border: 0px">
+                                        <input type="text" class="hyper-form-control" id="username<?= $selled['selled_id']; ?>1" value="<?= $selled_data['username']; ?>" readonly style="background-color: #fff;border-radius: 0px;border: 0px">
                                         <button id="username<?= $selled['selled_id']; ?>" class="btn btn-dark btn-sm" onclick="copy(this)"> คัดลอก </button>
                                         <!-- 'username<?= $selled['selled_id']; ?>' -->
                                     </div>
@@ -143,7 +143,7 @@ if (isset($_GET)) {
                                         <span>รหัสผ่าน</span>
                                     </div>
                                     <div class="col-8">
-                                        <input type="text" id="password<?= $selled['selled_id']; ?>1" value="<?= base64_decode($selled_data['password']); ?>" readonly style="background-color: #fff;border-radius: 0px;border: 0px">
+                                        <input type="text" class="hyper-form-control" id="password<?= $selled['selled_id']; ?>1" value="<?= base64_decode($selled_data['password']); ?>" readonly style="background-color: #fff;border-radius: 0px;border: 0px">
                                         <button id="password<?= $selled['selled_id']; ?>" class="btn btn-dark btn-sm" onclick="copy(this)"> คัดลอก </button>
                                     </div>
                                 </div>
@@ -152,7 +152,7 @@ if (isset($_GET)) {
                                         <span>จอ</span>
                                     </div>
                                     <div class="col-8">
-                                        <input type="text" value="<?= $selled_data['display']; ?>" readonly style="background-color: #fff;border-radius: 0px;border: 0px">
+                                        <input type="text" class="hyper-form-control" value="<?= $selled_data['display']; ?>" readonly style="background-color: #fff;border-radius: 0px;border: 0px">
                                     </div>
                                 </div>
                                 <div class="row" style="padding: 5px 2px 0px 2px;">
@@ -217,7 +217,7 @@ if (isset($_GET)) {
                                             </span>
                                         </div>
                                         <div class="modal-footer p-2 border-0 form-group">
-                                            <button type="button" class="btn btn-success" onclick="claim(<?= $selled['selled_id']; ?>)"><i class="fad fa-times-circle mr-1"></i>ส่งเคลม</button>
+                                            <button type="button" class="btn btn-success" onclick="claim(<?= $selled['selled_id']; ?>)"><i class="fas fa-check-circle"></i> ส่งเคลม</button>
                                             <button type="button" class="btn btn-danger" data-dismiss="modal" aria-label="Close"><i class="fad fa-times-circle mr-1"></i>ปิด</button>
                                         </div>
                                     </div>
@@ -244,9 +244,9 @@ if (isset($_GET)) {
                                                 </tr>
                                             </table>
                                         </div>
-                                        <div class="form-group" align="center">
-                                            <p>สอบถามเพิ่มเติม โดยตรงกับทางร้าน</p>
-                                            <img src="assets/img/line1.jpg" style="width:auto; max-width: 130px;">
+                                        <div class="form-group mt-3 justify-content-center" align="center">
+                                            <img src="assets/img/line1.jpg" style="width:auto; max-width: 200px;margin-bottom:0px">
+                                            <h5 style="color: green;margin-top: 0px;">สอบถามเพิ่มเติม โดยตรงกับทางร้าน</h5>
                                         </div>
                                         <div class="modal-footer p-2 border-0 form-group">
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal" aria-label="Close"><i class="fad fa-times-circle mr-1"></i>ปิด</button>

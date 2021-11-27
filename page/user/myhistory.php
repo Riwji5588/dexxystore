@@ -41,7 +41,7 @@ $total_selled_row = mysqli_num_rows($query_selled);
   ?>
       <div class='card col-10 col-md-3 color' style="width: 100%; background-color : white; border-color: black;">
         <div class='card-body'>
-          <span>Order : <b><?= $selled['selled_id']; ?></b> </span> <br>
+          <span>ออเดอร์ : <b style="color: #F55DA1;"><?= $selled['selled_id']; ?></b> </span> <br>
           <span>สินค้า : <b><?php if ($selled_card['card_title'] == null) {
                               echo 'unknow';
                             } else {
@@ -61,8 +61,8 @@ $total_selled_row = mysqli_num_rows($query_selled);
                         echo '<span class="text-danger">หมดอายุ</span>';
                       }
                       ?></p>
-          <button class='btn btn btn-sm' type='button' data-toggle='modal' data-target='#datamodal<?= $selled['selled_id']; ?>' style="color: white;background: #2B1854;">แสดงไอดี</button>
-          <button class='btn btn-warning btn-sm' type='button' data-toggle='modal' data-target='#datamodal1<?= $selled['selled_id']; ?>' style='color:black ;'><i class='fas fa-exclamation-triangle'></i> แจ้งปัญหา</button>
+          <button class='btn btn-sm' style="background-color: #363E64;color:white;" type='button' data-toggle='modal' data-target='#datamodal<?= $selled['selled_id']; ?>'>แสดงไอดี</button>
+          <button class='btn btn-sm' style="background-color: #FF3131;color:white;" type='button' data-toggle='modal' data-target='#datamodal1<?= $selled['selled_id']; ?>' style='color:black ;'><i class='fas fa-exclamation-triangle'></i> แจ้งปัญหา</button>
         </div>
       </div>
 
@@ -193,9 +193,9 @@ $total_selled_row = mysqli_num_rows($query_selled);
                       </tr>
                     </table>
                   </div>
-                  <div class="form-group" align="center">
-                    <p>สอบถามเพิ่มเติม โดยตรงกับทางร้าน</p>
-                    <img src="assets/img/line1.jpg" style="width:auto; max-width: 130px;">
+                  <div class="form-group mt-3 justify-content-center" align="center">
+                    <img src="assets/img/line1.jpg" style="width:auto; max-width: 200px;margin-bottom:0px">
+                    <h5 style="color: green;margin-top: 0px;">สอบถามเพิ่มเติม โดยตรงกับทางร้าน</h5>
                   </div>
                   <div class="modal-footer p-2 border-0 form-group">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal" aria-label="Close"><i class="fad fa-times-circle mr-1"></i>ปิด</button>

@@ -455,7 +455,7 @@ if (isset($_COOKIE['USER_SID'])) {
   <!-- Container End -->
   <a href="https://lin.ee/4YASD6R" align="center">
     <div class="br-icon justify-content-center">
-      <img src="assets/img/LINE.png">
+      <img class="logo" src="assets/img/LINE.png">
       <span style="font-size:13px;width:100%">Line</span>
     </div>
   </a>
@@ -479,14 +479,14 @@ if (isset($_COOKIE['USER_SID'])) {
 
   .br-icon {
     position: fixed;
-    bottom: 50px;
-    right: 50px;
+    bottom: 35px;
+    right: 35px;
     z-index: 100;
     height: 75px;
     width: 75px;
     border-radius: 0%;
     background: rgba(76, 175, 80, 0);
-    box-shadow : 2px 2px 10px 1px rgba(0, 0, 0, 0.58);
+    /* box-shadow : 2px 2px 10px 1px rgba(0, 0, 0, 0.58); */
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
     -webkit-transform: scale(0.92);
@@ -494,7 +494,11 @@ if (isset($_COOKIE['USER_SID'])) {
     border-radius: 50%;
   }
 
-  img {
+  img.carousel {
+    min-width: none;
+    max-width: 80%;
+  }
+  img.logo {
     min-width: none;
     max-width: 100%;
   }

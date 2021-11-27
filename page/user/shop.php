@@ -115,18 +115,18 @@ if ($total_game_row <= 0) {
                         <li data-target="#insub" data-slide-to="1"></li>
                         <li data-target="#insub" data-slide-to="2"></li>
                       </ol>
-                      <div class="carousel-inner">
-                        <div class="carousel-item active">
-                          <img src="assets/img/1.png" class="d-block w-70" alt="...">
+                      <div class="carousel-inner align-items-center">
+                        <div class="carousel-item active" align="center">
+                          <img src="assets/img/1.png"  class="d-block w-70 carousel" alt="...">
                         </div>
-                        <div class="carousel-item">
-                          <img src="assets/img/2.png" class="d-block w-70" alt="...">
+                        <div class="carousel-item" align="center">
+                          <img src="assets/img/2.png" class="d-block w-70 carousel" alt="...">
                         </div>
-                        <div class="carousel-item">
-                          <img src="assets/img/3.png" class="d-block w-70" alt="...">
+                        <div class="carousel-item" align="center">
+                          <img src="assets/img/3.png" class="d-block w-70 carousel" alt="...">
                         </div>
-                        <div class="carousel-item">
-                          <img src="assets/img/4.png" class="d-block w-70" alt="...">
+                        <div class="carousel-item" align="center">
+                          <img src="assets/img/4.png" class="d-block w-70 carousel" alt="...">
                         </div>
                       </div>
                       <button class="carousel-control-prev" type="button" data-target="#insub" data-slide="prev">
