@@ -453,16 +453,10 @@ if (isset($_COOKIE['USER_SID'])) {
     <!-- End Footer -->
   </div>
   <!-- Container End -->
-  <a href="https://lin.ee/4YASD6R">
-<<<<<<< HEAD
-    <div class="br-icon justify-content-center align-items-center">
+  <a href="https://lin.ee/4YASD6R" align="center">
+    <div class="br-icon justify-content-center">
       <img src="assets/img/LINE.png">
-      <span style="font-size:13px;width:100%">Contact Line</span>
-=======
-    <div class="br-icon">
-      <img src="assets/img/LINE.png ">
-      <span style="font-size:13px; color: white;">Contact Line</span>
->>>>>>> 26c4d9ce5d8d8f424c7ecec7215caaba47147b6a
+      <span style="font-size:13px;width:100%">Line</span>
     </div>
   </a>
 </body>

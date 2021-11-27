@@ -91,7 +91,7 @@ if ($total_game_row <= 0) {
               <div class="card-body">
                 <h5 class="mt-0 mb-2" id="title<?= $card['card_id'] ?>"><?= $card['card_title'] ?></h5>
                 <h5 class="mt-0" id="price<?= $card['card_id'] ?>">ราคา <?= number_format($card['card_price'], 0) ?> บาท</h5>
-                <h6 class="mt-0 text-muted">เหลือจำนวน <?= number_format($ready_selled_row['totaldata'], 0); ?> จอ</h6>
+                <h6 class="mt-0" style="color: green;">เหลือจำนวน <?= number_format($ready_selled_row['totaldata'], 0); ?> จอ</h6>
                 <div class="row no-gutters ml-auto mr-auto mt-3">
                   <button id="click<?= $card['card_id'] ?>" class="btn btn-sm hyper-btn-success col-12" type="button" data-toggle="modal" data-target="#detail<?= $card['card_id'] ?>" style=" color: black;"><i class="fal fa-shopping-cart mr-1"></i>ซื้อสินค้า</button>
                 </div>
@@ -117,16 +117,16 @@ if ($total_game_row <= 0) {
                       </ol>
                       <div class="carousel-inner">
                         <div class="carousel-item active">
-                          <img src="assets/img/1.png" class="d-block w-100" alt="...">
+                          <img src="assets/img/1.png" class="d-block w-70" alt="...">
                         </div>
                         <div class="carousel-item">
-                          <img src="assets/img/2.png" class="d-block w-100" alt="...">
+                          <img src="assets/img/2.png" class="d-block w-70" alt="...">
                         </div>
                         <div class="carousel-item">
-                          <img src="assets/img/3.png" class="d-block w-100" alt="...">
+                          <img src="assets/img/3.png" class="d-block w-70" alt="...">
                         </div>
                         <div class="carousel-item">
-                          <img src="assets/img/4.png" class="d-block w-100" alt="...">
+                          <img src="assets/img/4.png" class="d-block w-70" alt="...">
                         </div>
                       </div>
                       <button class="carousel-control-prev" type="button" data-target="#insub" data-slide="prev">

@@ -52,7 +52,7 @@ $total_selled_row = mysqli_num_rows($query_selled);
                       if ($selled['claim'] == 1) {
                         echo '<span class="text-success">เคลมสำเร็จ</span>';
                       } else if ($selled['claim'] == 2) {
-                        echo '<span class="text-warning">รอดำเนินการ</span>';
+                        echo "<span  style='color: #E1B623;'>รอดำเนินการ</span>";
                       } else if ($selled['claim'] == 3) {
                         echo '<span class="text-danger">ถูกปฏิเสธ</span>';
                       } else if ((int)date_diff(date_create(date("Y-m-d H:i:s")), date_create($selled['exp_date']))->format('%a') > 0) {
@@ -82,7 +82,7 @@ $total_selled_row = mysqli_num_rows($query_selled);
                   <span>ชื่อผู้ใช้งาน</span>
                 </div>
                 <div class="col-8">
-                  <input type="text" id="username<?= $selled['selled_id']; ?>1" value="<?= $selled_data['username']; ?>" readonly style="background-color: #fff;border-radius: 0px;border: 0px">
+                  <input type="text" class="hyper-form-control" id="username<?= $selled['selled_id']; ?>1" value="<?= $selled_data['username']; ?>" readonly style="background-color: #fff;border-radius: 0px;border: 0px">
                   <button id="username<?= $selled['selled_id']; ?>" class="btn btn-dark btn-sm" onclick="copy(this)"> คัดลอก </button>
                   <!-- 'username<?= $selled['selled_id']; ?>' -->
                 </div>
@@ -92,7 +92,7 @@ $total_selled_row = mysqli_num_rows($query_selled);
                   <span>รหัสผ่าน</span>
                 </div>
                 <div class="col-8">
-                  <input type="text" id="password<?= $selled['selled_id']; ?>1" value="<?= base64_decode($selled_data['password']); ?>" readonly style="background-color: #fff;border-radius: 0px;border: 0px">
+                  <input type="text" class="hyper-form-control" id="password<?= $selled['selled_id']; ?>1" value="<?= base64_decode($selled_data['password']); ?>" readonly style="background-color: #fff;border-radius: 0px;border: 0px">
                   <button id="password<?= $selled['selled_id']; ?>" class="btn btn-dark btn-sm" onclick="copy(this)"> คัดลอก </button>
                 </div>
               </div>
@@ -101,7 +101,7 @@ $total_selled_row = mysqli_num_rows($query_selled);
                   <span>จอ</span>
                 </div>
                 <div class="col-8">
-                  <input type="text" value="<?= $selled_data['display']; ?>" readonly style="background-color: #fff;border-radius: 0px;border: 0px">
+                  <input type="text" class="hyper-form-control" value="<?= $selled_data['display']; ?>" readonly style="background-color: #fff;border-radius: 0px;border: 0px">
                 </div>
               </div>
               <div class="row" style="padding: 5px 2px 0px 2px;">

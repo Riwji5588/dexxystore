@@ -1,5 +1,6 @@
 <!-- Game Type -->
-<h1 class="text-center mt-4 mb-2" style="color: white;">Netflix พร้อมจำหน่าย</h1><br>
+<h1 class="text-center mt-4 mb-2" style="color: white;">เว็บไซต์ซื้อสินค้าอัตโนมัติ บริการ 24 ชั่วโมง !</h1><br>
+<h2 class="text-center mt-4 mb-2" style="color: white;">Netflix พร้อมจำหน่าย</h2><br>
 <div class="row no-gutters" style="justify-content: center;">
 
   <?php
