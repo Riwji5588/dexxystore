@@ -36,20 +36,31 @@ if ($total_game_row <= 0) {
 
           <form id="addDatanew" method="POST" enctype="multipart/form-data">
 
-            <div class="input-group input-group-sm mb-3 mt-4">
+
+            <div class="input-group input-group-sm mb-3">
               <div class="input-group-prepend">
-                <span class="input-group-text hyper-bg-dark border-dark">ID</span>
+                <label class="input-group-text hyper-bg-dark border-dark" for="from_data">เลือกฟอร์มข้อมูล</label>
               </div>
-              <textarea id="stockId" name="stockId" type="text" class="form-control form-control-sm hyper-form-control " placeholder="Stock ID" required autocomplete="off" style=" min-height: 120px ; max-height: 180px ;"></textarea>
+              <select name="from_data" id="from_data" onchange="changedata(this)" class="custom-select hyper-form-control">
+                <option selected value="0">ฟอร์มข้อมูล...</option>
+                <option value="email:password display">email:password display</option>
+                <option value="email:password:display">email:password:display</option>
+              </select>
+            </div>
+            <div class="input-group input-group-sm mb-3 mt-1">
+              <div class="input-group-prepend">
+                <label class="input-group-text hyper-bg-dark border-dark" for="stockId">ไอดี</label>
+              </div>
+              <textarea id="stockId" name="stockId" type="text" class="form-control form-control-sm hyper-form-control " placeholder="โปรดเลือกฟอร์มการใส่" required autocomplete="off" style=" min-height: 120px ; max-height: 180px ;"></textarea>
             </div>
 
 
 
             <div class="input-group input-group-sm mb-3">
               <div class="input-group-prepend">
-                <label class="input-group-text hyper-bg-dark border-dark" for="inputGroupSelect01">เลือกการ์ด</label>
+                <label class="input-group-text hyper-bg-dark border-dark" for="cardnew">เลือกการ์ด</label>
               </div>
-              <select id="cardnew" name="cardnew" class="custom-select hyper-form-control" id="inputGroupSelect01">
+              <select id="cardnew" name="cardnew" class="custom-select hyper-form-control">
                 <option selected>เลือกการ์ด...</option>
                 <?php
                 $sql_select_type_card = "SELECT * FROM game_card WHERE game_id = '$id'";
@@ -66,7 +77,7 @@ if ($total_game_row <= 0) {
             </div>
             <div class="input-group input-group-sm">
               <div class="input-group-prepend">
-                <span class="input-group-text hyper-bg-dark border-dark">รายละเอียด</span>
+                <label class="input-group-text hyper-bg-dark border-dark" for="detailnew">รายละเอียด</label>
               </div>
               <textarea id="detailnew" name="detailnew" class="form-control form-control-sm hyper-form-control" style="height: 70px;min-height: 70px;max-height: 70px;"></textarea>
             </div>
@@ -133,7 +144,7 @@ if ($total_game_row <= 0) {
 
                           <div class="input-group input-group-sm mb-3 mt-4">
                             <div class="input-group-prepend">
-                              <span class="input-group-text hyper-bg-dark border-dark">ชื่อผู้ใช้งาน</span>
+                              <span class="input-group-text hyper-bg-dark border-dark">อีเมล์</span>
                             </div>
                             <input id="username<?= $data['data_id']; ?>" type="text" value="<?= $data['username']; ?>" class="form-control form-control-sm hyper-form-control" placeholder="ชื่อผู้ใช้งาน" required autocomplete="off">
                           </div>
@@ -204,6 +215,13 @@ if ($total_game_row <= 0) {
     }
   </script>
   <script>
+    // change placeholder
+    function changedata(input) {
+      var form_data = input.value;
+      document.getElementById("stockId").attributes.placeholder.value = form_data == '0' ? 'โปรดเลือกฟอร์มการใส่' : form_data;
+    }
+
+
     /* AddData script */
     $("#addDatanew").submit(function(adddata) {
       adddata.preventDefault();
@@ -418,7 +436,8 @@ if ($total_game_row <= 0) {
   #datatable_info {
     color: white;
   }
+
   .table-hover:hover {
-        background-color: #ddd;
-    }
+    background-color: #ddd;
+  }
 </style>
