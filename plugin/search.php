@@ -112,8 +112,10 @@ if (isset($_GET)) {
                                         echo '<span class="text-danger">หมดอายุ</span>';
                                     }
                                     ?></p>
-                        <button class='btn btn-sm' style="background-color: #363E64;color:white;" type='button' data-toggle='modal' data-target='#datamodal<?= $selled['selled_id']; ?>'>แสดงไอดี</button>
-                        <button class='btn btn-sm' style="background-color: #FF3131;color:white;" type='button' data-toggle='modal' data-target='#datamodal1<?= $selled['selled_id']; ?>' style='color:black ;'><i class='fas fa-exclamation-triangle'></i> แจ้งปัญหา</button>
+                        <div class="row justify-content-center">
+                            <button class='btn btn-sm mx-1' style="background-color: #363E64;color:white;" type='button' data-toggle='modal' data-target='#datamodal<?= $selled['selled_id']; ?>'>แสดงไอดี</button>
+                            <button class='btn btn-sm mx-1' style="background-color: #FF3131;color:white;" type='button' data-toggle='modal' data-target='#datamodal1<?= $selled['selled_id']; ?>' style='color:black ;'><i class='fas fa-exclamation-triangle'></i> แจ้งปัญหา</button>
+                        </div>
                     </div>
                 </div>
 
@@ -210,7 +212,7 @@ if (isset($_GET)) {
                                                 <table style="width: 100%;">
                                                     <tr align="center">
                                                         <td>
-                                                            <span>วิธีการเพิ่มรูปภาพ</span>
+                                                            <span>วิธีการแนบภาพปัญหา</span>
                                                         </td>
                                                         <td>
                                                             <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#addimg">คลิก</button>

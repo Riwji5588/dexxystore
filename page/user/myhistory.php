@@ -14,7 +14,7 @@ $total_selled_row = mysqli_num_rows($query_selled);
 <h1 class="text-center mt-4 mb-2" style="color: white;">ประวัติการซื้อ</h1><br>
 <div class="input-group mb-3 col-12 align-items-center">
   <span style="color: #fff">ค้นหา : &nbsp;</span>
-  <input type="text" class="form-control col-6 col-md-3 " onkeyup="search(this, '<?= $sql_select_selled ?>')">
+  <input type="text" class="form-control hyper-form-control col-6 col-md-3 " placeholder="ออเดอร์ สินค้า วันที่ซื้อสินค้า สถานะ" onkeyup="search(this, '<?= $sql_select_selled ?>')">
 </div>
 <!--card-->
 
@@ -161,7 +161,7 @@ $total_selled_row = mysqli_num_rows($query_selled);
                       <table style="width: 100%;">
                         <tr align="center">
                           <td>
-                            <span>วิธีการเพิ่มรูปภาพ</span>
+                            <span>วิธีการแนบภาพปัญหา</span>
                           </td>
                           <td>
                             <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#addimg">คลิก</button>

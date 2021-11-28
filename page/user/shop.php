@@ -103,8 +103,8 @@ if ($total_game_row <= 0) {
           <div class="modal fade" id="detail<?= $card['card_id'] ?>" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
               <div class="modal-content border-0 radius-border-2 hyper-bg-white">
-                <div class="modal-header hyper-bg-dark">
-                  <h6 class="modal-title"><i class="fal fa-info-circle mr-1"></i> ข้อมูลเพิ่มเติม</h6>
+                <div class="modal-header text-danger" style="background: #fff;">
+                  <h5 class="modal-title"><i class="fal fa-info-circle mr-1"></i> กรุณาอ่านรายละเอียดก่อนสั่งซื้อสินค้า</h5>
                 </div>
                 <div class="modal-body text-left">
 

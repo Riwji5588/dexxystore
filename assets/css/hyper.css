@@ -4,8 +4,7 @@
 .radius-border-6 {border-radius: 0.6rem !important;}
 .radius-border-2 {border-radius: 0.2rem !important;}
 
-.hyper-bg-white{background-color: #FFFFFF !important;color:#2E384D;}
-.hyper-bg-dark{background-color: #2E384D !important;color:#fff;}
+.hyper-bg-white{background-color: #FFFFFF !important;color:#2E384D;}.hyper-bg-dark{background-color: #2E384D !important;color:#fff;}
 
 .hyper-btn-perple {
   font-family: 'Kanit';
