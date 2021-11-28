@@ -104,6 +104,7 @@ $notify = $hyper->connect->query($select_noti);
 						$datetime = $row['datetime'];
 						$datetime7 = date_add(date_create($datetime), date_interval_create_from_date_string('7 days'));
 						$date_diff = date_diff(date_create($datetime), $datetime7)->format("%a");
+						$datetime7 = $datetime7->format("%a");
 
 						if ($row['isadmin']) {
 					?>
@@ -120,11 +121,11 @@ $notify = $hyper->connect->query($select_noti);
 											รายละเอียด
 										</a>
 									</div>
-									<div class="col-12 mt-5" align="right" style="position: absolute;">
+									<!-- <div class="col-12 mt-5" align="right" style="position: absolute;">
 										<small class="text-muted">
 											เหลือเวลาอีก <?= $date_diff ?> วัน
 										</small>
-									</div>
+									</div> -->
 								</div>
 							</div>
 							<?php
@@ -144,11 +145,11 @@ $notify = $hyper->connect->query($select_noti);
 												รายละเอียด
 											</a>
 										</div>
-										<div class="col-12 mt-5" align="right" style="position: absolute;">
+										<!-- <div class="col-12 mt-5" align="right" style="position: absolute;">
 											<small class="text-muted">
 												เหลือเวลาอีก <?= $date_diff ?> วัน
 											</small>
-										</div>
+										</div> -->
 									</div>
 								</div>
 							<?php
@@ -167,11 +168,11 @@ $notify = $hyper->connect->query($select_noti);
 												รายละเอียด
 											</a>
 										</div>
-										<div class="col-12 mt-5" align="right" style="position: absolute;">
+										<!-- <div class="col-12 mt-5" align="right" style="position: absolute;">
 											<small class="text-muted">
 												เหลือเวลาอีก <?= $date_diff ?> วัน
 											</small>
-										</div>
+										</div> -->
 									</div>
 								</div>
 					<?php
