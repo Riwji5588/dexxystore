@@ -231,7 +231,7 @@ $total_selled_row = mysqli_num_rows($query_selled);
 
 <!-- add img modal -->
 <div class="modal fade" id="addimg" data-backdrop="static">
-  <div class="modal-dialog modal-dialog-centered">
+  <div class="modal-dialog modal-dialog-centered modal-xl">
     <div class="modal-content">
       <div class="modal-body">
         <div class="row">
@@ -245,22 +245,18 @@ $total_selled_row = mysqli_num_rows($query_selled);
             <div id="inaddimg" class="carousel slide" data-ride="carousel" style="padding: 10px;">
               <ol class="carousel-indicators">
                 <li data-target="#inaddimg" data-slide-to="0" class="active"></li>
-                <li data-target="#inaddimg" data-slide-to="1"></li>
               </ol>
               <div class="carousel-inner">
                 <div class="carousel-item active" align="center">
-                  <img src="assets/img/howtoaddimg1.png" class="d-block w-100 carousel" alt="...">
-                </div>
-                <div class="carousel-item" align="center">
-                  <img src="assets/img/howtoaddimg2.png" class="d-block w-100 carousel" alt="...">
+                  <img src="assets/img/img.gif" class="d-block w-100" alt="...">
                 </div>
               </div>
               <button class="carousel-control-prev" type="button" data-target="#inaddimg" data-slide="prev">
-                <span class="carousel-control-prev-icon color-icon" aria-hidden="true"></span>
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                 <span class="sr-only">Previous</span>
               </button>
               <button class="carousel-control-next" type="button" data-target="#inaddimg" data-slide="next">
-                <span class="carousel-control-next-icon color-icon" aria-hidden="true"></span>
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
                 <span class="sr-only">Next</span>
               </button>
             </div>
