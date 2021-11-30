@@ -194,7 +194,7 @@ if (isset($_COOKIE['USER_SID'])) {
       color: white;
     }
 
-    a .pu:hover {
+    a.pu:hover, a.pu.-active {
       color: #b67bfb;
       text-shadow:
         0 0 7px #b67bfb,
@@ -208,7 +208,7 @@ if (isset($_COOKIE['USER_SID'])) {
       animation: pulsate 1.2s infinite alternate;
     }
 
-    a .gr:hover {
+    a.gr:hover, a.gr.-active {
       color: #40ff56;
       text-shadow:
         0 0 7px #40ff56,
@@ -222,7 +222,7 @@ if (isset($_COOKIE['USER_SID'])) {
       animation: pulsate 1.2s infinite alternate;
     }
 
-    a .pk:hover {
+    a.pk:hover, a.pk.-active {
       color: pink;
       text-shadow:
         0 0 7px #fc2c84,
@@ -236,7 +236,7 @@ if (isset($_COOKIE['USER_SID'])) {
       animation: pulsate 1.2s infinite alternate;
     }
 
-    a .yl:hover {
+    a.yl:hover, a.yl.-active {
       color: #f7ff24;
       text-shadow:
         0 0 7px #f7ff24,
@@ -250,21 +250,7 @@ if (isset($_COOKIE['USER_SID'])) {
       animation: pulsate 1.2s infinite alternate;
     }
 
-    .yl:hover {
-      color: #f7ff24;
-      text-shadow:
-        0 0 7px #f7ff24,
-        0 0 10px #f7ff24,
-        0 0 21px #f7ff24,
-        0 0 42px #f7ff24,
-        0 0 82px #f7ff24,
-        0 0 92px #f7ff24,
-        0 0 102px #f7ff24,
-        0 0 151px #f7ff24;
-      animation: pulsate 1.2s infinite alternate;
-    }
-
-    a .or:hover {
+    a.or:hover, a.or.-active {
       color: #ffaa56;
       text-shadow:
         0 0 7px #ffaa56,
@@ -278,7 +264,7 @@ if (isset($_COOKIE['USER_SID'])) {
       animation: pulsate 1.2s infinite alternate;
     }
 
-    a .bl:hover {
+    a.bl:hover, a.bl.-active {
       color: #00c0ff;
       text-shadow:
         0 0 7px #00c0ff,
@@ -292,7 +278,7 @@ if (isset($_COOKIE['USER_SID'])) {
       animation: pulsate 1.2s infinite alternate;
     }
 
-    a .rd:hover {
+    a.rd:hover, a.rd.-active {
       color: #ff3434;
       text-shadow:
         0 0 7px#ff3434,
