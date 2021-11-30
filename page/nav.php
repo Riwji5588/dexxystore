@@ -26,9 +26,9 @@
       </button>
       <div class="navbar-collapse collapse justify-content-between align-items-center w-100" id="collapsingNavbar2">
         <ul class="navbar-nav mx-auto text-center">
-          <li><a href="login"><button class="btn btn-sm gr my-2 my-sm-0 mr-2" type="button"><i class="fal fa-sign-in-alt mr-1"></i> เข้าสู่ระบบ</button></a></li>
-          <li><a href="register"><button class="btn btn-sm or my-2 my-sm-0 mr-2" type="button"><i class="fal fa-user-plus mr-1"></i> สมัครสมาชิก</button></a></li>
-          <li><a href="https://twitter.com/dexy_store" target="_blank"><button class="btn btn-sm bl my-2 my-sm-0 mr-2" type="button"><i class="fab fa-twitter-square mr-1"></i> Twitter</button></a></li>
+          <li><a href="login" class="btn btn-sm gr my-2 my-sm-0 mr-2"<i class="fal fa-sign-in-alt mr-1"></i> เข้าสู่ระบบ</a></li>
+          <li><a href="register" class="btn btn-sm or my-2 my-sm-0 mr-2"><i class="fal fa-user-plus mr-1"></i> สมัครสมาชิก</a></li>
+          <li><a href="https://twitter.com/dexy_store" target="_blank" class="btn btn-sm bl my-2 my-sm-0 mr-2"><i class="fab fa-twitter-square mr-1"></i> Twitter</button></a></li>
         </ul>
         <!-- <ul class="nav navbar-nav flex-row justify-content-center flex-nowrap">
       <li class="nav-item"><a class="nav-link" href=""><i class="fa fa-facebook mr-1"></i></a> </li>
@@ -36,3 +36,9 @@
     </ul> -->
       </div>
     </nav>
+
+    <style>
+      #collapsingNavbar2 ul li a {
+        color: #FFF;
+      }
+    </style>

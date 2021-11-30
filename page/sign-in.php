@@ -51,7 +51,7 @@
               setTimeout(function() {
                   if (data.code == "200"){
                       swal("เข้าสู่ระบบ สำเร็จ!", "ระบบกำลังพาท่านไป...", "success",{button:false,closeOnClickOutside:false,});
-                      setTimeout(function(){ window.location.reload();}, 2000);
+                      setTimeout(function(){ window.location.replace('./home'); }, 2000);
                   } else {
                       swal(data.msg ,"" ,"error",{button:{className:'hyper-btn-notoutline-danger',},closeOnClickOutside:false,});
                   }

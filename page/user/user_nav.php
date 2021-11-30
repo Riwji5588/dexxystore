@@ -41,22 +41,22 @@ $notify = $hyper->connect->query($select_noti);
 	</ul>
 	<div class="navbar-collapse collapse justify-content-center" id="navbar6">
 		<ul class="navbar-nav align-items-center">
-			<li><a href="home"><button class="btn btn-sm pu <?php if ($page == 'home' || $page == 'shop' || $page == 'item') {
-																echo '-active';
-															} ?> mr-2" type="button"><i class="fal fa-home-lg-alt mr-1"></i> หน้าแรก</button></a></li>
-			<li><a href="profile"><button class="btn btn-sm gr <?php if ($page == 'profile') {
-																	echo '-active';
-																} ?> mr-2" type="butt><i class=" fal fa-user mr-1"></i> บัญชีของฉัน</button></a></li>
-			<?php if ($data_user['role'] == '779') { ?><li><a href="adminsys"><button class="btn btn-sm pk <?php if ($page == 'adminsys' || $page == 'gametype' || $page == 'gameselect' || $page == 'editgame' || $page == 'gamecard' || $page == 'gamedata' || $page == 'dataowner' || $page == 'datauser' || $page == 'datapay' || $page == 'websetting' || $page == 'report') {
-																												echo '-active';
-																											} ?> mr-2" type="button"><i class="fal fa-tools mr-1"></i> ระบบแอดมิน</button></a></li><?php } ?>
-			<li><a href="history"><button class="btn btn-sm yl <?php if ($page == 'history') {
-																	echo '-active';
-																} ?> mr-2" type="button"><i class="fal fa-history mr-1"></i> ประวัติการซื้อ</button></a></li>
-			<li><a href="topup"><button class="btn btn-sm or <?php if ($page == 'topup') {
-																	echo '-active';
-																} ?> mr-2" type="button"><i class="fal fa-credit-card mr-1" style="color: white;"></i> เติมเงิน</button></a></li>
-			<li><a href="https://twitter.com/dexy_store" target="_blank"><button class="btn btn-sm bl mr-2" type="button"><i class="fab fa-twitter-square mr-1"></i> Twitter</button></a></li>
+			<li><a href="home" class="btn btn-sm pu <?php if ($page == 'home' || $page == 'shop' || $page == 'item') {
+														echo '-active';
+													} ?> mr-2"><i class="fal fa-home-lg-alt mr-1"></i> หน้าแรก</a></li>
+			<li><a href="profile" class="btn btn-sm gr <?php if ($page == 'profile') {
+															echo '-active';
+														} ?> mr-2"><i class=" fal fa-user mr-1"></i> บัญชีของฉัน</a></li>
+			<?php if ($data_user['role'] == '779') { ?><li><a href="adminsys" class="btn btn-sm pk <?php if ($page == 'adminsys' || $page == 'gametype' || $page == 'gameselect' || $page == 'editgame' || $page == 'gamecard' || $page == 'gamedata' || $page == 'dataowner' || $page == 'datauser' || $page == 'datapay' || $page == 'websetting' || $page == 'report') {
+																										echo '-active';
+																									} ?> mr-2"><i class="fal fa-tools mr-1"></i> ระบบแอดมิน</a></li><?php } ?>
+			<li><a href="history" class="btn btn-sm yl <?php if ($page == 'history') {
+															echo '-active';
+														} ?> mr-2"><i class="fal fa-history mr-1"></i> ประวัติการซื้อ</a></li>
+			<li><a href="topup" class="btn btn-sm or <?php if ($page == 'topup') {
+															echo '-active';
+														} ?> mr-2"><i class="fal fa-credit-card mr-1" style="color: white;"></i> เติมเงิน</a></li>
+			<li><a href="https://twitter.com/dexy_store" target="_blank" class="btn btn-sm bl mr-2"><i class="fab fa-twitter-square mr-1"></i> Twitter</a></li>
 		</ul>
 	</div>
 	<!-- On PC -->

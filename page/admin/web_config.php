@@ -14,7 +14,7 @@
           ?>
           <!-- Card Example -->
           <div class="media m-auto">
-            <img id="gamelogoimgnew" src="assets/img/logo_dexyStore.jpg" class="align-self-center mr-3 rounded-circle d-none d-md-block" width="70px;" height="70px;">
+            <img id="gamelogoimgnew" src="assets/img/<?= $webimage; ?>" class="align-self-center mr-3 rounded-circle d-none d-md-block" width="70px;" height="70px;">
             <div class="media-body text-center text-md-left">
               <img id="gamelogoresimgnew" src="assets/img/<?= $web['image']; ?>" class="ml-auto mr-auto rounded-circle d-block d-md-none" width="70px;" height="70px;">
               <h4 class="mt-0 mb-1" id="gamenamenew"><?= $web['name']; ?></h4>
