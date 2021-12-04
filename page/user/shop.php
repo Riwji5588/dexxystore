@@ -228,7 +228,7 @@ if ($total_game_row <= 0) {
                 swal("กำลังซื้อสินค้า กรุณารอสักครู่...", {
                   button: false,
                   closeOnClickOutside: false,
-                  timer: 1900,
+                  timer: 1000,
                 });
 
               },
@@ -238,7 +238,7 @@ if ($total_game_row <= 0) {
                   if (data.code == "200") {
                     swal({
                       title: 'ซื้อสินค้า สำเร็จ!',
-                      text: 'ออเดอร์ที่ '+ data.order +' สินค้าของคุณจะไปอยู้ในหน้าประวัติการซื้อ',
+                      text: 'ออเดอร์ที่ '+ data.order +' สินค้าของคุณจะไปอยู้ในหน้าประวัติการซื้อ !',
                       icon: "success",
                       closeOnClickOutside: false,
                       button: false,
@@ -254,7 +254,7 @@ if ($total_game_row <= 0) {
                       closeOnClickOutside: false,
                     });
                   }
-                }, 2000);
+                }, 1500);
               }
 
             });
