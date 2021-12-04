@@ -16,7 +16,7 @@ $notify = $hyper->connect->query($select_noti);
 	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar6">
 		<span class="navbar-toggler-icon"></span>
 	</button>
-	<a href="home" class="navbar-brand ml-3" style="width: 10%;"><img src="assets/img/logo_dexyStore.jpg" width="64" height="64" class="d-inline-block align-top rounded-circle"></a>
+	<a href="home" class="navbar-brand ml-3" style="width: 10%"><img src="assets/img/logo_dexyStore.png" width="100" height="50" class="d-inline-block align-top rounded-circle"></a>
 	<!-- ON Mobile -->
 	<ul id="onmb" class="nav ml-auto align-items-center" style="display:inline-flex">
 		<li class="nav-item">
