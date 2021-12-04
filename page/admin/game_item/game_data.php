@@ -254,7 +254,7 @@ if ($total_game_row <= 0) {
               });
               setTimeout(function() {
                 window.location.reload();
-              }, 2000);
+              }, 500);
             } else {
               swal(data.msg, "", "error", {
                 button: {
@@ -263,7 +263,7 @@ if ($total_game_row <= 0) {
                 closeOnClickOutside: false,
               });
             }
-          }, 2000);
+          }, 500);
         }
 
       });
@@ -315,7 +315,7 @@ if ($total_game_row <= 0) {
                     });
                     setTimeout(function() {
                       window.location.reload();
-                    }, 2000);
+                    }, 500);
                   } else {
                     swal(data.msg, "", "error", {
                       button: {
@@ -324,7 +324,7 @@ if ($total_game_row <= 0) {
                       closeOnClickOutside: false,
                     });
                   }
-                }, 2000);
+                }, 500);
               }
 
             });
@@ -401,7 +401,7 @@ if ($total_game_row <= 0) {
                       });
                       setTimeout(function() {
                         window.location.reload();
-                      }, 2000);
+                      }, 500);
                     } else {
                       swal(data.msg, "", "error", {
                         button: {
@@ -410,7 +410,7 @@ if ($total_game_row <= 0) {
                         closeOnClickOutside: false,
                       });
                     }
-                  }, 2000);
+                  }, 500);
                 }
 
               });

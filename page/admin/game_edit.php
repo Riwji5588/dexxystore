@@ -196,7 +196,7 @@
                   });
                   setTimeout(function() {
                     window.location.reload();
-                  }, 2000);
+                  }, 1000);
                 } else {
                   swal(data.msg, "", "error", {
                     button: {
@@ -205,7 +205,7 @@
                     closeOnClickOutside: false,
                   });
                 }
-              }, 2000);
+              }, 1000);
             }
 
           });
@@ -257,7 +257,7 @@
                         });
                         setTimeout(function() {
                           window.location.reload();
-                        }, 2000);
+                        }, 1000);
                       } else {
                         swal(data.msg, "", "error", {
                           button: {
@@ -266,7 +266,7 @@
                           closeOnClickOutside: false,
                         });
                       }
-                    }, 2000);
+                    }, 1000);
                   }
 
                 });
@@ -334,7 +334,7 @@
                           });
                           setTimeout(function() {
                             window.location.reload();
-                          }, 2000);
+                          }, 1000);
                         } else {
                           swal(data.msg, "", "error", {
                             button: {
@@ -343,7 +343,7 @@
                             closeOnClickOutside: false,
                           });
                         }
-                      }, 2000);
+                      }, 1000);
                     }
 
                   });

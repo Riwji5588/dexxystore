@@ -18,8 +18,8 @@
 
 
     <nav class="navbar navbar-expand-md navbar-dark fixed-top justify-content-center" style="background-color: #131315;">
-      <a class="navbar-brand" href="home">
-        <img src="assets/img/logo_dexyStore.jpg" width="64" height="64" class="d-inline-block align-top rounded-circle">
+      <a class="navbar-brand" href="home" >
+        <img src="assets/img/logo_dexyStore.png" width="120" height="60" class="d-inline-block align-top rounded-circle">
       </a>
       <button class="navbar-toggler ml-1" type="button" data-toggle="collapse" data-target="#collapsingNavbar2">
         <span class="navbar-toggler-icon"></span>

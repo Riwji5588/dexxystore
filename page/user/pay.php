@@ -2,15 +2,18 @@
       <div class="card color radius-border">
             <div class="card-body p-0 text-center pt-4">
 
-                  <img src="assets/img/tw.png" style="width: 15%;" class="mb-4 pr-4 border-right">
+            <img src="assets/img/tw.png" style="width: 15%;" class="mb-4 pr-4 border-right">
                   <img src="assets/img/wallet-logo.png" style="width: 40%;" class="mb-4 pl-4">
                   </p>
 
-                  <h4 class="text-color">ใส่ลิ้งซองของขวัญ</h4>
-                  <h6 class="text-color m-3">คงเหลือ <?= $points; ?> บาท</h6>
+                  <h3 class="text-color m-3 " style="color: #ffb700";>ระบบเติมเงินอัตโนมัติ 24 ชม. ผ่านทรูวอลเลต</h3>
+                  <h6 class="text-color m-1">หากสนใจเติมเงินผ่านธนาคาร <br>โปรดแจ้งสลิปทางไลน์ร้าน</h6>
+                  <h5 class="text-color m-4"><br></h5>
+                  
+                  
                   <input type="text" id="ref" class="text-center form-control form-control-sm hyper-form-control ml-auto mr-auto" placeholder="กรอกลิ้งซองอั่งเปา" style="max-width:350px;width:80%;border: 1px solid #343a40;" autocomplete="off">
                   <small id="giftlinkHelp" class="form-text text-color" style="opacity: 0.7;">ตัวอย่างลิ้ง : https://gift.truemoney.com/campaign/?v=cofi9...</small>
-
+                        <h3 class="text-color m-4">ใส่ลิ้งซองของขวัญ</h3>
                   <div class="form-group mt-5">
                         <div class="row justify-content-center">
                               <div class="col-12 col-md-4">
@@ -171,3 +174,4 @@
                   border-radius: 50%;
             }
       </style>
+      
