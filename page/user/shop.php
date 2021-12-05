@@ -221,6 +221,7 @@ if ($total_game_row <= 0) {
               url: "plugin/buyitem.php",
               dataType: "json",
               data: {
+                type: 1,
                 id: id
               },
 
