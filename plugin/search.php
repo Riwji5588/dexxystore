@@ -124,7 +124,7 @@ if (isset($_GET)) {
                     <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content border-0 radius-border-2 hyper-bg-white">
                             <div class="modal-header hyper-bg-dark">
-                                <h5 class="modal-title"> ไอดีของคุณ</h5>
+                                <h5 class="modal-title"> ข้อมูลสินค้า</h5>
                                 <button type="button" class="close p-4" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
@@ -132,10 +132,10 @@ if (isset($_GET)) {
                             <div class="modal-body text-left">
                                 <div class="row" style="padding: 5px 2px 0px 2px;">
                                     <div class="col-4">
-                                        <span>ชื่อผู้ใช้งาน</span>
+                                        <span>ชื่อผู้ใช้
                                     </div>
                                     <div class="col-8">
-                                        <input type="text" class="hyper-form-control" id="username<?= $selled['selled_id']; ?>1" value="<?= $selled_data['username']; ?>" readonly style="background-color: #fff;border-radius: 0px;border: 0px">
+                                        <input type="text" class="hyper-form-control" id="username<?= $selled['selled_id']; ?>1" value="<?= $selled_data['username']; ?>" readonly style="color: #2E4C6D ; background-color: white;border-radius: 0px;border: 0px">
                                         <button id="username<?= $selled['selled_id']; ?>" class="btn btn-dark btn-sm" onclick="copy(this)"> คัดลอก </button>
                                         <!-- 'username<?= $selled['selled_id']; ?>' -->
                                     </div>
@@ -145,7 +145,7 @@ if (isset($_GET)) {
                                         <span>รหัสผ่าน</span>
                                     </div>
                                     <div class="col-8">
-                                        <input type="text" class="hyper-form-control" id="password<?= $selled['selled_id']; ?>1" value="<?= base64_decode($selled_data['password']); ?>" readonly style="background-color: #fff;border-radius: 0px;border: 0px">
+                                        <input type="text" class="hyper-form-control" id="password<?= $selled['selled_id']; ?>1" value="<?= base64_decode($selled_data['password']); ?>" readonly style="color:#2E4C6D ; background-color: white;border-radius: 0px;border: 0px">
                                         <button id="password<?= $selled['selled_id']; ?>" class="btn btn-dark btn-sm" onclick="copy(this)"> คัดลอก </button>
                                     </div>
                                 </div>
@@ -154,7 +154,7 @@ if (isset($_GET)) {
                                         <span>จอ</span>
                                     </div>
                                     <div class="col-8">
-                                        <input type="text" class="hyper-form-control" value="<?= $selled_data['display']; ?>" readonly style="background-color: #fff;border-radius: 0px;border: 0px">
+                                        <input type="text" class="hyper-form-control" value="<?= $selled_data['display']; ?>" readonly style="color:#2E4C6D ; background-color: white;border-radius: 0px;border: 0px">
                                     </div>
                                 </div>
                                 <div class="row" style="padding: 5px 2px 0px 2px;">
@@ -162,10 +162,20 @@ if (isset($_GET)) {
                                         <span>วันหมดอายุ</span>
                                     </div>
                                     <div class="col-8">
-                                        <p><?= DateThai($selled['exp_date']) ?></p>
+                                        <p style="color:#2E4C6D ;"><?= DateThai($selled['exp_date']) ?></p>
                                     </div>
-                                </div>
 
+                                </div>
+                                <span style="color: #ff0022;" align="center"><b>อ่านก่อนเข้าจอ</b> <br></span>
+
+                                <ol>
+                                    <li style="color: #ff0022;">ห้ามเปลี่ยนชื่อจอ รูปจอ</li>
+                                    <li style="color: #ff0022;">ห้ามล๊อคจอ / ตั้ง Pin จอ </li>
+                                    <li style="color: #ff0022;">ห้ามแชร์รหัสให้ผู้อื่น ใช้งาน 1 คนเท่านั้น </li>
+                                    <li style="color: #ff0022;">ภาษาของเมนูเป็นภาษาอังกฤษเท่านั้น ไม่สามารถเปลี่ยนได้</li>
+
+
+                                </ol>
                                 <div class="modal-footer p-2 border-0">
                                     <button type="button" class="btn btn-secondary  btn-danger" data-dismiss="modal"><i class="fad fa-times-circle mr-1"></i>ปิด</button>
                                 </div>
@@ -190,10 +200,10 @@ if (isset($_GET)) {
                                 <!-- tab control -->
                                 <ul class="nav nav-tabs">
                                     <li class="nav-item">
-                                        <a class="nav-link active" data-toggle="tab" href="#claim<?= $selled['selled_id']; ?>">เคลมสินค้า</a>
+                                        <a class="nav-link active" data-toggle="tab" href="#claim<?= $selled['selled_id']; ?>">หน้า เคลมสินค้า</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" data-toggle="tab" href="#other<?= $selled['selled_id']; ?>">สอบถามปัญหาต่างๆ</a>
+                                        <a class="nav-link" data-toggle="tab" href="#other<?= $selled['selled_id']; ?>">หน้าที่ 2 ติดต่อQ&A</a>
                                     </li>
                                 </ul>
                                 <!--conternt !-->
@@ -202,7 +212,9 @@ if (isset($_GET)) {
                                     <div id="claim<?= $selled['selled_id']; ?>" class="tab-pane active">
                                         <br>
                                         <div class="form-group">
-                                            <p for="detail<?= $selled['selled_id']; ?>">ตัวอย่างสาเหตุปัญหา</p>
+                                            <p for="detail<?= $selled['selled_id']; ?>">
+                                            <h5>ตัวอย่างสาเหตุปัญหา</h5>
+                                            </p>
                                             <ol>
                                                 <li>รหัสผ่านไม่ถูกต้อง / ไม่สามารถเข้าไอดีได้</li>
                                                 <li>ไอดีหมดอายุ ขึ้นให้จ่าย / Update Payment</li>
@@ -212,7 +224,7 @@ if (isset($_GET)) {
                                                 <table style="width: 100%;">
                                                     <tr align="center">
                                                         <td>
-                                                            <span>วิธีการแนบภาพปัญหา</span>
+                                                            <span>วิธีแนบรูปภาพสำหรับช่องเหตุผล</span>
                                                         </td>
                                                         <td>
                                                             <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#addimg">คลิก</button>
@@ -221,16 +233,21 @@ if (isset($_GET)) {
                                                 </table>
                                             </div>
                                             <div class="form-group" align="center">
-                                                <textarea id="detail<?= $selled['selled_id']; ?>" class="form-control" style="width: 88%;min-height: 100px" autofocus></textarea>
+                                                <textarea id="detail<?= $selled['selled_id']; ?>" class="form-control" style="width: 88%;min-height: 100px" placeholder="ระบุปัญหาและรายละเอียด" autofocus></textarea>
                                             </div>
+                                            <span style="color: green;" align="center"><b>การเคลมสินค้ามีปัญหา ไอดีใหม่จะแสดงแทนที่อันเดิมใน </b><br align="center"><b>" ออเดอร์ที่แจ้งปัญหา "</b></span>
                                             <span style="color: red;">
-                                                <b>*หมายเหตุ </b>
+
+                                                <b><br><br>*หมายเหตุ </b>
                                                 <ol style="color: black;">
-                                                    <li>หากเคลม<u>ครั้งแรก</u> จะได้รับไอดีใหม่ทันที</li>
-                                                    <li>หากเคลม<u>ครั้งที่ 2 ขึ้นไป</u> จะต้องรอแอดมินมาอนุมัติ</li>
-                                                    <li>ในกรณี<u>ถูกปฏิเสธ</u> โปรดติดต่อไลน์ร้านเพื่อแก้ไขปัญหา</li>
+
+                                                    <li>แจ้งปัญหาผ่านเว็บ<u> ครั้งแรก</u> จะได้รับไอดีใหม่ทันที</li>
+                                                    <li>แจ้งปัญหาผ่านเว็บ<u> ครั้งที่ 2 ขึ้นไป</u> จะต้องรอแอดมินมาอนุมัติ</li>
+                                                    <li>ในกรณี<u> ถูกปฏิเสธ</u> โปรดติดต่อไลน์ร้านเพื่อแก้ไขปัญหา</li>
+
                                                 </ol>
                                             </span>
+
                                         </div>
                                         <div class="modal-footer p-2 border-0 form-group">
                                             <button type="button" class="btn btn-success" onclick="claim(<?= $selled['selled_id']; ?>)"><i class="fas fa-check-circle"></i> ส่งเคลม</button>
@@ -262,7 +279,7 @@ if (isset($_GET)) {
                                         </div>
                                         <div class="form-group mt-3 justify-content-center" align="center">
                                             <img src="assets/img/line1.jpg" style="width:auto; max-width: 200px;margin-bottom:0px">
-                                            <h5 style="color: green;margin-top: 0px;">สอบถามเพิ่มเติม โดยตรงกับทางร้าน</h5>
+                                            <h5 style="color: green;margin-top: 0px;">สแกน QR CODE เพื่อติดต่อร้าน</h5>
                                         </div>
                                         <div class="modal-footer p-2 border-0 form-group">
                                             <button type="button" class="btn btn-danger" data-dismiss="modal" aria-label="Close"><i class="fad fa-times-circle mr-1"></i>ปิด</button>

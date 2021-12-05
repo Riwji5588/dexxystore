@@ -16,7 +16,7 @@ $total_selled_row = mysqli_num_rows($query_selled);
   <span style="color: #fff">ค้นหา : &nbsp;</span>
   <input type="text" class="form-control hyper-form-control col-6 col-md-3 " placeholder="ออเดอร์ สินค้า วันที่ซื้อสินค้า สถานะ" onkeyup="search(this, '<?= $sql_select_selled ?>')">
 </div>
-<h5 class="text-center mt-1 mb-4" style="color: white;" >หากสนใจต่อเดือนถัดไปสำหรับออเดอร์เดิม โปรดติดต่อไลน์ร้านก่อนวันหมดอายุ </h5>
+<h5 class="text-center mt-1 mb-4" style="color: white;">หากสนใจต่อเดือนถัดไปสำหรับออเดอร์เดิม โปรดติดต่อไลน์ร้านก่อนวันหมดอายุ </h5>
 <!--card-->
 
 
@@ -39,27 +39,32 @@ $total_selled_row = mysqli_num_rows($query_selled);
       $query_selled_game = $hyper->connect->query($sql_select_selled_card);
       $selled_card = mysqli_fetch_array($query_selled_game);
 
+      $expire = strtotime($selled['exp_date']) - strtotime('today midnight');
+
   ?>
       <div class='card col-10 col-md-3 color' style="width: 100%; background-color : white; border-color: black;">
         <div class='card-body'>
           <span>ออเดอร์ : <b style="color: #F55DA1;"><?= $selled['selled_id']; ?></b> </span> <br>
-          <span>สินค้า : <b><?php if ($selled_card['card_title'] == null) {
-                              echo 'unknow';
-                            } else {
-                              echo $selled_card['card_title'] . " - " . $selled_card['card_price'];
-                            } ?></b> </span><br>
+          <input id="card_id<?= $selled['selled_id']; ?>" type="hidden" value="<?= $selled_card['card_id']; ?>">
+          <span id="price<?= $selled['selled_id']; ?>">สินค้า : <b><?php if ($selled_card['card_title'] == null) {
+                                                                      echo 'unknow';
+                                                                    } else {
+                                                                      echo $selled_card['card_title'] . " - " . $selled_card['card_price'];
+                                                                    } ?></b> </span><br>
           <span>วันที่ซื้อสินค้า : <b><?= DateThai1($selled['selled_date']); ?></b> </span>
           <p> สถานะ : <?php
-                      if ($selled['claim'] == 1) {
-                        echo '<span class="text-success">เคลมสำเร็จ</span>';
-                      } else if ($selled['claim'] == 2) {
-                        echo "<span  style='color: #E1B623;'>รอดำเนินการ</span>";
-                      } else if ($selled['claim'] == 3) {
-                        echo '<span class="text-danger">ถูกปฏิเสธ</span>';
-                      } else if ((int)date_diff(date_create(date("Y-m-d H:i:s")), date_create($selled['exp_date']))->format('%a') > 0) {
-                        echo '<span class="text-primary">ยังไม่หมดอายุ</span>';
-                      } else {
+                      if ($expire < 1) {
                         echo '<span class="text-danger">หมดอายุ</span>';
+                      } else {
+                        if ($selled['claim'] == 1) {
+                          echo '<span class="text-success">เคลมสำเร็จ</span>';
+                        } else if ($selled['claim'] == 2) {
+                          echo "<span  style='color: #E1B623;'>รอดำเนินการ</span>";
+                        } else if ($selled['claim'] == 3) {
+                          echo '<span class="text-danger">ถูกปฏิเสธ</span>';
+                        } else {
+                          echo '<span class="text-primary">ยังไม่หมดอายุ</span>';
+                        }
                       }
                       ?></p>
           <div class="row justify-content-center">
@@ -85,7 +90,7 @@ $total_selled_row = mysqli_num_rows($query_selled);
                   <span>ชื่อผู้ใช้
                 </div>
                 <div class="col-8">
-                  <input type="text" class="hyper-form-control" id="username<?= $selled['selled_id']; ?>1" value="<?= $selled_data['username']; ?>"  readonly style="color: #2E4C6D ; background-color: white;border-radius: 0px;border: 0px">
+                  <input type="text" class="hyper-form-control" id="username<?= $selled['selled_id']; ?>1" value="<?= $selled_data['username']; ?>" readonly style="color: #2E4C6D ; background-color: white;border-radius: 0px;border: 0px">
                   <button id="username<?= $selled['selled_id']; ?>" class="btn btn-dark btn-sm" onclick="copy(this)"> คัดลอก </button>
                   <!-- 'username<?= $selled['selled_id']; ?>' -->
                 </div>
@@ -104,28 +109,37 @@ $total_selled_row = mysqli_num_rows($query_selled);
                   <span>จอ</span>
                 </div>
                 <div class="col-8">
-                  <input type="text" class="hyper-form-control" value="<?= $selled_data['display']; ?>" readonly style="color:#2E4C6D ; background-color: white;border-radius: 0px;border: 0px"> 
+                  <input type="text" class="hyper-form-control" value="<?= $selled_data['display']; ?>" readonly style="color:#2E4C6D ; background-color: white;border-radius: 0px;border: 0px">
                 </div>
               </div>
-              <div class="row" style="padding: 5px 2px 0px 2px;">
+              <div class="row" style="padding: 5px 2px 0px 0px;">
                 <div class="col-4">
-                  <span>วันหมดอายุ</span>
+                  <span>วันหมดอายุ <a href="#" onclick="renew(<?= $selled['selled_id']; ?>)">(ต่ออายุ)</a></span>
                 </div>
-                <div class="col-8" >
-                  <p style="color:#2E4C6D ;"><?= DateThai($selled['exp_date']) ?></p>
+                <div class="col-8">
+                  <?php
+                  $expire = strtotime($selled['exp_date']) - strtotime('today midnight');
+                  if ($expire > 0) :
+                  ?>
+                    <p style="color: #2E4C6D"><?= DateThai($selled['exp_date']) ?></p>
+                  <?php
+                  else :
+                  ?>
+                    <p style="color: #ff0022"><u>หมดอายุแล้ว</u></p>
+                  <?php
+                  endif;
+                  ?>
                 </div>
-            
               </div>
+              
               <span style="color: #ff0022;" align="center"><b>อ่านก่อนเข้าจอ</b> <br></span>
-            
-            <ol>
-                    <li style="color: #ff0022;">ห้ามเปลี่ยนชื่อจอ รูปจอ</li>
-                    <li style="color: #ff0022;">ห้ามล๊อคจอ / ตั้ง Pin จอ </li>
-                    <li style="color: #ff0022;">ห้ามแชร์รหัสให้ผู้อื่น ใช้งาน 1 คนเท่านั้น </li>
-                    <li style="color: #ff0022;">ภาษาของเมนูเป็นภาษาอังกฤษเท่านั้น ไม่สามารถเปลี่ยนได้</li>
-                    
-                    
-                  </ol>
+              <ol>
+                <li style="color: #ff0022;">ห้ามเปลี่ยนชื่อจอ รูปจอ</li>
+                <li style="color: #ff0022;">ห้ามล๊อคจอ / ตั้ง Pin จอ </li>
+                <li style="color: #ff0022;">ห้ามแชร์รหัสให้ผู้อื่น ใช้งาน 1 คนเท่านั้น </li>
+                <li style="color: #ff0022;">ภาษาของเมนูเป็นภาษาอังกฤษเท่านั้น ไม่สามารถเปลี่ยนได้</li>
+              </ol>
+
               <div class="modal-footer p-2 border-0">
                 <button type="button" class="btn btn-secondary  btn-danger" data-dismiss="modal"><i class="fad fa-times-circle mr-1"></i>ปิด</button>
               </div>
@@ -162,7 +176,9 @@ $total_selled_row = mysqli_num_rows($query_selled);
                 <div id="claim<?= $selled['selled_id']; ?>" class="tab-pane active">
                   <br>
                   <div class="form-group">
-                    <p for="detail<?= $selled['selled_id']; ?>"><h5>ตัวอย่างสาเหตุปัญหา</h5></p>
+                    <p for="detail<?= $selled['selled_id']; ?>">
+                    <h5>ตัวอย่างสาเหตุปัญหา</h5>
+                    </p>
                     <ol>
                       <li>รหัสผ่านไม่ถูกต้อง / ไม่สามารถเข้าไอดีได้</li>
                       <li>ไอดีหมดอายุ ขึ้นให้จ่าย / Update Payment</li>
@@ -183,19 +199,19 @@ $total_selled_row = mysqli_num_rows($query_selled);
                     <div class="form-group" align="center">
                       <textarea id="detail<?= $selled['selled_id']; ?>" class="form-control" style="width: 88%;min-height: 100px" placeholder="ระบุปัญหาและรายละเอียด" autofocus></textarea>
                     </div>
-                    <span style="color: green;" align="center" ><b>การเคลมสินค้ามีปัญหา ไอดีใหม่จะแสดงแทนที่อันเดิมใน </b><br align="center"><b>" ออเดอร์ที่แจ้งปัญหา "</b></span>
-                    <span style="color: red;"> 
-                    
-                      <b ><br><br>*หมายเหตุ </b>
+                    <span style="color: green;" align="center"><b>การเคลมสินค้ามีปัญหา ไอดีใหม่จะแสดงแทนที่อันเดิมใน </b><br align="center"><b>" ออเดอร์ที่แจ้งปัญหา "</b></span>
+                    <span style="color: red;">
+
+                      <b><br><br>*หมายเหตุ </b>
                       <ol style="color: black;">
-                  
+
                         <li>แจ้งปัญหาผ่านเว็บ<u> ครั้งแรก</u> จะได้รับไอดีใหม่ทันที</li>
                         <li>แจ้งปัญหาผ่านเว็บ<u> ครั้งที่ 2 ขึ้นไป</u> จะต้องรอแอดมินมาอนุมัติ</li>
                         <li>ในกรณี<u> ถูกปฏิเสธ</u> โปรดติดต่อไลน์ร้านเพื่อแก้ไขปัญหา</li>
-                        
+
                       </ol>
                     </span>
-                  
+
                   </div>
                   <div class="modal-footer p-2 border-0 form-group">
                     <button type="button" class="btn btn-success" onclick="claim(<?= $selled['selled_id']; ?>)"><i class="fas fa-check-circle"></i> ส่งเคลม</button>
@@ -368,6 +384,74 @@ $total_selled_row = mysqli_num_rows($query_selled);
     }
   }
 
+  function renew(id) {
+    var card_id = $('#card_id' + id).val();
+    console.log(card_id);
+    swal({
+        title: 'ต้องการต่ออายุสินค้านี้หรือไม่',
+        text: $('#price' + id).text(),
+        icon: "info",
+        buttons: {
+          confirm: {
+            text: 'ต่ออายุ',
+            className: 'hyper-btn-notoutline-success'
+          },
+          cancel: 'ยกเลิก'
+        },
+        closeOnClickOutside: false,
+      })
+      .then((willDelete) => {
+        if (willDelete) {
+
+          $.ajax({
+
+            type: "POST",
+            url: "plugin/buyitem.php",
+            dataType: "json",
+            data: {
+              type: 2,
+              id: card_id,
+              selled_id: id
+            },
+
+            beforeSend: function() {
+              swal("กำลังซื้อสินค้า กรุณารอสักครู่...", {
+                button: false,
+                closeOnClickOutside: false,
+                timer: 1000,
+              });
+
+            },
+
+            success: function(data) {
+              setTimeout(function() {
+                if (data.code == "200") {
+                  swal({
+                    title: 'ต่ออายุการใช้งาน สำเร็จ!',
+                    text: 'ออเดอร์ที่ ' + data.order + ' ได้ต่ออายุการใช้งานแล้ว!',
+                    icon: "success",
+                    closeOnClickOutside: false,
+                    button: false,
+                  });
+                  setTimeout(function() {
+                    window.location.reload();
+                  }, 2000);
+                } else {
+                  swal(data.msg, "", "error", {
+                    button: {
+                      className: 'hyper-btn-notoutline-danger',
+                    },
+                    closeOnClickOutside: false,
+                  });
+                }
+              }, 1500);
+            }
+
+          });
+
+        }
+      });
+  }
 
   function copy(input) {
     let id = input.id + '1';
