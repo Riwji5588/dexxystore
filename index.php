@@ -46,7 +46,7 @@ function DateThai($strDate)
   $strMinute = date("i", strtotime($strDate));
   $strday = date("l", strtotime($strDate));
   $strMonthCut = array("", "ม.ค.", "ก.พ.", "มี.ค.", "เม.ย.", "พ.ค.", "มิ.ย.", "ก.ค.", "ส.ค.", "ก.ย.", "ต.ค.", "พ.ย.", "ธ.ค.");
-  $strdayCut = array("", "วันจันทร์ที่", "วันอังคารที่", "วันพุธที่", "วันพฤหัสบดีที่", "วันศุกร์ที่", "วันเสาร์ที่", "วันอาทิตย์ที่");
+  $strdayCut = array("", "จันทร์ที่", "อังคารที่", "พุธที่", "พฤหัสบดีที่", "ศุกร์ที่", "เสาร์ที่", "อาทิตย์ที่");
   if ($strday == "Monday") {
     $strdayThai = $strdayCut[1];
   } elseif ($strday == "Tuesday") {
@@ -63,7 +63,7 @@ function DateThai($strDate)
     $strdayThai = $strdayCut[7];
   }
   $strMonthThai = $strMonthCut[$strMonth];
-  return "$strdayThai $strDay $strMonthThai $strYear เวลา $strHour:$strMinute";
+  return "$strdayThai $strDay $strMonthThai $strYear";
 }
 
 function DateThai1($strDate)
