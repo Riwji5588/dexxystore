@@ -42,6 +42,7 @@ $total_selled_row = mysqli_num_rows($query_selled);
       $expire = strtotime($selled['exp_date']) - strtotime('today midnight');
 
   ?>
+  
       <div class='card col-10 col-md-3 color' style="width: 100%; background-color : white; border-color: black;">
         <div class='card-body'>
           <span>ออเดอร์ : <b style="color: #F55DA1;"><?= $selled['selled_id']; ?></b> </span> <br>
@@ -69,7 +70,7 @@ $total_selled_row = mysqli_num_rows($query_selled);
                       ?></p>
           <div class="row justify-content-center">
             <button class='btn btn-sm mx-1' style="background-color: #363E64;color:white;" type='button' data-toggle='modal' data-target='#datamodal<?= $selled['selled_id']; ?>'>แสดงไอดี</button>
-            <button class='btn btn-sm mx-1' style="background-color: #FF3131;color:white;" type='button' data-toggle='modal' data-target='#datamodal1<?= $selled['selled_id']; ?>' style='color:black ;'><i class='fas fa-exclamation-triangle'></i> แจ้งปัญหา</button>
+            <button class='btn btn-sm mx-1' style="background-color: #FF3131;color:white;" type='button' data-toggle='modal' data-target='#claimmodal<?= $selled['selled_id']; ?>' style='color:black ;'><i class='fas fa-exclamation-triangle'></i> แจ้งปัญหา</button>
           </div>
         </div>
       </div>
@@ -151,7 +152,7 @@ $total_selled_row = mysqli_num_rows($query_selled);
       <!-- End Data Modal -->
 
       <!-- Claim Modal -->
-      <div class="modal fade" id="datamodal1<?= $selled['selled_id']; ?>">
+      <div class="modal fade" id="claimmodal<?= $selled['selled_id']; ?>">
         <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content">
             <div class="modal-header" style="background-color: #FFBD59;">
@@ -256,6 +257,7 @@ $total_selled_row = mysqli_num_rows($query_selled);
         </div>
       </div>
       <!-- End Data Modal -->
+
   <?php } while ($selled = mysqli_fetch_array($query_selled));
   }
   while ($selled = mysqli_fetch_array($query_selled)); ?>
@@ -378,7 +380,7 @@ $total_selled_row = mysqli_num_rows($query_selled);
           document.getElementById("result").innerHTML = this.responseText;
         }
       };
-      xhttp.open("GET", "plugin/search.php?search=" + search + "&sql=" + sql, false);
+      xhttp.open("GET", "plugin/search.php?search=" + search + "&sql=" + sql, true);
       xhttp.send(200);
       document.getElementById("result").innerHTML = XMLHttp.responseText;
     }
