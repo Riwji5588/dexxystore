@@ -8,7 +8,7 @@
   <button class="navbar-toggler ml-1" type="button" data-toggle="collapse" data-target="#collapsingNavbar2">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <div class="navbar-collapse collapse justify-content-center align-items-center  w-100" id="collapsingNavbar2" style="">
+  <div class="navbar-collapse collapse justify-content-center align-items-center  w-100" id="collapsingNavbar2">
     <ul class="navbar-nav justify-content-center" align="center">
       <li><a href="login" class="btn btn-sm gr my-2 my-sm-0 mr-2"><i class="fal fa-sign-in-alt mr-1"></i> เข้าสู่ระบบ</a></li>
       <li><a href="register" class="btn btn-sm or my-2 my-sm-0 mr-2"><i class="fal fa-user-plus mr-1"></i> สมัครสมาชิก</a></li>
