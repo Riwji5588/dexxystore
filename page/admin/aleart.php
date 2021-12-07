@@ -36,7 +36,7 @@
                         <td>
                             <?php
                             if ($claim_data['confirm'] != 0) {
-                                echo $claim_data['id'];
+                                echo $i+1;
                             }
                             ?>
                         </td>
