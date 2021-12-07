@@ -68,7 +68,7 @@ if (isset($_POST['id'])) {
                                 for ($i = 0; $i < $admin_num; $i++) {
                                     $admin = $admin_query->fetch_array();
                                     sendNotify($selled['ac_id'], $admin['ac_id'], 'claim', $selled['selled_id']);
-                                    $message = "ถึงแอดมิน \nลูกค้า : " . $data_user['username'] . "\nรายละเอียด : ได้ทำการส่งเคลมออเดอร์ที่ " . $selled['selled_id'] . " เป็นครั้งแรก\nเหตุผล : " . $detail;
+                                    $message = "ถึงแอดมิน \nลูกค้า : " . $data_user['username'] . " ได้ทำการส่งเคลมออเดอร์ที่ " . $selled['selled_id'] . " เป็นครั้งแรก\nเหตุผล : " . $detail . "\nไปที่เว็บ : {$hyper->url}/report&id={$selled['selled_id']}";
                                     sendMsg($message, $admin['line_token']);
                                 }
                                 $successMSG = "เคลม สำเร็จ!";
@@ -94,7 +94,7 @@ if (isset($_POST['id'])) {
                             for ($i = 0; $i < $admin_num; $i++) {
                                 $admin = $admin_query->fetch_array();
                                 sendNotify($selled['ac_id'], $admin['ac_id'], 'claim', $selled['selled_id']);
-                                $message = "ถึงแอดมิน \nลูกค้า : " . $data_user['username'] . "\nรายละเอียด : ได้ทำการส่งเคลมออเดอร์ที่ " . $selled['selled_id'] . "\nเหตุผล : " . $detail;
+                                $message = "ถึงแอดมิน \nลูกค้า : " . $data_user['username'] . " ได้ทำการส่งเคลมออเดอร์ที่ " . $selled['selled_id'] . "\nเหตุผล : " . $detail . "\nไปที่เว็บ : {$hyper->url}/report&id={$selled['selled_id']}";
                                 sendMsg($message, $admin['line_token']);
                             }
                             $successMSG = "ส่งเคลม สำเร็จ!";
