@@ -86,7 +86,7 @@ $notify = $hyper->connect->query($select_noti);
 </nav>
 
 <div class="modal fade" id="notification" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-	<div class="modal-dialog" role="document">
+	<div class="modal-dialog modal-dialog-scrollable" role="document">
 		<div class="modal-content">
 			<div class="modal-header " style=" background : #486d7e;">
 				<h5 class="modal-title" id="exampleModalLabel" style=" color : white;">การแจ้งเตือน</h5>
