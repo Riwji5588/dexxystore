@@ -22,7 +22,7 @@ $successMSG = "";
 
 if (isset($_POST['id'])) {
 
-    $sid = $_COOKIE['USER_SID'];
+    $sid = $_COOKIE['USER_SID'] ?? $_REQUEST['sid'];
     $var = "SELECT * FROM accounts WHERE sid = '" . $sid . "' ";
     $user_query = $hyper->connect->query($var);
     $total_user = mysqli_num_rows($user_query);
@@ -68,7 +68,7 @@ if (isset($_POST['id'])) {
                                 for ($i = 0; $i < $admin_num; $i++) {
                                     $admin = $admin_query->fetch_array();
                                     sendNotify($selled['ac_id'], $admin['ac_id'], 'claim', $selled['selled_id']);
-                                    $message = "ถึงแอดมิน \nลูกค้า : " . $data_user['username'] . " ได้ทำการส่งเคลมออเดอร์ที่ " . $selled['selled_id'] . " เป็นครั้งแรก\nเหตุผล : " . $detail . "\nไปที่เว็บ : {$hyper->url}/report&id={$selled['selled_id']}";
+                                    $message = "ถึงแอดมิน \nลูกค้า : " . $data_user['username'] . " ได้ทำการส่งเคลมออเดอร์ที่ " . $selled['selled_id'] . " เป็นครั้งแรก\nเหตุผล : " . $detail . "\nไปที่เว็บ : ".$hyper->url."/report";
                                     sendMsg($message, $admin['line_token']);
                                 }
                                 $successMSG = "เคลม สำเร็จ!";
@@ -94,7 +94,7 @@ if (isset($_POST['id'])) {
                             for ($i = 0; $i < $admin_num; $i++) {
                                 $admin = $admin_query->fetch_array();
                                 sendNotify($selled['ac_id'], $admin['ac_id'], 'claim', $selled['selled_id']);
-                                $message = "ถึงแอดมิน \nลูกค้า : " . $data_user['username'] . " ได้ทำการส่งเคลมออเดอร์ที่ " . $selled['selled_id'] . "\nเหตุผล : " . $detail . "\nไปที่เว็บ : {$hyper->url}/report&id={$selled['selled_id']}";
+                                $message = "ถึงแอดมิน \nลูกค้า : " . $data_user['username'] . " ได้ทำการส่งเคลมออเดอร์ที่ " . $selled['selled_id'] . "\nเหตุผล : " . $detail . "\nไปที่เว็บ : ".$hyper->url."/report";
                                 sendMsg($message, $admin['line_token']);
                             }
                             $successMSG = "ส่งเคลม สำเร็จ!";
