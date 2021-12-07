@@ -129,7 +129,7 @@ $total_selled_row = mysqli_num_rows($query_selled);
                     <p style="color: #ff0022"><u>หมดอายุแล้ว</u></p>
                   <?php
                   endif;
-                  ?>               
+                  ?>
                 </div>
               </div>
 
@@ -391,7 +391,7 @@ $total_selled_row = mysqli_num_rows($query_selled);
     console.log(card_id);
     swal({
         title: 'ต้องการต่อวันประกันสินค้านี้หรือไม่',
-        text: "การต่อวันประกันจะ +30 วัน หลังจากวันหมดประกันเดิม\n"+$('#price' + id).text(),
+        text: "การต่อวันประกันจะ +30 วัน หลังจากวันหมดประกันเดิม\n" + $('#price' + id).text(),
         icon: "info",
         buttons: {
           confirm: {
@@ -489,30 +489,30 @@ $total_selled_row = mysqli_num_rows($query_selled);
         swal("กำลังส่งเคลม กรุณารอสักครู่...", {
           button: false,
           closeOnClickOutside: false,
-          timer: 1900,
+          timer: 500,
         });
 
       },
 
       success: function(data) {
-        setTimeout(function() {
-          if (data.code == "200") {
-            swal(data.msg, '\n', "success", {
-              button: false,
-              closeOnClickOutside: false,
-            });
-            setTimeout(function() {
-              window.location.reload();
-            }, 500);
-          } else {
-            swal(data.msg, "\n", "error", {
-              button: {
-                className: 'hyper-btn-notoutline-danger',
-              },
-              closeOnClickOutside: false,
-            });
-          }
-        }, 1000);
+
+        if (data.code == "200") {
+          swal(data.msg, '\n', "success", {
+            button: false,
+            closeOnClickOutside: false,
+          });
+          setTimeout(function() {
+            window.location.reload();
+          }, 1500);
+        } else {
+          swal(data.msg, "\n", "error", {
+            button: {
+              className: 'hyper-btn-notoutline-danger',
+            },
+            closeOnClickOutside: false,
+          });
+        }
+
       }
 
     });
