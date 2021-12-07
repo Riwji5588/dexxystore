@@ -503,7 +503,7 @@ $total_selled_row = mysqli_num_rows($query_selled);
             });
             setTimeout(function() {
               window.location.reload();
-            }, 2000);
+            }, 500);
           } else {
             swal(data.msg, "\n", "error", {
               button: {
@@ -512,7 +512,7 @@ $total_selled_row = mysqli_num_rows($query_selled);
               closeOnClickOutside: false,
             });
           }
-        }, 2000);
+        }, 1000);
       }
 
     });

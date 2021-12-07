@@ -62,13 +62,13 @@ if (isset($_POST['id'])) {
                             $data_game_update = "UPDATE game_data SET selled = 1 WHERE data_id = {$game['data_id']}";
 
                             if ($hyper->connect->query($data_selled_update) && $hyper->connect->query($data_game_update)) {
-                                $select_admin = "SELECT * FROM accounts WHERE role = '779'";
+                                $select_admin = "SELECT * FROM accounts WHERE role=779";
                                 $admin_query = $hyper->connect->query($select_admin);
                                 $admin_num = mysqli_num_rows($admin_query);
                                 for ($i = 0; $i < $admin_num; $i++) {
                                     $admin = $admin_query->fetch_array();
                                     sendNotify($selled['ac_id'], $admin['ac_id'], 'claim', $selled['selled_id']);
-                                    $message = " ถึงแอดมิน \nลูกค้า : " . $data_user['username'] . "\nรายละเอียด : ได้ทำการส่งเคลมออเดอร์ที่ " . $selled['selled_id'] . " เป็นครั้งแรก";
+                                    $message = "ถึงแอดมิน \nลูกค้า : " . $data_user['username'] . "\nรายละเอียด : ได้ทำการส่งเคลมออเดอร์ที่ " . $selled['selled_id'] . " เป็นครั้งแรก\nโดยมีเหตุผมในการเคลมคือ : " . $detail;
                                     sendMsg($message, $admin['line_token']);
                                 }
                                 $successMSG = "เคลม สำเร็จ!";
@@ -88,13 +88,13 @@ if (isset($_POST['id'])) {
                     if ($hyper->connect->query($sendClaim)) {
                         $data_selled_update = "UPDATE data_selled SET claim = 2 WHERE selled_id = {$selled['selled_id']}"; // set claim 2 = send claim and waiting for confirm
                         if ($hyper->connect->query($data_selled_update)) {
-                            $select_admin = "SELECT * FROM accounts WHERE role = '779'";
+                            $select_admin = "SELECT * FROM accounts WHERE role=779";
                             $admin_query = $hyper->connect->query($select_admin);
                             $admin_num = mysqli_num_rows($admin_query);
                             for ($i = 0; $i < $admin_num; $i++) {
                                 $admin = $admin_query->fetch_array();
                                 sendNotify($selled['ac_id'], $admin['ac_id'], 'claim', $selled['selled_id']);
-                                $message = " ถึงแอดมิน \nลูกค้า : " . $data_user['username'] . "\nรายละเอียด : ได้ทำการส่งเคลมออเดอร์ที่ " . $selled['selled_id'];
+                                $message = "ถึงแอดมิน \nลูกค้า : " . $data_user['username'] . "\nรายละเอียด : ได้ทำการส่งเคลมออเดอร์ที่ " . $selled['selled_id'] . "\nโดยมีเหตุผมในการเคลมคือ : " . $detail;
                                 sendMsg($message, $admin['line_token']);
                             }
                             $successMSG = "ส่งเคลม สำเร็จ!";
