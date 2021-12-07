@@ -9,8 +9,7 @@
 
     $uid = $data_user['ac_id'];
   }
-  $domain = 'https://sandbox.dexystore.me';
-  $url = "https://notify-bot.line.me/oauth/authorize?response_type=code&client_id=6nHwLpJf2Dl1dTgwwvBrpN&redirect_uri=" . $domain . "/api/sendnoti&scope=notify&state={$uid}";
+  $url = "https://notify-bot.line.me/oauth/authorize?response_type=code&client_id=6nHwLpJf2Dl1dTgwwvBrpN&redirect_uri=" . $hyper->url . "/api/sendnoti&scope=notify&state={$uid}";
   ?>
  <!-- Profile -->
  <div class="row no-gutters">
