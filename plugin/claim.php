@@ -61,17 +61,38 @@ if (isset($_POST['id'])) {
                             $data_selled_update = "UPDATE data_selled SET claim = 1, data_id = {$game['data_id']} WHERE selled_id = {$selled['selled_id']}";
                             $data_game_update = "UPDATE game_data SET selled = 1 WHERE data_id = {$game['data_id']}";
 
-                            if ($hyper->connect->query($data_selled_update) && $hyper->connect->query($data_game_update)) {
+                            if ($hyper->connect->query($data_selled_update)) {
                                 $select_admin = "SELECT * FROM accounts WHERE role=779";
                                 $admin_query = $hyper->connect->query($select_admin);
                                 $admin_num = mysqli_num_rows($admin_query);
                                 for ($i = 0; $i < $admin_num; $i++) {
                                     $admin = $admin_query->fetch_array();
                                     sendNotify($selled['ac_id'], $admin['ac_id'], 'claim', $selled['selled_id']);
-                                    $message = "ถึงแอดมิน \nลูกค้า : " . $data_user['username'] . " ได้ทำการส่งเคลมออเดอร์ที่ " . $selled['selled_id'] . " เป็นครั้งแรก\nเหตุผล : " . $detail . "\nไปที่เว็บ : ".$hyper->url."/report";
-                                    sendMsg($message, $admin['line_token']);
+                                    $message = "ถึงแอดมิน \nลูกค้า : " . $data_user['username'] . " ได้ทำการส่งเคลมออเดอร์ที่ " . $selled['selled_id'] . " เป็นครั้งแรก\nเหตุผล : " . $detail . "\nไปที่เว็บ : " . $hyper->url . "/report";
+                                    if ($admin['line_token'] != NULL) {
+
+                                        $url = "https://notify-api.line.me/api/notify";
+                                        $data = "message=" . $message;
+                                        $headers = array(
+                                            "Content-Type: application/x-www-form-urlencoded",
+                                            "Authorization: Bearer " . $admin['line_token']
+                                        );
+
+                                        $ch = curl_init();
+                                        curl_setopt_array($ch, array(
+                                            CURLOPT_URL => $url,
+                                            CURLOPT_RETURNTRANSFER => true,
+                                            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                                            CURLOPT_CUSTOMREQUEST => "POST",
+                                            CURLOPT_POSTFIELDS => $data,
+                                            CURLOPT_HTTPHEADER => $headers,
+                                            CURLOPT_SSL_VERIFYPEER => false,
+                                        ));
+                                        curl_exec($ch);
+                                        curl_close($ch);
+                                    }
                                 }
-                                $successMSG = "เคลม สำเร็จ!";
+                                $successMSG = "ส่งเคลม สำเร็จ!";
                             } else {
                                 $errorMSG = "เคลมไม่สำเร็จ... กรุณาแจ้งแอดมิน (2)";
                             }
@@ -94,8 +115,29 @@ if (isset($_POST['id'])) {
                             for ($i = 0; $i < $admin_num; $i++) {
                                 $admin = $admin_query->fetch_array();
                                 sendNotify($selled['ac_id'], $admin['ac_id'], 'claim', $selled['selled_id']);
-                                $message = "ถึงแอดมิน \nลูกค้า : " . $data_user['username'] . " ได้ทำการส่งเคลมออเดอร์ที่ " . $selled['selled_id'] . "\nเหตุผล : " . $detail . "\nไปที่เว็บ : ".$hyper->url."/report";
-                                sendMsg($message, $admin['line_token']);
+                                $message = "ถึงแอดมิน \nลูกค้า : " . $data_user['username'] . " ได้ทำการส่งเคลมออเดอร์ที่ " . $selled['selled_id'] . "\nเหตุผล : " . $detail . "\nไปที่เว็บ : " . $hyper->url . "/report";
+                                if ($admin['line_token'] != NULL) {
+
+                                    $url = "https://notify-api.line.me/api/notify";
+                                    $data = "message=" . $message;
+                                    $headers = array(
+                                        "Content-Type: application/x-www-form-urlencoded",
+                                        "Authorization: Bearer " . $admin['line_token']
+                                    );
+
+                                    $ch = curl_init();
+                                    curl_setopt_array($ch, array(
+                                        CURLOPT_URL => $url,
+                                        CURLOPT_RETURNTRANSFER => true,
+                                        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                                        CURLOPT_CUSTOMREQUEST => "POST",
+                                        CURLOPT_POSTFIELDS => $data,
+                                        CURLOPT_HTTPHEADER => $headers,
+                                        CURLOPT_SSL_VERIFYPEER => false,
+                                    ));
+                                    curl_exec($ch);
+                                    curl_close($ch);
+                                }
                             }
                             $successMSG = "ส่งเคลม สำเร็จ!";
                         } else {

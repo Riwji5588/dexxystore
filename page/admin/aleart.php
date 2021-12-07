@@ -36,7 +36,7 @@
                         <td>
                             <?php
                             if ($claim_data['confirm'] != 0) {
-                                echo $i+1;
+                                echo $i + 1;
                             }
                             ?>
                         </td>
@@ -53,9 +53,9 @@
                             } ?></td>
                         <td>
                             <button class="btn btn-sm hyper-btn-notoutline-success" type="button" data-toggle="modal" data-target="#editusermodal<?= $i ?>"><i class="fal fa-info-circle mr-1"></i> แสดงไอดี</button>
-                        <?php if($claim_data['confirm'] != 0) :?>   
-                            <button onclick="DelLog(this)" value="<?= $claim_data['id']; ?>" class="btn btn-sm hyper-btn-notoutline-danger my-1 my-sm-0" type="button"><i class="fal fa-trash-alt mr-1"></i> ลบ</button>
-                        <?php endif; ?>
+                            <?php if ($claim_data['confirm'] != 0) : ?>
+                                <button onclick="DelLog(this)" value="<?= $claim_data['id']; ?>" class="btn btn-sm hyper-btn-notoutline-danger my-1 my-sm-0" type="button"><i class="fal fa-trash-alt mr-1"></i> ลบ</button>
+                            <?php endif; ?>
                         </td>
                         <!-- aleart Data Modal -->
                         <div class="modal fade" id="editusermodal<?= $i ?>" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-hidden="true">
