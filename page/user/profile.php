@@ -61,10 +61,16 @@
 
            <center><button id="resetpassword" class="btn btn-sm hyper-btn-orange w-100" type="submit"><i class="fal fa-key mr-1"></i> เปลี่ยนรหัสผ่าน</button></center>
          </form>
-         <?php if ($data_user['role'] == '779') : ?>
-         <center><a href="<?= $url ?> " target="_blank" class="btn btn-sm hyper-btn-success w-100 mt-4">เชื่อมต่อกับไลน์</a></center>
-          <?php endif; ?>
-        </div>
+         <?php if ($data_user['role'] == '779') :
+            if ($data_user['line_token'] == null || $data_user['line_token'] == '') { ?>
+             <center><a href="<?= $url ?> " class="btn btn-sm hyper-btn-success w-100 mt-4">เชื่อมต่อกับไลน์</a></center>
+           <?php } else {
+            ?>
+            <center><a href="#" class="btn btn-sm hyper-btn-dark w-100 mt-4 disabled">เชื่อมต่อกับไลน์แล้ว</a></center>
+         <?php
+            }
+          endif; ?>
+       </div>
      </div>
    </div>
 
