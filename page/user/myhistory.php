@@ -16,7 +16,7 @@ $total_selled_row = mysqli_num_rows($query_selled);
   <span style="color: #fff">ค้นหา : &nbsp;</span>
   <input type="text" class="form-control hyper-form-control col-6 col-md-3 " placeholder="ออเดอร์ สินค้า วันที่ซื้อสินค้า สถานะ" onkeyup="search(this, '<?= $sql_select_selled ?>')">
 </div>
-<h5 class="text-center mt-1 mb-4" style="color: white;">หากสนใจต่อเดือนถัดไปสำหรับออเดอร์เดิม โปรดติดต่อไลน์ร้านก่อนวันหมดอายุ </h5>
+<h5 class="text-center mt-1 mb-4" style="color: white;">หากสนใจต่อเดือนถัดไปสำหรับออเดอร์เดิม โปรดติดต่อไลน์ร้านก่อนวันหมดประกัน </h5>
 <!--card-->
 
 
@@ -115,7 +115,7 @@ $total_selled_row = mysqli_num_rows($query_selled);
               </div>
               <div class="row" style="padding: 5px 2px 0px 0px;">
                 <div class="col-4">
-                  <span>วันหมดอายุ <a href="#" onclick="renew(<?= $selled['selled_id']; ?>)">(ต่ออายุ)</a></span>
+                  <span>วันหมดประกัน <a href="#" onclick="renew(<?= $selled['selled_id']; ?>)"><br>ต่อวันประกัน +30 วัน คลิกที่นี่</a></span>
                 </div>
                 <div class="col-8">
                   <?php
@@ -390,12 +390,12 @@ $total_selled_row = mysqli_num_rows($query_selled);
     var card_id = $('#card_id' + id).val();
     console.log(card_id);
     swal({
-        title: 'ต้องการต่ออายุสินค้านี้หรือไม่',
-        text: $('#price' + id).text(),
+        title: 'ต้องการต่อวันประกันสินค้านี้หรือไม่',
+        text: "การต่อวันประกันจะ +30 วัน หลังจากวันหมดประกันเดิม\n"+$('#price' + id).text(),
         icon: "info",
         buttons: {
           confirm: {
-            text: 'ต่ออายุ',
+            text: 'ยืนยัน',
             className: 'hyper-btn-notoutline-success'
           },
           cancel: 'ยกเลิก'
@@ -503,7 +503,7 @@ $total_selled_row = mysqli_num_rows($query_selled);
             });
             setTimeout(function() {
               window.location.reload();
-            }, 2000);
+            }, 500);
           } else {
             swal(data.msg, "\n", "error", {
               button: {
@@ -512,7 +512,7 @@ $total_selled_row = mysqli_num_rows($query_selled);
               closeOnClickOutside: false,
             });
           }
-        }, 2000);
+        }, 1000);
       }
 
     });
