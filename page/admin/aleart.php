@@ -36,7 +36,7 @@
                         <td>
                             <?php
                             if ($claim_data['confirm'] != 0) {
-                                echo $claim_data['id'];
+                                echo $i+1;
                             }
                             ?>
                         </td>
@@ -53,7 +53,9 @@
                             } ?></td>
                         <td>
                             <button class="btn btn-sm hyper-btn-notoutline-success" type="button" data-toggle="modal" data-target="#editusermodal<?= $i ?>"><i class="fal fa-info-circle mr-1"></i> แสดงไอดี</button>
-
+                        <?php if($claim_data['confirm'] != 0) :?>   
+                            <button onclick="DelLog(this)" value="<?= $claim_data['id']; ?>" class="btn btn-sm hyper-btn-notoutline-danger my-1 my-sm-0" type="button"><i class="fal fa-trash-alt mr-1"></i> ลบ</button>
+                        <?php endif; ?>
                         </td>
                         <!-- aleart Data Modal -->
                         <div class="modal fade" id="editusermodal<?= $i ?>" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-hidden="true">
@@ -182,6 +184,66 @@
 </style>
 
 <script>
+    function DelLog(id) {
+        swal({
+                title: 'คุณต้องการลบข้อมูลนี้หรือไม่?',
+                text: "ถ้าลบแล้วจำไม่สามารถกู้กลับมาได้",
+                icon: "warning",
+                buttons: {
+                    confirm: {
+                        text: 'ลบข้อมูล',
+                        className: 'hyper-btn-notoutline-danger'
+                    },
+                    cancel: 'ยกเลิก'
+                },
+                closeOnClickOutside: false,
+            })
+            .then((willDelete) => {
+                if (willDelete) {
+                    $.ajax({
+
+                        type: "POST",
+                        url: "plugin/del_log.php",
+                        dataType: "json",
+                        data: {
+                            id: id.value
+                        },
+
+                        beforeSend: function() {
+                            swal("กำลังลบข้อมูล กรุณารอสักครู่...", {
+                                button: false,
+                                closeOnClickOutside: false,
+                                timer: 1900,
+                            });
+
+                        },
+
+                        success: function(data) {
+                            setTimeout(function() {
+                                if (data.code == "200") {
+                                    swal("ลบข้อมูล สำเร็จ!", "ระบบกำลังพาท่านไป...", "success", {
+                                        button: false,
+                                        closeOnClickOutside: false,
+                                    });
+                                    setTimeout(function() {
+                                        window.location.reload();
+                                    }, 2000);
+                                } else {
+                                    swal(data.msg, "", "error", {
+                                        button: {
+                                            className: 'hyper-btn-notoutline-danger',
+                                        },
+                                        closeOnClickOutside: false,
+                                    });
+                                }
+                            }, 2000);
+                        }
+
+                    });
+                }
+            });
+    }
+
     function submit(id, type) {
         // console.log(id);
         // console.log(type);

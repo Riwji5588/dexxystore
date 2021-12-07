@@ -1,0 +1,16 @@
+<IfModule mod_rewrite.c>
+
+RewriteEngine on
+
+Options -Indexes
+ErrorDocument 403 /plugin/403.php
+ErrorDocument 404 /plugin/403.php
+ErrorDocument 500 /plugin/403.php
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-l
+
+RewriteRule ^(.+)$ index.php?thispage=$1
+
+</IfModule>
