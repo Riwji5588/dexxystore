@@ -101,10 +101,17 @@ $notify = $hyper->connect->query($select_noti);
 						$msg = base64_decode($row['message']);
 						$order_id = (int) filter_var($msg, FILTER_SANITIZE_NUMBER_INT);
 
-						$datetime = $row['datetime'];
-						$datetime7 = date_add(date_create($datetime), date_interval_create_from_date_string('7 days'));
-						$date_diff = date_diff(date_create($datetime), $datetime7)->format("%a");
-						$datetime7 = $datetime7->format("%a");
+						$datetime = $row['datetime'] . ' + 7 day';
+						$date = date('Y-m-d H:i:s', strtotime("+ 0 day"));
+						if ((strtotime($datetime) - strtotime($date)) > 0) {
+							$active = date('Y-m-d H:i:s', strtotime($datetime));
+							$day_diff = date_diff(date_create($date), date_create($active));
+							$day = (int)$day_diff->format("%a");
+						} else {
+							$sql = "DELETE FROM notify_log WHERE id={$row['id']}";
+							$query = $hyper->connect->query($sql);
+							$day = (strtotime($datetime) - strtotime($date));
+						}
 
 						if ($row['isadmin']) {
 					?>
@@ -117,15 +124,19 @@ $notify = $hyper->connect->query($select_noti);
 										<?= $msg ?>
 									</div>
 									<div class="col-4 col-md-3 mb-2" style="margin-top: 4px;">
-										<a href="report&id=<?= $order_id ?>" class="btn btn-sm btn-warning " style=" color :black ; ">
+										<a href="report&id=<?= $order_id ?>" class="btn btn-sm btn-warning " style="color: black;font-size: 13px;">
 											รายละเอียด
 										</a>
 									</div>
-									<!-- <div class="col-12 mt-5" align="right" style="position: absolute;">
+									<div class="col-12 mt-5" align="right" style="position: absolute;">
 										<small class="text-muted">
-											เหลือเวลาอีก <?= $date_diff ?> วัน
+											<?php if ($day > 0) : ?>
+												เหลือเวลาอีก <?= $day ?> วัน
+											<?php else : ?>
+												หมดเวลา
+											<?php endif; ?>
 										</small>
-									</div> -->
+									</div>
 								</div>
 							</div>
 							<?php
@@ -141,15 +152,19 @@ $notify = $hyper->connect->query($select_noti);
 											<?= $msg ?>
 										</div>
 										<div class="col-4 col-md-3 mb-2" style="margin-top: 4px;">
-											<a href="history&id=<?= $order_id ?>" class="btn btn-sm btn-warning " style=" color :black ; ">
+											<a href="history&id=<?= $order_id ?>" class="btn btn-sm btn-warning " style="color: black;font-size: 13px;">
 												รายละเอียด
 											</a>
 										</div>
-										<!-- <div class="col-12 mt-5" align="right" style="position: absolute;">
+										<div class="col-12 mt-5" align="right" style="position: absolute;">
 											<small class="text-muted">
-												เหลือเวลาอีก <?= $date_diff ?> วัน
+												<?php if ($day > 0) : ?>
+													เหลือเวลาอีก <?= $day ?> วัน
+												<?php else : ?>
+													หมดเวลา
+												<?php endif; ?>
 											</small>
-										</div> -->
+										</div>
 									</div>
 								</div>
 							<?php
@@ -164,15 +179,19 @@ $notify = $hyper->connect->query($select_noti);
 											<?= $msg ?>
 										</div>
 										<div class="col-4 col-md-3 mb-2" style="margin-top: 4px;">
-											<a href="history&id=<?= $order_id ?>" class="btn btn-sm btn-warning " style=" color :black ; ">
+											<a href="history&id=<?= $order_id ?>" class="btn btn-sm btn-warning " style="color: black;font-size: 13px;">
 												รายละเอียด
 											</a>
 										</div>
-										<!-- <div class="col-12 mt-5" align="right" style="position: absolute;">
+										<div class="col-12 mt-5" align="right" style="position: absolute;">
 											<small class="text-muted">
-												เหลือเวลาอีก <?= $date_diff ?> วัน
+												<?php if ($day > 0) : ?>
+													เหลือเวลาอีก <?= $day ?> วัน
+												<?php else : ?>
+													หมดเวลา
+												<?php endif; ?>
 											</small>
-										</div> -->
+										</div>
 									</div>
 								</div>
 					<?php
