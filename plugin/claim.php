@@ -61,17 +61,20 @@ if (isset($_POST['id'])) {
                             $data_selled_update = "UPDATE data_selled SET claim = 1, data_id = {$game['data_id']} WHERE selled_id = {$selled['selled_id']}";
                             $data_game_update = "UPDATE game_data SET selled = 1 WHERE data_id = {$game['data_id']}";
 
-                            if ($hyper->connect->query($data_selled_update) && $hyper->connect->query($data_game_update)) {
+                            if ($hyper->connect->query($data_selled_update)) {
                                 $select_admin = "SELECT * FROM accounts WHERE role=779";
                                 $admin_query = $hyper->connect->query($select_admin);
                                 $admin_num = mysqli_num_rows($admin_query);
                                 for ($i = 0; $i < $admin_num; $i++) {
                                     $admin = $admin_query->fetch_array();
                                     sendNotify($selled['ac_id'], $admin['ac_id'], 'claim', $selled['selled_id']);
-                                    $message = "ถึงแอดมิน \nลูกค้า : " . $data_user['username'] . " ได้ทำการส่งเคลมออเดอร์ที่ " . $selled['selled_id'] . " เป็นครั้งแรก\nเหตุผล : " . $detail . "\nไปที่เว็บ : ".$hyper->url."/report";
-                                    sendMsg($message, $admin['line_token']);
+                                    $message = "ถึงแอดมิน \nออเดอร์ที่ : " . $selled['selled_id'] . "\nสถานะ : ส่งเคลม (ครั้งแรก)\nโดย : " . $data_user['username'] . "\nไปที่เว็บ : " . $hyper->url . "/report"."&"."id={$selled['selled_id']}";
+                                    if ($admin['line_token'] != NULL) {
+
+                                        $hyper->line->send($admin['line_token'], $message); // Send msg to admin Line
+                                    }
                                 }
-                                $successMSG = "เคลม สำเร็จ!";
+                                $successMSG = "ส่งเคลม สำเร็จ!";
                             } else {
                                 $errorMSG = "เคลมไม่สำเร็จ... กรุณาแจ้งแอดมิน (2)";
                             }
@@ -94,8 +97,11 @@ if (isset($_POST['id'])) {
                             for ($i = 0; $i < $admin_num; $i++) {
                                 $admin = $admin_query->fetch_array();
                                 sendNotify($selled['ac_id'], $admin['ac_id'], 'claim', $selled['selled_id']);
-                                $message = "ถึงแอดมิน \nลูกค้า : " . $data_user['username'] . " ได้ทำการส่งเคลมออเดอร์ที่ " . $selled['selled_id'] . "\nเหตุผล : " . $detail . "\nไปที่เว็บ : ".$hyper->url."/report";
-                                sendMsg($message, $admin['line_token']);
+                                $message = "ถึงแอดมิน \nออเดอร์ที่ : " . $selled['selled_id'] . "\nสถานะ : ส่งเคลม\nโดย : " . $data_user['username'] . "\nไปที่เว็บ : " . $hyper->url . "/report"."&"."id={$selled['selled_id']}";
+                                if ($admin['line_token'] != NULL) {
+
+                                    $hyper->line->send($admin['line_token'], $message); // Send msg to admin Line
+                                }
                             }
                             $successMSG = "ส่งเคลม สำเร็จ!";
                         } else {
@@ -126,6 +132,17 @@ if (isset($_POST['id'])) {
                     $data_game_update = "UPDATE game_data SET selled = 1 WHERE data_id = {$game['data_id']}";
 
                     if ($hyper->connect->query($confirm) && $hyper->connect->query($data_selled_update) && $hyper->connect->query($data_game_update)) {
+                        $select_admin = "SELECT * FROM accounts WHERE role=779";
+                        $admin_query = $hyper->connect->query($select_admin);
+                        $admin_num = mysqli_num_rows($admin_query);
+                        for ($i = 0; $i < $admin_num; $i++) {
+                            $admin = $admin_query->fetch_array();
+                            $message = "ถึงแอดมิน \nออเดอร์ที่ : " . $selled['selled_id'] . "\nสถานะ : อนุมัติ\nโดย : " . $data_user['username'] . "\nไปที่เว็บ : " . $hyper->url . "/report";
+                            if ($admin['line_token'] != NULL) {
+
+                                $hyper->line->send($admin['line_token'], $message); // Send msg to admin Line
+                            }
+                        }
                         sendNotify((int)$uid, (int)$selled['ac_id'], 'confirm', (int)$selled['selled_id']);
                         $successMSG = "อนุมัติ สำเร็จ!";
                     } else {
@@ -138,6 +155,17 @@ if (isset($_POST['id'])) {
                 $reject = "UPDATE data_claim SET confirm = 2 WHERE claim_id={$selled['selled_id']} AND confirm=0";
                 $reject_selled = "UPDATE data_selled SET claim = 3 WHERE selled_id = {$selled['selled_id']}";
                 if ($hyper->connect->query($reject) && $hyper->connect->query($reject_selled)) {
+                    $select_admin = "SELECT * FROM accounts WHERE role=779";
+                    $admin_query = $hyper->connect->query($select_admin);
+                    $admin_num = mysqli_num_rows($admin_query);
+                    for ($i = 0; $i < $admin_num; $i++) {
+                        $admin = $admin_query->fetch_array();
+                        $message = "ถึงแอดมิน \nออเดอร์ที่ : " . $selled['selled_id'] . "\nสถานะ : ถูกปฏิเสธ\nโดย : " . $data_user['username'] . "\nไปที่เว็บ : " . $hyper->url . "/report";
+                        if ($admin['line_token'] != NULL) {
+
+                            $hyper->line->send($admin['line_token'], $message); // Send msg to admin Line
+                        }
+                    }
                     sendNotify((int)$uid, (int)$selled['ac_id'], 'reject', (int)$selled['selled_id']);
                     $successMSG = "ปฏิเสธ สำเร็จ!";
                 } else {

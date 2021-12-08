@@ -9,6 +9,7 @@ $data_user = $hyper->connect->query($var)->fetch_array();
 $select_noti = "SELECT * FROM notify_log WHERE _to={$data_user['ac_id']} ORDER BY id DESC";
 
 $notify = $hyper->connect->query($select_noti);
+$noti_row = mysqli_num_rows($notify);
 
 ?>
 
@@ -86,7 +87,7 @@ $notify = $hyper->connect->query($select_noti);
 </nav>
 
 <div class="modal fade" id="notification" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-	<div class="modal-dialog" role="document">
+	<div class="modal-dialog modal-dialog-scrollable" role="document">
 		<div class="modal-content">
 			<div class="modal-header " style=" background : #486d7e;">
 				<h5 class="modal-title" id="exampleModalLabel" style=" color : white;">การแจ้งเตือน</h5>
@@ -97,88 +98,111 @@ $notify = $hyper->connect->query($select_noti);
 			<div class="modal-body" style="font-size: 15px">
 				<div>
 					<?php
-					while ($row = mysqli_fetch_assoc($notify)) {
-						$msg = base64_decode($row['message']);
-						$order_id = (int) filter_var($msg, FILTER_SANITIZE_NUMBER_INT);
+					if ($noti_row > 0) :
+						while ($row = mysqli_fetch_assoc($notify)) {
+							$msg = base64_decode($row['message']);
+							$order_id = (int) filter_var($msg, FILTER_SANITIZE_NUMBER_INT);
 
-						$datetime = $row['datetime'];
-						$datetime7 = date_add(date_create($datetime), date_interval_create_from_date_string('7 days'));
-						$date_diff = date_diff(date_create($datetime), $datetime7)->format("%a");
-						$datetime7 = $datetime7->format("%a");
-
-						if ($row['isadmin']) {
-					?>
-							<div class="alert alert-info">
-								<div class="row align-items-center mb-1">
-									<div class="col-1 col-md-1 " style="padding-right: 0;">
-										<i class="fas fa-bell"></i>
-									</div>
-									<div class="col-12 col-md-8 " align="start" style="padding-right: 0;">
-										<?= $msg ?>
-									</div>
-									<div class="col-4 col-md-3 mb-2" style="margin-top: 4px;">
-										<a href="report&id=<?= $order_id ?>" class="btn btn-sm btn-warning " style=" color :black ; ">
-											รายละเอียด
-										</a>
-									</div>
-									<!-- <div class="col-12 mt-5" align="right" style="position: absolute;">
-										<small class="text-muted">
-											เหลือเวลาอีก <?= $date_diff ?> วัน
-										</small>
-									</div> -->
-								</div>
-							</div>
-							<?php
-						} else {
-							if ($row['status'] == 1) {
-							?>
-								<div class="alert alert-success">
-									<div class="row align-items-center mb-1">
-										<div class="col-1 col-md-1 ">
-											<i class="fas fa-bell"></i>
-										</div>
-										<div class="col-12 col-md-8" align="start">
-											<?= $msg ?>
-										</div>
-										<div class="col-4 col-md-3 mb-2" style="margin-top: 4px;">
-											<a href="history&id=<?= $order_id ?>" class="btn btn-sm btn-warning " style=" color :black ; ">
-												รายละเอียด
-											</a>
-										</div>
-										<!-- <div class="col-12 mt-5" align="right" style="position: absolute;">
-											<small class="text-muted">
-												เหลือเวลาอีก <?= $date_diff ?> วัน
-											</small>
-										</div> -->
-									</div>
-								</div>
-							<?php
+							$datetime = $row['datetime'] . ' + 7 day';
+							$date = date('Y-m-d H:i:s', strtotime("+ 0 day"));
+							if ((strtotime($datetime) - strtotime($date)) > 0) {
+								$active = date('Y-m-d H:i:s', strtotime($datetime));
+								$day_diff = date_diff(date_create($date), date_create($active));
+								$day = (int)$day_diff->format("%a");
 							} else {
-							?>
-								<div class="alert alert-danger">
+								$sql = "DELETE FROM notify_log WHERE id={$row['id']}";
+								$query = $hyper->connect->query($sql);
+								$day = (strtotime($datetime) - strtotime($date));
+							}
+
+							if ($row['isadmin']) {
+					?>
+								<div class="alert alert-info">
 									<div class="row align-items-center mb-1">
-										<div class="col-1 col-md-1 ">
+										<div class="col-1 col-md-1 " style="padding-right: 0;">
 											<i class="fas fa-bell"></i>
 										</div>
-										<div class="col-12 col-md-8 " align="start">
+										<div class="col-12 col-md-8 " align="start" style="padding-right: 0;">
 											<?= $msg ?>
 										</div>
 										<div class="col-4 col-md-3 mb-2" style="margin-top: 4px;">
-											<a href="history&id=<?= $order_id ?>" class="btn btn-sm btn-warning " style=" color :black ; ">
+											<a href="report&id=<?= $order_id ?>" class="btn btn-sm btn-warning " style="color: black;font-size: 13px;">
 												รายละเอียด
 											</a>
 										</div>
-										<!-- <div class="col-12 mt-5" align="right" style="position: absolute;">
+										<div class="col-12 mt-5" align="right" style="position: absolute;">
 											<small class="text-muted">
-												เหลือเวลาอีก <?= $date_diff ?> วัน
+												<?php if ($day > 0) : ?>
+													เหลือเวลาอีก <?= $day ?> วัน
+												<?php else : ?>
+													หมดเวลา
+												<?php endif; ?>
 											</small>
-										</div> -->
+										</div>
 									</div>
 								</div>
+								<?php
+							} else {
+								if ($row['status'] == 1) {
+								?>
+									<div class="alert alert-success">
+										<div class="row align-items-center mb-1">
+											<div class="col-1 col-md-1 ">
+												<i class="fas fa-bell"></i>
+											</div>
+											<div class="col-12 col-md-8" align="start">
+												<?= $msg ?>
+											</div>
+											<div class="col-4 col-md-3 mb-2" style="margin-top: 4px;">
+												<a href="history&id=<?= $order_id ?>" class="btn btn-sm btn-warning " style="color: black;font-size: 13px;">
+													รายละเอียด
+												</a>
+											</div>
+											<div class="col-12 mt-5" align="right" style="position: absolute;">
+												<small class="text-muted">
+													<?php if ($day > 0) : ?>
+														เหลือเวลาอีก <?= $day ?> วัน
+													<?php else : ?>
+														หมดเวลา
+													<?php endif; ?>
+												</small>
+											</div>
+										</div>
+									</div>
+								<?php
+								} else {
+								?>
+									<div class="alert alert-danger">
+										<div class="row align-items-center mb-1">
+											<div class="col-1 col-md-1 ">
+												<i class="fas fa-bell"></i>
+											</div>
+											<div class="col-12 col-md-8 " align="start">
+												<?= $msg ?>
+											</div>
+											<div class="col-4 col-md-3 mb-2" style="margin-top: 4px;">
+												<a href="history&id=<?= $order_id ?>" class="btn btn-sm btn-warning " style="color: black;font-size: 13px;">
+													รายละเอียด
+												</a>
+											</div>
+											<div class="col-12 mt-5" align="right" style="position: absolute;">
+												<small class="text-muted">
+													<?php if ($day > 0) : ?>
+														เหลือเวลาอีก <?= $day ?> วัน
+													<?php else : ?>
+														หมดเวลา
+													<?php endif; ?>
+												</small>
+											</div>
+										</div>
+									</div>
 					<?php
+								}
 							}
 						}
-					}
+					else :
+						echo "ไม่มีการแจ้งเตือน";
+					endif;
 					?>
 				</div>
 			</div>
