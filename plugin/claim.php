@@ -71,25 +71,7 @@ if (isset($_POST['id'])) {
                                     $message = "ถึงแอดมิน \nลูกค้า : " . $data_user['username'] . " ได้ทำการส่งเคลมออเดอร์ที่ " . $selled['selled_id'] . " เป็นครั้งแรก\nเหตุผล : " . $detail . "\nไปที่เว็บ : " . $hyper->url . "/report";
                                     if ($admin['line_token'] != NULL) {
 
-                                        $url = "https://notify-api.line.me/api/notify";
-                                        $data = "message=" . $message;
-                                        $headers = array(
-                                            "Content-Type: application/x-www-form-urlencoded",
-                                            "Authorization: Bearer " . $admin['line_token']
-                                        );
-
-                                        $ch = curl_init();
-                                        curl_setopt_array($ch, array(
-                                            CURLOPT_URL => $url,
-                                            CURLOPT_RETURNTRANSFER => true,
-                                            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                                            CURLOPT_CUSTOMREQUEST => "POST",
-                                            CURLOPT_POSTFIELDS => $data,
-                                            CURLOPT_HTTPHEADER => $headers,
-                                            CURLOPT_SSL_VERIFYPEER => false,
-                                        ));
-                                        curl_exec($ch);
-                                        curl_close($ch);
+                                        $hyper->line->send($admin['line_token'], $message); // Send msg to admin Line
                                     }
                                 }
                                 $successMSG = "ส่งเคลม สำเร็จ!";
@@ -118,25 +100,7 @@ if (isset($_POST['id'])) {
                                 $message = "ถึงแอดมิน \nลูกค้า : " . $data_user['username'] . " ได้ทำการส่งเคลมออเดอร์ที่ " . $selled['selled_id'] . "\nเหตุผล : " . $detail . "\nไปที่เว็บ : " . $hyper->url . "/report";
                                 if ($admin['line_token'] != NULL) {
 
-                                    $url = "https://notify-api.line.me/api/notify";
-                                    $data = "message=" . $message;
-                                    $headers = array(
-                                        "Content-Type: application/x-www-form-urlencoded",
-                                        "Authorization: Bearer " . $admin['line_token']
-                                    );
-
-                                    $ch = curl_init();
-                                    curl_setopt_array($ch, array(
-                                        CURLOPT_URL => $url,
-                                        CURLOPT_RETURNTRANSFER => true,
-                                        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                                        CURLOPT_CUSTOMREQUEST => "POST",
-                                        CURLOPT_POSTFIELDS => $data,
-                                        CURLOPT_HTTPHEADER => $headers,
-                                        CURLOPT_SSL_VERIFYPEER => false,
-                                    ));
-                                    curl_exec($ch);
-                                    curl_close($ch);
+                                    $hyper->line->send($admin['line_token'], $message); // Send msg to admin Line
                                 }
                             }
                             $successMSG = "ส่งเคลม สำเร็จ!";
