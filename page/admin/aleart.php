@@ -261,30 +261,28 @@
                 swal("กำลังดำเนินการ กรุณารอสักครู่...", {
                     button: false,
                     closeOnClickOutside: false,
-                    timer: 1900,
+                    timer: 500,
                 });
 
             },
 
             success: function(data) {
-                setTimeout(function() {
-                    if (data.code == "200") {
-                        swal(data.msg, '\n', "success", {
-                            button: false,
-                            closeOnClickOutside: false,
-                        });
-                        setTimeout(function() {
-                            window.location.reload();
-                        }, 2000);
-                    } else {
-                        swal(data.msg, "\n", "error", {
-                            button: {
-                                className: 'hyper-btn-notoutline-danger',
-                            },
-                            closeOnClickOutside: false,
-                        });
-                    }
-                }, 2000);
+                if (data.code == "200") {
+                    swal(data.msg, '\n', "success", {
+                        button: false,
+                        closeOnClickOutside: false,
+                    });
+                    setTimeout(function() {
+                        window.location.reload();
+                    }, 1500);
+                } else {
+                    swal(data.msg, "\n", "error", {
+                        button: {
+                            className: 'hyper-btn-notoutline-danger',
+                        },
+                        closeOnClickOutside: false,
+                    });
+                }
             }
 
         });
