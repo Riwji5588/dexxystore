@@ -68,7 +68,7 @@ if (isset($_POST['id'])) {
                                 for ($i = 0; $i < $admin_num; $i++) {
                                     $admin = $admin_query->fetch_array();
                                     sendNotify($selled['ac_id'], $admin['ac_id'], 'claim', $selled['selled_id']);
-                                    $message = "ถึงแอดมิน \nออเดอร์ที่ : " . $selled['selled_id'] . "\nสถานะ : ส่งเคลม (ครั้งแรก)\nโดย : " . $data_user['username'] . "\nไปที่เว็บ : " . $hyper->url . "/report?id={$selled['selled_id']}";
+                                    $message = "ถึงแอดมิน \nออเดอร์ที่ : " . $selled['selled_id'] . "\nสถานะ : ส่งเคลม (ครั้งแรก)\nโดย : " . $data_user['username'] . "\nไปที่เว็บ : " . $hyper->url . "/report"."&"."id={$selled['selled_id']}";
                                     if ($admin['line_token'] != NULL) {
 
                                         $hyper->line->send($admin['line_token'], $message); // Send msg to admin Line
@@ -97,7 +97,7 @@ if (isset($_POST['id'])) {
                             for ($i = 0; $i < $admin_num; $i++) {
                                 $admin = $admin_query->fetch_array();
                                 sendNotify($selled['ac_id'], $admin['ac_id'], 'claim', $selled['selled_id']);
-                                $message = "ถึงแอดมิน \nออเดอร์ที่ : " . $selled['selled_id'] . "\nสถานะ : ส่งเคลม\nโดย : " . $data_user['username'] . "\nไปที่เว็บ : " . $hyper->url . "/report?id={$selled['selled_id']}";
+                                $message = "ถึงแอดมิน \nออเดอร์ที่ : " . $selled['selled_id'] . "\nสถานะ : ส่งเคลม\nโดย : " . $data_user['username'] . "\nไปที่เว็บ : " . $hyper->url . "/report"."&"."id={$selled['selled_id']}";
                                 if ($admin['line_token'] != NULL) {
 
                                     $hyper->line->send($admin['line_token'], $message); // Send msg to admin Line
