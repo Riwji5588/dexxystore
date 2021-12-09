@@ -420,13 +420,12 @@ $total_selled_row = mysqli_num_rows($query_selled);
               swal("กำลังซื้อสินค้า กรุณารอสักครู่...", {
                 button: false,
                 closeOnClickOutside: false,
-                timer: 1000,
+                timer: 500,
               });
 
             },
 
             success: function(data) {
-              setTimeout(function() {
                 if (data.code == "200") {
                   swal({
                     title: 'ต่ออายุการใช้งาน สำเร็จ!',
@@ -437,7 +436,7 @@ $total_selled_row = mysqli_num_rows($query_selled);
                   });
                   setTimeout(function() {
                     window.location.reload();
-                  }, 2000);
+                  }, 1500);
                 } else {
                   swal(data.msg, "", "error", {
                     button: {
@@ -446,7 +445,6 @@ $total_selled_row = mysqli_num_rows($query_selled);
                     closeOnClickOutside: false,
                   });
                 }
-              }, 1500);
             }
 
           });

@@ -6,5 +6,3 @@ unset($_COOKIE['USER_SID']);
 	echo "<script>";
 	echo 'window.location = "'.$url.'";';
 	echo "</script>";
-
-?>

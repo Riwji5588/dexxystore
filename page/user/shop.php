@@ -117,7 +117,7 @@ if ($total_game_row <= 0) {
                       </ol>
                       <div class="carousel-inner align-items-center">
                         <div class="carousel-item active" align="center">
-                          <img src="assets/img/1.png"  class="d-block w-70 carousel" alt="...">
+                          <img src="assets/img/1.png" class="d-block w-70 carousel" alt="...">
                         </div>
                         <div class="carousel-item" align="center">
                           <img src="assets/img/2.png" class="d-block w-70 carousel" alt="...">
@@ -141,10 +141,10 @@ if ($total_game_row <= 0) {
                   </div>
                   </pre>
                   <div class="modal-footer p-2 border-0 row">
-                    
-                      <button onclick="BuyItem(this)" value="<?= $card['card_id'] ?>" class="btn  hyper-btn-buy mb-2 mb-md-0 mr-0 mr-md-2 "><i class="fal fa-shopping-cart mr-1"></i>ซื้อสินค้า</button>
-                      <button type="button" class="btn  hyper-btn-notoutline-danger  mb-2 mb-md-0 mr-0 mr-md-2" data-dismiss="modal"><i class="fad fa-times-circle mr-1"></i>ปิดหน้าต่าง</button>
-                   
+
+                    <button onclick="BuyItem(this)" value="<?= $card['card_id'] ?>" class="btn  hyper-btn-buy mb-2 mb-md-0 mr-0 mr-md-2 "><i class="fal fa-shopping-cart mr-1"></i>ซื้อสินค้า</button>
+                    <button type="button" class="btn  hyper-btn-notoutline-danger  mb-2 mb-md-0 mr-0 mr-md-2" data-dismiss="modal"><i class="fad fa-times-circle mr-1"></i>ปิดหน้าต่าง</button>
+
                   </div>
 
                 </div>
@@ -229,33 +229,31 @@ if ($total_game_row <= 0) {
                 swal("กำลังซื้อสินค้า กรุณารอสักครู่...", {
                   button: false,
                   closeOnClickOutside: false,
-                  timer: 1000,
+                  timer: 500,
                 });
 
               },
 
               success: function(data) {
-                setTimeout(function() {
-                  if (data.code == "200") {
-                    swal({
-                      title: 'ซื้อสินค้า สำเร็จ!',
-                      text: 'ออเดอร์ที่ '+ data.order +' สินค้าของคุณจะไปอยู้ในหน้าประวัติการซื้อ !',
-                      icon: "success",
-                      closeOnClickOutside: false,
-                      button: false,
-                    });
-                    setTimeout(function() {
-                      window.location.reload();
-                    }, 2000);
-                  } else {
-                    swal(data.msg, "\n", "error", {
-                      button: {
-                        className: 'hyper-btn-notoutline-danger',
-                      },
-                      closeOnClickOutside: false,
-                    });
-                  }
-                }, 1500);
+                if (data.code == "200") {
+                  swal({
+                    title: 'ซื้อสินค้า สำเร็จ!',
+                    text: 'ออเดอร์ที่ ' + data.order + ' สินค้าของคุณจะไปอยู้ในหน้าประวัติการซื้อ !',
+                    icon: "success",
+                    closeOnClickOutside: false,
+                    button: false,
+                  });
+                  setTimeout(function() {
+                    window.location.reload();
+                  }, 1500);
+                } else {
+                  swal(data.msg, "\n", "error", {
+                    button: {
+                      className: 'hyper-btn-notoutline-danger',
+                    },
+                    closeOnClickOutside: false,
+                  });
+                }
               }
 
             });
