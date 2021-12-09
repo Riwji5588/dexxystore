@@ -68,7 +68,7 @@ if (isset($_POST['id'])) {
                                 for ($i = 0; $i < $admin_num; $i++) {
                                     $admin = $admin_query->fetch_array();
                                     sendNotify($selled['ac_id'], $admin['ac_id'], 'claim', $selled['selled_id']);
-                                    $message = "ถึงแอดมิน \n";
+                                    $message = "\n‼️ ถึงแอดมิน ‼️ \n";
                                     $message .= "ออเดอร์ที่ : " . $selled['selled_id'] . "\n";
                                     $message .= "สถานะ : ส่งเคลม (ครั้งแรก)\n";
                                     $message .= "โดย : " . $data_user['username'] . "\n";
@@ -102,7 +102,7 @@ if (isset($_POST['id'])) {
                             for ($i = 0; $i < $admin_num; $i++) {
                                 $admin = $admin_query->fetch_array();
                                 sendNotify($selled['ac_id'], $admin['ac_id'], 'claim', $selled['selled_id']);
-                                $message = "ถึงแอดมิน \n";
+                                $message = "\n‼️ ถึงแอดมิน ‼️ \n";
                                 $message .= "ออเดอร์ที่ : " . $selled['selled_id'] . "\n";
                                 $message .= "สถานะ : ส่งเคลม \n";
                                 $message .= "โดย : " . $data_user['username'] . "\n";
@@ -147,7 +147,7 @@ if (isset($_POST['id'])) {
                         $admin_num = mysqli_num_rows($admin_query);
                         for ($i = 0; $i < $admin_num; $i++) {
                             $admin = $admin_query->fetch_array();
-                            $message = "ถึงแอดมิน \n";
+                            $message = "\n‼️ ถึงแอดมิน ‼️ \n";
                             $message .= "ออเดอร์ที่ : " . $selled['selled_id'] . "\n";
                             $message .= "สถานะ : อนุมัติ \n";
                             $message .= "โดย : " . $data_user['username'] . "\n";
@@ -174,7 +174,7 @@ if (isset($_POST['id'])) {
                     $admin_num = mysqli_num_rows($admin_query);
                     for ($i = 0; $i < $admin_num; $i++) {
                         $admin = $admin_query->fetch_array();
-                        $message = "ถึงแอดมิน \n";
+                        $message = "\n‼️ ถึงแอดมิน ‼️ \n";
                         $message .= "ออเดอร์ที่ : " . $selled['selled_id'] . "\n";
                         $message .= "สถานะ : ปฏิเสธ \n";
                         $message .= "โดย : " . $data_user['username'] . "\n";
