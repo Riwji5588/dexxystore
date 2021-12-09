@@ -150,13 +150,12 @@
                     swal("กำลังลบข้อมูล กรุณารอสักครู่...", {
                       button: false,
                       closeOnClickOutside: false,
-                      timer: 1900,
+                      timer: 500,
                     });
 
                   },
 
                   success: function(data) {
-                    setTimeout(function() {
                       if (data.code == "200") {
                         swal("ลบข้อมูล สำเร็จ!", "ระบบกำลังพาท่านไป...", "success", {
                           button: false,
@@ -164,7 +163,7 @@
                         });
                         setTimeout(function() {
                           window.location.reload();
-                        }, 2000);
+                        }, 1500);
                       } else {
                         swal(data.msg, "", "error", {
                           button: {
@@ -173,7 +172,7 @@
                           closeOnClickOutside: false,
                         });
                       }
-                    }, 2000);
+
                   }
 
                 });
@@ -232,13 +231,12 @@
                       swal("กำลังอัพเดทข้อมูล กรุณารอสักครู่...", {
                         button: false,
                         closeOnClickOutside: false,
-                        timer: 1900,
+                        timer: 500,
                       });
 
                     },
 
                     success: function(data) {
-                      setTimeout(function() {
                         if (data.code == "200") {
                           swal("อัพเดทข้อมูล สำเร็จ!", "ระบบกำลังบันทึกข้อมูล...", "success", {
                             button: false,
@@ -246,7 +244,7 @@
                           });
                           setTimeout(function() {
                             window.location.reload();
-                          }, 2000);
+                          }, 1500);
                         } else {
                           swal(data.msg, "", "error", {
                             button: {
@@ -255,7 +253,6 @@
                             closeOnClickOutside: false,
                           });
                         }
-                      }, 2000);
                     }
 
                   });

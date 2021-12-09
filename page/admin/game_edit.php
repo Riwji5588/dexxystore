@@ -182,30 +182,28 @@
               swal("กำลังเพิ่มเกม กรุณารอสักครู่...", {
                 button: false,
                 closeOnClickOutside: false,
-                timer: 1900,
+                timer: 500,
               });
 
             },
 
             success: function(data) {
-              setTimeout(function() {
-                if (data.code == "200") {
-                  swal("เพิ่มเกม สำเร็จ!", "ระบบกำลังบันทึกข้อมูล...", "success", {
-                    button: false,
-                    closeOnClickOutside: false,
-                  });
-                  setTimeout(function() {
-                    window.location.reload();
-                  }, 1000);
-                } else {
-                  swal(data.msg, "", "error", {
-                    button: {
-                      className: 'hyper-btn-notoutline-danger',
-                    },
-                    closeOnClickOutside: false,
-                  });
-                }
-              }, 1000);
+              if (data.code == "200") {
+                swal("เพิ่มเกม สำเร็จ!", "ระบบกำลังบันทึกข้อมูล...", "success", {
+                  button: false,
+                  closeOnClickOutside: false,
+                });
+                setTimeout(function() {
+                  window.location.reload();
+                }, 1500);
+              } else {
+                swal(data.msg, "", "error", {
+                  button: {
+                    className: 'hyper-btn-notoutline-danger',
+                  },
+                  closeOnClickOutside: false,
+                });
+              }
             }
 
           });
@@ -243,30 +241,28 @@
                     swal("กำลังลบข้อมูล กรุณารอสักครู่...", {
                       button: false,
                       closeOnClickOutside: false,
-                      timer: 1900,
+                      timer: 500,
                     });
 
                   },
 
                   success: function(data) {
-                    setTimeout(function() {
-                      if (data.code == "200") {
-                        swal("ลบเกม สำเร็จ!", "ระบบกำลังพาท่านไป...", "success", {
-                          button: false,
-                          closeOnClickOutside: false,
-                        });
-                        setTimeout(function() {
-                          window.location.reload();
-                        }, 1000);
-                      } else {
-                        swal(data.msg, "", "error", {
-                          button: {
-                            className: 'hyper-btn-notoutline-danger',
-                          },
-                          closeOnClickOutside: false,
-                        });
-                      }
-                    }, 1000);
+                    if (data.code == "200") {
+                      swal("ลบเกม สำเร็จ!", "ระบบกำลังพาท่านไป...", "success", {
+                        button: false,
+                        closeOnClickOutside: false,
+                      });
+                      setTimeout(function() {
+                        window.location.reload();
+                      }, 500);
+                    } else {
+                      swal(data.msg, "", "error", {
+                        button: {
+                          className: 'hyper-btn-notoutline-danger',
+                        },
+                        closeOnClickOutside: false,
+                      });
+                    }
                   }
 
                 });
@@ -320,30 +316,28 @@
                       swal("กำลังอัพเดทเกม กรุณารอสักครู่...", {
                         button: false,
                         closeOnClickOutside: false,
-                        timer: 1900,
+                        timer: 500,
                       });
 
                     },
 
                     success: function(data) {
-                      setTimeout(function() {
-                        if (data.code == "200") {
-                          swal("อัพเดทเกม สำเร็จ!", "ระบบกำลังบันทึกข้อมูล...", "success", {
-                            button: false,
-                            closeOnClickOutside: false,
-                          });
-                          setTimeout(function() {
-                            window.location.reload();
-                          }, 1000);
-                        } else {
-                          swal(data.msg, "", "error", {
-                            button: {
-                              className: 'hyper-btn-notoutline-danger',
-                            },
-                            closeOnClickOutside: false,
-                          });
-                        }
-                      }, 1000);
+                      if (data.code == "200") {
+                        swal("อัพเดทเกม สำเร็จ!", "ระบบกำลังบันทึกข้อมูล...", "success", {
+                          button: false,
+                          closeOnClickOutside: false,
+                        });
+                        setTimeout(function() {
+                          window.location.reload();
+                        }, 1000);
+                      } else {
+                        swal(data.msg, "", "error", {
+                          button: {
+                            className: 'hyper-btn-notoutline-danger',
+                          },
+                          closeOnClickOutside: false,
+                        });
+                      }
                     }
 
                   });

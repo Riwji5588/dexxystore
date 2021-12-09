@@ -213,13 +213,12 @@
                             swal("กำลังลบข้อมูล กรุณารอสักครู่...", {
                                 button: false,
                                 closeOnClickOutside: false,
-                                timer: 1900,
+                                timer: 500,
                             });
 
                         },
 
                         success: function(data) {
-                            setTimeout(function() {
                                 if (data.code == "200") {
                                     swal("ลบข้อมูล สำเร็จ!", "ระบบกำลังพาท่านไป...", "success", {
                                         button: false,
@@ -236,7 +235,6 @@
                                         closeOnClickOutside: false,
                                     });
                                 }
-                            }, 2000);
                         }
 
                     });

@@ -240,30 +240,28 @@ if ($total_game_row <= 0) {
           swal("กำลังเพิ่มข้อมูล กรุณารอสักครู่...", {
             button: false,
             closeOnClickOutside: false,
-            timer: 1900,
+            timer: 500,
           });
 
         },
 
         success: function(data) {
-          setTimeout(function() {
-            if (data.code == "200") {
-              swal("เพิ่มข้อมูล สำเร็จ!", "ระบบกำลังบันทึกข้อมูล...", "success", {
-                button: false,
-                closeOnClickOutside: false,
-              });
-              setTimeout(function() {
-                window.location.reload();
-              }, 500);
-            } else {
-              swal(data.msg, "", "error", {
-                button: {
-                  className: 'hyper-btn-notoutline-danger',
-                },
-                closeOnClickOutside: false,
-              });
-            }
-          }, 500);
+          if (data.code == "200") {
+            swal("เพิ่มข้อมูล สำเร็จ!", "ระบบกำลังบันทึกข้อมูล...", "success", {
+              button: false,
+              closeOnClickOutside: false,
+            });
+            setTimeout(function() {
+              window.location.reload();
+            }, 1500);
+          } else {
+            swal(data.msg, "", "error", {
+              button: {
+                className: 'hyper-btn-notoutline-danger',
+              },
+              closeOnClickOutside: false,
+            });
+          }
         }
 
       });
@@ -301,30 +299,28 @@ if ($total_game_row <= 0) {
                 swal("กำลังลบข้อมูล กรุณารอสักครู่...", {
                   button: false,
                   closeOnClickOutside: false,
-                  timer: 1900,
+                  timer: 500,
                 });
 
               },
 
               success: function(data) {
-                setTimeout(function() {
-                  if (data.code == "200") {
-                    swal("ลบข้อมูล สำเร็จ!", "ระบบกำลังพาท่านไป...", "success", {
-                      button: false,
-                      closeOnClickOutside: false,
-                    });
-                    setTimeout(function() {
-                      window.location.reload();
-                    }, 500);
-                  } else {
-                    swal(data.msg, "", "error", {
-                      button: {
-                        className: 'hyper-btn-notoutline-danger',
-                      },
-                      closeOnClickOutside: false,
-                    });
-                  }
-                }, 500);
+                if (data.code == "200") {
+                  swal("ลบข้อมูล สำเร็จ!", "ระบบกำลังพาท่านไป...", "success", {
+                    button: false,
+                    closeOnClickOutside: false,
+                  });
+                  setTimeout(function() {
+                    window.location.reload();
+                  }, 1500);
+                } else {
+                  swal(data.msg, "", "error", {
+                    button: {
+                      className: 'hyper-btn-notoutline-danger',
+                    },
+                    closeOnClickOutside: false,
+                  });
+                }
               }
 
             });
@@ -387,30 +383,28 @@ if ($total_game_row <= 0) {
                   swal("กำลังอัพเดทข้อมูล กรุณารอสักครู่...", {
                     button: false,
                     closeOnClickOutside: false,
-                    timer: 1900,
+                    timer: 500,
                   });
 
                 },
 
                 success: function(data) {
-                  setTimeout(function() {
-                    if (data.code == "200") {
-                      swal("อัพเดทข้อมูล สำเร็จ!", "ระบบกำลังบันทึกข้อมูล...", "success", {
-                        button: false,
-                        closeOnClickOutside: false,
-                      });
-                      setTimeout(function() {
-                        window.location.reload();
-                      }, 500);
-                    } else {
-                      swal(data.msg, "", "error", {
-                        button: {
-                          className: 'hyper-btn-notoutline-danger',
-                        },
-                        closeOnClickOutside: false,
-                      });
-                    }
-                  }, 500);
+                  if (data.code == "200") {
+                    swal("อัพเดทข้อมูล สำเร็จ!", "ระบบกำลังบันทึกข้อมูล...", "success", {
+                      button: false,
+                      closeOnClickOutside: false,
+                    });
+                    setTimeout(function() {
+                      window.location.reload();
+                    }, 1500);
+                  } else {
+                    swal(data.msg, "", "error", {
+                      button: {
+                        className: 'hyper-btn-notoutline-danger',
+                      },
+                      closeOnClickOutside: false,
+                    });
+                  }
                 }
 
               });
