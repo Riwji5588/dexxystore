@@ -61,7 +61,7 @@ if (isset($_POST['id'])) {
                             $data_selled_update = "UPDATE data_selled SET claim = 1, data_id = {$game['data_id']} WHERE selled_id = {$selled['selled_id']}";
                             $data_game_update = "UPDATE game_data SET selled = 1 WHERE data_id = {$game['data_id']}";
 
-                            if ($hyper->connect->query($data_selled_update)) {
+                            if ($hyper->connect->query($data_selled_update) && $hyper->connect->query($data_game_update)) {
                                 $select_admin = "SELECT * FROM accounts WHERE role=779";
                                 $admin_query = $hyper->connect->query($select_admin);
                                 $admin_num = mysqli_num_rows($admin_query);
