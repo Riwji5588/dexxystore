@@ -65,7 +65,7 @@
              <center><a href="<?= $url ?> " class="btn btn-sm hyper-btn-success w-100 mt-4">เชื่อมต่อกับไลน์</a></center>
            <?php } else {
             ?>
-            <center><a href="#" class="btn btn-sm hyper-btn-dark w-100 mt-4 disabled">เชื่อมต่อกับไลน์แล้ว</a></center>
+             <center><a href="#" class="btn btn-sm hyper-btn-dark w-100 mt-4 disabled">เชื่อมต่อกับไลน์แล้ว</a></center>
          <?php
             }
           endif; ?>
@@ -102,13 +102,13 @@
          swal("กำลังบันทึกข้อมูล กรุณารอสักครู่...", {
            button: false,
            closeOnClickOutside: false,
-           timer: 1900,
+           timer: 500,
          });
 
        },
 
        success: function(data) {
-         setTimeout(function() {
+         setTimeout(() => {
            if (data.code == "200") {
              swal("เปลี่ยนรหัสผ่าน สำเร็จ!", "ระบบกำลังพาท่านไป...", "success", {
                button: false,
@@ -116,14 +116,14 @@
              });
              setTimeout(function() {
                window.location.href = "logout";
-             }, 2000);
+             }, 1500);
            } else {
              swal(data.msg, "", "error", {
                button: true,
                closeOnClickOutside: false,
              });
            }
-         }, 2000);
+         }, 600)
        }
 
      });

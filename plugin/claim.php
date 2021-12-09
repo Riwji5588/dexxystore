@@ -68,7 +68,12 @@ if (isset($_POST['id'])) {
                                 for ($i = 0; $i < $admin_num; $i++) {
                                     $admin = $admin_query->fetch_array();
                                     sendNotify($selled['ac_id'], $admin['ac_id'], 'claim', $selled['selled_id']);
-                                    $message = "ถึงแอดมิน \nออเดอร์ที่ : " . $selled['selled_id'] . "\nสถานะ : ส่งเคลม (ครั้งแรก)\nโดย : " . $data_user['username'] . "\nไปที่เว็บ : " . $hyper->url . "/report"."&"."id={$selled['selled_id']}";
+                                    $message = "ถึงแอดมิน \n";
+                                    $message .= "ออเดอร์ที่ : " . $selled['selled_id'] . "\n";
+                                    $message .= "สถานะ : ส่งเคลม (ครั้งแรก)\n";
+                                    $message .= "โดย : " . $data_user['username'] . "\n";
+                                    $message .= "เหตุผล : " . $detail . "\n";
+                                    $message .= "ไปที่เว็บ : " . $hyper->url . "/report" . "&" . "id={$selled['selled_id']}";
                                     if ($admin['line_token'] != NULL) {
 
                                         $hyper->line->send($admin['line_token'], $message); // Send msg to admin Line
@@ -97,7 +102,12 @@ if (isset($_POST['id'])) {
                             for ($i = 0; $i < $admin_num; $i++) {
                                 $admin = $admin_query->fetch_array();
                                 sendNotify($selled['ac_id'], $admin['ac_id'], 'claim', $selled['selled_id']);
-                                $message = "ถึงแอดมิน \nออเดอร์ที่ : " . $selled['selled_id'] . "\nสถานะ : ส่งเคลม\nโดย : " . $data_user['username'] . "\nไปที่เว็บ : " . $hyper->url . "/report"."&"."id={$selled['selled_id']}";
+                                $message = "ถึงแอดมิน \n";
+                                $message .= "ออเดอร์ที่ : " . $selled['selled_id'] . "\n";
+                                $message .= "สถานะ : ส่งเคลม \n";
+                                $message .= "โดย : " . $data_user['username'] . "\n";
+                                $message .= "เหตุผล : " . $detail . "\n";
+                                $message .= "ไปที่เว็บ : " . $hyper->url . "/report" . "&" . "id={$selled['selled_id']}";
                                 if ($admin['line_token'] != NULL) {
 
                                     $hyper->line->send($admin['line_token'], $message); // Send msg to admin Line
@@ -137,7 +147,11 @@ if (isset($_POST['id'])) {
                         $admin_num = mysqli_num_rows($admin_query);
                         for ($i = 0; $i < $admin_num; $i++) {
                             $admin = $admin_query->fetch_array();
-                            $message = "ถึงแอดมิน \nออเดอร์ที่ : " . $selled['selled_id'] . "\nสถานะ : อนุมัติ\nโดย : " . $data_user['username'] . "\nไปที่เว็บ : " . $hyper->url . "/report";
+                            $message = "ถึงแอดมิน \n";
+                            $message .= "ออเดอร์ที่ : " . $selled['selled_id'] . "\n";
+                            $message .= "สถานะ : อนุมัติ \n";
+                            $message .= "โดย : " . $data_user['username'] . "\n";
+                            $message .= "ไปที่เว็บ : " . $hyper->url . "/report" . "&" . "id={$selled['selled_id']}";
                             if ($admin['line_token'] != NULL) {
 
                                 $hyper->line->send($admin['line_token'], $message); // Send msg to admin Line
@@ -160,7 +174,11 @@ if (isset($_POST['id'])) {
                     $admin_num = mysqli_num_rows($admin_query);
                     for ($i = 0; $i < $admin_num; $i++) {
                         $admin = $admin_query->fetch_array();
-                        $message = "ถึงแอดมิน \nออเดอร์ที่ : " . $selled['selled_id'] . "\nสถานะ : ถูกปฏิเสธ\nโดย : " . $data_user['username'] . "\nไปที่เว็บ : " . $hyper->url . "/report";
+                        $message = "ถึงแอดมิน \n";
+                        $message .= "ออเดอร์ที่ : " . $selled['selled_id'] . "\n";
+                        $message .= "สถานะ : ปฏิเสธ \n";
+                        $message .= "โดย : " . $data_user['username'] . "\n";
+                        $message .= "ไปที่เว็บ : " . $hyper->url . "/report" . "&" . "id={$selled['selled_id']}";
                         if ($admin['line_token'] != NULL) {
 
                             $hyper->line->send($admin['line_token'], $message); // Send msg to admin Line

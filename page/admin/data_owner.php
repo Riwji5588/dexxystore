@@ -55,10 +55,10 @@
                   <td><?= $selled_account['username']; ?></td>
                   <td><?= DateThai1($selled['selled_date']); ?></td>
                   <td><?php if ($expire < 1) {
-                      echo "หมดอายุ";
-                  } else {
-                    echo "ยังไม่หมดอายุ";
-                  } ?></td>
+                        echo "หมดอายุ";
+                      } else {
+                        echo "ยังไม่หมดอายุ";
+                      } ?></td>
                   <td>
                     <button class="btn btn-sm hyper-btn-notoutline-success" type="button" data-toggle="modal" data-target="#editownermodal<?= $selled_data['data_id']; ?>"><i class="fal fa-edit mr-1"></i> แก้ไข</button>
                     <button onclick="DelData(this)" value="<?= $selled['selled_id']; ?>" class="btn btn-sm hyper-btn-notoutline-danger my-1 my-sm-0" type="button"><i class="fal fa-trash-alt mr-1"></i> ลบ</button>
@@ -150,13 +150,13 @@
                     swal("กำลังลบข้อมูล กรุณารอสักครู่...", {
                       button: false,
                       closeOnClickOutside: false,
-                      timer: 1900,
+                      timer: 500,
                     });
 
                   },
 
                   success: function(data) {
-                    setTimeout(function() {
+                    setTimeout(() => {
                       if (data.code == "200") {
                         swal("ลบข้อมูล สำเร็จ!", "ระบบกำลังพาท่านไป...", "success", {
                           button: false,
@@ -164,7 +164,7 @@
                         });
                         setTimeout(function() {
                           window.location.reload();
-                        }, 2000);
+                        }, 1500);
                       } else {
                         swal(data.msg, "", "error", {
                           button: {
@@ -173,7 +173,8 @@
                           closeOnClickOutside: false,
                         });
                       }
-                    }, 2000);
+                    }, 600);
+
                   }
 
                 });
@@ -232,13 +233,13 @@
                       swal("กำลังอัพเดทข้อมูล กรุณารอสักครู่...", {
                         button: false,
                         closeOnClickOutside: false,
-                        timer: 1900,
+                        timer: 500,
                       });
 
                     },
 
                     success: function(data) {
-                      setTimeout(function() {
+                      setTimeout(() => {
                         if (data.code == "200") {
                           swal("อัพเดทข้อมูล สำเร็จ!", "ระบบกำลังบันทึกข้อมูล...", "success", {
                             button: false,
@@ -246,7 +247,7 @@
                           });
                           setTimeout(function() {
                             window.location.reload();
-                          }, 2000);
+                          }, 1500);
                         } else {
                           swal(data.msg, "", "error", {
                             button: {
@@ -255,7 +256,7 @@
                             closeOnClickOutside: false,
                           });
                         }
-                      }, 2000);
+                      }, 600);
                     }
 
                   });

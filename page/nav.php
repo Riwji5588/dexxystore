@@ -23,9 +23,10 @@
     color: #FFF;
 
   }
+
   @media (min-width: 771px) {
     #collapsingNavbar2 {
-      margin-right:140px;
+      margin-right: 140px;
     }
   }
 </style>

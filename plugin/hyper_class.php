@@ -126,9 +126,12 @@ class LineMsg
     public function Send($token, $message)
     {
         $url = "https://notify-api.line.me/api/notify";
-        $data = "message=" . $message;
+        $data = array(
+            'message' => $message,
+        );
+        // $data = "message=" . $message;
         $headers = array(
-            "Content-Type: application/x-www-form-urlencoded",
+            "Content-Type: multipart/form-data",
             "Authorization: Bearer " . $token
         );
 
