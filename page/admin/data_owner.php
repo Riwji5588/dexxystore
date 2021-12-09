@@ -55,10 +55,10 @@
                   <td><?= $selled_account['username']; ?></td>
                   <td><?= DateThai1($selled['selled_date']); ?></td>
                   <td><?php if ($expire < 1) {
-                      echo "หมดอายุ";
-                  } else {
-                    echo "ยังไม่หมดอายุ";
-                  } ?></td>
+                        echo "หมดอายุ";
+                      } else {
+                        echo "ยังไม่หมดอายุ";
+                      } ?></td>
                   <td>
                     <button class="btn btn-sm hyper-btn-notoutline-success" type="button" data-toggle="modal" data-target="#editownermodal<?= $selled_data['data_id']; ?>"><i class="fal fa-edit mr-1"></i> แก้ไข</button>
                     <button onclick="DelData(this)" value="<?= $selled['selled_id']; ?>" class="btn btn-sm hyper-btn-notoutline-danger my-1 my-sm-0" type="button"><i class="fal fa-trash-alt mr-1"></i> ลบ</button>
@@ -156,6 +156,7 @@
                   },
 
                   success: function(data) {
+                    setTimeout(() => {
                       if (data.code == "200") {
                         swal("ลบข้อมูล สำเร็จ!", "ระบบกำลังพาท่านไป...", "success", {
                           button: false,
@@ -172,6 +173,7 @@
                           closeOnClickOutside: false,
                         });
                       }
+                    }, 600);
 
                   }
 
@@ -237,6 +239,7 @@
                     },
 
                     success: function(data) {
+                      setTimeout(() => {
                         if (data.code == "200") {
                           swal("อัพเดทข้อมูล สำเร็จ!", "ระบบกำลังบันทึกข้อมูล...", "success", {
                             button: false,
@@ -253,6 +256,7 @@
                             closeOnClickOutside: false,
                           });
                         }
+                      }, 600);
                     }
 
                   });

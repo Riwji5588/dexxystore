@@ -60,22 +60,24 @@
             },
 
             success: function(data) {
-              if (data.code == "200") {
-                swal("เปลี่ยนรหัสผ่าน สำเร็จ!", "ระบบกำลังพาท่านไป...", "success", {
-                  button: false,
-                  closeOnClickOutside: false,
-                });
-                setTimeout(function() {
-                  window.location.href = "logout";
-                }, 1500);
-              } else {
-                swal(data.msg, "", "error", {
-                  button: {
-                    className: 'hyper-btn-notoutline-danger',
-                  },
-                  closeOnClickOutside: false,
-                });
-              }
+              setTimeout(() => {
+                if (data.code == "200") {
+                  swal("เปลี่ยนรหัสผ่าน สำเร็จ!", "ระบบกำลังพาท่านไป...", "success", {
+                    button: false,
+                    closeOnClickOutside: false,
+                  });
+                  setTimeout(function() {
+                    window.location.href = "logout";
+                  }, 1500);
+                } else {
+                  swal(data.msg, "", "error", {
+                    button: {
+                      className: 'hyper-btn-notoutline-danger',
+                    },
+                    closeOnClickOutside: false,
+                  });
+                }
+              }, 600)
             }
 
           });

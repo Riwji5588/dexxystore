@@ -246,22 +246,24 @@ if ($total_game_row <= 0) {
         },
 
         success: function(data) {
-          if (data.code == "200") {
-            swal("เพิ่มข้อมูล สำเร็จ!", "ระบบกำลังบันทึกข้อมูล...", "success", {
-              button: false,
-              closeOnClickOutside: false,
-            });
-            setTimeout(function() {
-              window.location.reload();
-            }, 1500);
-          } else {
-            swal(data.msg, "", "error", {
-              button: {
-                className: 'hyper-btn-notoutline-danger',
-              },
-              closeOnClickOutside: false,
-            });
-          }
+          setTimeout(() => {
+            if (data.code == "200") {
+              swal("เพิ่มข้อมูล สำเร็จ!", "ระบบกำลังบันทึกข้อมูล...", "success", {
+                button: false,
+                closeOnClickOutside: false,
+              });
+              setTimeout(function() {
+                window.location.reload();
+              }, 1500);
+            } else {
+              swal(data.msg, "", "error", {
+                button: {
+                  className: 'hyper-btn-notoutline-danger',
+                },
+                closeOnClickOutside: false,
+              });
+            }
+          }, 600);
         }
 
       });
@@ -305,22 +307,24 @@ if ($total_game_row <= 0) {
               },
 
               success: function(data) {
-                if (data.code == "200") {
-                  swal("ลบข้อมูล สำเร็จ!", "ระบบกำลังพาท่านไป...", "success", {
-                    button: false,
-                    closeOnClickOutside: false,
-                  });
-                  setTimeout(function() {
-                    window.location.reload();
-                  }, 1500);
-                } else {
-                  swal(data.msg, "", "error", {
-                    button: {
-                      className: 'hyper-btn-notoutline-danger',
-                    },
-                    closeOnClickOutside: false,
-                  });
-                }
+                setTimeout(() => {
+                  if (data.code == "200") {
+                    swal("ลบข้อมูล สำเร็จ!", "ระบบกำลังพาท่านไป...", "success", {
+                      button: false,
+                      closeOnClickOutside: false,
+                    });
+                    setTimeout(function() {
+                      window.location.reload();
+                    }, 1500);
+                  } else {
+                    swal(data.msg, "", "error", {
+                      button: {
+                        className: 'hyper-btn-notoutline-danger',
+                      },
+                      closeOnClickOutside: false,
+                    });
+                  }
+                }, 600);
               }
 
             });
@@ -389,22 +393,24 @@ if ($total_game_row <= 0) {
                 },
 
                 success: function(data) {
-                  if (data.code == "200") {
-                    swal("อัพเดทข้อมูล สำเร็จ!", "ระบบกำลังบันทึกข้อมูล...", "success", {
-                      button: false,
-                      closeOnClickOutside: false,
-                    });
-                    setTimeout(function() {
-                      window.location.reload();
-                    }, 1500);
-                  } else {
-                    swal(data.msg, "", "error", {
-                      button: {
-                        className: 'hyper-btn-notoutline-danger',
-                      },
-                      closeOnClickOutside: false,
-                    });
-                  }
+                  setTimeout(() => {
+                    if (data.code == "200") {
+                      swal("อัพเดทข้อมูล สำเร็จ!", "ระบบกำลังบันทึกข้อมูล...", "success", {
+                        button: false,
+                        closeOnClickOutside: false,
+                      });
+                      setTimeout(function() {
+                        window.location.reload();
+                      }, 1500);
+                    } else {
+                      swal(data.msg, "", "error", {
+                        button: {
+                          className: 'hyper-btn-notoutline-danger',
+                        },
+                        closeOnClickOutside: false,
+                      });
+                    }
+                  }, 600);
                 }
 
               });

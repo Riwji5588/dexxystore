@@ -235,25 +235,27 @@ if ($total_game_row <= 0) {
               },
 
               success: function(data) {
-                if (data.code == "200") {
-                  swal({
-                    title: 'ซื้อสินค้า สำเร็จ!',
-                    text: 'ออเดอร์ที่ ' + data.order + ' สินค้าของคุณจะไปอยู้ในหน้าประวัติการซื้อ !',
-                    icon: "success",
-                    closeOnClickOutside: false,
-                    button: false,
-                  });
-                  setTimeout(function() {
-                    window.location.reload();
-                  }, 1500);
-                } else {
-                  swal(data.msg, "\n", "error", {
-                    button: {
-                      className: 'hyper-btn-notoutline-danger',
-                    },
-                    closeOnClickOutside: false,
-                  });
-                }
+                setTimeout(() => {
+                  if (data.code == "200") {
+                    swal({
+                      title: 'ซื้อสินค้า สำเร็จ!',
+                      text: 'ออเดอร์ที่ ' + data.order + ' สินค้าของคุณจะไปอยู้ในหน้าประวัติการซื้อ !',
+                      icon: "success",
+                      closeOnClickOutside: false,
+                      button: false,
+                    });
+                    setTimeout(function() {
+                      window.location.reload();
+                    }, 1500);
+                  } else {
+                    swal(data.msg, "\n", "error", {
+                      button: {
+                        className: 'hyper-btn-notoutline-danger',
+                      },
+                      closeOnClickOutside: false,
+                    });
+                  }
+                }, 600);
               }
 
             });

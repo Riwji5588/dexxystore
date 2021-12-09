@@ -426,6 +426,7 @@ $total_selled_row = mysqli_num_rows($query_selled);
             },
 
             success: function(data) {
+              setTimeout(() => {
                 if (data.code == "200") {
                   swal({
                     title: 'ต่ออายุการใช้งาน สำเร็จ!',
@@ -445,6 +446,7 @@ $total_selled_row = mysqli_num_rows($query_selled);
                     closeOnClickOutside: false,
                   });
                 }
+              }, 600);
             }
 
           });
@@ -493,7 +495,7 @@ $total_selled_row = mysqli_num_rows($query_selled);
       },
 
       success: function(data) {
-
+        
         if (data.code == "200") {
           swal(data.msg, '\n', "success", {
             button: false,

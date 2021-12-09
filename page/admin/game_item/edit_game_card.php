@@ -328,22 +328,24 @@
               },
 
               success: function(data) {
-                if (data.code == "200") {
-                  swal("เพิ่มการ์ดแสดงสินค้า สำเร็จ!", "ระบบกำลังบันทึกข้อมูล...", "success", {
-                    button: false,
-                    closeOnClickOutside: false,
-                  });
-                  setTimeout(function() {
-                    window.location.reload();
-                  }, 1500);
-                } else {
-                  swal(data.msg, "", "error", {
-                    button: {
-                      className: 'hyper-btn-notoutline-danger',
-                    },
-                    closeOnClickOutside: false,
-                  });
-                }
+                setTimeout(() => {
+                  if (data.code == "200") {
+                    swal("เพิ่มการ์ดแสดงสินค้า สำเร็จ!", "ระบบกำลังบันทึกข้อมูล...", "success", {
+                      button: false,
+                      closeOnClickOutside: false,
+                    });
+                    setTimeout(function() {
+                      window.location.reload();
+                    }, 1500);
+                  } else {
+                    swal(data.msg, "", "error", {
+                      button: {
+                        className: 'hyper-btn-notoutline-danger',
+                      },
+                      closeOnClickOutside: false,
+                    });
+                  }
+                }, 600);
               }
 
             });
@@ -408,22 +410,24 @@
                       },
 
                       success: function(data) {
-                        if (data.code == "200") {
-                          swal("อัพเดทการ์ดแสดงสินค้า สำเร็จ!", "ระบบกำลังบันทึกข้อมูล...", "success", {
-                            button: false,
-                            closeOnClickOutside: false,
-                          });
-                          setTimeout(function() {
-                            window.location.reload();
-                          }, 1500);
-                        } else {
-                          swal(data.msg, "", "error", {
-                            button: {
-                              className: 'hyper-btn-notoutline-danger',
-                            },
-                            closeOnClickOutside: false,
-                          });
-                        }
+                        setTimeout(() => {
+                          if (data.code == "200") {
+                            swal("อัพเดทการ์ดแสดงสินค้า สำเร็จ!", "ระบบกำลังบันทึกข้อมูล...", "success", {
+                              button: false,
+                              closeOnClickOutside: false,
+                            });
+                            setTimeout(function() {
+                              window.location.reload();
+                            }, 1500);
+                          } else {
+                            swal(data.msg, "", "error", {
+                              button: {
+                                className: 'hyper-btn-notoutline-danger',
+                              },
+                              closeOnClickOutside: false,
+                            });
+                          }
+                        }, 600);
                       }
 
                     });
@@ -472,22 +476,24 @@
                     },
 
                     success: function(data) {
-                      if (data.code == "200") {
-                        swal("ลบรูปภาพ สำเร็จ!", "ระบบกำลังพาท่านไป...", "success", {
-                          button: false,
-                          closeOnClickOutside: false,
-                        });
-                        setTimeout(function() {
-                          window.location.reload();
-                        }, 2000);
-                      } else {
-                        swal(data.msg, "", "error", {
-                          button: {
-                            className: 'hyper-btn-notoutline-danger',
-                          },
-                          closeOnClickOutside: false,
-                        });
-                      }
+                      setTimeout(() => {
+                        if (data.code == "200") {
+                          swal("ลบรูปภาพ สำเร็จ!", "ระบบกำลังพาท่านไป...", "success", {
+                            button: false,
+                            closeOnClickOutside: false,
+                          });
+                          setTimeout(function() {
+                            window.location.reload();
+                          }, 2000);
+                        } else {
+                          swal(data.msg, "", "error", {
+                            button: {
+                              className: 'hyper-btn-notoutline-danger',
+                            },
+                            closeOnClickOutside: false,
+                          });
+                        }
+                      }, 600);
                     }
 
                   });
@@ -532,22 +538,24 @@
                     },
 
                     success: function(data) {
-                      if (data.code == "200") {
-                        swal("ลบการ์ด สำเร็จ!", "ระบบกำลังพาท่านไป...", "success", {
-                          button: false,
-                          closeOnClickOutside: false,
-                        });
-                        setTimeout(function() {
-                          window.location.reload();
-                        }, 1500);
-                      } else {
-                        swal(data.msg, "", "error", {
-                          button: {
-                            className: 'hyper-btn-notoutline-danger',
-                          },
-                          closeOnClickOutside: false,
-                        });
-                      }
+                      setTimeout(() => {
+                        if (data.code == "200") {
+                          swal("ลบการ์ด สำเร็จ!", "ระบบกำลังพาท่านไป...", "success", {
+                            button: false,
+                            closeOnClickOutside: false,
+                          });
+                          setTimeout(function() {
+                            window.location.reload();
+                          }, 1500);
+                        } else {
+                          swal(data.msg, "", "error", {
+                            button: {
+                              className: 'hyper-btn-notoutline-danger',
+                            },
+                            closeOnClickOutside: false,
+                          });
+                        }
+                      }, 600);
                     }
 
                   });
