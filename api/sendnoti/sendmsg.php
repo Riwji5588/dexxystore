@@ -10,7 +10,11 @@ function sendMSG($message, $hyper)
         if ($result['role'] == 779) :
 
             $url = "https://notify-api.line.me/api/notify";
-            $data = "message=" . $message;
+            // $data = "message=" . $message;
+
+            $data = array(
+                'message' => $message
+            );
             $headers = array(
                 "Content-Type: application/x-www-form-urlencoded",
                 "Authorization: Bearer " . $result['line_token']
