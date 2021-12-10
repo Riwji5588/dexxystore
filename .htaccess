@@ -1,8 +1,6 @@
 <IfModule mod_rewrite.c>
 
 RewriteEngine On
-RewriteCond %{HTTPS} off
-RewriteRule (.*) https://%{SERVER_NAME}/$1 [R,L]
 
 Options -Indexes
 ErrorDocument 403 /plugin/403.php

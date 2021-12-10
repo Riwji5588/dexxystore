@@ -67,7 +67,7 @@ if (isset($_POST['id'])) {
                                 $admin_num = mysqli_num_rows($admin_query);
                                 for ($i = 0; $i < $admin_num; $i++) {
                                     $admin = $admin_query->fetch_array();
-                                    sendNotify($selled['ac_id'], $admin['ac_id'], 'claim', $selled['selled_id']);
+                                    $hyper->notify->sendNotify($selled['ac_id'], $admin['ac_id'], 'claim', $selled['selled_id']);
                                     $message = "\n‼️ ถึงแอดมิน ‼️ \n";
                                     $message .= "ออเดอร์ที่ : " . $selled['selled_id'] . "\n";
                                     $message .= "สถานะ : ส่งเคลม (ครั้งแรก)\n";
@@ -101,7 +101,7 @@ if (isset($_POST['id'])) {
                             $admin_num = mysqli_num_rows($admin_query);
                             for ($i = 0; $i < $admin_num; $i++) {
                                 $admin = $admin_query->fetch_array();
-                                sendNotify($selled['ac_id'], $admin['ac_id'], 'claim', $selled['selled_id']);
+                                $hyper->notify->sendNotify($selled['ac_id'], $admin['ac_id'], 'claim', $selled['selled_id']);
                                 $message = "\n‼️ ถึงแอดมิน ‼️ \n";
                                 $message .= "ออเดอร์ที่ : " . $selled['selled_id'] . "\n";
                                 $message .= "สถานะ : ส่งเคลม \n";
@@ -157,7 +157,7 @@ if (isset($_POST['id'])) {
                                 $hyper->line->send($admin['line_token'], $message); // Send msg to admin Line
                             }
                         }
-                        sendNotify((int)$uid, (int)$selled['ac_id'], 'confirm', (int)$selled['selled_id']);
+                        $hyper->notify->sendNotify((int)$uid, (int)$selled['ac_id'], 'confirm', (int)$selled['selled_id']);
                         $successMSG = "อนุมัติ สำเร็จ!";
                     } else {
                         $errorMSG = "เคลมไม่สำเร็จ... กรุณาติดต่อผู้ดูแลระบบ";
@@ -184,7 +184,7 @@ if (isset($_POST['id'])) {
                             $hyper->line->send($admin['line_token'], $message); // Send msg to admin Line
                         }
                     }
-                    sendNotify((int)$uid, (int)$selled['ac_id'], 'reject', (int)$selled['selled_id']);
+                    $hyper->notify->sendNotify((int)$uid, (int)$selled['ac_id'], 'reject', (int)$selled['selled_id']);
                     $successMSG = "ปฏิเสธ สำเร็จ!";
                 } else {
                     $errorMSG = "เกิดข้อผิดพลาด... กรุณาติดต่อผู้ดูแลระบบ";
