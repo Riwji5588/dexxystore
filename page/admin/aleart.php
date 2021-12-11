@@ -16,12 +16,13 @@
             <?php
             $select_claim = "SELECT * FROM data_claim ORDER BY id";
             $claim_result = $hyper->connect->query($select_claim);
+            $i = 0;
             if (mysqli_num_rows($claim_result) > 0) {
-                for ($i = 0; $i < mysqli_num_rows($claim_result); $i++) {
+                do {
                     $claim_data = $claim_result->fetch_array();
                     $select_data = "SELECT * FROM game_data WHERE data_id={$claim_data['data_id']}";
-                    $select_user = "SELECT username FROM accounts WHERE ac_id={$claim_data['ac_id']} LIMIT 1";
-                    $ac_id = $hyper->connect->query($select_user)->fetch_all()[0][0];
+                    $select_user = "SELECT * FROM accounts WHERE ac_id={$claim_data['ac_id']}";
+                    $username = $hyper->connect->query($select_user)->fetch_array();
 
                     $data_result = $hyper->connect->query($select_data)->fetch_array();
                     $data_result['password'] = base64_decode($data_result['password']);
@@ -37,10 +38,12 @@
                             <?php
                             if ($claim_data['confirm'] != 0) {
                                 echo $i + 1;
+                            } else {
+                                echo "-";
                             }
                             ?>
                         </td>
-                        <td><?= $ac_id ?></td>
+                        <td><?= $username['username'] ?></td>
                         <td><?= DateThai($claim_data['claim_date']) ?></td>
                         <td><?php if (isset($_GET['id']) && $_GET['id'] == $claim_data['claim_id'] && $claim_data['confirm'] == 0) {
                                 echo '<span style="color: #fff;">รอดำเนินการ</span>';
@@ -125,7 +128,8 @@
                         </td>
                     </tr>
             <?php
-                }
+                    $i++;
+                } while ($i < mysqli_num_rows($claim_result));
             } ?>
 
         </tbody>
@@ -219,22 +223,22 @@
                         },
 
                         success: function(data) {
-                                if (data.code == "200") {
-                                    swal("ลบข้อมูล สำเร็จ!", "ระบบกำลังพาท่านไป...", "success", {
-                                        button: false,
-                                        closeOnClickOutside: false,
-                                    });
-                                    setTimeout(function() {
-                                        window.location.reload();
-                                    }, 2000);
-                                } else {
-                                    swal(data.msg, "", "error", {
-                                        button: {
-                                            className: 'hyper-btn-notoutline-danger',
-                                        },
-                                        closeOnClickOutside: false,
-                                    });
-                                }
+                            if (data.code == "200") {
+                                swal("ลบข้อมูล สำเร็จ!", "ระบบกำลังพาท่านไป...", "success", {
+                                    button: false,
+                                    closeOnClickOutside: false,
+                                });
+                                setTimeout(function() {
+                                    window.location.reload();
+                                }, 2000);
+                            } else {
+                                swal(data.msg, "", "error", {
+                                    button: {
+                                        className: 'hyper-btn-notoutline-danger',
+                                    },
+                                    closeOnClickOutside: false,
+                                });
+                            }
                         }
 
                     });
