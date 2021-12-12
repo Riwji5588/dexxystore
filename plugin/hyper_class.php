@@ -170,7 +170,7 @@ class Notify
 
         global $hyper;
         date_default_timezone_set("Asia/Bangkok");
-        $datetime = date("Y-m-d H:i:s");
+        $datetime = date("Y-m-d");
         $admin = 1;
 
         $to_user = "SELECT * FROM accounts WHERE ac_id='$to'";
