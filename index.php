@@ -495,6 +495,35 @@ if (isset($_COOKIE['USER_SID'])) {
     border-radius: 50%;
   }
 
+  .br-icon1 {
+    align-items: center;
+    position: fixed;
+    bottom: 35px;
+    left: 35px;
+    z-index: 100;
+    height: 75px;
+    width: 75px;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -webkit-transform: scale(0.92);
+    transform: scale(0.92);
+    border-radius: 50%;
+    animation: opacity 300ms ease-in-out infinite;
+  }
+
+  .br-icon1 span {
+    /* move to midden */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    font-weight: bold;
+    width: 100%;
+    text-align: center;
+    
+  }
+
   img.carousel {
     min-width: none;
     max-width: 80%;

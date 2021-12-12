@@ -1,9 +1,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <div class="table-responsive mt-3">
+
+    <div id="delAll" class="br-icon1 text-center btn btn-danger" style="display: none;" onclick="delAll()">
+        <span>ลบที่เลือก</span>
+    </div>
+
     <table id="datatable" class="table table-hover text-center w-100">
         <thead class="hyper-bg-dark">
             <tr>
+                <th>เลือก</th>
                 <th scope="col" style="width:120px;">ลำดับการเคลม</th>
                 <th scope="col">ผู้เคลม</th>
                 <th scope="col">วันที่เคลม</th>
@@ -37,6 +43,17 @@
                         <td>
                             <?php
                             if ($claim_data['confirm'] != 0) {
+                            ?>
+                                <input type="checkbox" id="check<?= $claim_data['id'] ?>" name="check<?= $claim_data['id'] ?>" value="<?= $claim_data['id'] ?>" onclick="checkedL(this)">
+                            <?php
+                            } else {
+                                echo "-";
+                            }
+                            ?>
+                        </td>
+                        <td>
+                            <?php
+                            if ($claim_data['confirm'] != 0) {
                                 echo $i + 1;
                             } else {
                                 echo "-";
@@ -57,7 +74,7 @@
                         <td>
                             <button class="btn btn-sm hyper-btn-notoutline-success" type="button" data-toggle="modal" data-target="#editusermodal<?= $i ?>"><i class="fal fa-info-circle mr-1"></i> แสดงไอดี</button>
                             <?php if ($claim_data['confirm'] != 0) : ?>
-                                <button onclick="DelLog(this)" value="<?= $claim_data['id']; ?>" class="btn btn-sm hyper-btn-notoutline-danger my-1 my-sm-0" type="button"><i class="fal fa-trash-alt mr-1"></i> ลบ</button>
+                                <button onclick="DelLog(<?= $claim_data['id']; ?>);" value="<?= $claim_data['id']; ?>" class="btn btn-sm hyper-btn-notoutline-danger my-1 my-sm-0" type="button"><i class="fal fa-trash-alt mr-1"></i> ลบ</button>
                             <?php endif; ?>
                         </td>
                         <!-- aleart Data Modal -->
@@ -135,6 +152,7 @@
         </tbody>
     </table>
 </div>
+<input type="hidden" id="del" name="del" value="">
 <style>
     .table-hover:hover {
         background-color: #ddd;
@@ -188,9 +206,42 @@
 </style>
 
 <script>
-    function DelLog(id) {
+    var total_del = [];
+
+    function checkedL(data) {
+        var value = data.value;
+        var id = data.id
+        var check = $('#' + id).is(':checked');
+        if (check) {
+            total_del.push(value);
+            $('#delAll').show()
+            document.getElementById('delAll').style.animation = "fadeIn 300ms";
+
+        } else {
+            index = total_del.indexOf(value);
+            if (index > -1) {
+                total_del.splice(index, 1);
+            }
+
+            if (total_del.length == 0) {
+                document.getElementById('delAll').style.animation = "fadeOut 1s";
+                $('#delAll').hide();
+            }
+        }
+        // console.log(total_del);
+    }
+
+    function delAll() {
+        document.getElementById('del').value = total_del.join(',');
+        // console.log($('#del').val());
+        let title = total_del.length > 1 ? 'คุณต้องการลบ ' + total_del.length + ' ข้อมูลนี้หรือไม่?' : 'คุณต้องการลบข้อมูลนี้หรือไม่?'
+        DelLog($('#del').val(), title);
+
+    }
+
+    function DelLog(id, title = 'คุณต้องการลบข้อมูลนี้หรือไม่?') {
         swal({
-                title: 'คุณต้องการลบข้อมูลนี้หรือไม่?',
+                title: title,
                 text: "ถ้าลบแล้วจำไม่สามารถกู้กลับมาได้",
                 icon: "warning",
                 buttons: {
@@ -210,7 +261,7 @@
                         url: "plugin/del_log.php",
                         dataType: "json",
                         data: {
-                            id: id.value
+                            id: id
                         },
 
                         beforeSend: function() {
@@ -223,22 +274,24 @@
                         },
 
                         success: function(data) {
-                            if (data.code == "200") {
-                                swal("ลบข้อมูล สำเร็จ!", "ระบบกำลังพาท่านไป...", "success", {
-                                    button: false,
-                                    closeOnClickOutside: false,
-                                });
-                                setTimeout(function() {
-                                    window.location.reload();
-                                }, 2000);
-                            } else {
-                                swal(data.msg, "", "error", {
-                                    button: {
-                                        className: 'hyper-btn-notoutline-danger',
-                                    },
-                                    closeOnClickOutside: false,
-                                });
-                            }
+                            setTimeout(() => {
+                                if (data.code == "200") {
+                                    swal("ลบข้อมูล สำเร็จ!", "ระบบกำลังพาท่านไป...", "success", {
+                                        button: false,
+                                        closeOnClickOutside: false,
+                                    });
+                                    setTimeout(function() {
+                                        window.location.reload();
+                                    }, 2000);
+                                } else {
+                                    swal(data.msg, "", "error", {
+                                        button: {
+                                            className: 'hyper-btn-notoutline-danger',
+                                        },
+                                        closeOnClickOutside: false,
+                                    });
+                                }
+                            }, 600)
                         }
 
                     });
