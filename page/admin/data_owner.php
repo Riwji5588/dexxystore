@@ -88,6 +88,13 @@
                                 <input id="password<?= $selled_data['data_id']; ?>" value="<?= base64_decode($selled_data['password']); ?>" type="text" class="form-control form-control-sm hyper-form-control" placeholder="รหัสผ่าน" required autocomplete="off">
                               </div>
 
+                              <div class="input-group input-group-sm mb-3">
+                                <div class="input-group-prepend">
+                                  <span class="input-group-text hyper-bg-dark border-dark">จอ</span>
+                                </div>
+                                <input id="username<?= $selled_data['data_id']; ?>" value="<?= $selled_data['display']; ?>" type="text" class="form-control form-control-sm hyper-form-control" placeholder="ชื่อผู้ใช้งาน" required autocomplete="off">
+                              </div>
+
                               <div class="input-group input-group-sm">
                                 <div class="input-group-prepend">
                                   <span class="input-group-text hyper-bg-dark border-dark">รายละเอียด</span>

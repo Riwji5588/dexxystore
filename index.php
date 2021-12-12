@@ -25,8 +25,8 @@ if (isset($_SESSION['USER_SID'])) {
   $role = $data_user['role'];
   $sid = $data_user['sid'];
   $ac_id = $data_user['ac_id'];
-
-  setcookie('USER_SID', $sid, time() + 1 * 24 * 60 * 60);
+  $_SESSION['role'] = base64_encode(md5($data_user['role']));
+  setcookie('USER_SID', $sid, time() + 1 * 24 * 60 * 60, "/");
 } else {
   $loged = 0;
 }
@@ -194,7 +194,8 @@ if (isset($_COOKIE['USER_SID'])) {
       color: white;
     }
 
-    a.pu:hover, a.pu.-active {
+    a.pu:hover,
+    a.pu.-active {
       color: #b67bfb;
       text-shadow:
         0 0 7px #b67bfb,
@@ -208,7 +209,8 @@ if (isset($_COOKIE['USER_SID'])) {
       animation: pulsate 1.2s infinite alternate;
     }
 
-    a.gr:hover, a.gr.-active {
+    a.gr:hover,
+    a.gr.-active {
       color: #40ff56;
       text-shadow:
         0 0 7px #40ff56,
@@ -222,7 +224,8 @@ if (isset($_COOKIE['USER_SID'])) {
       animation: pulsate 1.2s infinite alternate;
     }
 
-    a.pk:hover, a.pk.-active {
+    a.pk:hover,
+    a.pk.-active {
       color: pink;
       text-shadow:
         0 0 7px #fc2c84,
@@ -236,7 +239,8 @@ if (isset($_COOKIE['USER_SID'])) {
       animation: pulsate 1.2s infinite alternate;
     }
 
-    a.yl:hover, a.yl.-active {
+    a.yl:hover,
+    a.yl.-active {
       color: #f7ff24;
       text-shadow:
         0 0 7px #f7ff24,
@@ -250,7 +254,8 @@ if (isset($_COOKIE['USER_SID'])) {
       animation: pulsate 1.2s infinite alternate;
     }
 
-    a.or:hover, a.or.-active {
+    a.or:hover,
+    a.or.-active {
       color: #ffaa56;
       text-shadow:
         0 0 7px #ffaa56,
@@ -264,7 +269,8 @@ if (isset($_COOKIE['USER_SID'])) {
       animation: pulsate 1.2s infinite alternate;
     }
 
-    a.bl:hover, a.bl.-active {
+    a.bl:hover,
+    a.bl.-active {
       color: #00c0ff;
       text-shadow:
         0 0 7px #00c0ff,
@@ -278,7 +284,8 @@ if (isset($_COOKIE['USER_SID'])) {
       animation: pulsate 1.2s infinite alternate;
     }
 
-    a.rd:hover, a.rd.-active {
+    a.rd:hover,
+    a.rd.-active {
       color: #ff3434;
       text-shadow:
         0 0 7px#ff3434,
@@ -486,6 +493,35 @@ if (isset($_COOKIE['USER_SID'])) {
     -webkit-transform: scale(0.92);
     transform: scale(0.92);
     border-radius: 50%;
+  }
+
+  .br-icon1 {
+    align-items: center;
+    position: fixed;
+    bottom: 35px;
+    left: 35px;
+    z-index: 100;
+    height: 75px;
+    width: 75px;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -webkit-transform: scale(0.92);
+    transform: scale(0.92);
+    border-radius: 50%;
+    animation: opacity 300ms ease-in-out infinite;
+  }
+
+  .br-icon1 span {
+    /* move to midden */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    font-weight: bold;
+    width: 100%;
+    text-align: center;
+    
   }
 
   img.carousel {

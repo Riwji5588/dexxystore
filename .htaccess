@@ -1,6 +1,6 @@
 <IfModule mod_rewrite.c>
 
-RewriteEngine on
+RewriteEngine On
 
 Options -Indexes
 ErrorDocument 403 /plugin/403.php
