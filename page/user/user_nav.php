@@ -104,7 +104,7 @@ $noti_row = mysqli_num_rows($notify);
 							$msg = base64_decode($row['message']);
 							$order_id = (int) filter_var($msg, FILTER_SANITIZE_NUMBER_INT);
 
-							$datetime = $row['datetime'] . ' + 3 day';
+							$datetime = $row['datetime'] . ' + 2 day';
 							$date = date('Y-m-d H:i:s', strtotime("+ 0 day"));
 							$day_check = strtotime($datetime) - strtotime($date);
 							if ($day_check > 0) {
