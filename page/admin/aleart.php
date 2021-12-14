@@ -92,7 +92,8 @@
                                             <div class="row" style="position: absolute;right: 0px;padding-right: 30px;z-index:5;">
                                                 <div class="btn-group" role="group" aria-label="Basic example">
                                                     <button type="submit" class="btn btn-success btn-sm" onclick="submit(<?= $claim_data['claim_id']; ?>,2)">อนุมัติ</button>
-                                                    <button type="submit" class="btn btn-danger btn-sm" onclick="submit(<?= $claim_data['claim_id']; ?>,3)">ปฏิเสธ</button>
+                                                    <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#reject<?= $claim_data['claim_id']; ?>">ปฏิเสธ</button>
+                                                    <!-- <button type="submit" class="btn btn-danger btn-sm" onclick="reject(<?= $claim_data['claim_id']; ?>,3)">ปฏิเสธ</button> -->
                                                 </div>
                                             </div>
                                         <?php endif; ?>
@@ -144,6 +145,33 @@
 
                         </td>
                     </tr>
+                    <!-- sub modal -->
+                    <div class="modal fade" id="reject<?= $claim_data['claim_id']; ?>" data-backdrop="static">
+                        <div class="modal-dialog modal-dialog-centered modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">ปฏิเสธการเคลม</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="form-group">
+                                                <label for="">สาเหตุที่ปฏิเสธ</label>
+                                                <textarea id="response<?= $claim_data['claim_id']; ?>" class="form-control" id="reject_detail<?= $claim_data['claim_id']; ?>" rows="3" placeholder="กรุณากรอกสาเหตุที่ปฏิเสธ"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-success" onclick="submit(<?= $claim_data['claim_id']; ?>,3, $('#response<?= $claim_data['claim_id']; ?>').val())">ยืนยัน</button>
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal">ปิด</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
             <?php
                     $i++;
                 } while ($i < mysqli_num_rows($claim_result));
@@ -299,9 +327,9 @@
             });
     }
 
-    function submit(id, type) {
+    function submit(id, type, response = '') {
         // console.log(id);
-        // console.log(type);
+        // console.log(response);
         $.ajax({
 
             type: "POST",
@@ -309,7 +337,8 @@
             dataType: "json",
             data: {
                 id: id,
-                type: type
+                type: type,
+                response: response
             },
 
             beforeSend: function() {
