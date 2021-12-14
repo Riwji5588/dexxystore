@@ -6,6 +6,7 @@ $var = "SELECT * FROM accounts WHERE sid = '" . $sid . "' ";
 $user_query = $hyper->connect->query($var);
 $total_user = mysqli_num_rows($user_query);
 $data_user = $hyper->connect->query($var)->fetch_array();
+
 $select_noti = "SELECT * FROM notify_log WHERE _to={$data_user['ac_id']} ORDER BY id DESC";
 
 $notify = $hyper->connect->query($select_noti);
@@ -103,9 +104,10 @@ $noti_row = mysqli_num_rows($notify);
 							$msg = base64_decode($row['message']);
 							$order_id = (int) filter_var($msg, FILTER_SANITIZE_NUMBER_INT);
 
-							$datetime = $row['datetime'] . ' + 7 day';
+							$datetime = $row['datetime'] . ' + 2 day';
 							$date = date('Y-m-d H:i:s', strtotime("+ 0 day"));
-							if ((strtotime($datetime) - strtotime($date)) > 0) {
+							$day_check = strtotime($datetime) - strtotime($date);
+							if ($day_check > 0) {
 								$active = date('Y-m-d H:i:s', strtotime($datetime));
 								$day_diff = date_diff(date_create($date), date_create($active));
 								$day = (int)$day_diff->format("%a");

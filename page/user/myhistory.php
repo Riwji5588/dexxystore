@@ -4,9 +4,7 @@
 
 <?php
 
-$sql_select_selled = "SELECT * FROM data_selled WHERE ac_id = $ac_id";
-$query_selled = $hyper->connect->query($sql_select_selled);
-$total_selled_row = mysqli_num_rows($query_selled);
+$sql_select_selled = "SELECT * FROM data_selled WHERE ac_id = $ac_id ORDER BY selled_id DESC";
 
 
 ?>
@@ -20,9 +18,8 @@ $total_selled_row = mysqli_num_rows($query_selled);
 <!--card-->
 
 
-
 <!-- DATA can be change in plugin/search.php! -->
-<div id="result" class="row justify-content-center"></div> 
+<div id="result" class="row justify-content-center" style="width: 100%;"></div> 
 
 <!-- add img modal -->
 <div class="modal fade" id="addimg" data-backdrop="static">
