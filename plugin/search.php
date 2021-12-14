@@ -67,9 +67,16 @@ if (isset($_GET)) {
     $query_selled = $hyper->connect->query($_GET['sql']);
     $total_selled_row = mysqli_num_rows($query_selled);
 
+
     if ($total_selled_row > 0) {
         $selled = mysqli_fetch_array($query_selled);
         do {
+
+            $sid = $_COOKIE['USER_SID'];
+            $var = "SELECT * FROM accounts WHERE sid = '" . $sid . "' ";
+            $user_query = $hyper->connect->query($var);
+            $total_user = mysqli_num_rows($user_query);
+            $data_user = $hyper->connect->query($var)->fetch_array();
 
             $selled_data_id = $selled['data_id'];
 
@@ -88,6 +95,18 @@ if (isset($_GET)) {
             $str = strtolower("{$selled['selled_id']} {$selled_card['card_title']} - {$selled_card['card_price']} {$buy_date}");
             $expire = strtotime($selled['exp_date']) - strtotime('today midnight');
 
+
+            $select_noti = "SELECT * FROM notify_log WHERE _to={$data_user['ac_id']} ORDER BY id DESC";
+            $notify = $hyper->connect->query($select_noti);
+            $noti_row = mysqli_num_rows($notify);
+            $row = $notify->fetch_all();
+            $msg = base64_decode($row['message']);
+            $order_id = (int) filter_var($msg, FILTER_SANITIZE_NUMBER_INT);
+
+            $datetime = $row['datetime'] . ' + 3 day';
+            $date = date('Y-m-d H:i:s', strtotime("+ 0 day"));
+            $day_check = strtotime($datetime) - strtotime($date);
+
             if (strpos($selled['selled_id'], $word) !== false || strpos($str, $word) !== false || $_GET['search'] === 'ttt') :
 ?>
 
@@ -100,23 +119,47 @@ if (isset($_GET)) {
                                                                                     } else {
                                                                                         echo $selled_card['card_title'] . " - " . $selled_card['card_price'];
                                                                                     } ?></b> </span><br>
-                        <span>วันที่ซื้อสินค้า : <b><?= DateThai1($selled['selled_date']); ?></b> </span>
-                        <p> สถานะ : <?php
-                                    if ($expire < 1) {
-                                        echo '<span class="text-danger">หมดอายุ</span>';
-                                    } else {
-                                        if ($selled['claim'] == 1) {
-                                            echo '<span class="text-success">เคลมสำเร็จ</span>';
-                                        } else if ($selled['claim'] == 2) {
-                                            echo "<span  style='color: #E1B623;'>รอดำเนินการ</span>";
-                                        } else if ($selled['claim'] == 3) {
-                                            echo '<span class="text-danger">ถูกปฏิเสธ</span>';
-                                        } else {
-                                            echo '<span class="text-primary">ยังไม่หมดอายุ</span>';
-                                        }
+                        <span>วันที่ซื้อสินค้า : <b><?= DateThai1($selled['selled_date']); ?></b></span>
+                        <?php
+                        for ($i = 0; $i < $noti_row; $i++) :
+                            $msg = base64_decode($row[$i][3]);
+                            $order_id = (int) filter_var($msg, FILTER_SANITIZE_NUMBER_INT);
+                            // echo $order_id;
+                            if ($order_id == (int)$selled['selled_id']) :
+                                if ($day_check > 0) {
+                        ?>
+                                    <span> สถานะ : <?php
+                                                    if ($selled['claim'] == 1) {
+                                                        echo '<span class="text-success">เคลมสำเร็จ</span>';
+                                                    } else if ($selled['claim'] == 2) {
+                                                        echo "<span  style='color: #E1B623;'>รอดำเนินการ</span>";
+                                                    } else if ($selled['claim'] == 3) {
+                                                        echo '<span class="text-danger">ถูกปฎิเสธ</span>';
+                                                    } else {
+                                                        echo '<span>-</span>';
+                                                    }
+                                                    ?></span>
+                        <?php
+                                    if ($selled['claim'] == 3) {
+                                        ?>
+                                        <p>หมายเหตุ : </p>
+                                        <?php
                                     }
-                                    ?></p>
-                        <div class="row justify-content-center">
+                                    break;
+                                }
+                            endif;
+                        endfor;
+                        ?>
+                        <p class="text-right mt-1"><?php
+                                                    if ($expire < 1) {
+                                                        echo '<b class="text-danger">หมดอายุ</b>';
+                                                    } else if ($expire < 7) {
+                                                        echo '<b class="text-warning">ใกล้หมดอายุ</b>';
+                                                    } else {
+                                                        echo '<b class="text-primary">ยังไม่หมดอายุ</b>';
+                                                    }
+                                                    ?></p>
+                        <div class="row justify-content-center float-center">
                             <button class='btn btn-sm mx-1' style="background-color: #363E64;color:white;" type='button' data-toggle='modal' data-target='#datamodal<?= $selled['selled_id']; ?>'>แสดงไอดี</button>
                             <button class='btn btn-sm mx-1' style="background-color: #FF3131;color:white;" type='button' data-toggle='modal' data-target='#claimmodal<?= $selled['selled_id']; ?>' style='color:black ;'><i class='fas fa-exclamation-triangle'></i> แจ้งปัญหา</button>
                         </div>

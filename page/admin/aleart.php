@@ -20,7 +20,7 @@
         <tbody>
 
             <?php
-            $select_claim = "SELECT * FROM data_claim ORDER BY id";
+            $select_claim = "SELECT * FROM data_claim ORDER BY id DESC LIMIT 20";
             $claim_result = $hyper->connect->query($select_claim);
             $i = 0;
             if (mysqli_num_rows($claim_result) > 0) {
