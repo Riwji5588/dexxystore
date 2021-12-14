@@ -119,7 +119,7 @@ if (isset($_GET)) {
                                                                                     } else {
                                                                                         echo $selled_card['card_title'] . " - " . $selled_card['card_price'];
                                                                                     } ?></b> </span><br>
-                        <span>วันที่ซื้อสินค้า : <b><?= DateThai1($selled['selled_date']); ?></b></span>
+                        <span>วันที่ซื้อสินค้า : <b><?= DateThai1($selled['selled_date']); ?></b></span><br>
                         <?php
                         for ($i = 0; $i < $noti_row; $i++) :
                             $msg = base64_decode($row[$i][3]);
@@ -142,7 +142,7 @@ if (isset($_GET)) {
                                     <?php
                                     if ($selled['claim'] == 3) {
                                     ?>
-                                        <p class="text-danger">หมายเหตุ : <?= $selled['response'] ?></p>
+                                        <br><span class="text-danger">หมายเหตุ : <?= $selled['response'] ?></span>
                         <?php
                                     }
                                     break;
@@ -150,7 +150,7 @@ if (isset($_GET)) {
                             endif;
                         endfor;
                         ?>
-                        <p class="text-right mt-1"><?php
+                        <p class="mt-1"><?php
                                                     if ($expire < 1) {
                                                         echo '<b class="text-danger">หมดอายุ</b>';
                                                     } else if ($expire < 7) {
@@ -206,7 +206,7 @@ if (isset($_GET)) {
                                 </div>
                                 <div class="row" style="padding: 5px 2px 0px 0px;">
                                     <div class="col-4">
-                                        <span>วันหมดอายุ <a href="#" onclick="renew(<?= $selled['selled_id']; ?>)">(ต่ออายุ)</a></span>
+                                        <span>วันหมดอายุ <a href="#" onclick="renew(<?= $selled['selled_id']; ?>)"><br>ต่อวันประกัน +30 วัน คลิกที่นี่</a></span>
                                     </div>
                                     <div class="col-8">
                                         <?php

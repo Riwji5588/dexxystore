@@ -146,7 +146,7 @@ if (isset($_POST['id'])) {
                 if (mysqli_num_rows($row) == 1) {
 
                     $confirm = "UPDATE data_claim SET confirm = 1 WHERE claim_id={$selled['selled_id']} AND confirm=0";
-                    $data_selled_update = "UPDATE data_selled SET claim = 1, data_id = {$game['data_id']}, exp_date = '$claim_date' response='' WHERE selled_id = {$selled['selled_id']} AND claim=2";
+                    $data_selled_update = "UPDATE data_selled SET claim = 1, data_id = {$game['data_id']}, exp_date = '$claim_date' WHERE selled_id = {$selled['selled_id']} AND claim=2";
                     $data_game_update = "UPDATE game_data SET selled = 1 WHERE data_id = {$game['data_id']}";
 
                     if ($hyper->connect->query($confirm) && $hyper->connect->query($data_selled_update) && $hyper->connect->query($data_game_update)) {
@@ -189,6 +189,7 @@ if (isset($_POST['id'])) {
                                 $message = "\n‼️ ถึงแอดมิน ‼️ \n";
                                 $message .= "ออเดอร์ที่ : " . $selled['selled_id'] . "\n";
                                 $message .= "สถานะ : ปฏิเสธ \n";
+                                $message .= "หมายเหตุ : " . $response . "\n";
                                 $message .= "โดย : " . $data_user['username'] . "\n";
                                 $message .= "ไปที่เว็บ : " . $hyper->url . "/report" . "&" . "id={$selled['selled_id']}";
                                 if ($admin['line_token'] != NULL) {
