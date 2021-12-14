@@ -142,7 +142,7 @@ if (isset($_GET)) {
                         <?php
                                     if ($selled['claim'] == 3) {
                                         ?>
-                                        <p>หมายเหตุ : </p>
+                                        <p class="text-danger">หมายเหตุ : <?= $selled['response'] ?></p>
                                         <?php
                                     }
                                     break;
