@@ -412,6 +412,13 @@ if (isset($_COOKIE['USER_SID'])) {
           $page = 'home';
           include('page/welcome.php');
         }
+      } elseif ($page == 'reportfirst') {
+        if ($data_user['role'] == '779') {
+          include('page/admin/aleartfirst.php');
+        } else {
+          $page = 'home';
+          include('page/welcome.php');
+        }
       } else {
         $page = 'home';
         include('page/welcome.php');
@@ -521,7 +528,7 @@ if (isset($_COOKIE['USER_SID'])) {
     font-weight: bold;
     width: 100%;
     text-align: center;
-    
+
   }
 
   img.carousel {

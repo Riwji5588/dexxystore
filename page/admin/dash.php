@@ -22,6 +22,9 @@ $pay_row = $hyper->connect->query($pay)->fetch_array();
 $alert = "SELECT count(id) AS 'totalalert' FROM data_claim WHERE confirm = 0";
 $alert_row = $hyper->connect->query($alert)->fetch_array();
 
+$ftalert = "SELECT count(id) AS 'totalfirstalert' FROM data_claim WHERE confirm = 9";
+$ftalert_row = $hyper->connect->query($ftalert)->fetch_array();
+
 ?>
 
 <!-- Dashboard -->
@@ -96,6 +99,15 @@ $alert_row = $hyper->connect->query($alert)->fetch_array();
                 <h1 class="mt-0 mb-0" style="font-size: 3.5rem;"><i class="fas fa-exclamation-triangle"></i></h1>
                 <h1 class="mt-0 mb-0"><?= $alert_row['totalalert'] ?></h1>
                 <font class="text-muted">รออนุมัติการเคลม</font>
+            </div>
+        </a>
+    </div>
+    <div class="col-6 col-lg-4 p-2">
+        <a href="reportfirst">
+            <div class="card shadow-dark radius-border-6 hyper-bg-white text-center p-3 hyper-card">
+                <h1 class="mt-0 mb-0" style="font-size: 3.5rem;"><i class="fas fa-exclamation-triangle"></i></h1>
+                <h1 class="mt-0 mb-0"><?= $ftalert_row['totalfirstalert'] ?></h1>
+                <font class="text-muted">การเคลมครั้งแรก</font>
             </div>
         </a>
     </div>

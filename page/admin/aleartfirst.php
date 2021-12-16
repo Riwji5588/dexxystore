@@ -20,7 +20,7 @@
         <tbody>
 
             <?php
-            $select_claim = "SELECT * FROM data_claim WHERE confirm!=9 ORDER BY id DESC LIMIT 20";
+            $select_claim = "SELECT * FROM data_claim WHERE confirm = 9 ORDER BY id DESC LIMIT 20 ";
             $claim_result = $hyper->connect->query($select_claim);
             $i = 0;
             if (mysqli_num_rows($claim_result) > 0) {
@@ -66,7 +66,7 @@
                                 echo '<span style="color: #fff;">รอดำเนินการ</span>';
                             } else if ($claim_data['confirm'] == 0) {
                                 echo '<span class="text-warning">รอดำเนินการ</span>';
-                            } else if ($claim_data['confirm'] == 1) {
+                            } else if ($claim_data['confirm'] == 9) {
                                 echo '<span class="text-success">อนุมัติ</span>';
                             } else if ($claim_data['confirm'] == 2) {
                                 echo '<span class="text-danger">ปฏิเสธ</span>';

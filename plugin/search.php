@@ -151,14 +151,14 @@ if (isset($_GET)) {
                         endfor;
                         ?>
                         <p class="mt-1"><?php
-                                                    if ($expire < 1) {
-                                                        echo '<b class="text-danger">หมดอายุ</b>';
-                                                    } else if ($expire < 7) {
-                                                        echo '<b class="text-warning">ใกล้หมดอายุ</b>';
-                                                    } else {
-                                                        echo '<b class="text-primary">ยังไม่หมดอายุ</b>';
-                                                    }
-                                                    ?></p>
+                                        if ($expire < 1) {
+                                            echo '<b class="text-danger">หมดอายุ</b>';
+                                        } else if ($expire < 7) {
+                                            echo '<b class="text-warning">ใกล้หมดอายุ</b>';
+                                        } else {
+                                            echo '<b class="text-primary">ยังไม่หมดอายุ</b>';
+                                        }
+                                        ?></p>
                         <div class="row justify-content-center float-center">
                             <button class='btn btn-sm mx-1' style="background-color: #363E64;color:white;" type='button' data-toggle='modal' data-target='#datamodal<?= $selled['selled_id']; ?>'>แสดงไอดี</button>
                             <button class='btn btn-sm mx-1' style="background-color: #FF3131;color:white;" type='button' data-toggle='modal' data-target='#claimmodal<?= $selled['selled_id']; ?>' style='color:black ;'><i class='fas fa-exclamation-triangle'></i> แจ้งปัญหา</button>
@@ -177,33 +177,35 @@ if (isset($_GET)) {
                                 </button>
                             </div>
                             <div class="modal-body text-left">
-                                <div class="row" style="padding: 5px 2px 0px 2px;">
-                                    <div class="col-4">
-                                        <span>ชื่อผู้ใช้
+                                <?php if ($expire > 0) : ?>
+                                    <div class="row" style="padding: 5px 2px 0px 2px;">
+                                        <div class="col-4">
+                                            <span>ชื่อผู้ใช้
+                                        </div>
+                                        <div class="col-8">
+                                            <input type="text" class="hyper-form-control" id="username<?= $selled['selled_id']; ?>1" value="<?= $selled_data['username']; ?>" readonly style="color: #2E4C6D ; background-color: white;border-radius: 0px;border: 0px">
+                                            <button id="username<?= $selled['selled_id']; ?>" class="btn btn-dark btn-sm" onclick="copy(this)"> คัดลอก </button>
+                                            <!-- 'username<?= $selled['selled_id']; ?>' -->
+                                        </div>
                                     </div>
-                                    <div class="col-8">
-                                        <input type="text" class="hyper-form-control" id="username<?= $selled['selled_id']; ?>1" value="<?= $selled_data['username']; ?>" readonly style="color: #2E4C6D ; background-color: white;border-radius: 0px;border: 0px">
-                                        <button id="username<?= $selled['selled_id']; ?>" class="btn btn-dark btn-sm" onclick="copy(this)"> คัดลอก </button>
-                                        <!-- 'username<?= $selled['selled_id']; ?>' -->
+                                    <div class="row" style="padding: 5px 2px 0px 2px;">
+                                        <div class="col-4">
+                                            <span>รหัสผ่าน</span>
+                                        </div>
+                                        <div class="col-8">
+                                            <input type="text" class="hyper-form-control" id="password<?= $selled['selled_id']; ?>1" value="<?= base64_decode($selled_data['password']); ?>" readonly style="color:#2E4C6D ; background-color: white;border-radius: 0px;border: 0px">
+                                            <button id="password<?= $selled['selled_id']; ?>" class="btn btn-dark btn-sm" onclick="copy(this)"> คัดลอก </button>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="row" style="padding: 5px 2px 0px 2px;">
-                                    <div class="col-4">
-                                        <span>รหัสผ่าน</span>
+                                    <div class="row" style="padding: 5px 2px 0px 2px;">
+                                        <div class="col-4">
+                                            <span>จอ</span>
+                                        </div>
+                                        <div class="col-8">
+                                            <input type="text" class="hyper-form-control" value="<?= $selled_data['display']; ?>" readonly style="color:#2E4C6D ; background-color: white;border-radius: 0px;border: 0px">
+                                        </div>
                                     </div>
-                                    <div class="col-8">
-                                        <input type="text" class="hyper-form-control" id="password<?= $selled['selled_id']; ?>1" value="<?= base64_decode($selled_data['password']); ?>" readonly style="color:#2E4C6D ; background-color: white;border-radius: 0px;border: 0px">
-                                        <button id="password<?= $selled['selled_id']; ?>" class="btn btn-dark btn-sm" onclick="copy(this)"> คัดลอก </button>
-                                    </div>
-                                </div>
-                                <div class="row" style="padding: 5px 2px 0px 2px;">
-                                    <div class="col-4">
-                                        <span>จอ</span>
-                                    </div>
-                                    <div class="col-8">
-                                        <input type="text" class="hyper-form-control" value="<?= $selled_data['display']; ?>" readonly style="color:#2E4C6D ; background-color: white;border-radius: 0px;border: 0px">
-                                    </div>
-                                </div>
+                                <?php endif; ?>
                                 <div class="row" style="padding: 5px 2px 0px 0px;">
                                     <div class="col-4">
                                         <span>วันหมดอายุ <a href="#" onclick="renew(<?= $selled['selled_id']; ?>)"><br>ต่อวันประกัน +30 วัน คลิกที่นี่</a></span>
@@ -223,7 +225,6 @@ if (isset($_GET)) {
                                         ?>
                                     </div>
                                 </div>
-
                                 <span style="color: #ff0022;" align="center"><b>อ่านก่อนเข้าจอ</b> <br></span>
                                 <ol>
                                     <li style="color: #ff0022;">ห้ามเปลี่ยนชื่อจอ รูปจอ</li>
@@ -369,3 +370,7 @@ if (isset($_GET)) {
     </div>
   </div>
 </div> -->
+
+<script>
+    $('data').a
+</script>
