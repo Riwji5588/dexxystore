@@ -142,7 +142,7 @@ if (isset($_GET)) {
                                     <?php
                                     if ($selled['claim'] == 3) {
                                     ?>
-                                        <br><span class="text-danger">หมายเหตุ : <?= $selled['response'] ?></span>
+                                        <br> หมายเหตุ :<span style='color: #ff6b4a;'><br> <?= $selled['response'] ?> </span> <br>
                         <?php
                                     }
                                     break;
@@ -208,7 +208,7 @@ if (isset($_GET)) {
                                 <?php endif; ?>
                                 <div class="row" style="padding: 5px 2px 0px 0px;">
                                     <div class="col-4">
-                                        <span>วันหมดอายุ <a href="#" onclick="renew(<?= $selled['selled_id']; ?>)"><br>ต่อวันประกัน +30 วัน คลิกที่นี่</a></span>
+                                        <span>วันหมดอายุ </span>
                                     </div>
                                     <div class="col-8">
                                         <?php
@@ -223,9 +223,10 @@ if (isset($_GET)) {
                                         <?php
                                         endif;
                                         ?>
+                                        <span><a href="#" onclick="renew(<?= $selled['selled_id']; ?>)" style="color: #1a00db;" ><br>ต่อวันประกัน +30 วัน   คลิกที่นี่!</a></span>
                                     </div>
                                 </div>
-                                <span style="color: #ff0022;" align="center"><b>อ่านก่อนเข้าจอ</b> <br></span>
+                                <span style="color: #ff0022;" align="center"><br><b>อ่านก่อนเข้าจอ</b> <br></span>
                                 <ol>
                                     <li style="color: #ff0022;">ห้ามเปลี่ยนชื่อจอ รูปจอ</li>
                                     <li style="color: #ff0022;">ห้ามล๊อคจอ / ตั้ง Pin จอ </li>
