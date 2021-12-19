@@ -99,7 +99,8 @@ if (isset($_GET)) {
             $select_noti = "SELECT * FROM notify_log WHERE _to={$data_user['ac_id']} ORDER BY id DESC";
             $notify = $hyper->connect->query($select_noti);
             $noti_row = mysqli_num_rows($notify);
-            $row = $notify->fetch_all();
+            $row = $notify->fetch_assoc();
+            // print_r($row);
             $msg = base64_decode($row['message']);
             $order_id = (int) filter_var($msg, FILTER_SANITIZE_NUMBER_INT);
 
@@ -122,7 +123,7 @@ if (isset($_GET)) {
                         <span>วันที่ซื้อสินค้า : <b><?= DateThai1($selled['selled_date']); ?></b></span><br>
                         <?php
                         for ($i = 0; $i < $noti_row; $i++) :
-                            $msg = base64_decode($row[$i][3]);
+                            $msg = base64_decode($row['message']);
                             $order_id = (int) filter_var($msg, FILTER_SANITIZE_NUMBER_INT);
                             // echo $order_id;
                             if ($order_id == (int)$selled['selled_id']) :

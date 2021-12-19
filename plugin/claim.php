@@ -61,7 +61,8 @@ if (isset($_POST['id'])) {
                             date_default_timezone_set("Asia/Bangkok");
                             $claim_date = date("Y-m-d H:i:s");
                             $sendClaim = "INSERT INTO data_claim(claim_id, data_id, ac_id, detail, claim_date, confirm) VALUES ('{$selled['selled_id']}', '{$selled['data_id']}', '{$selled['ac_id']}', '$detail', '$claim_date', 9)";
-                            if ($hyper->connect->query($sendClaim)) {
+                            $sendClaim_first = "INSERT INTO data_claim_first(claim_id, data_id, ac_id, detail, claim_date, confirm) VALUES ('{$selled['selled_id']}', '{$selled['data_id']}', '{$selled['ac_id']}', '$detail', '$claim_date', 9)";
+                            if ($hyper->connect->query($sendClaim) && $hyper->connect->query($sendClaim_first)) {
                                 $data_selled_update = "UPDATE data_selled SET claim = 1, data_id = {$game['data_id']} WHERE selled_id = {$selled['selled_id']}";
                                 $data_game_update = "UPDATE game_data SET selled = 1 WHERE data_id = {$game['data_id']}";
 
