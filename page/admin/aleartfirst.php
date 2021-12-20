@@ -92,8 +92,8 @@
                                             <div class="row" style="position: absolute;right: 0px;padding-right: 30px;z-index:5;">
                                                 <div class="btn-group" role="group" aria-label="Basic example">
 
-                                                    <button type="submit" class="btn btn-success btn-sm" onclick="">เข้าสต๊อก</button>
-                                                    <button type="submit" class="btn btn-danger btn-sm" onclick="">ตรวจแล้ว</button>
+                                                    <button type="submit" class="btn btn-success btn-sm" onclick="submit(<?= $claim_data['claim_id'] ?>, 1)">เข้าสต๊อก</button>
+                                                    <button type="submit" class="btn btn-danger btn-sm" onclick="submit(<?= $claim_data['claim_id'] ?>, 2)">ตรวจแล้ว</button>
                                                     <!-- <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#reject<?= $claim_data['claim_id']; ?>">ตรวจแล้ว</button> -->
                                                 </div>
                                             </div>
@@ -329,18 +329,17 @@
             });
     }
 
-    function submit(id, type, response = '') {
+    function submit(id, type) {
         // console.log(id);
         // console.log(response);
         $.ajax({
 
             type: "POST",
-            url: "plugin/claim.php",
+            url: "plugin/claimcheck.php",
             dataType: "json",
             data: {
                 id: id,
                 type: type,
-                response: response
             },
 
             beforeSend: function() {
