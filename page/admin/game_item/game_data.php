@@ -155,7 +155,12 @@ if ($total_game_row <= 0) {
                             </div>
                             <input id="password<?= $data['data_id']; ?>" type="text" value="<?= base64_decode($data['password']); ?>" class="form-control form-control-sm hyper-form-control" placeholder="รหัสผ่าน" required autocomplete="off">
                           </div>
-
+                          <div class="input-group input-group-sm mb-3">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text hyper-bg-dark border-dark">จอ</span>
+                            </div>
+                            <input type="text" value="<?= $data['display']; ?>" class="form-control form-control-sm hyper-form-control" placeholder="จอ" required autocomplete="off">
+                          </div>
                           <div class="input-group input-group-sm mb-3">
                             <div class="input-group-prepend">
                               <label class="input-group-text hyper-bg-dark border-dark" for="inputGroupSelect01">เลือกการ์ด</label>
