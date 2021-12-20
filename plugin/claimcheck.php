@@ -53,16 +53,16 @@ if (isset($_POST['id'])) {
                     $admin = $admin_query->fetch_array();
                     $message = "\n‼️ ถึงแอดมิน ‼️ \n";
                     $message .= "ออเดอร์ที่ : " . $selled['selled_id'] . "\n";
-                    $message .= "สถานะ : นำกลับไปจำหน่อย \n";
+                    $message .= "สถานะ : นำกลับไปจำหน่าย \n";
                     $message .= "โดย : " . $data_user['username'] . "\n";
                     if ($admin['line_token'] != NULL) {
 
                         $hyper->line->send($admin['line_token'], $message); // Send msg to admin Line
                     }
                 }
-                $successMSG = "นำกลับไปจำหน่อย สำเร็จ!";
+                $successMSG = "นำกลับไปจำหน่าย สำเร็จ!";
             } else {
-                $errorMSG = "นำกลับไปจำหน่อยไม่สำเร็จ... กรุณาติดต่อผู้ดูแลระบบ";
+                $errorMSG = "นำกลับไปจำหน่ายไม่สำเร็จ... กรุณาติดต่อผู้ดูแลระบบ";
             }
         } else { // do nothing
 
