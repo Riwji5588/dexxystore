@@ -289,7 +289,8 @@
                         url: "plugin/del_log.php",
                         dataType: "json",
                         data: {
-                            id: id
+                            id: id,
+                            table: "data_claim"
                         },
 
                         beforeSend: function() {

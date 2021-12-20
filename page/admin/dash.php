@@ -22,7 +22,7 @@ $pay_row = $hyper->connect->query($pay)->fetch_array();
 $alert = "SELECT count(id) AS 'totalalert' FROM data_claim WHERE confirm = 0";
 $alert_row = $hyper->connect->query($alert)->fetch_array();
 
-$ftalert = "SELECT count(id) AS 'totalfirstalert' FROM data_claim WHERE confirm = 9";
+$ftalert = "SELECT count(id) AS 'totalfirstalert' FROM data_claim_first WHERE confirm = 0";
 $ftalert_row = $hyper->connect->query($ftalert)->fetch_array();
 
 ?>

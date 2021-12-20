@@ -99,7 +99,8 @@ if (isset($_GET)) {
             $select_noti = "SELECT * FROM notify_log WHERE _to={$data_user['ac_id']} ORDER BY id DESC";
             $notify = $hyper->connect->query($select_noti);
             $noti_row = mysqli_num_rows($notify);
-            $row = $notify->fetch_all();
+            $row = $notify->fetch_assoc();
+            // print_r($row);
             $msg = base64_decode($row['message']);
             $order_id = (int) filter_var($msg, FILTER_SANITIZE_NUMBER_INT);
 
@@ -122,7 +123,7 @@ if (isset($_GET)) {
                         <span>วันที่ซื้อสินค้า : <b><?= DateThai1($selled['selled_date']); ?></b></span><br>
                         <?php
                         for ($i = 0; $i < $noti_row; $i++) :
-                            $msg = base64_decode($row[$i][3]);
+                            $msg = base64_decode($row['message']);
                             $order_id = (int) filter_var($msg, FILTER_SANITIZE_NUMBER_INT);
                             // echo $order_id;
                             if ($order_id == (int)$selled['selled_id']) :
@@ -142,7 +143,7 @@ if (isset($_GET)) {
                                     <?php
                                     if ($selled['claim'] == 3) {
                                     ?>
-                                        <br><span class="text-danger">หมายเหตุ : <?= $selled['response'] ?></span>
+                                        <br> หมายเหตุ :<span style='color: #ff6b4a;'><br> <?= $selled['response'] ?> </span> <br>
                         <?php
                                     }
                                     break;
@@ -208,7 +209,7 @@ if (isset($_GET)) {
                                 <?php endif; ?>
                                 <div class="row" style="padding: 5px 2px 0px 0px;">
                                     <div class="col-4">
-                                        <span>วันหมดอายุ <a href="#" onclick="renew(<?= $selled['selled_id']; ?>)"><br>ต่อวันประกัน +30 วัน คลิกที่นี่</a></span>
+                                        <span>วันหมดอายุ </span>
                                     </div>
                                     <div class="col-8">
                                         <?php
@@ -223,9 +224,10 @@ if (isset($_GET)) {
                                         <?php
                                         endif;
                                         ?>
+                                        <span><a href="#" onclick="renew(<?= $selled['selled_id']; ?>)" style="color: #1a00db;" ><br>ต่อวันประกัน +30 วัน   คลิกที่นี่!</a></span>
                                     </div>
                                 </div>
-                                <span style="color: #ff0022;" align="center"><b>อ่านก่อนเข้าจอ</b> <br></span>
+                                <span style="color: #ff0022;" align="center"><br><b>อ่านก่อนเข้าจอ</b> <br></span>
                                 <ol>
                                     <li style="color: #ff0022;">ห้ามเปลี่ยนชื่อจอ รูปจอ</li>
                                     <li style="color: #ff0022;">ห้ามล๊อคจอ / ตั้ง Pin จอ </li>

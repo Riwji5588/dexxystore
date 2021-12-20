@@ -20,7 +20,7 @@
         <tbody>
 
             <?php
-            $select_claim = "SELECT * FROM data_claim WHERE confirm = 9 ORDER BY id DESC LIMIT 20 ";
+            $select_claim = "SELECT * FROM data_claim_first ORDER BY id DESC LIMIT 20 ";
             $claim_result = $hyper->connect->query($select_claim);
             $i = 0;
             if (mysqli_num_rows($claim_result) > 0) {
@@ -63,16 +63,16 @@
                         <td><?= $username['username'] ?></td>
                         <td><?= DateThai($claim_data['claim_date']) ?></td>
                         <td><?php if (isset($_GET['id']) && $_GET['id'] == $claim_data['claim_id'] && $claim_data['confirm'] == 0) {
-                                echo '<span style="color: #fff;">รอดำเนินการ</span>';
+                                echo '<span style="color: #fff;">รอตรวจสอบ</span>';
                             } else if ($claim_data['confirm'] == 0) {
-                                echo '<span class="text-warning">รอดำเนินการ</span>';
-                            } else if ($claim_data['confirm'] == 9) {
-                                echo '<span class="text-success">อนุมัติ</span>';
+                                echo '<span class="text-warning">รอตรวจสอบ</span>';
+                            } else if ($claim_data['confirm'] == 1) {
+                                echo '<span class="text-success">กลับเข้าสต๊อก</span>';
                             } else if ($claim_data['confirm'] == 2) {
-                                echo '<span class="text-danger">ปฏิเสธ</span>';
+                                echo '<span class="text-dark">ตรวจสอบแล้ว</span>';
                             } ?></td>
                         <td>
-                            <button class="btn btn-sm hyper-btn-notoutline-success" type="button" data-toggle="modal" data-target="#editusermodal<?= $i ?>"><i class="fal fa-info-circle mr-1"></i> แสดงไอดี</button>
+                            <button class="btn btn-sm hyper-btn-notoutline-success" type="button" data-toggle="modal" data-target="#editusermodal<?= $i ?>"><i class="fal fa-info-circle mr-1"></i> ตรวจสอบ</button>
                             <?php if ($claim_data['confirm'] != 0) : ?>
                                 <button onclick="DelLog(<?= $claim_data['id']; ?>);" value="<?= $claim_data['id']; ?>" class="btn btn-sm hyper-btn-notoutline-danger my-1 my-sm-0" type="button"><i class="fal fa-trash-alt mr-1"></i> ลบ</button>
                             <?php endif; ?>
@@ -91,9 +91,10 @@
                                         <?php if ($claim_data['confirm'] == 0) : ?>
                                             <div class="row" style="position: absolute;right: 0px;padding-right: 30px;z-index:5;">
                                                 <div class="btn-group" role="group" aria-label="Basic example">
-                                                    <button type="submit" class="btn btn-success btn-sm" onclick="submit(<?= $claim_data['claim_id']; ?>,2)">อนุมัติ</button>
-                                                    <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#reject<?= $claim_data['claim_id']; ?>">ปฏิเสธ</button>
-                                                    <!-- <button type="submit" class="btn btn-danger btn-sm" onclick="reject(<?= $claim_data['claim_id']; ?>,3)">ปฏิเสธ</button> -->
+
+                                                    <button type="submit" class="btn btn-success btn-sm" onclick="submit(<?= $claim_data['claim_id'] ?>, 1)">เข้าสต๊อก</button>
+                                                    <button type="submit" class="btn btn-danger btn-sm" onclick="submit(<?= $claim_data['claim_id'] ?>, 2)">ตรวจแล้ว</button>
+                                                    <!-- <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#reject<?= $claim_data['claim_id']; ?>">ตรวจแล้ว</button> -->
                                                 </div>
                                             </div>
                                         <?php endif; ?>
@@ -289,7 +290,8 @@
                         url: "plugin/del_log.php",
                         dataType: "json",
                         data: {
-                            id: id
+                            id: id,
+                            table: "data_claim_first"
                         },
 
                         beforeSend: function() {
@@ -327,18 +329,17 @@
             });
     }
 
-    function submit(id, type, response = '') {
+    function submit(id, type) {
         // console.log(id);
         // console.log(response);
         $.ajax({
 
             type: "POST",
-            url: "plugin/claim.php",
+            url: "plugin/claimcheck.php",
             dataType: "json",
             data: {
                 id: id,
                 type: type,
-                response: response
             },
 
             beforeSend: function() {

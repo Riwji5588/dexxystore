@@ -14,7 +14,7 @@ $sql_select_selled = "SELECT * FROM data_selled WHERE ac_id = $ac_id ORDER BY se
   <span style="color: #fff">ค้นหา : &nbsp;</span>
   <input id="search" type="text" class="form-control hyper-form-control col-6 col-md-3 " placeholder="ออเดอร์ สินค้า วันที่ซื้อสินค้า สถานะ" onkeyup="search(this, '<?= $sql_select_selled ?>')">
 </div>
-<h5 class="text-center mt-1 mb-4" style="color: white;">หากสนใจต่อเดือนถัดไปสำหรับออเดอร์เดิม โปรดติดต่อไลน์ร้านก่อนวันหมดประกัน </h5>
+<h5 class="text-center mt-1 mb-4" style="color: white;">การต่อวันประกันสินค้า +30 วัน ควรต่อก่อนวันหมดประกันจริง</h5>
 <!--card-->
 
 
