@@ -28,7 +28,7 @@
               <img src="assets/img/game/<?= $game['game_image']; ?>" class="card-img-top img-fluid" style="border-top-left-radius: 0.6rem !important;border-top-right-radius: 0.6rem !important;">
               <div class="card-body">
                 <h5 class="mt-0 mb-2" id="title<?= $game['game_id']; ?>"><?= $game['game_name']; ?></h5>
-                <span style="color: green;">พร้อมส่ง <?= number_format($ready_selled_row['totaldata'], 0); ?> จอ</span>
+                <span style="color: green;">พร้อมส่ง</span>
               </div>
             </div>
           </a>
