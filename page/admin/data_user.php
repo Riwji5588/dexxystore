@@ -1,8 +1,8 @@
       <!-- Data User -->
       <h3 class="text-center mt-4 mb-4" style="color: white ;">--- จัดการผู้ใช้งาน ---</h3>
 
-      <div class="mt-3">
-        <table id="myTable" class="table table-hover  text-center w-100">
+      <div class="table-responsive mt-3">
+        <table id="datatable" class="table table-hover  text-center w-100">
           <thead class="hyper-bg-dark">
             <tr>
               <th scope="col" style="width:120px;">เลขที่บัญชี</th>
@@ -102,10 +102,6 @@
       <!-- End User  -->
 
       <script>
-        $(document).ready(function() {
-          $('#myTable').DataTable();
-        });
-
         /** Delete Data */
         function DelUser(id) {
           var id = id.value;

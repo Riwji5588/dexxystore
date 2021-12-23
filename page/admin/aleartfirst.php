@@ -1,11 +1,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<div class="mt-3">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<div class="table-responsive mt-3">
 
     <div id="delAll" class="br-icon1 text-center btn btn-danger" style="display: none;" onclick="delAll()">
         <span>ลบที่เลือก</span>
     </div>
 
-    <table id="myTable" class="table table-hover text-center w-100">
+    <table id="datatable" class="table table-hover text-center w-100">
         <thead class="hyper-bg-dark">
             <tr>
                 <th>เลือก</th>
@@ -234,10 +235,6 @@
 </style>
 
 <script>
-    $(document).ready(function() {
-        $('#myTable').DataTable();
-    });
-
     var total_del = [];
 
     function checkedL(data) {
