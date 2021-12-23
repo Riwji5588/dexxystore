@@ -1,8 +1,8 @@
       <!-- Data Owner -->
       <h3 class="text-center mt-4 mb-4" style="color: white;">--- ID Netflixถูกจำหน่ายแล้ว ---</h3>
 
-      <div class="table-responsive mt-3">
-        <table id="datatable" class="table table-hover text-center w-100">
+      <div class="mt-3">
+        <table id="myTable" class="table table-hover text-center w-100">
           <thead class="hyper-bg-dark">
             <tr>
               <th scope="col" style="width:120px;">เลขที่ข้อมูล</th>
@@ -126,6 +126,10 @@
       <!-- End Data Owner  -->
 
       <script>
+        $(document).ready(function() {
+          $('#myTable').DataTable();
+        });
+
         /** Delete Data */
         function DelData(id) {
           var id = id.value;

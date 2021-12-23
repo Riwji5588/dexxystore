@@ -27,8 +27,8 @@
             <div class="card shadow-dark radius-border-6 hyper-bg-white hyper-card" style="border:3px solid #2E384D !important;">
               <img src="assets/img/game/<?= $game['game_image']; ?>" class="card-img-top img-fluid" style="border-top-left-radius: 0.6rem !important;border-top-right-radius: 0.6rem !important;">
               <div class="card-body">
-                <h5 class="mt-0 mb-2" id="title<?= $game['game_id']; ?>"><?= $game['game_name']; ?></h5>
-                <span style="color: green;">พร้อมส่ง</span>
+                <h4 class="mt-0 mb-2" id="title<?= $game['game_id']; ?>"><?= $game['game_name']; ?></h4> 
+                <h5 style="color: green;" class="text-left" > พร้อมส่ง ! </h5>
               </div>
             </div>
           </a>

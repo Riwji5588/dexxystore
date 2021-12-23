@@ -96,8 +96,8 @@ if ($total_game_row <= 0) {
   </div>
   <!-- End Add Game Data Modal -->
 
-  <div class="table-responsive mt-3">
-    <table id="datatable" class="table table-hover text-center w-100">
+  <div class="mt-3">
+    <table id="myTable" class="table table-hover text-center w-100">
       <thead class="hyper-bg-dark">
         <tr>
           <th scope="col" style="width:120px;">เลขที่ข้อมูล</th>
@@ -215,6 +215,10 @@ if ($total_game_row <= 0) {
   </div>
 
   <script>
+    $(document).ready(function() {
+      $('#myTable').DataTable();
+    });
+
     function submitdata(id) {
       $("#submitdata" + id).click();
     }
