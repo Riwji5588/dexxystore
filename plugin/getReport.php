@@ -21,6 +21,7 @@ if ($_POST) {
 
                     array_push($data, [
                         // claim_data
+                        'id' => $claim_data['id'],
                         'claim_data_id' => $claim_data['claim_id'],
                         'claim_data_confirm' => $claim_data['confirm'],
                         'claim_data_date' => $claim_data['claim_date'],
