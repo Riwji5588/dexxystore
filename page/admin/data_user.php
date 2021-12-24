@@ -38,8 +38,8 @@
 
             for (let i = 0; i < data.length; i++) {
               body += `
-              <tr>
-                <td>${data[i].ac_id}</td>
+              <tr ${data[i].ban == '0' ? '' : 'style="color: red;"'}>
+                <td>${i+1}</td>
                 <td>${data[i].username}</td>
                 <td>${data[i].points}</td>
                 <td>${data[i].role == 779 ? 'ผู้ดูแลระบบ' : 'ผู้ใช้งาน'}</td>
@@ -76,13 +76,25 @@
                               <input id="point${data[i].ac_id}" value="${data[i].points}" type="number" class="form-control form-control-sm hyper-form-control" placeholder="Point" required>
                             </div>
 
-                            <div class="input-group input-group-sm">
+                            <div class="input-group input-group-sm mb-3">
                               <div class="input-group-prepend">
-                                <label class="input-group-text hyper-bg-dark border-dark" for="inputGroupSelect01">ระดับผู้ใช้งาน</label>
+                                <label class="input-group-text hyper-bg-dark border-dark" for="role${data[i].ac_id}">ระดับผู้ใช้งาน</label>
                               </div>
-                              <select id="role${data[i].ac_id}" class="custom-select hyper-form-control" id="inputGroupSelect01">
+                              <select id="role${data[i].ac_id}" class="custom-select hyper-form-control">
                                 <option ${data[i].role == 1 ? 'selected' : ''} value="1">ผู้ใช้งาน</option>
                                 <option ${data[i].role == 779 ? 'selected' : ''} value="779">ผู้ดูแลระบบ</option>
+                              </select>
+                            </div>
+
+                            <div class="input-group input-group-sm">
+                              <div class="input-group-prepend">
+                                <label class="input-group-text hyper-bg-dark border-dark" for="ban${data[i].ac_id}">แบน</label>
+                              </div>
+                              <select id="ban${data[i].ac_id}" class="custom-select hyper-form-control">
+                                <option value="0" ${data[i].ban == 0 ? 'selected' : ''}>-</option>
+                                <option value="1" ${data[i].ban == 1 ? 'selected' : ''}>แบนการซื้อ</option>
+                                <option value="2" ${data[i].ban == 2 ? 'selected' : ''}>แบนการเคลม</option>
+                                <option value="3" ${data[i].ban == 3 ? 'selected' : ''}>แบนการซื้อและการเคลม</option>
                               </select>
                             </div>
 
@@ -170,8 +182,6 @@
             });
         }
 
-
-
         /** Update Data */
         function updatedata(id) {
 
@@ -201,11 +211,13 @@
                   var point = $('#point' + id).val();
                   var email = $('#email' + id).val();
                   var role = $('#role' + id).val();
+                  var ban = $('#ban' + id).val();
 
                   updatedata.append('user_id', uid);
                   updatedata.append('point', point);
                   updatedata.append('email', email);
                   updatedata.append('role', role);
+                  updatedata.append('ban', ban);
 
                   $.ajax({
 

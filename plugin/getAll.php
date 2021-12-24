@@ -3,7 +3,7 @@ include("hyper_api.php");
 
 $users = [];
 
-$select = "SELECT ac_id, username, email, points, role FROM accounts";
+$select = "SELECT ac_id, username, email, points, role, ban FROM accounts";
 $query = $hyper->connect->query($select);
 $row = $query->num_rows;
 $i = 0;
