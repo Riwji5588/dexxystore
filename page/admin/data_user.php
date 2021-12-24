@@ -1,7 +1,6 @@
       <!-- Data User -->
       <h3 class="text-center mt-4 mb-4" style="color: white ;">--- จัดการผู้ใช้งาน ---</h3>
-
-      <div class="mt-3" id="loading" style="display: block;">
+      <div class="mt-3">
         <table id="myTable" class="table table-hover text-center w-100">
           <thead class="hyper-bg-dark">
             <tr>
@@ -15,8 +14,14 @@
           <tbody id="body">
           </tbody>
         </table>
+        <div id="loading" class="container" style="color: #FFF;" align="center">
+          <div class="spinner-border" role="status">
+          </div>
+        </div>
       </div>
       <!-- End User  -->
+
+
 
       <script>
         $(document).ready(async () => {
@@ -24,102 +29,122 @@
           let host = window.location.origin == "http://localhost" ? "http://localhost/dexxystore" : isSandbox ? "https://sandbox.dexystore.me" : "https://dexystore.me";
           let url = host + '/plugin/getAll.php';
           const response = await fetch(url, {
-            method: 'GET', // *GET, POST, PUT, DELETE, etc.
+            method: 'POST', // *GET, POST, PUT, DELETE, etc.
             mode: 'no-cors', // no-cors, *cors, same-origin
+            cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
             credentials: 'same-origin', // include, *same-origin, omit
             headers: {
               'Content-Type': 'application/json'
               // 'Content-Type': 'application/x-www-form-urlencoded',
             },
+            redirect: 'follow', // manual, *follow, error
+            referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+            body: JSON.stringify({
+              action: 'getalluser'
+            }) // body data type must match "Content-Type" header
           });
-          const json = await response.json();
-          if (json.code == 200) {
-            const data = json.data;
-            let body = $('#body').html();
+          $.ajax({
 
-            for (let i = 0; i < data.length; i++) {
-              body += `
-              <tr ${data[i].ban == '0' ? '' : 'style="color: red;"'}>
-                <td>${i+1}</td>
-                <td>${data[i].username}</td>
-                <td>${data[i].points}</td>
-                ${data[i].role == 779 ? '<td class="text-danger">ผู้ดูแลระบบ</td>' : '<td>ผู้ใช้งาน</td>'}
-                
-                <td>
-                  <button class="btn btn-sm hyper-btn-notoutline-success" type="button" data-toggle="modal" data-target="#editusermodal${data[i].ac_id}"><i class="fal fa-edit mr-1"></i> แก้ไข</button>
-                  <button onclick="DelUser(this)" value="${data[i].ac_id}" class="btn btn-sm hyper-btn-notoutline-danger my-1 my-sm-0" type="button"><i class="fal fa-trash-alt mr-1"></i> ลบ</button>
+            type: "POST",
+            url: url,
+            dataType: "json",
+            data: {
+              action: 'getalluser'
+            },
+            success: function(json) {
+              if (json.code == 200) {
+                const data = json.data;
+                let body = $('#body').html();
 
-                  <!-- Edit Game Data Modal -->
-                  <div class="modal fade" id="editusermodal${data[i].ac_id}" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered">
-                      <div class="modal-content border-0 radius-border-2 hyper-bg-white">
-                        <div class="modal-header hyper-bg-dark">
-                          <h6 class="modal-title"><i class="fal fa-plus-square mr-1"></i> อัพเดทข้อมูล</h6>
+                for (let i = 0; i < data.length; i++) {
+                  body +=
+                    `
+                    <tr ${data[i].ban=='0' ? '' : 'style="color: red;"' }>
+                      <td>${i+1}</td>
+                      <td>${data[i].username}</td>
+                      <td>${data[i].points}</td>
+                      ${data[i].role == 779 ? '<td class="text-danger">ผู้ดูแลระบบ</td>' : '<td>ผู้ใช้งาน</td>'}
+                      <td>
+                        <button class="btn btn-sm hyper-btn-notoutline-success" type="button" data-toggle="modal" data-target="#editusermodal${data[i].ac_id}"><i class="fal fa-edit mr-1"></i> แก้ไข</button>
+                        <button onclick="DelUser(this)" value="${data[i].ac_id}" class="btn btn-sm hyper-btn-notoutline-danger my-1 my-sm-0" type="button"><i class="fal fa-trash-alt mr-1"></i> ลบ</button>
+
+                        <!-- Edit Game Data Modal -->
+                        <div class="modal fade" id="editusermodal${data[i].ac_id}" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-hidden="true">
+                          <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content border-0 radius-border-2 hyper-bg-white">
+                              <div class="modal-header hyper-bg-dark">
+                                <h6 class="modal-title"><i class="fal fa-plus-square mr-1"></i> อัพเดทข้อมูล</h6>
+                              </div>
+                              <div class="modal-body text-center">
+
+                                <form method="POST" enctype="multipart/form-data">
+
+                                  <img src="assets/img/logoani_236x236.jpg" width="99px" class="img-fluid rounded-circle ml-auto mr-auto mb-2"></br>
+                                  <font class="text-muted">Username</font>
+                                  <h5><b>${data[i].username}</b></h5>
+
+                                  <div class="input-group input-group-sm mb-3 mt-4">
+                                    <div class="input-group-prepend">
+                                      <span class="input-group-text hyper-bg-dark border-dark">E-mail</span>
+                                    </div>
+                                    <input id="email${data[i].ac_id}" value="${data[i].email}" type="email" class="form-control form-control-sm hyper-form-control" placeholder="E-mail" required>
+                                  </div>
+
+                                  <div class="input-group input-group-sm mb-3">
+                                    <div class="input-group-prepend">
+                                      <span class="input-group-text hyper-bg-dark border-dark">บาท</span>
+                                    </div>
+                                    <input id="point${data[i].ac_id}" value="${data[i].points}" type="number" class="form-control form-control-sm hyper-form-control" placeholder="Point" required>
+                                  </div>
+
+                                  <div class="input-group input-group-sm mb-3">
+                                    <div class="input-group-prepend">
+                                      <label class="input-group-text hyper-bg-dark border-dark" for="role${data[i].ac_id}">ระดับผู้ใช้งาน</label>
+                                    </div>
+                                    <select id="role${data[i].ac_id}" class="custom-select hyper-form-control">
+                                      <option ${data[i].role==1 ? 'selected' : '' } value="1">ผู้ใช้งาน</option>
+                                      <option ${data[i].role==779 ? 'selected' : '' } value="779">ผู้ดูแลระบบ</option>
+                                    </select>
+                                  </div>
+
+                                  <div class="input-group input-group-sm">
+                                    <div class="input-group-prepend">
+                                      <label class="input-group-text hyper-bg-dark border-dark" for="ban${data[i].ac_id}">แบน</label>
+                                    </div>
+                                    <select id="ban${data[i].ac_id}" class="custom-select hyper-form-control">
+                                      <option value="0" ${data[i].ban==0 ? 'selected' : '' }>-</option>
+                                      <option value="1" ${data[i].ban==1 ? 'selected' : '' }>แบนการซื้อ</option>
+                                      <option value="2" ${data[i].ban==2 ? 'selected' : '' }>แบนการเคลม</option>
+                                      <option value="3" ${data[i].ban==3 ? 'selected' : '' }>แบนการซื้อและการเคลม</option>
+                                    </select>
+                                  </div>
+
+                                  <button type="submit" id="updatedata${data[i].ac_id}" class="d-none"></button>
+                                </form>
+
+                              </div>
+                              <div class="modal-footer p-2 border-0">
+                                <button type="button" onclick="updatedata('${data[i].ac_id}')" class="btn hyper-btn-notoutline-success"><i class="fal fa-plus-square mr-1"></i>อัพเดทข้อมูล</button>
+                                <button type="button" class="btn hyper-btn-notoutline-danger" data-dismiss="modal"><i class="fad fa-times-circle mr-1"></i>ยกเลิก</button>
+                              </div>
+                            </div>
+                          </div>
                         </div>
-                        <div class="modal-body text-center">
+                        <!-- End Edit Game Data Modal -->
 
-                          <form method="POST" enctype="multipart/form-data">
-
-                            <img src="assets/img/logoani_236x236.jpg" width="99px" class="img-fluid rounded-circle ml-auto mr-auto mb-2"></br>
-                            <font class="text-muted">Username</font>
-                            <h5><b>${data[i].username}</b></h5>
-
-                            <div class="input-group input-group-sm mb-3 mt-4">
-                              <div class="input-group-prepend">
-                                <span class="input-group-text hyper-bg-dark border-dark">E-mail</span>
-                              </div>
-                              <input id="email${data[i].ac_id}" value="${data[i].email}" type="email" class="form-control form-control-sm hyper-form-control" placeholder="E-mail" required>
-                            </div>
-
-                            <div class="input-group input-group-sm mb-3">
-                              <div class="input-group-prepend">
-                                <span class="input-group-text hyper-bg-dark border-dark">บาท</span>
-                              </div>
-                              <input id="point${data[i].ac_id}" value="${data[i].points}" type="number" class="form-control form-control-sm hyper-form-control" placeholder="Point" required>
-                            </div>
-
-                            <div class="input-group input-group-sm mb-3">
-                              <div class="input-group-prepend">
-                                <label class="input-group-text hyper-bg-dark border-dark" for="role${data[i].ac_id}">ระดับผู้ใช้งาน</label>
-                              </div>
-                              <select id="role${data[i].ac_id}" class="custom-select hyper-form-control">
-                                <option ${data[i].role == 1 ? 'selected' : ''} value="1">ผู้ใช้งาน</option>
-                                <option ${data[i].role == 779 ? 'selected' : ''} value="779">ผู้ดูแลระบบ</option>
-                              </select>
-                            </div>
-
-                            <div class="input-group input-group-sm">
-                              <div class="input-group-prepend">
-                                <label class="input-group-text hyper-bg-dark border-dark" for="ban${data[i].ac_id}">แบน</label>
-                              </div>
-                              <select id="ban${data[i].ac_id}" class="custom-select hyper-form-control">
-                                <option value="0" ${data[i].ban == 0 ? 'selected' : ''}>-</option>
-                                <option value="1" ${data[i].ban == 1 ? 'selected' : ''}>แบนการซื้อ</option>
-                                <option value="2" ${data[i].ban == 2 ? 'selected' : ''}>แบนการเคลม</option>
-                                <option value="3" ${data[i].ban == 3 ? 'selected' : ''}>แบนการซื้อและการเคลม</option>
-                              </select>
-                            </div>
-
-                            <button type="submit" id="updatedata${data[i].ac_id}" class="d-none"></button>
-                          </form>
-
-                        </div>
-                        <div class="modal-footer p-2 border-0">
-                          <button type="button" onclick="updatedata('${data[i].ac_id}')" class="btn hyper-btn-notoutline-success"><i class="fal fa-plus-square mr-1"></i>อัพเดทข้อมูล</button>
-                          <button type="button" class="btn hyper-btn-notoutline-danger" data-dismiss="modal"><i class="fad fa-times-circle mr-1"></i>ยกเลิก</button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <!-- End Edit Game Data Modal -->
-
-                </td>
-                </tr>
-              `;
+                      </td>
+                    </tr>
+                    `;
+                }
+                $('#body').html(body);
+                $('#myTable').DataTable();
+                $('#loading').remove();
+              }
+            },
+            error: function(data) {
+              console.log(data.responseText);
             }
-            $('#body').html(body);
-            $('#myTable').DataTable();
-          }
+          });
 
         })
         /** Delete Data */
