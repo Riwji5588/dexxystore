@@ -106,9 +106,10 @@ if ($total_game_row <= 0) {
           <th scope="col" style="width: 170px;">เมนู</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody id="loading" style="display: none;">
 
         <?php
+        $loaddata = 0;
         $sql_select_data = "SELECT * FROM game_data WHERE game_id = '$id' AND selled = 0";
         $query_data = $hyper->connect->query($sql_select_data);
         $total_data_row = mysqli_num_rows($query_data);
@@ -207,7 +208,25 @@ if ($total_game_row <= 0) {
 
               </td>
             </tr>
-        <?php } while ($data = mysqli_fetch_array($query_data));
+          <?php
+            $loaddata++;
+          } while ($data = mysqli_fetch_array($query_data));
+          if ($loaddata == $total_data_row) {
+          ?>
+            <script>
+              $("#loading").show();
+            </script>
+          <?php
+          } else {
+          ?>
+            <tr>
+              <td colspan="6">
+                <div class="spinner-border" role="status">
+                </div>
+              </td>
+            </tr>
+        <?php
+          }
         } ?>
 
       </tbody>

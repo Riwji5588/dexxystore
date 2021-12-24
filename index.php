@@ -140,12 +140,16 @@ if (isset($_COOKIE['USER_SID'])) {
 
   <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.14.0/css/all.css" integrity="sha384-VhBcF/php0Z/P5ZxlxaEx1GwqTQVIBu4G4giRWxTKOCjTxsPFETUDdVL5B6vYvOt" crossorigin="anonymous">
 
+
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
+  <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+
   <!-- <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script> -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+  <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> -->
+  <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script> -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
 
-  <script type="text/javascript" src="assets/js/jquery.dataTables.min.js"></script>
+  <!-- <script type="text/javascript" src="assets/js/jquery.dataTables.min.js"></script> -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
   <script>
     $(document).ready(function() {
@@ -154,6 +158,16 @@ if (isset($_COOKIE['USER_SID'])) {
     });
   </script>
   <style>
+    .dataTables_info,
+    .dataTables_wrapper .dataTables_filter input {
+      color: white !important;
+    }
+    .dataTables_wrapper .dataTables_length select {
+      color: white !important;
+      background-color: #000 !important;
+
+    }
+
     /* Now the super main part */
     /* this gets the whole scrollbar including the scrollbar area */
     ::-webkit-scrollbar {

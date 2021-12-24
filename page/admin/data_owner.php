@@ -14,9 +14,10 @@
               <th scope="col" style="width: 170px;">เมนู</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody id="loading" style="display: none;">
 
             <?php
+            $loaddata = 0;
             $sql_select_selled = "SELECT * FROM data_selled";
             $query_selled = $hyper->connect->query($sql_select_selled);
             $total_selled_row = mysqli_num_rows($query_selled);
@@ -117,7 +118,25 @@
 
                   </td>
                 </tr>
-            <?php } while ($selled = mysqli_fetch_array($query_selled));
+              <?php
+                $loaddata++;
+              } while ($selled = mysqli_fetch_array($query_selled));
+              if ($loaddata == $total_selled_row) {
+              ?>
+                <script>
+                  $("#loading").show();
+                </script>
+              <?php
+              } else {
+              ?>
+                <tr>
+                  <td colspan="6">
+                    <div class="spinner-border" role="status">
+                    </div>
+                  </td>
+                </tr>
+            <?php
+              }
             } ?>
 
           </tbody>
