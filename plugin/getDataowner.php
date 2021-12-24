@@ -35,7 +35,7 @@ if (isset($_GET)) {
                 array_push($data, [
                     // selled
                     'selled_id' => $selled['selled_id'],
-                    'selled_date' => $selled['selled_date'],
+                    'selled_date' => $hyper->datethai->DateThai1($selled['selled_date']),
                     // selled_data
                     'selled_data_username' => $selled_data['username'],
                     'selled_data_id' => $selled_data['data_id'],

@@ -24,7 +24,7 @@ if ($_POST) {
                         'id' => $claim_data['id'],
                         'claim_data_id' => $claim_data['claim_id'],
                         'claim_data_confirm' => $claim_data['confirm'],
-                        'claim_data_date' => $claim_data['claim_date'],
+                        'claim_data_date' => $hyper->datethai->DateThai1($claim_data['claim_date']),
                         'claim_data_detail' => $claim_data['detail'],
                         // data_result
                         'data_result_username' => $data_result['username'],
@@ -60,7 +60,7 @@ if ($_POST) {
                         'id' => $claim_data['id'],
                         'claim_data_id' => $claim_data['claim_id'],
                         'claim_data_confirm' => $claim_data['confirm'],
-                        'claim_data_date' => $claim_data['claim_date'],
+                        'claim_data_date' => $hyper->datethai->DateThai1($claim_data['claim_date']),
                         'claim_data_detail' => $claim_data['detail'],
                         // data_result
                         'data_result_username' => $data_result['username'],

@@ -37,64 +37,6 @@ if (empty($_GET['thispage'])) {
 
 $page = $_GET['thispage'];
 
-function DateThai($strDate)
-{
-  $strYear = date("Y", strtotime($strDate)) + 543;
-  $strMonth = date("n", strtotime($strDate));
-  $strDay = date("j", strtotime($strDate));
-  $strHour = date("H", strtotime($strDate));
-  $strMinute = date("i", strtotime($strDate));
-  $strday = date("l", strtotime($strDate));
-  $strMonthCut = array("", "ม.ค.", "ก.พ.", "มี.ค.", "เม.ย.", "พ.ค.", "มิ.ย.", "ก.ค.", "ส.ค.", "ก.ย.", "ต.ค.", "พ.ย.", "ธ.ค.");
-  $strdayCut = array("", "จันทร์ที่", "อังคารที่", "พุธที่", "พฤหัสบดีที่", "ศุกร์ที่", "เสาร์ที่", "อาทิตย์ที่");
-  if ($strday == "Monday") {
-    $strdayThai = $strdayCut[1];
-  } elseif ($strday == "Tuesday") {
-    $strdayThai = $strdayCut[2];
-  } elseif ($strday == "Wednesday") {
-    $strdayThai = $strdayCut[3];
-  } elseif ($strday == "Thursday") {
-    $strdayThai = $strdayCut[4];
-  } elseif ($strday == "Friday") {
-    $strdayThai = $strdayCut[5];
-  } elseif ($strday == "Saturday") {
-    $strdayThai = $strdayCut[6];
-  } elseif ($strday == "Sunday") {
-    $strdayThai = $strdayCut[7];
-  }
-  $strMonthThai = $strMonthCut[$strMonth];
-  return "$strdayThai $strDay $strMonthThai $strYear";
-}
-
-function DateThai1($strDate)
-{
-  $strYear = date("Y", strtotime($strDate)) + 543;
-  $strMonth = date("n", strtotime($strDate));
-  $strDay = date("j", strtotime($strDate));
-  $strHour = date("H", strtotime($strDate));
-  $strMinute = date("i", strtotime($strDate));
-  $strday = date("l", strtotime($strDate));
-  $strMonthCut = array("", "ม.ค.", "ก.พ.", "มี.ค.", "เม.ย.", "พ.ค.", "มิ.ย.", "ก.ค.", "ส.ค.", "ก.ย.", "ต.ค.", "พ.ย.", "ธ.ค.");
-  $strdayCut = array("", "วันจันทร์ที่", "วันอังคารที่", "วันพุธที่", "วันพฤหัสบดีที่", "วันศุกร์ที่", "วันเสาร์ที่", "วันอาทิตย์ที่");
-  if ($strday == "Monday") {
-    $strdayThai = $strdayCut[1];
-  } elseif ($strday == "Tuesday") {
-    $strdayThai = $strdayCut[2];
-  } elseif ($strday == "Wednesday") {
-    $strdayThai = $strdayCut[3];
-  } elseif ($strday == "Thursday") {
-    $strdayThai = $strdayCut[4];
-  } elseif ($strday == "Friday") {
-    $strdayThai = $strdayCut[5];
-  } elseif ($strday == "Saturday") {
-    $strdayThai = $strdayCut[6];
-  } elseif ($strday == "Sunday") {
-    $strdayThai = $strdayCut[7];
-  }
-  $strMonthThai = $strMonthCut[$strMonth];
-  return "$strDay $strMonthThai $strYear";
-}
-
 if (isset($_COOKIE['USER_SID'])) {
   $sid = $_COOKIE['USER_SID'];
   $var = "SELECT * FROM accounts WHERE sid = '" . $sid . "' ";
