@@ -42,6 +42,7 @@
 
             for (let i = 0; i < data1.length; i++) {
               let data = data1[i];
+              let password = decodeURIComponent(escape(window.atob(data.selled_data_password)));
               body += `
               <tr>
                   <td>${data.selled_id}</td>
@@ -76,7 +77,7 @@
                                 <div class="input-group-prepend">
                                   <span class="input-group-text hyper-bg-dark border-dark">รหัสผ่าน</span>
                                 </div>
-                                <input id="password${data.selled_data_id}" value="${data.selled_data_password}" type="text" class="form-control form-control-sm hyper-form-control" placeholder="รหัสผ่าน" required autocomplete="off">
+                                <input id="password${data.selled_data_id}" value="${password}" type="text" class="form-control form-control-sm hyper-form-control" placeholder="รหัสผ่าน" required autocomplete="off">
                               </div>
 
                               <div class="input-group input-group-sm mb-3">
@@ -110,7 +111,6 @@
                 </tr>`;
             }
             $('#body').html(body);
-
             $('#myTable').DataTable();
           } else {
             console.log(data);
