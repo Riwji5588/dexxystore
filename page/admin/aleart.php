@@ -6,7 +6,7 @@
         <span>ลบที่เลือก</span>
     </div>
 
-    <table id="datatable" class="table table-hover text-center w-100">
+    <table id="myTable" class="table table-hover text-center w-100">
         <thead class="hyper-bg-dark">
             <tr>
                 <th>เลือก</th>
@@ -102,9 +102,9 @@
                                                 <span>ชื่อผู้ใช้งาน</span>
                                             </div>
                                             <div class="col-9 col-md-8">
-                                                <input type="text" id="username<?= $selled['selled_id']; ?>1" value="<?= $data_result['username'] ?>" readonly style="background-color: #fff;border-radius: 0px;border: 0px">
-                                                <!-- <button id="username<?= $selled['selled_id']; ?>" class="btn btn-dark btn-sm" onclick="copy(this)"> คัดลอก </button> -->
-                                                <!-- 'username<?= $selled['selled_id']; ?>' -->
+                                                <input type="text" id="username<?= $claim_data['claim_id']; ?>1" value="<?= $data_result['username'] ?>" readonly style="background-color: #fff;border-radius: 0px;border: 0px">
+                                                <!-- <button id="username<?= $claim_data['claim_id']; ?>" class="btn btn-dark btn-sm" onclick="copy(this)"> คัดลอก </button> -->
+                                                <!-- 'username<?= $claim_data['claim_id']; ?>' -->
                                             </div>
                                         </div>
                                         <div class="row" style="padding: 5px 2px 0px 2px;">
@@ -112,8 +112,8 @@
                                                 <span>รหัสผ่าน</span>
                                             </div>
                                             <div class="col-9 col-md-8">
-                                                <input type="text" id="password<?= $selled['selled_id']; ?>1" value="<?= $data_result['password'] ?>" readonly style="background-color: #fff;border-radius: 0px;border: 0px">
-                                                <!-- <button id="password<?= $selled['selled_id']; ?>" class="btn btn-dark btn-sm" onclick="copy(this)"> คัดลอก </button> -->
+                                                <input type="text" id="password<?= $claim_data['claim_id']; ?>1" value="<?= $data_result['password'] ?>" readonly style="background-color: #fff;border-radius: 0px;border: 0px">
+                                                <!-- <button id="password<?= $claim_data['claim_id']; ?>" class="btn btn-dark btn-sm" onclick="copy(this)"> คัดลอก </button> -->
                                             </div>
                                         </div>
                                         <div class="row" style="padding: 5px 2px 0px 2px;">
