@@ -23,16 +23,15 @@
       <script>
         $(document).ready(async () => {
           let host = window.location.origin == "http://localhost" ? "http://localhost/dexxystore" : "https://dexystore.me";
-          let url = host + '/plugin/getDataowner.php';
+          let url = host + '/plugin/getDataowner.php?action=getdataowner';
           const response = await fetch(url, {
-            method: 'GET', // *GET, POST, PUT, DELETE, etc.
+            method: 'POST', // *GET, POST, PUT, DELETE, etc.
             mode: 'no-cors', // no-cors, *cors, same-origin
             credentials: 'same-origin', // include, *same-origin, omit
             headers: {
               'Content-Type': 'application/json'
               // 'Content-Type': 'application/x-www-form-urlencoded',
             },
-
           });
           const json = await response.json();
           if (json.code == 200) {
@@ -111,6 +110,8 @@
             $('#body').html(body);
 
             $('#myTable').DataTable();
+          }else {
+            console.log(data);
           }
 
         })
