@@ -22,8 +22,10 @@
 
       <script>
         $(document).ready(async () => {
-          let host = window.location.origin == "http://localhost" ? "http://localhost/dexxystore" : "https://dexystore.me";
+          let isSandbox = window.location.origin == "https://sandbox.dexystore.me";
+          let host = window.location.origin == "http://localhost" ? "http://localhost/dexxystore" : isSandbox ? "https://sandbox.dexystore.me" : "https://dexystore.me";
           let url = host + '/plugin/getDataowner.php?action=getdataowner';
+          // console.log(url);
           const response = await fetch(url, {
             method: 'POST', // *GET, POST, PUT, DELETE, etc.
             mode: 'no-cors', // no-cors, *cors, same-origin
@@ -110,7 +112,7 @@
             $('#body').html(body);
 
             $('#myTable').DataTable();
-          }else {
+          } else {
             console.log(data);
           }
 

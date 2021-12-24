@@ -20,7 +20,8 @@
 
       <script>
         $(document).ready(async () => {
-          let host = window.location.origin == "http://localhost" ? "http://localhost/dexxystore" : "https://dexystore.me";
+          let isSandbox = window.location.origin == "https://sandbox.dexystore.me";
+          let host = window.location.origin == "http://localhost" ? "http://localhost/dexxystore" : isSandbox ? "https://sandbox.dexystore.me" : "https://dexystore.me";
           let url = host + '/plugin/getAll.php';
           const response = await fetch(url, {
             method: 'GET', // *GET, POST, PUT, DELETE, etc.
@@ -42,7 +43,8 @@
                 <td>${i+1}</td>
                 <td>${data[i].username}</td>
                 <td>${data[i].points}</td>
-                <td>${data[i].role == 779 ? 'ผู้ดูแลระบบ' : 'ผู้ใช้งาน'}</td>
+                ${data[i].role == 779 ? '<td class="text-danger">ผู้ดูแลระบบ</td>' : '<td>ผู้ใช้งาน</td>'}
+                
                 <td>
                   <button class="btn btn-sm hyper-btn-notoutline-success" type="button" data-toggle="modal" data-target="#editusermodal${data[i].ac_id}"><i class="fal fa-edit mr-1"></i> แก้ไข</button>
                   <button onclick="DelUser(this)" value="${data[i].ac_id}" class="btn btn-sm hyper-btn-notoutline-danger my-1 my-sm-0" type="button"><i class="fal fa-trash-alt mr-1"></i> ลบ</button>
