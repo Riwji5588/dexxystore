@@ -6,7 +6,7 @@
         <span>ลบที่เลือก</span>
     </div>
 
-    <table id="datatable" class="table table-hover text-center w-100">
+    <table id="myTable" class="table table-hover text-center w-100">
         <thead class="hyper-bg-dark">
             <tr>
                 <th>เลือก</th>
@@ -17,169 +17,13 @@
                 <th scope="col" style="width: 170px;">เมนู</th>
             </tr>
         </thead>
-        <tbody>
-
-            <?php
-            $select_claim = "SELECT * FROM data_claim_first ORDER BY id DESC LIMIT 20 ";
-            $claim_result = $hyper->connect->query($select_claim);
-            $i = 0;
-            if (mysqli_num_rows($claim_result) > 0) {
-                do {
-                    $claim_data = $claim_result->fetch_array();
-                    $select_data = "SELECT * FROM game_data WHERE data_id={$claim_data['data_id']}";
-                    $select_user = "SELECT * FROM accounts WHERE ac_id={$claim_data['ac_id']}";
-                    $username = $hyper->connect->query($select_user)->fetch_array();
-
-                    $data_result = $hyper->connect->query($select_data)->fetch_array();
-                    $data_result['password'] = base64_decode($data_result['password']);
-            ?>
-                    <tr <?php if ($claim_data['confirm'] != 0) {
-                            echo 'style="background-color: #DADDE2;"';
-                        } else if (isset($_GET['id']) && $_GET['id'] == $claim_data['claim_id']) {
-                            echo 'style="background-color: #E7B91F"';
-                        }
-
-                        ?>>
-                        <td>
-                            <?php
-                            if ($claim_data['confirm'] != 0) {
-                            ?>
-                                <input type="checkbox" id="check<?= $claim_data['id'] ?>" name="check<?= $claim_data['id'] ?>" value="<?= $claim_data['id'] ?>" onclick="checkedL(this)">
-                            <?php
-                            } else {
-                                echo "-";
-                            }
-                            ?>
-                        </td>
-                        <td>
-                            <?php
-                            if ($claim_data['confirm'] != 0) {
-                                echo $i + 1;
-                            } else {
-                                echo "-";
-                            }
-                            ?>
-                        </td>
-                        <td><?= $username['username'] ?></td>
-                        <td><?= DateThai($claim_data['claim_date']) ?></td>
-                        <td><?php if (isset($_GET['id']) && $_GET['id'] == $claim_data['claim_id'] && $claim_data['confirm'] == 0) {
-                                echo '<span style="color: #fff;">รอตรวจสอบ</span>';
-                            } else if ($claim_data['confirm'] == 0) {
-                                echo '<span class="text-warning">รอตรวจสอบ</span>';
-                            } else if ($claim_data['confirm'] == 1) {
-                                echo '<span class="text-success">กลับเข้าสต๊อก</span>';
-                            } else if ($claim_data['confirm'] == 2) {
-                                echo '<span class="text-dark">ตรวจสอบแล้ว</span>';
-                            } ?></td>
-                        <td>
-                            <button class="btn btn-sm hyper-btn-notoutline-success" type="button" data-toggle="modal" data-target="#editusermodal<?= $i ?>"><i class="fal fa-info-circle mr-1"></i> ตรวจสอบ</button>
-                            <?php if ($claim_data['confirm'] != 0) : ?>
-                                <button onclick="DelLog(<?= $claim_data['id']; ?>);" value="<?= $claim_data['id']; ?>" class="btn btn-sm hyper-btn-notoutline-danger my-1 my-sm-0" type="button"><i class="fal fa-trash-alt mr-1"></i> ลบ</button>
-                            <?php endif; ?>
-                        </td>
-                        <!-- aleart Data Modal -->
-                        <div class="modal fade" id="editusermodal<?= $i ?>" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered">
-                                <div class="modal-content border-0 radius-border-2 hyper-bg-white">
-                                    <div class="modal-header hyper-bg-dark">
-                                        <h5 class="modal-title"><i class="fal fa-info-circle mr-1"></i> ข้อมูลไอดีที่เคลม</h5>
-                                        <button type="button" class="close p-4" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body text-left">
-                                        <?php if ($claim_data['confirm'] == 0) : ?>
-                                            <div class="row" style="position: absolute;right: 0px;padding-right: 30px;z-index:5;">
-                                                <div class="btn-group" role="group" aria-label="Basic example">
-
-                                                    <button type="submit" class="btn btn-success btn-sm" onclick="submit(<?= $claim_data['claim_id'] ?>, 1)">เข้าสต๊อก</button>
-                                                    <button type="submit" class="btn btn-danger btn-sm" onclick="submit(<?= $claim_data['claim_id'] ?>, 2)">ตรวจแล้ว</button>
-                                                    <!-- <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#reject<?= $claim_data['claim_id']; ?>">ตรวจแล้ว</button> -->
-                                                </div>
-                                            </div>
-                                        <?php endif; ?>
-                                        <div class="row" style="padding: 5px 2px 0px 2px;">
-                                            <div class="col-3 col-md-4">
-                                                <span>ชื่อผู้ใช้งาน</span>
-                                            </div>
-                                            <div class="col-9 col-md-8">
-                                                <input type="text" id="username<?= $selled['selled_id']; ?>1" value="<?= $data_result['username'] ?>" readonly style="background-color: #fff;border-radius: 0px;border: 0px">
-                                                <!-- <button id="username<?= $selled['selled_id']; ?>" class="btn btn-dark btn-sm" onclick="copy(this)"> คัดลอก </button> -->
-                                                <!-- 'username<?= $selled['selled_id']; ?>' -->
-                                            </div>
-                                        </div>
-                                        <div class="row" style="padding: 5px 2px 0px 2px;">
-                                            <div class="col-3 col-md-4">
-                                                <span>รหัสผ่าน</span>
-                                            </div>
-                                            <div class="col-9 col-md-8">
-                                                <input type="text" id="password<?= $selled['selled_id']; ?>1" value="<?= $data_result['password'] ?>" readonly style="background-color: #fff;border-radius: 0px;border: 0px">
-                                                <!-- <button id="password<?= $selled['selled_id']; ?>" class="btn btn-dark btn-sm" onclick="copy(this)"> คัดลอก </button> -->
-                                            </div>
-                                        </div>
-                                        <div class="row" style="padding: 5px 2px 0px 2px;">
-                                            <div class="col-3 col-md-4">
-                                                <span>จอ</span>
-                                            </div>
-                                            <div class="col-9 col-md-8">
-                                                <input type="text" value="<?= $data_result['display'] ?>" readonly style="background-color: #fff;border-radius: 0px;border: 0px">
-                                            </div>
-                                        </div>
-                                        <div class="row" style="padding: 5px 2px 0px 2px;">
-                                            <div class="col-3 col-md-4">
-                                                <span>สาเหตุในการเคลม</span>
-                                            </div>
-                                            <div class="col-9 col-md-8">
-                                                <p><?= $claim_data['detail'] ?></p>
-                                            </div>
-                                        </div>
-
-                                        <div class="modal-footer p-2 border-0">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fad fa-times-circle mr-1"></i>ปิด</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- End accept Data Modal -->
-
-                        </td>
-                    </tr>
-                    <!-- sub modal -->
-                    <div class="modal fade" id="reject<?= $claim_data['claim_id']; ?>" data-backdrop="static">
-                        <div class="modal-dialog modal-dialog-centered modal-lg">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title">ปฏิเสธการเคลม</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <div class="row">
-                                        <div class="col-12">
-                                            <div class="form-group">
-                                                <label for="">สาเหตุที่ปฏิเสธ</label>
-                                                <textarea id="response<?= $claim_data['claim_id']; ?>" class="form-control" id="reject_detail<?= $claim_data['claim_id']; ?>" rows="3" placeholder="กรุณากรอกสาเหตุที่ปฏิเสธ"></textarea>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-success" onclick="submit(<?= $claim_data['claim_id']; ?>,3, $('#response<?= $claim_data['claim_id']; ?>').val())">ยืนยัน</button>
-                                    <button type="button" class="btn btn-danger" data-dismiss="modal">ปิด</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-            <?php
-                    $i++;
-                } while ($i < mysqli_num_rows($claim_result));
-            } ?>
-
+        <tbody id="body">
         </tbody>
     </table>
+    <div id="loading" class="container" style="color: #FFF;" align="center">
+        <div class="spinner-border" role="status">
+        </div>
+    </div>
 </div>
 <input type="hidden" id="del" name="del" value="">
 <style>
@@ -235,6 +79,130 @@
 </style>
 
 <script>
+    $(document).ready(async () => {
+        let isSandbox = window.location.origin == "https://sandbox.dexystore.me";
+        let host = window.location.origin == "http://localhost" ? "http://localhost/dexxystore" : isSandbox ? "https://sandbox.dexystore.me" : "https://dexystore.me";
+        let url = host + '/plugin/getReport.php';
+        let getid = window.location.search.split('id=')[1] || false;
+        $.ajax({
+
+            type: "POST",
+            url: url,
+            dataType: "json",
+            data: {
+                action: 'getreport',
+                type: 2
+            },
+            success: function(json) {
+                if (json.code == 200) {
+                    const data = json.data;
+                    let body = $('#body').html();
+                    let html = '';
+                    for (let i = 0; i < data.length; i++) {
+                        body += `
+                        <tr ${data[i].claim_data_confirm != 0 ? 'style="background-color: #DADDE2;"' : getid && getid == data[i].claim_data_id ? 'style="background-color: #E7B91F"' : ''}>
+                            <td>
+                            ${data[i].claim_data_confirm != 0 ? `<input type="checkbox" id="check${data[i].claim_data_id}" name="check${data[i].claim_data_id}" value="${data[i].id}" onclick="checkedL(this)">` : '-'}
+                            </td>
+                            <td>
+                                ${data[i].claim_data_confirm != 0 ? i+1 : '-'}
+                            </td>
+                            <td>${data[i].username}</td>
+                            <td>${data[i].claim_data_date}</td>
+                            <td>${getid && 
+                                getid == data[i].claim_data_id ? '<span style="color: #fff;">รอดำเนินการ</span>' : 
+                                data[i].claim_data_confirm == 0 ? '<span class="text-warning">รอดำเนินการ</span>' : 
+                                data[i].claim_data_confirm == 1 ? '<span class="text-success">กลับเข้าสต๊อก</span>' : 
+                                data[i].claim_data_confirm == 2 ? '<span class="text-danger">ตรวจสอบแล้ว</span>' : 
+                                '-'}
+                            </td>
+                            <td>
+                                <button class="btn btn-sm hyper-btn-notoutline-success" type="button" data-toggle="modal" data-target="#editusermodal${i}"><i class="fal fa-info-circle mr-1"></i> แสดงไอดี</button>
+                                ${data[i].claim_data_confirm != 0 ? `<button onclick="DelLog(${data[i].id})" class="btn btn-sm hyper-btn-notoutline-danger my-1 my-sm-0" type="button"><i class="fal fa-trash-alt mr-1"></i> ลบ</button>` : ''}
+                            </td>
+                        </tr>
+                        `;
+                        html += `
+                        <!-- aleart Data Modal -->
+                            <div class="modal fade" id="editusermodal${i}" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content border-0 radius-border-2 hyper-bg-white">
+                                        <div class="modal-header hyper-bg-dark">
+                                            <h5 class="modal-title"><i class="fal fa-info-circle mr-1"></i> ข้อมูลไอดีที่เคลม</h5>
+                                            <button type="button" class="close p-4" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body text-left">
+                                            ${data[i].claim_data_confirm == 0 ? `
+                                                <div class="row" style="position: absolute;right: 0px;padding-right: 30px;z-index:5;">
+                                                    <div class="btn-group" role="group" aria-label="Basic example">
+                                                        <button type="submit" class="btn btn-success btn-sm" onclick="submit(${data[i].claim_data_id},1)">เข้าสต๊อก</button>
+                                                        <button type="submit" class="btn btn-danger btn-sm" onclick="submit(${data[i].claim_data_id}, 2)">ตรวจแล้ว</button>
+                                                    </div>
+                                                </div>` : ''}
+                                            <div class="row" style="padding: 5px 2px 0px 2px;">
+                                                <div class="col-3 col-md-4">
+                                                    <span>ชื่อผู้ใช้งาน</span>
+                                                </div>
+                                                <div class="col-9 col-md-8">
+                                                    <input type="text" id="username${data[i].claim_data_id}1" value="${data[i].data_result_username}" readonly style="background-color: #fff;border-radius: 0px;border: 0px">
+                                                </div>
+                                            </div>
+                                            <div class="row" style="padding: 5px 2px 0px 2px;">
+                                                <div class="col-3 col-md-4">
+                                                    <span>รหัสผ่าน</span>
+                                                </div>
+                                                <div class="col-9 col-md-8">
+                                                    <input type="text" id="password${data[i].claim_data_id}1" value="${data[i].data_result_password}" readonly style="background-color: #fff;border-radius: 0px;border: 0px">
+                                                </div>
+                                            </div>
+                                            <div class="row" style="padding: 5px 2px 0px 2px;">
+                                                <div class="col-3 col-md-4">
+                                                    <span>จอ</span>
+                                                </div>
+                                                <div class="col-9 col-md-8">
+                                                    <input type="text" value="${data[i].data_result_display}" readonly style="background-color: #fff;border-radius: 0px;border: 0px">
+                                                </div>
+                                            </div>
+                                            <div class="row" style="padding: 5px 2px 0px 2px;">
+                                                <div class="col-3 col-md-4">
+                                                    <span>สาเหตุในการเคลม</span>
+                                                </div>
+                                                <div class="col-9 col-md-8">
+                                                    <p>${data[i].claim_data_detail}</p>
+                                                </div>
+                                            </div>
+
+                                            <div class="modal-footer p-2 border-0">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fad fa-times-circle mr-1"></i>ปิด</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>`;
+                    }
+                    $('#body').html(body);
+                    $('body').append(html);
+                    $('#myTable').DataTable();
+                    $('#loading').remove();
+                }
+            },
+            error: function(data) {
+                console.log(data.responseText);
+                $('#myTable').DataTable();
+                html = 
+                `
+                <tr>
+                    <td colspan="6">ไม่มีข้อมูลในขณะนี้</td>
+                </tr>
+                `
+                $('#body').html(html);
+                $('#loading').remove();
+            }
+        });
+
+    })
     var total_del = [];
 
     function checkedL(data) {

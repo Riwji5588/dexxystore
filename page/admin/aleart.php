@@ -218,6 +218,15 @@
             },
             error: function(data) {
                 console.log(data.responseText);
+                $('#myTable').DataTable();
+                html =
+                    `
+                <tr>
+                    <td colspan="6">ไม่มีข้อมูลในขณะนี้</td>
+                </tr>
+                `
+                $('#body').html(html);
+                $('#loading').remove();
             }
         });
 
