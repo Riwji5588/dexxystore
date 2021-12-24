@@ -1,8 +1,8 @@
 <?php
 include("hyper_api.php");
 
-if (isset($_GET)) {
-    if ($_GET['action'] == 'getdataowner'){
+if ($_POST) {
+    if ($_POST['action'] == 'getdataowner'){
         $data = [];
         
         $sql_select_selled = "SELECT * FROM data_selled";

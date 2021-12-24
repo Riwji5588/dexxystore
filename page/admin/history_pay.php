@@ -16,6 +16,10 @@
           </tbody>
           </tbody>
         </table>
+        <div id="loading" class="container" style="color: #FFF;" align="center">
+          <div class="spinner-border" role="status">
+          </div>
+        </div>
       </div>
       <!-- End Pay  -->
 

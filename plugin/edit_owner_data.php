@@ -21,8 +21,9 @@ if(isset($_POST['data_id'])){
             $user = $_POST['username'];
             $pass = base64_encode($_POST['password']);
             $detail = $_POST['detail'];
+            $display = $_POST['display'];
 
-            $update_data_sql = "UPDATE game_data SET username = '".$user."', password = '".$pass."', detail = '".$detail."' WHERE data_id = $did";
+            $update_data_sql = "UPDATE game_data SET username = '".$user."', password = '".$pass."', detail = '".$detail."', display = '". $display ."' WHERE data_id = $did";
             $query_data_update = $hyper->connect->query($update_data_sql);
             if(!$query_data_update){
                 $errorMSG = "อัพเดทข้อมูลไม่สำเร็จ";
@@ -42,5 +43,3 @@ if(isset($_POST['data_id'])){
 }else{
   header("Location: 403.php");
 }
-
-?>

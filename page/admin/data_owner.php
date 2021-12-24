@@ -17,6 +17,10 @@
           <tbody id="body">
           </tbody>
         </table>
+        <div id="loading" class="container" style="color: #FFF;" align="center">
+          <div class="spinner-border" role="status">
+          </div>
+        </div>
       </div>
       <!-- End Data Owner  -->
 
@@ -24,97 +28,108 @@
         $(document).ready(async () => {
           let isSandbox = window.location.origin == "https://sandbox.dexystore.me";
           let host = window.location.origin == "http://localhost" ? "http://localhost/dexxystore" : isSandbox ? "https://sandbox.dexystore.me" : "https://dexystore.me";
-          let url = host + '/plugin/getDataowner.php?action=getdataowner';
-          // console.log(url);
-          const response = await fetch(url, {
-            method: 'POST', // *GET, POST, PUT, DELETE, etc.
-            mode: 'no-cors', // no-cors, *cors, same-origin
-            credentials: 'same-origin', // include, *same-origin, omit
-            headers: {
-              'Content-Type': 'application/json'
-              // 'Content-Type': 'application/x-www-form-urlencoded',
+          let url = host + '/plugin/getDataowner.php';
+          $.ajax({
+
+            type: "POST",
+            url: url,
+            dataType: "json",
+            data: {
+              action: 'getdataowner',
             },
-          });
-          const json = await response.json();
-          if (json.code == 200) {
-            let body = $('#body').html();
-            const data1 = json.data;
+            success: function(json) {
+              if (json.code == 200) {
+                let body = $('#body').html();
+                const data1 = json.data;
 
-            for (let i = 0; i < data1.length; i++) {
-              let data = data1[i];
-              let password = decodeURIComponent(escape(window.atob(data.selled_data_password)));
-              body += `
-              <tr>
-                  <td>${data.selled_id}</td>
-                  <td>${data.card_id == null ? 'Unknow' : data.card_title+" - "+data.card_price}</td>
-                  <td>${data.selled_data_username}</td>
-                  <td>${data.account_username}</td>
-                  <td>${data.selled_date}</td>
-                  <td>${data.expire < 1 ? "หมดประกัน" : "ยังไม่หมดประกัน"}</td>
-                  <td>
-                    <button class="btn btn-sm hyper-btn-notoutline-success" type="button" data-toggle="modal" data-target="#editownermodal${data.selled_data_id}"><i class="fal fa-edit mr-1"></i> แก้ไข</button>
-                    <button onclick="DelData(this)" value="${data.selled_id}" class="btn btn-sm hyper-btn-notoutline-danger my-1 my-sm-0" type="button"><i class="fal fa-trash-alt mr-1"></i> ลบ</button>
+                for (let i = 0; i < data1.length; i++) {
+                  let data = data1[i];
+                  let password = decodeURIComponent(escape(window.atob(data.selled_data_password)));
+                  body += `
+                    <tr>
+                      <td>${data.selled_id}</td>
+                      <td>${data.card_id == null ? 'Unknow' : data.card_title+" - "+data.card_price}</td>
+                      <td>${data.selled_data_username}</td>
+                      <td>${data.account_username}</td>
+                      <td>${data.selled_date}</td>
+                      <td>${data.expire < 1 ? "หมดประกัน" : "ยังไม่หมดประกัน"}</td>
+                      <td>
+                        <button class="btn btn-sm hyper-btn-notoutline-success" type="button" data-toggle="modal" data-target="#editownermodal${data.selled_data_id}"><i class="fal fa-edit mr-1"></i> แก้ไข</button>
+                        <button onclick="DelData(this)" value="${data.selled_id}" class="btn btn-sm hyper-btn-notoutline-danger my-1 my-sm-0" type="button"><i class="fal fa-trash-alt mr-1"></i> ลบ</button>
 
-                    <!-- Edit Game Data Modal -->
-                    <div class="modal fade" id="editownermodal${data.selled_data_id}" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-hidden="true">
-                      <div class="modal-dialog modal-dialog-centered">
-                        <div class="modal-content border-0 radius-border-2 hyper-bg-white">
-                          <div class="modal-header hyper-bg-dark">
-                            <h6 class="modal-title"><i class="fal fa-plus-square mr-1"></i> อัพเดทข้อมูล</h6>
-                          </div>
-                          <div class="modal-body text-center">
-
-                            <form method="POST" enctype="multipart/form-data">
-
-                              <div class="input-group input-group-sm mb-3 mt-4">
-                                <div class="input-group-prepend">
-                                  <span class="input-group-text hyper-bg-dark border-dark">ชื่อผู้ใช้งาน</span>
-                                </div>
-                                <input id="username${data.selled_data_id}" value="${data.selled_data_username}" type="text" class="form-control form-control-sm hyper-form-control" placeholder="ชื่อผู้ใช้งาน" required autocomplete="off">
+                        <!-- Edit Game Data Modal -->
+                        <div class="modal fade" id="editownermodal${data.selled_data_id}" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-hidden="true">
+                          <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content border-0 radius-border-2 hyper-bg-white">
+                              <div class="modal-header hyper-bg-dark">
+                                <h6 class="modal-title"><i class="fal fa-plus-square mr-1"></i> อัพเดทข้อมูล</h6>
                               </div>
+                              <div class="modal-body text-center">
 
-                              <div class="input-group input-group-sm mb-3">
-                                <div class="input-group-prepend">
-                                  <span class="input-group-text hyper-bg-dark border-dark">รหัสผ่าน</span>
-                                </div>
-                                <input id="password${data.selled_data_id}" value="${password}" type="text" class="form-control form-control-sm hyper-form-control" placeholder="รหัสผ่าน" required autocomplete="off">
+                                <form method="POST" enctype="multipart/form-data">
+
+                                  <div class="input-group input-group-sm mb-3 mt-4">
+                                    <div class="input-group-prepend">
+                                      <span class="input-group-text hyper-bg-dark border-dark">ชื่อผู้ใช้งาน</span>
+                                    </div>
+                                    <input id="username${data.selled_data_id}" value="${data.selled_data_username}" type="text" class="form-control form-control-sm hyper-form-control" placeholder="ชื่อผู้ใช้งาน" required autocomplete="off">
+                                  </div>
+
+                                  <div class="input-group input-group-sm mb-3">
+                                    <div class="input-group-prepend">
+                                      <span class="input-group-text hyper-bg-dark border-dark">รหัสผ่าน</span>
+                                    </div>
+                                    <input id="password${data.selled_data_id}" value="${password}" type="text" class="form-control form-control-sm hyper-form-control" placeholder="รหัสผ่าน" required autocomplete="off">
+                                  </div>
+
+                                  <div class="input-group input-group-sm mb-3">
+                                    <div class="input-group-prepend">
+                                      <span class="input-group-text hyper-bg-dark border-dark">จอ</span>
+                                    </div>
+                                    <input id="display${data.selled_data_id}" value="${data.selled_data_display}" type="text" class="form-control form-control-sm hyper-form-control" placeholder="ชื่อผู้ใช้งาน" required autocomplete="off">
+                                  </div>
+
+                                  <div class="input-group input-group-sm">
+                                    <div class="input-group-prepend">
+                                      <span class="input-group-text hyper-bg-dark border-dark">รายละเอียด</span>
+                                    </div>
+                                    <textarea id="detail${data.selled_data_id}" class="form-control form-control-sm hyper-form-control" style="height: 100px;min-height: 100px;max-height: 100px;">${data.selled_data_detail}</textarea>
+                                  </div>
+
+                                  <button type="submit" id="updatedata${data.selled_data_id}" class="d-none"></button>
+                                </form>
+
                               </div>
-
-                              <div class="input-group input-group-sm mb-3">
-                                <div class="input-group-prepend">
-                                  <span class="input-group-text hyper-bg-dark border-dark">จอ</span>
-                                </div>
-                                <input id="username${data.selled_data_id}" value="${data.selled_data_display}" type="text" class="form-control form-control-sm hyper-form-control" placeholder="ชื่อผู้ใช้งาน" required autocomplete="off">
+                              <div class="modal-footer p-2 border-0">
+                                <button type="button" onclick="updatedata('${data.selled_data_id}')" class="btn hyper-btn-notoutline-success"><i class="fal fa-plus-square mr-1"></i>อัพเดทข้อมูล</button>
+                                <button type="button" class="btn hyper-btn-notoutline-danger" data-dismiss="modal"><i class="fad fa-times-circle mr-1"></i>ยกเลิก</button>
                               </div>
-
-                              <div class="input-group input-group-sm">
-                                <div class="input-group-prepend">
-                                  <span class="input-group-text hyper-bg-dark border-dark">รายละเอียด</span>
-                                </div>
-                                <textarea id="detail${data.selled_data_id}" class="form-control form-control-sm hyper-form-control" style="height: 100px;min-height: 100px;max-height: 100px;">${data.selled_data_detail}</textarea>
-                              </div>
-
-                              <button type="submit" id="updatedata${data.selled_data_id}" class="d-none"></button>
-                            </form>
-
-                          </div>
-                          <div class="modal-footer p-2 border-0">
-                            <button type="button" onclick="updatedata('${data.selled_data_id}')" class="btn hyper-btn-notoutline-success"><i class="fal fa-plus-square mr-1"></i>อัพเดทข้อมูล</button>
-                            <button type="button" class="btn hyper-btn-notoutline-danger" data-dismiss="modal"><i class="fad fa-times-circle mr-1"></i>ยกเลิก</button>
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    </div>
-                    <!-- End Edit Game Data Modal -->
+                        <!-- End Edit Game Data Modal -->
 
-                  </td>
-                </tr>`;
+                      </td>
+                    </tr>`;
+                }
+                $('#body').html(body);
+                $('#myTable').DataTable();
+                $('#loading').remove();
+              }
+            },
+            error: function(data) {
+              console.log(data.responseText);
+              $('#myTable').DataTable();
+              html =
+                `
+                <tr>
+                    <td colspan="7">ไม่มีข้อมูลในขณะนี้</td>
+                </tr>
+                `
+              $('#body').html(html);
+              $('#loading').remove();
             }
-            $('#body').html(body);
-            $('#myTable').DataTable();
-          } else {
-            console.log(data);
-          }
+          });
 
         })
 
@@ -212,11 +227,13 @@
                   var username = $('#username' + id).val();
                   var password = $('#password' + id).val();
                   var detail = $('#detail' + id).val();
+                  var display = $('#display' + id).val();
 
                   updatedata.append('data_id', did);
                   updatedata.append('username', username);
                   updatedata.append('password', password);
                   updatedata.append('detail', detail);
+                  updatedata.append('display', display);
 
                   $.ajax({
 
