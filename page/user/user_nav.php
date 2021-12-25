@@ -49,7 +49,7 @@ $noti_row = mysqli_num_rows($notify);
 			<li><a href="profile" class="btn btn-sm gr <?php if ($page == 'profile') {
 															echo '-active';
 														} ?> mr-2"><i class=" fal fa-user mr-1"></i> บัญชีของฉัน</a></li>
-			<?php if ($data_user['role'] == '779') { ?><li><a href="adminsys" class="btn btn-sm pk <?php if ($page == 'adminsys' || $page == 'gametype' || $page == 'gameselect' || $page == 'editgame' || $page == 'gamecard' || $page == 'gamedata' || $page == 'dataowner' || $page == 'datauser' || $page == 'datapay' || $page == 'websetting' || $page == 'report') {
+			<?php if ($data_user['role'] == '779') { ?><li><a href="adminsys" class="btn btn-sm pk <?php if ($page == 'adminsys' || $page == 'gametype' || $page == 'gameselect' || $page == 'editgame' || $page == 'gamecard' || $page == 'gamedata' || $page == 'dataowner' || $page == 'datauser' || $page == 'datapay' || $page == 'websetting' || $page == 'report' || $page == 'reportfirst') {
 																										echo '-active';
 																									} ?> mr-2"><i class="fal fa-tools mr-1"></i> ระบบแอดมิน</a></li><?php } ?>
 			<li><a href="history" class="btn btn-sm yl <?php if ($page == 'history') {
