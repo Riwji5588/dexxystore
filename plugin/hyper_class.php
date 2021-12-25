@@ -185,19 +185,19 @@ class Notify
 
             $msg = "<b>{$from_user_data['username']}</b> ทำการขอเคลมสินค้าออเดอร์ที่<b> {$orderid}</b> "; // to admin
             $encode = base64_encode($msg);
-            $sql = "INSERT INTO notify_log(_from, _to, message, isadmin, datetime) VALUES ({$from_user_data['ac_id']}, {$to_user_data[0][0]}, '{$encode}', $admin, '{$datetime}')";
+            $sql = "INSERT INTO notify_log(_from, _to, data_id, message, isadmin, datetime) VALUES ({$from_user_data['ac_id']}, {$to_user_data[0][0]}, {$orderid}, '{$encode}', $admin, '{$datetime}')";
             $hyper->connect->query($sql);
 
             // echo $hyper->connect->error;
         } else if ($type == "confirm") { //when admin confirm claim then user will recept it
             $msg = "ออเดอร์ <b>{$orderid}</b> ของคุณได้รับการอนุมัติแล้ว! "; // to user
             $encode = base64_encode($msg);
-            $sql = "INSERT INTO notify_log(_from, _to, message, status, datetime) VALUES ({$from_user_data['ac_id']}, {$to_user_data[0][0]}, '{$encode}', 1, '{$datetime}')";
+            $sql = "INSERT INTO notify_log(_from, _to, data_id, message, status, datetime) VALUES ({$from_user_data['ac_id']}, {$to_user_data[0][0]}, {$orderid}, '{$encode}', 1, '{$datetime}')";
             $hyper->connect->query($sql);
         } else if ($type == "reject") { //when admin confirm claim then user will recept it
             $msg = "ออเดอร์ <b>{$orderid}</b> ของคุณได้ถูกปฏิเสธ! "; // to user
             $encode = base64_encode($msg);
-            $sql = "INSERT INTO notify_log(_from, _to, message, status, datetime) VALUES ({$from_user_data['ac_id']}, {$to_user_data[0][0]}, '{$encode}', 2, '{$datetime}')";
+            $sql = "INSERT INTO notify_log(_from, _to, data_id,  message, status, datetime) VALUES ({$from_user_data['ac_id']}, {$to_user_data[0][0]}, {$orderid}, '{$encode}', 2, '{$datetime}')";
             $hyper->connect->query($sql);
         }
     }

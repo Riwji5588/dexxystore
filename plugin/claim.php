@@ -82,10 +82,11 @@ if (isset($_POST['id'])) {
                                             $message .= "เหตุผล : " . $detail . "\n";
                                             $message .= "ไปที่เว็บ : " . $hyper->url . "/reportfirst" . "&" . "id={$selled['selled_id']}";
                                             if ($admin['line_token'] != NULL) {
-
+                                                
                                                 $hyper->line->send($admin['line_token'], $message); // Send msg to admin Line
                                             }
                                         }
+                                        $hyper->notify->sendNotify($selled['ac_id'], 39, 'confirm', $selled['selled_id']);
                                         $successMSG = "ส่งเคลม สำเร็จ!";
                                     } else {
                                         $errorMSG = "เคลมไม่สำเร็จ... กรุณาแจ้งแอดมิน (2)";
