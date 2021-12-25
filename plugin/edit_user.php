@@ -21,8 +21,9 @@ if(isset($_POST['user_id'])){
                 $point = $_POST['point'];
                 $email = $_POST['email'];
                 $role = $_POST['role'];
+                $ban = $_POST['ban'];
     
-                $update_data_sql = "UPDATE accounts SET points = '".$point."', email = '".$email."', role = '".$role."' WHERE ac_id = $uid";
+                $update_data_sql = "UPDATE accounts SET points = '".$point."', email = '".$email."', role = '".$role."', ban = '". $ban ."' WHERE ac_id = $uid";
                 $query_data_update = $hyper->connect->query($update_data_sql);
                 if(!$query_data_update){
                     $errorMSG = "อัพเดทข้อมูลไม่สำเร็จ";
@@ -44,5 +45,3 @@ if(isset($_POST['user_id'])){
 }else{
   header("Location: 403.php");
 }
-
-?>

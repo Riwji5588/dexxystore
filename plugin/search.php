@@ -69,9 +69,9 @@ if (isset($_GET)) {
 
 
     if ($total_selled_row > 0) {
-        $selled = mysqli_fetch_array($query_selled);
+        $i = 0;
         do {
-
+            $selled = mysqli_fetch_array($query_selled);
             $sid = $_COOKIE['USER_SID'];
             $var = "SELECT * FROM accounts WHERE sid = '" . $sid . "' ";
             $user_query = $hyper->connect->query($var);
@@ -96,17 +96,12 @@ if (isset($_GET)) {
             $expire = strtotime($selled['exp_date']) - strtotime('today midnight');
 
 
-            $select_noti = "SELECT * FROM notify_log WHERE _to={$data_user['ac_id']} ORDER BY id DESC";
+            $select_noti = "SELECT * FROM notify_log WHERE _to={$data_user['ac_id']} AND data_id={$selled['selled_id']} ORDER BY id";
             $notify = $hyper->connect->query($select_noti);
-            $noti_row = mysqli_num_rows($notify);
+            $noti_row = $notify->num_rows;
             $row = $notify->fetch_assoc();
-            // print_r($row);
-            $msg = base64_decode($row['message']);
-            $order_id = (int) filter_var($msg, FILTER_SANITIZE_NUMBER_INT);
 
-            $datetime = $row['datetime'] . ' +2 day';
-            $date = date('Y-m-d H:i:s', strtotime("+ 0 day"));
-            $day_check = strtotime($datetime) - strtotime($date);
+
 
             if (strpos($selled['selled_id'], $word) !== false || strpos($str, $word) !== false || $_GET['search'] === 'ttt') :
 ?>
@@ -122,11 +117,22 @@ if (isset($_GET)) {
                                                                                     } ?></b> </span><br>
                         <span>วันที่ซื้อสินค้า : <b><?= DateThai1($selled['selled_date']); ?></b></span><br>
                         <?php
-                        for ($i = 0; $i < $noti_row; $i++) :
-                            $msg = base64_decode($row['message']);
-                            $order_id = (int) filter_var($msg, FILTER_SANITIZE_NUMBER_INT);
-                            // echo $order_id;
-                            if ($order_id == (int)$selled['selled_id']) :
+                        if ($row == null) {
+                            $datetime = 0;
+                            $date = date('Y-m-d H:i:s', strtotime("+ 0 day"));
+                            $day_check = $datetime - strtotime($date);
+                        } else {
+                            // print_r(count($row));
+                            $order_id = $row['data_id'];
+
+                            // print_r($row);
+
+                            if ($order_id == (int)$selled['selled_id']) {
+
+                                $datetime = $row['datetime'] . ' +2 day';
+                                $date = date('Y-m-d H:i:s', strtotime("+ 0 day"));
+                                $day_check = strtotime($datetime) - strtotime($date);
+
                                 if ($day_check > 0) {
                         ?>
                                     <span> สถานะ : <?php
@@ -146,10 +152,9 @@ if (isset($_GET)) {
                                         <br> หมายเหตุ :<span style='color: #ff6b4a;'><br> <?= $selled['response'] ?> </span> <br>
                         <?php
                                     }
-                                    break;
                                 }
-                            endif;
-                        endfor;
+                            }
+                        }
                         ?>
                         <p class="mt-1"><?php
                                         if ($expire < 1) {
@@ -224,7 +229,7 @@ if (isset($_GET)) {
                                         <?php
                                         endif;
                                         ?>
-                                        <span><a href="#" onclick="renew(<?= $selled['selled_id']; ?>)" style="color: #1a00db;" ><br>ต่อวันประกัน +30 วัน   คลิกที่นี่!</a></span>
+                                        <span><a href="#" onclick="renew(<?= $selled['selled_id']; ?>)" style="color: #1a00db;"><br>ต่อวันประกัน +30 วัน คลิกที่นี่!</a></span>
                                     </div>
                                 </div>
                                 <span style="color: #ff0022;" align="center"><br><b>อ่านก่อนเข้าจอ</b> <br></span>
@@ -353,7 +358,8 @@ if (isset($_GET)) {
 <?php
 
             endif;
-        } while ($selled = mysqli_fetch_array($query_selled));
+            $i++;
+        } while ($i < $total_selled_row);
     }
 }
 

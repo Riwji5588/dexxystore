@@ -7,7 +7,7 @@ $user_query = $hyper->connect->query($var);
 $total_user = mysqli_num_rows($user_query);
 $data_user = $hyper->connect->query($var)->fetch_array();
 
-$select_noti = "SELECT * FROM notify_log WHERE _to={$data_user['ac_id']} ORDER BY id DESC";
+$select_noti = "SELECT * FROM notify_log WHERE _to={$data_user['ac_id']} AND isadmin!=1 ORDER BY id DESC";
 
 $notify = $hyper->connect->query($select_noti);
 $noti_row = mysqli_num_rows($notify);
@@ -49,7 +49,7 @@ $noti_row = mysqli_num_rows($notify);
 			<li><a href="profile" class="btn btn-sm gr <?php if ($page == 'profile') {
 															echo '-active';
 														} ?> mr-2"><i class=" fal fa-user mr-1"></i> บัญชีของฉัน</a></li>
-			<?php if ($data_user['role'] == '779') { ?><li><a href="adminsys" class="btn btn-sm pk <?php if ($page == 'adminsys' || $page == 'gametype' || $page == 'gameselect' || $page == 'editgame' || $page == 'gamecard' || $page == 'gamedata' || $page == 'dataowner' || $page == 'datauser' || $page == 'datapay' || $page == 'websetting' || $page == 'report') {
+			<?php if ($data_user['role'] == '779') { ?><li><a href="adminsys" class="btn btn-sm pk <?php if ($page == 'adminsys' || $page == 'gametype' || $page == 'gameselect' || $page == 'editgame' || $page == 'gamecard' || $page == 'gamedata' || $page == 'dataowner' || $page == 'datauser' || $page == 'datapay' || $page == 'websetting' || $page == 'report' || $page == 'reportfirst') {
 																										echo '-active';
 																									} ?> mr-2"><i class="fal fa-tools mr-1"></i> ระบบแอดมิน</a></li><?php } ?>
 			<li><a href="history" class="btn btn-sm yl <?php if ($page == 'history') {
@@ -119,30 +119,6 @@ $noti_row = mysqli_num_rows($notify);
 
 							if ($row['isadmin']) {
 					?>
-								<div class="alert alert-info">
-									<div class="row align-items-center mb-1">
-										<div class="col-1 col-md-1 " style="padding-right: 0;">
-											<i class="fas fa-bell"></i>
-										</div>
-										<div class="col-12 col-md-8 " align="start" style="padding-right: 0;">
-											<?= $msg ?>
-										</div>
-										<div class="col-4 col-md-3 mb-2" style="margin-top: 4px;">
-											<a href="report&id=<?= $order_id ?>" class="btn btn-sm btn-warning " style="color: black;font-size: 13px;">
-												รายละเอียด
-											</a>
-										</div>
-										<div class="col-12 mt-5" align="right" style="position: absolute;">
-											<small class="text-muted">
-												<?php if ($day > 0) : ?>
-													เหลือเวลาอีก <?= $day ?> วัน
-												<?php else : ?>
-													หมดเวลา
-												<?php endif; ?>
-											</small>
-										</div>
-									</div>
-								</div>
 								<?php
 							} else {
 								if ($row['status'] == 1) {

@@ -53,9 +53,6 @@ if ($total_game_row <= 0) {
               </div>
               <textarea id="stockId" name="stockId" type="text" class="form-control form-control-sm hyper-form-control " placeholder="โปรดเลือกฟอร์มการใส่" required autocomplete="off" style=" min-height: 120px ; max-height: 180px ;"></textarea>
             </div>
-
-
-
             <div class="input-group input-group-sm mb-3">
               <div class="input-group-prepend">
                 <label class="input-group-text hyper-bg-dark border-dark" for="cardnew">เลือกการ์ด</label>
@@ -97,7 +94,7 @@ if ($total_game_row <= 0) {
   <!-- End Add Game Data Modal -->
 
   <div class="table-responsive mt-3">
-    <table id="datatable" class="table table-hover text-center w-100">
+    <table id="myTable" class="table table-hover text-center w-100">
       <thead class="hyper-bg-dark">
         <tr>
           <th scope="col" style="width:120px;">เลขที่ข้อมูล</th>
@@ -106,9 +103,10 @@ if ($total_game_row <= 0) {
           <th scope="col" style="width: 170px;">เมนู</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody id="loading" style="display: none;">
 
         <?php
+        $loaddata = 0;
         $sql_select_data = "SELECT * FROM game_data WHERE game_id = '$id' AND selled = 0";
         $query_data = $hyper->connect->query($sql_select_data);
         $total_data_row = mysqli_num_rows($query_data);
@@ -155,7 +153,12 @@ if ($total_game_row <= 0) {
                             </div>
                             <input id="password<?= $data['data_id']; ?>" type="text" value="<?= base64_decode($data['password']); ?>" class="form-control form-control-sm hyper-form-control" placeholder="รหัสผ่าน" required autocomplete="off">
                           </div>
-
+                          <div class="input-group input-group-sm mb-3">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text hyper-bg-dark border-dark">จอ</span>
+                            </div>
+                            <input type="text" id="display<?= $data['data_id']; ?>" value="<?= $data['display']; ?>" class="form-control form-control-sm hyper-form-control" placeholder="จอ" required autocomplete="off">
+                          </div>
                           <div class="input-group input-group-sm mb-3">
                             <div class="input-group-prepend">
                               <label class="input-group-text hyper-bg-dark border-dark" for="inputGroupSelect01">เลือกการ์ด</label>
@@ -202,7 +205,25 @@ if ($total_game_row <= 0) {
 
               </td>
             </tr>
-        <?php } while ($data = mysqli_fetch_array($query_data));
+          <?php
+            $loaddata++;
+          } while ($data = mysqli_fetch_array($query_data));
+          if ($loaddata == $total_data_row) {
+          ?>
+            <script>
+              $("#loading").show();
+            </script>
+          <?php
+          } else {
+          ?>
+            <tr>
+              <td colspan="6">
+                <div class="spinner-border" role="status">
+                </div>
+              </td>
+            </tr>
+        <?php
+          }
         } ?>
 
       </tbody>
@@ -210,6 +231,10 @@ if ($total_game_row <= 0) {
   </div>
 
   <script>
+    $(document).ready(async () => {
+      $('#myTable').DataTable();
+    })
+
     function submitdata(id) {
       $("#submitdata" + id).click();
     }
@@ -362,6 +387,7 @@ if ($total_game_row <= 0) {
               var did = id;
               var username = $('#username' + id).val();
               var password = $('#password' + id).val();
+              var display = $('#display' + id).val();
               var cid = $('#card' + id).val();
               var detail = $('#detail' + id).val();
               var gid = $('#gameid' + id).val();
@@ -369,6 +395,7 @@ if ($total_game_row <= 0) {
               updatedata.append('data_id', did);
               updatedata.append('username', username);
               updatedata.append('password', password);
+              updatedata.append('display', display);
               updatedata.append('card_id', cid);
               updatedata.append('detail', detail);
               updatedata.append('gameid', gid);

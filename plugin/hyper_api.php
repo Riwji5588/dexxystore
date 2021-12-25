@@ -9,5 +9,6 @@ $hyper = (object) array(
     // "url" => "http://localhost/dexxystore",
     "line"=> new LineMsg,
     "notify" => new Notify,
+    "datethai" => new DateThai,
 );
 

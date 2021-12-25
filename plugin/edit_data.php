@@ -27,8 +27,9 @@ if(isset($_POST['data_id'])){
                 $pass = base64_encode($_POST['password']);
                 $cid = $_POST['card_id'];
                 $detail = $_POST['detail'];
+                $display = $_POST['display'];
 
-                $update_data_sql = "UPDATE game_data SET game_id = '".$gid."', card_id = '".$cid."', username = '".$user."', password = '".$pass."', detail = '".$detail."' WHERE data_id = $did";
+                $update_data_sql = "UPDATE game_data SET game_id = '".$gid."', card_id = '".$cid."', username = '".$user."', password = '".$pass."', detail = '".$detail."', display='". $display ."' WHERE data_id = $did";
                 $query_data_update = $hyper->connect->query($update_data_sql);
                 if(!$query_data_update){
                     $errorMSG = "อัพเดทข้อมูลไม่สำเร็จ";
