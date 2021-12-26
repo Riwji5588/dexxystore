@@ -1,0 +1,292 @@
+.sign {
+  margin: -30px auto auto 15px;
+  font-size: 1.5em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* transform: translate(-50%, -50%); */
+  letter-spacing: 2;
+  font-family: "kanit";
+  text-transform: uppercase;
+  color: #fff;
+  text-shadow: 0 0 0.6rem #fff, 0 0 1.5rem #a34dd4, -0.2rem 0.1rem 1rem #a34dd4,
+    0.2rem 0.1rem 1rem #a34dd4, 0 -0.5rem 2rem #890ecf, 0 0.5rem 3rem #890ecf;
+  animation: shine 2s forwards, flicker 3s infinite;
+}
+
+@keyframes blink {
+  0%,
+  22%,
+  36%,
+  75% {
+    color: #fff;
+    text-shadow: 0 0 0.6rem #fff, 0 0 1.5rem #a34dd4,
+      -0.2rem 0.1rem 1rem #a34dd4, 0.2rem 0.1rem 1rem #a34dd4,
+      0 -0.5rem 2rem #890ecf, 0 0.5rem 3rem #890ecf;
+  }
+
+  28%,
+  33% {
+    color: #fff;
+    text-shadow: none;
+  }
+
+  82%,
+  97% {
+    color: #fff;
+    text-shadow: none;
+  }
+}
+
+.flicker {
+  animation: shine 2s forwards, blink 3s 2s infinite;
+}
+
+.fast-flicker {
+  animation: shine 2s forwards, blink 10s 1s infinite;
+}
+
+@keyframes shine {
+  0% {
+    color: #fff;
+    text-shadow: none;
+  }
+
+  100% {
+    color: #fff;
+    text-shadow: 0 0 0.6rem #fff, 0 0 1.5rem #a34dd4,
+      -0.2rem 0.1rem 1rem #a34dd4, 0.2rem 0.1rem 1rem #a34dd4,
+      0 -0.5rem 2rem #890ecf, 0 0.5rem 3rem #890ecf;
+  }
+}
+
+@keyframes flicker {
+  from {
+    opacity: 1;
+  }
+
+  4% {
+    opacity: 0.9;
+  }
+
+  6% {
+    opacity: 0.85;
+  }
+
+  8% {
+    opacity: 0.95;
+  }
+
+  10% {
+    opacity: 0.9;
+  }
+
+  11% {
+    opacity: 0.922;
+  }
+
+  12% {
+    opacity: 0.9;
+  }
+
+  14% {
+    opacity: 0.95;
+  }
+
+  16% {
+    opacity: 0.98;
+  }
+
+  17% {
+    opacity: 0.9;
+  }
+
+  19% {
+    opacity: 0.93;
+  }
+
+  20% {
+    opacity: 0.99;
+  }
+
+  24% {
+    opacity: 1;
+  }
+
+  26% {
+    opacity: 0.94;
+  }
+
+  28% {
+    opacity: 0.98;
+  }
+
+  37% {
+    opacity: 0.93;
+  }
+
+  38% {
+    opacity: 0.5;
+  }
+
+  39% {
+    opacity: 0.96;
+  }
+
+  42% {
+    opacity: 1;
+  }
+
+  44% {
+    opacity: 0.97;
+  }
+
+  46% {
+    opacity: 0.94;
+  }
+
+  56% {
+    opacity: 0.9;
+  }
+
+  58% {
+    opacity: 0.9;
+  }
+
+  60% {
+    opacity: 0.99;
+  }
+
+  68% {
+    opacity: 1;
+  }
+
+  70% {
+    opacity: 0.9;
+  }
+
+  72% {
+    opacity: 0.95;
+  }
+
+  93% {
+    opacity: 0.93;
+  }
+
+  95% {
+    opacity: 0.95;
+  }
+
+  97% {
+    opacity: 0.93;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  h1.textanimate {
+    text-align: center;
+    color: #555;
+    font-family: "kanit";
+    font-weight: 300;
+    overflow: hidden;
+    -webkit-backface-visibility: hidden;
+    -webkit-perspective: 1000;
+    -webkit-transform: translate3d(0, 0, 0);
+    animation: centerpoint 7s infinite;
+  }
+  
+  h1.textanimate div {
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
+  h1.textanimate div:first-of-type {
+    /* For increasing performance 
+    ID/Class should've been used. 
+    For a small demo 
+    it's okaish for now */
+
+    animation: showup 7s infinite;
+  }
+
+  h1.textanimate div:last-of-type {
+    width: 0px;
+    animation: reveal 7s infinite;
+  }
+
+  h1.textanimate div:last-of-type span {
+    margin-left: -355px;
+    animation: slidein 7s infinite;
+  }
+}
+
+@keyframes showup {
+  0% {
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes slidein {
+  0% {
+    margin-left: -300px;
+  }
+  20% {
+    margin-left: -300px;
+  }
+  35% {
+    margin-left: -70px;
+  }
+  100% {
+    margin-left: -70px;
+  }
+}
+
+@keyframes reveal {
+  0% {
+    opacity: 0;
+    width: 0px;
+  }
+  20% {
+    opacity: 1;
+    width: 0px;
+  }
+  30% {
+    width: 300px;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    width: 300px;
+  }
+}
+
+@keyframes centerpoint {
+  0% {
+    margin-left: 40px;
+  }
+  20% {
+    margin-left: 40px;
+  }
+  25% {
+    margin-left: 80px;
+  }
+  100% {
+    margin-left: 80px;
+  }
+}

@@ -19,7 +19,7 @@ $sql_select_selled = "SELECT * FROM data_selled WHERE ac_id = $ac_id ORDER BY se
 
 
 <!-- DATA can be change in plugin/search.php! -->
-<div id="result" class="row justify-content-center" style="width: 100%;"></div> 
+<div id="result" class="row justify-content-center" style="width: 100%;"></div>
 
 <!-- add img modal -->
 <div class="modal fade" id="addimg" data-backdrop="static">
@@ -131,6 +131,32 @@ $sql_select_selled = "SELECT * FROM data_selled WHERE ac_id = $ac_id ORDER BY se
     search($('#search'), '<?= $sql_select_selled ?>');
   });
 
+  async function dosomething(id) {
+    document.getElementById('claimbtn' + id).disabled = true;
+    await claim(id)
+  }
+
+  async function sendline(message, token) {
+    let tokenList = token.split(',');
+    const urlLine = 'https://linenotifyapi.herokuapp.com/';
+    $.ajax({
+      url: urlLine,
+      type: 'POST',
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+        'Access-Control-Allow-Headers': 'Content-Type, Authorization, X-Requested-With',
+      },
+      data: {
+        message: message,
+        token: tokenList
+      }
+    }).then(function() {
+      setTimeout(() => {
+        window.location.reload();
+      }, 600);
+    });
+  }
 
   // search with ajax
   function search(input, sql) {
@@ -255,19 +281,14 @@ $sql_select_selled = "SELECT * FROM data_selled WHERE ac_id = $ac_id ORDER BY se
           closeOnClickOutside: false,
           timer: 500,
         });
-
       },
-
       success: function(data) {
-
         if (data.code == "200") {
           swal(data.msg, '\n', "success", {
             button: false,
             closeOnClickOutside: false,
           });
-          setTimeout(function() {
-            window.location.reload();
-          }, 1500);
+          sendline(data.line[0].massage, data.line[1].token);
         } else {
           swal(data.msg, "\n", "error", {
             button: {

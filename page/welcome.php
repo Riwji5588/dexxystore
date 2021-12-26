@@ -1,6 +1,16 @@
 <!-- Game Type -->
-<h1 class="text-center mt-4" style="color: white;">เว็บไซต์ซื้อสินค้าอัตโนมัติ บริการ 24 ชั่วโมง !</h1><br>
-<h2 class="text-center mb-2" style="color: white;">สินค้าแนะนำ</h2><br>
+
+<h1 class="text-center mt-4 textanimate" style="color: white;" align="center">
+  <div>เว็บไซต์ซื้อสินค้าอัตโนมัติ</div>
+  <div>
+    <span>บริการ 24 ชั่วโมง !</span>
+  </div>
+</h1><br>
+<h1 class="text-center mb-2" style="color: white;">
+  <div class="sign text-center" align="center">
+    <span class="fast-flicker">สิน</span>ค้า<span class="flicker">แนะนำ</span>
+  </div>
+</h1><br>
 <div class="row no-gutters" style="justify-content: center;">
 
   <?php
@@ -27,8 +37,8 @@
             <div class="card shadow-dark radius-border-6 hyper-bg-white hyper-card" style="border:3px solid #2E384D !important;">
               <img src="assets/img/game/<?= $game['game_image']; ?>" class="card-img-top img-fluid" style="border-top-left-radius: 0.6rem !important;border-top-right-radius: 0.6rem !important;">
               <div class="card-body">
-                <h4 class="mt-0 mb-2" id="title<?= $game['game_id']; ?>"><?= $game['game_name']; ?></h4> 
-                <h5 style="color: green;" class="text-left" > พร้อมส่ง ! </h5>
+                <h4 class="mt-0 mb-2" id="title<?= $game['game_id']; ?>"><?= $game['game_name']; ?></h4>
+                <h5 style="color: green;" class="text-left"> พร้อมส่ง ! </h5>
               </div>
             </div>
           </a>
