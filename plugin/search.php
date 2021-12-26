@@ -312,7 +312,7 @@ if (isset($_GET)) {
 
                                         </div>
                                         <div class="modal-footer p-2 border-0 form-group">
-                                            <button type="button" class="btn btn-success" onclick="claim(<?= $selled['selled_id']; ?>)"><i class="fas fa-check-circle"></i> ส่งเคลม</button>
+                                            <button id="claimbtn<?= $selled['selled_id']; ?>" type="button" class="btn btn-success" onclick="dosomething(<?= $selled['selled_id']; ?>)"><i class="fas fa-check-circle"></i> ส่งเคลม</button>
                                             <button type="button" class="btn btn-danger" data-dismiss="modal" aria-label="Close"><i class="fad fa-times-circle mr-1"></i>ปิด</button>
                                         </div>
                                     </div>

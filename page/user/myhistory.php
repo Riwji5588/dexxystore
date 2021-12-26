@@ -19,7 +19,7 @@ $sql_select_selled = "SELECT * FROM data_selled WHERE ac_id = $ac_id ORDER BY se
 
 
 <!-- DATA can be change in plugin/search.php! -->
-<div id="result" class="row justify-content-center" style="width: 100%;"></div> 
+<div id="result" class="row justify-content-center" style="width: 100%;"></div>
 
 <!-- add img modal -->
 <div class="modal fade" id="addimg" data-backdrop="static">
@@ -131,6 +131,34 @@ $sql_select_selled = "SELECT * FROM data_selled WHERE ac_id = $ac_id ORDER BY se
     search($('#search'), '<?= $sql_select_selled ?>');
   });
 
+  function dosomething(id) {
+    document.getElementById('claimbtn'+id).disabled = true;
+    claim(id);
+    click_delay(id);
+  }
+
+  function click_delay(id) {
+    function endCountdown() {
+      // logic to finish the countdown here
+      document.getElementById('claimbtn'+id).innerHTML = "ส่งเคลม";
+      document.getElementById('claimbtn'+id).disabled = false;
+    }
+
+    function handleTimer() {
+      if (count === 0) {
+        clearInterval(timer);
+        endCountdown();
+      } else {
+        document.getElementById('claimbtn'+id).innerHTML = "คูลดาวน์ " + count;
+        console.log(count);
+        count--;
+      }
+    }
+    var count = 3;
+    var timer = setInterval(function() {
+      handleTimer(count);
+    }, 1000);
+  }
 
   // search with ajax
   function search(input, sql) {
