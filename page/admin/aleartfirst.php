@@ -136,8 +136,8 @@
                                             ${data[i].claim_data_confirm == 0 ? `
                                                 <div class="row" style="position: absolute;right: 0px;padding-right: 30px;z-index:5;">
                                                     <div class="btn-group" role="group" aria-label="Basic example">
-                                                        <button type="submit" class="btn btn-success btn-sm" onclick="submit(${data[i].claim_data_id},1)">เข้าสต๊อก</button>
-                                                        <button type="submit" class="btn btn-danger btn-sm" onclick="submit(${data[i].claim_data_id}, 2)">ตรวจแล้ว</button>
+                                                        <button id="confirmbtn${data[i].claim_data_id}" type="submit" class="btn btn-success btn-sm" onclick="doConfirm(${data[i].claim_data_id})">เข้าสต๊อก</button>
+                                                        <button id="rejectbtn${data[i].claim_data_id}" type="submit" class="btn btn-danger btn-sm" onclick="doReject(${data[i].claim_data_id})">ตรวจแล้ว</button>
                                                     </div>
                                                 </div>` : ''}
                                             <div class="row" style="padding: 5px 2px 0px 2px;">
@@ -202,6 +202,40 @@
         });
 
     })
+
+    async function doConfirm(id) {
+        document.getElementById('confirmbtn' + id).disabled = true;
+        document.getElementById('rejectbtn' + id).disabled = true;
+        await submit(id, 1);
+    }
+
+    async function doReject(id) {
+        document.getElementById('confirmbtn' + id).disabled = true;
+        document.getElementById('rejectbtn' + id).disabled = true;
+        await submit(id, 2);
+    }
+
+    async function sendline(message, token) {
+        let tokenList = token.split(',');
+        const urlLine = 'https://linenotifyapi.herokuapp.com/';
+        $.ajax({
+            url: urlLine,
+            type: 'POST',
+            headers: {
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+                'Access-Control-Allow-Headers': 'Content-Type, Authorization, X-Requested-With',
+            },
+            data: {
+                message: message,
+                token: tokenList
+            }
+        }).then(function() {
+            setTimeout(() => {
+                window.location.reload();
+            }, 100);
+        });
+    }
     var total_del = [];
 
     function checkedL(data) {
@@ -324,9 +358,8 @@
                         button: false,
                         closeOnClickOutside: false,
                     });
-                    setTimeout(function() {
-                        window.location.reload();
-                    }, 1500);
+                    // console.log(data.line);
+                    sendline(data.line[0].massage, data.line[1].token);
                 } else {
                     swal(data.msg, "\n", "error", {
                         button: {

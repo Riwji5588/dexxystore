@@ -4,6 +4,8 @@ include("hyper_api.php");
 include("../api/sendnoti/sendmsg.php");
 $errorMSG = "";
 $successMSG = "";
+$token = [];
+$line_data = [];
 
 /* 
 
@@ -49,17 +51,27 @@ if (isset($_POST['id'])) {
                 $select_admin = "SELECT * FROM accounts WHERE role=779";
                 $admin_query = $hyper->connect->query($select_admin);
                 $admin_num = mysqli_num_rows($admin_query);
+
+                // msg
+                $message = "\n‼️ ถึงแอดมิน ‼️ \n";
+                $message .= "ออเดอร์ที่ : " . $selled['selled_id'] . "\n";
+                $message .= "สถานะ : นำกลับไปจำหน่าย \n";
+                $message .= "โดย : " . $data_user['username'] . "\n";
+
+                array_push($line_data, [
+                    'massage' => $message,
+                ]);
+
                 for ($i = 0; $i < $admin_num; $i++) {
                     $admin = $admin_query->fetch_array();
-                    $message = "\n‼️ ถึงแอดมิน ‼️ \n";
-                    $message .= "ออเดอร์ที่ : " . $selled['selled_id'] . "\n";
-                    $message .= "สถานะ : นำกลับไปจำหน่าย \n";
-                    $message .= "โดย : " . $data_user['username'] . "\n";
                     if ($admin['line_token'] != NULL) {
-
-                        $hyper->line->send($admin['line_token'], $message); // Send msg to admin Line
+                        array_push($token, $admin['line_token']);
+                        // $hyper->line->send($admin['line_token'], $message); // Send msg to admin Line
                     }
                 }
+                array_push($line_data, [
+                    'token' => join(",", $token)
+                ]);
                 $successMSG = "นำกลับไปจำหน่าย สำเร็จ!";
             } else {
                 $errorMSG = "นำกลับไปจำหน่ายไม่สำเร็จ... กรุณาติดต่อผู้ดูแลระบบ";
@@ -72,17 +84,27 @@ if (isset($_POST['id'])) {
                 $select_admin = "SELECT * FROM accounts WHERE role=779";
                 $admin_query = $hyper->connect->query($select_admin);
                 $admin_num = mysqli_num_rows($admin_query);
+
+                // msg
+                $message = "\n‼️ ถึงแอดมิน ‼️ \n";
+                $message .= "ออเดอร์ที่ : " . $selled['selled_id'] . "\n";
+                $message .= "สถานะ : ตรวจสอบแล้ว \n";
+                $message .= "โดย : " . $data_user['username'] . "\n";
+
+                array_push($line_data, [
+                    'massage' => $message,
+                ]);
+
                 for ($i = 0; $i < $admin_num; $i++) {
                     $admin = $admin_query->fetch_array();
-                    $message = "\n‼️ ถึงแอดมิน ‼️ \n";
-                    $message .= "ออเดอร์ที่ : " . $selled['selled_id'] . "\n";
-                    $message .= "สถานะ : ตรวจสอบแล้ว \n";
-                    $message .= "โดย : " . $data_user['username'] . "\n";
                     if ($admin['line_token'] != NULL) {
-
-                        $hyper->line->send($admin['line_token'], $message); // Send msg to admin Line
+                        array_push($token, $admin['line_token']);
+                        // $hyper->line->send($admin['line_token'], $message); // Send msg to admin Line
                     }
                 }
+                array_push($line_data, [
+                    'token' => join(",", $token)
+                ]);
                 $successMSG = "ตรวจสอบสำเร็จ!";
             } else {
                 $errorMSG = "เกิดข้อผิดพลาด... กรุณาติดต่อผู้ดูแลระบบ (1)";
@@ -96,7 +118,7 @@ if (isset($_POST['id'])) {
 
 /* result */
 if (empty($errorMSG)) {
-    echo json_encode(['code' => 200, 'msg' => $successMSG]);
+    echo json_encode(['code' => 200, 'msg' => $successMSG, 'line' => $line_data]);
 } else {
     echo json_encode(['code' => 500, 'msg' => $errorMSG]);
 }

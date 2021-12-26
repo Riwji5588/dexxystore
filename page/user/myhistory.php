@@ -131,33 +131,31 @@ $sql_select_selled = "SELECT * FROM data_selled WHERE ac_id = $ac_id ORDER BY se
     search($('#search'), '<?= $sql_select_selled ?>');
   });
 
-  function dosomething(id) {
-    document.getElementById('claimbtn'+id).disabled = true;
-    claim(id);
-    click_delay(id);
+  async function dosomething(id) {
+    document.getElementById('claimbtn' + id).disabled = true;
+    await claim(id)
   }
 
-  function click_delay(id) {
-    function endCountdown() {
-      // logic to finish the countdown here
-      document.getElementById('claimbtn'+id).innerHTML = "ส่งเคลม";
-      document.getElementById('claimbtn'+id).disabled = false;
-    }
-
-    function handleTimer() {
-      if (count === 0) {
-        clearInterval(timer);
-        endCountdown();
-      } else {
-        document.getElementById('claimbtn'+id).innerHTML = "คูลดาวน์ " + count;
-        console.log(count);
-        count--;
+  async function sendline(message, token) {
+    let tokenList = token.split(',');
+    const urlLine = 'https://linenotifyapi.herokuapp.com/';
+    $.ajax({
+      url: urlLine,
+      type: 'POST',
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+        'Access-Control-Allow-Headers': 'Content-Type, Authorization, X-Requested-With',
+      },
+      data: {
+        message: message,
+        token: tokenList
       }
-    }
-    var count = 3;
-    var timer = setInterval(function() {
-      handleTimer(count);
-    }, 1000);
+    }).then(function() {
+      setTimeout(() => {
+        window.location.reload();
+      }, 600);
+    });
   }
 
   // search with ajax
@@ -283,19 +281,14 @@ $sql_select_selled = "SELECT * FROM data_selled WHERE ac_id = $ac_id ORDER BY se
           closeOnClickOutside: false,
           timer: 500,
         });
-
       },
-
       success: function(data) {
-
         if (data.code == "200") {
           swal(data.msg, '\n', "success", {
             button: false,
             closeOnClickOutside: false,
           });
-          setTimeout(function() {
-            window.location.reload();
-          }, 1500);
+          sendline(data.line[0].massage, data.line[1].token);
         } else {
           swal(data.msg, "\n", "error", {
             button: {
