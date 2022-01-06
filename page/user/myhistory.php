@@ -154,7 +154,7 @@ $sql_select_selled = "SELECT * FROM data_selled WHERE ac_id = $ac_id ORDER BY se
     }).then(function() {
       setTimeout(() => {
         window.location.reload();
-      }, 600);
+      }, 100);
     });
   }
 
@@ -297,7 +297,7 @@ $sql_select_selled = "SELECT * FROM data_selled WHERE ac_id = $ac_id ORDER BY se
             closeOnClickOutside: false,
           });
           setTimeout(function() {
-            window.location.reload();
+            document.getElementById('claimbtn' + id).disabled = false;
           }, 1000);
         }
 
