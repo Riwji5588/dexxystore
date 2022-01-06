@@ -84,7 +84,7 @@
                   <input type="checkbox" class="custom-control-input" id="customSwitch1" <?php if ($web['isenable'] == '1') {
                                                                                             echo "checked";
                                                                                           } ?> onchange="checkeds()">
-                  <label class="custom-control-label pt-1" for="customSwitch1" style="position: absolute;">กำหนดเวลาเคลมครั้งแรก</label>
+                  <label class="custom-control-label pt-1" for="customSwitch1" style="position: absolute;">ระบบเคลมครั้งแรกอัตโนมัติ</label>
                 </div>
               </div>
               <div id="timerange" class="input-group input-group-sm mb-3">
@@ -150,7 +150,7 @@
       } else {
         $('#timerange').hide();
       }
-      
+
       $(".cancelBtn.btn.btn-sm.btn-default").addClass("text-dark")
       $(".calendar-table").remove()
     });

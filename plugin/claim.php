@@ -78,7 +78,7 @@ if (isset($_POST['id'])) {
                                 $now = explode(':', date("H:i"));
                                 $now = $now[0] * 60 + $now[1];
 
-                                if ($isenable == '1' && $now >= $start && $now <= $end || $isenable == '0') {
+                                if ($isenable == '1' && $now >= $start && $now <= $end) {
 
                                     $data_game = "SELECT * FROM game_data WHERE selled=0 AND card_id={$card_id['card_id']} LIMIT 1";
                                     $row = $hyper->connect->query($data_game);
@@ -99,7 +99,8 @@ if (isset($_POST['id'])) {
                                                 $admin_num = mysqli_num_rows($admin_query);
 
                                                 // msg
-                                                $message = "\n‼️ ถึงแอดมิน ‼️ \n";
+                                                $message = "\n=== ระบบเคลมอัตโนมัติ ===\n";
+                                                $message .= "‼️ ถึงแอดมิน ‼️ \n";
                                                 $message .= "ออเดอร์ที่ : " . $selled['selled_id'] . "\n";
                                                 $message .= "สถานะ : ส่งเคลม (ครั้งแรก)\n";
                                                 $message .= "โดย : " . $data_user['username'] . "\n";
@@ -144,7 +145,11 @@ if (isset($_POST['id'])) {
                                             $admin_num = mysqli_num_rows($admin_query);
 
                                             // msg
-                                            $message = "\n=== ไม่อยู่ในช่วงเวลาที่กำหนด ===\n";
+                                            if ($web['isenable'] == '0') {
+                                                $message = "\n=== ปิดระบบเคลมอัตโนมัติ ===\n";
+                                            } else {
+                                                $message = "\n=== ไม่อยู่ในช่วงเวลาที่กำหนด ===\n";
+                                            }
                                             $message .= "‼️ ถึงแอดมิน ‼️ \n";
                                             $message .= "ออเดอร์ที่ : " . $selled['selled_id'] . "\n";
                                             $message .= "สถานะ : ส่งเคลม (ครั้งแรก)\n";
