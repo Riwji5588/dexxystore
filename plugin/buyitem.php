@@ -31,7 +31,7 @@ if (isset($_POST['id'])) {
             $updateuser_query = $hyper->connect->query($updateuser);
             if ($updateuser_query) {
 
-                if($data_user['ban'] == '1' or $data_user['ban'] == '3') {
+                if($data_user['ban'] == '1' or $data_user['ban'] == '999') {
                     $errorMSG = "คุณถูกแบล็กลิสต์ไว้... โปรดติดต่อทางร้าน";
                 }else{
                     if ($_POST['type'] == 1) {

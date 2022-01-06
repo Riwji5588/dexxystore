@@ -1,49 +1,62 @@
-      <!-- Data User -->
-      <h3 class="text-center mt-4 mb-4" style="color: white ;">--- จัดการผู้ใช้งาน ---</h3>
-      <div class="mt-3">
-        <table id="myTable" class="table table-hover text-center w-100">
-          <thead class="hyper-bg-dark">
-            <tr>
-              <th scope="col" style="width:120px;">เลขที่บัญชี</th>
-              <th scope="col">บัญชีผู้ใช้</th>
-              <th scope="col">บาท</th>
-              <th scope="col">ระดับ</th>
-              <th scope="col" style="width: 170px;">เมนู</th>
-            </tr>
-          </thead>
-          <tbody id="body">
-          </tbody>
-        </table>
-        <div id="loading" class="container" style="color: #FFF;" align="center">
-          <div class="spinner-border" role="status">
-          </div>
-        </div>
-      </div>
-      <!-- End User  -->
+ <!-- 
+
+  Ban status:
+
+  0 = not banned
+  1 = banned buy
+  2 = banned claim
+  3 = banned first claim
+  999 = banned all
+
+  -->
+
+
+ <!-- Data User -->
+ <h3 class="text-center mt-4 mb-4" style="color: white ;">--- จัดการผู้ใช้งาน ---</h3>
+ <div class="mt-3">
+   <table id="myTable" class="table table-hover text-center w-100">
+     <thead class="hyper-bg-dark">
+       <tr>
+         <th scope="col" style="width:120px;">เลขที่บัญชี</th>
+         <th scope="col">บัญชีผู้ใช้</th>
+         <th scope="col">บาท</th>
+         <th scope="col">ระดับ</th>
+         <th scope="col" style="width: 170px;">เมนู</th>
+       </tr>
+     </thead>
+     <tbody id="body">
+     </tbody>
+   </table>
+   <div id="loading" class="container" style="color: #FFF;" align="center">
+     <div class="spinner-border" role="status">
+     </div>
+   </div>
+ </div>
+ <!-- End User  -->
 
 
 
-      <script>
-        $(document).ready(async () => {
-          let isSandbox = window.location.origin == "https://sandbox.dexystore.me";
-          let host = window.location.origin == "http://localhost" ? "http://localhost/dexxystore" : isSandbox ? "https://sandbox.dexystore.me" : "https://dexystore.me";
-          let url = host + '/plugin/getAll.php';
-          $.ajax({
+ <script>
+   $(document).ready(async () => {
+     let isSandbox = window.location.origin == "https://sandbox.dexystore.me";
+     let host = window.location.origin == "http://localhost" ? "http://localhost/dexxystore" : isSandbox ? "https://sandbox.dexystore.me" : "https://dexystore.me";
+     let url = host + '/plugin/getAll.php';
+     $.ajax({
 
-            type: "POST",
-            url: url,
-            dataType: "json",
-            data: {
-              action: 'getalluser'
-            },
-            success: function(json) {
-              if (json.code == 200) {
-                const data = json.data;
-                let body = $('#body').html();
+       type: "POST",
+       url: url,
+       dataType: "json",
+       data: {
+         action: 'getalluser'
+       },
+       success: function(json) {
+         if (json.code == 200) {
+           const data = json.data;
+           let body = $('#body').html();
 
-                for (let i = 0; i < data.length; i++) {
-                  body +=
-                    `
+           for (let i = 0; i < data.length; i++) {
+             body +=
+               `
                     <tr ${data[i].ban=='0' ? '' : 'style="color: red;"' }>
                       <td>${i+1}</td>
                       <td>${data[i].username}</td>
@@ -100,7 +113,8 @@
                                       <option value="0" ${data[i].ban==0 ? 'selected' : '' }>-</option>
                                       <option value="1" ${data[i].ban==1 ? 'selected' : '' }>แบนการซื้อ</option>
                                       <option value="2" ${data[i].ban==2 ? 'selected' : '' }>แบนการเคลม</option>
-                                      <option value="3" ${data[i].ban==3 ? 'selected' : '' }>แบนการซื้อและการเคลม</option>
+                                      <option value="3" ${data[i].ban==3 ? 'selected' : '' }>แบนการเคลม (ครั้งแรก)</option>
+                                      <option value="999" ${data[i].ban==999 ? 'selected' : '' }>แบนการซื้อและการเคลม</option>
                                     </select>
                                   </div>
 
@@ -120,184 +134,184 @@
                       </td>
                     </tr>
                     `;
-                }
-                $('#body').html(body);
-                $('#myTable').DataTable();
-                $('#loading').remove();
-              }
-            },
-            error: function(data) {
-              console.log(data.responseText);
-            }
-          });
+           }
+           $('#body').html(body);
+           $('#myTable').DataTable();
+           $('#loading').remove();
+         }
+       },
+       error: function(data) {
+         console.log(data.responseText);
+       }
+     });
 
-        })
-        /** Delete Data */
-        function DelUser(id) {
-          var id = id.value;
-          swal({
-              title: 'ต้องการลบผู้ใช้งานที่ ' + id,
-              text: "ถ้าลบแล้วจำไม่สามารถกู้กลับมาได้",
-              icon: "warning",
-              buttons: {
-                confirm: {
-                  text: 'ลบผู้ใช้งาน',
-                  className: 'hyper-btn-notoutline-danger'
-                },
-                cancel: 'ยกเลิก'
-              },
-              closeOnClickOutside: false,
-            })
-            .then((willDelete) => {
-              if (willDelete) {
-                $.ajax({
+   })
+   /** Delete Data */
+   function DelUser(id) {
+     var id = id.value;
+     swal({
+         title: 'ต้องการลบผู้ใช้งานที่ ' + id,
+         text: "ถ้าลบแล้วจำไม่สามารถกู้กลับมาได้",
+         icon: "warning",
+         buttons: {
+           confirm: {
+             text: 'ลบผู้ใช้งาน',
+             className: 'hyper-btn-notoutline-danger'
+           },
+           cancel: 'ยกเลิก'
+         },
+         closeOnClickOutside: false,
+       })
+       .then((willDelete) => {
+         if (willDelete) {
+           $.ajax({
 
-                  type: "POST",
-                  url: "plugin/del_user.php",
-                  dataType: "json",
-                  data: {
-                    id: id
-                  },
+             type: "POST",
+             url: "plugin/del_user.php",
+             dataType: "json",
+             data: {
+               id: id
+             },
 
-                  beforeSend: function() {
-                    swal("กำลังลบข้อมูล กรุณารอสักครู่...", {
-                      button: false,
-                      closeOnClickOutside: false,
-                      timer: 500,
-                    });
+             beforeSend: function() {
+               swal("กำลังลบข้อมูล กรุณารอสักครู่...", {
+                 button: false,
+                 closeOnClickOutside: false,
+                 timer: 500,
+               });
 
-                  },
+             },
 
-                  success: function(data) {
-                    setTimeout(() => {
-                      if (data.code == "200") {
-                        swal("ลบผู้ใช้งาน สำเร็จ!", "ระบบกำลังพาท่านไป...", "success", {
-                          button: false,
-                          closeOnClickOutside: false,
-                        });
-                        setTimeout(function() {
-                          window.location.reload();
-                        }, 1500);
-                      } else {
-                        swal(data.msg, "", "error", {
-                          button: {
-                            className: 'hyper-btn-notoutline-danger',
-                          },
-                          closeOnClickOutside: false,
-                        });
-                      }
-                    }, 600);
-                  }
+             success: function(data) {
+               setTimeout(() => {
+                 if (data.code == "200") {
+                   swal("ลบผู้ใช้งาน สำเร็จ!", "ระบบกำลังพาท่านไป...", "success", {
+                     button: false,
+                     closeOnClickOutside: false,
+                   });
+                   setTimeout(function() {
+                     window.location.reload();
+                   }, 1500);
+                 } else {
+                   swal(data.msg, "", "error", {
+                     button: {
+                       className: 'hyper-btn-notoutline-danger',
+                     },
+                     closeOnClickOutside: false,
+                   });
+                 }
+               }, 600);
+             }
 
-                });
-              }
-            });
-        }
+           });
+         }
+       });
+   }
 
-        /** Update Data */
-        function updatedata(id) {
+   /** Update Data */
+   function updatedata(id) {
 
-          $("#updatedata" + id).submit();
+     $("#updatedata" + id).submit();
 
-          $("#updatedata" + id).submit(function(updateData) {
-            updateData.preventDefault();
+     $("#updatedata" + id).submit(function(updateData) {
+       updateData.preventDefault();
 
-            swal({
-                title: 'ต้องการอัพเดทผู้ใช้งาน',
-                text: "คุณต้องการอัพเดทผู้ใช้งานใช่หรือไม่",
-                icon: "info",
-                buttons: {
-                  confirm: {
-                    text: 'อัพเดท',
-                    className: 'hyper-btn-notoutline-success'
-                  },
-                  cancel: 'ยกเลิก'
-                },
-                closeOnClickOutside: false,
-              })
-              .then((willDelete) => {
-                if (willDelete) {
+       swal({
+           title: 'ต้องการอัพเดทผู้ใช้งาน',
+           text: "คุณต้องการอัพเดทผู้ใช้งานใช่หรือไม่",
+           icon: "info",
+           buttons: {
+             confirm: {
+               text: 'อัพเดท',
+               className: 'hyper-btn-notoutline-success'
+             },
+             cancel: 'ยกเลิก'
+           },
+           closeOnClickOutside: false,
+         })
+         .then((willDelete) => {
+           if (willDelete) {
 
-                  var updatedata = new FormData();
-                  var uid = id;
-                  var point = $('#point' + id).val();
-                  var email = $('#email' + id).val();
-                  var role = $('#role' + id).val();
-                  var ban = $('#ban' + id).val();
+             var updatedata = new FormData();
+             var uid = id;
+             var point = $('#point' + id).val();
+             var email = $('#email' + id).val();
+             var role = $('#role' + id).val();
+             var ban = $('#ban' + id).val();
 
-                  updatedata.append('user_id', uid);
-                  updatedata.append('point', point);
-                  updatedata.append('email', email);
-                  updatedata.append('role', role);
-                  updatedata.append('ban', ban);
+             updatedata.append('user_id', uid);
+             updatedata.append('point', point);
+             updatedata.append('email', email);
+             updatedata.append('role', role);
+             updatedata.append('ban', ban);
 
-                  $.ajax({
+             $.ajax({
 
-                    type: "POST",
-                    url: "plugin/edit_user.php",
-                    dataType: "json",
-                    data: updatedata,
-                    cache: false,
-                    contentType: false,
-                    processData: false,
+               type: "POST",
+               url: "plugin/edit_user.php",
+               dataType: "json",
+               data: updatedata,
+               cache: false,
+               contentType: false,
+               processData: false,
 
-                    beforeSend: function() {
-                      swal("กำลังอัพเดทข้อมูล กรุณารอสักครู่...", {
-                        button: false,
-                        closeOnClickOutside: false,
-                        timer: 500,
-                      });
+               beforeSend: function() {
+                 swal("กำลังอัพเดทข้อมูล กรุณารอสักครู่...", {
+                   button: false,
+                   closeOnClickOutside: false,
+                   timer: 500,
+                 });
 
-                    },
+               },
 
-                    success: function(data) {
-                      setTimeout(() => {
-                        if (data.code == "200") {
-                          swal("อัพเดทผู้ใช้งาน สำเร็จ!", "ระบบกำลังบันทึกข้อมูล...", "success", {
-                            button: false,
-                            closeOnClickOutside: false,
-                          });
-                          setTimeout(function() {
-                            window.location.reload();
-                          }, 1500);
-                        } else {
-                          swal(data.msg, "", "error", {
-                            button: {
-                              className: 'hyper-btn-notoutline-danger',
-                            },
-                            closeOnClickOutside: false,
-                          });
-                        }
-                      }, 600);
-                    }
+               success: function(data) {
+                 setTimeout(() => {
+                   if (data.code == "200") {
+                     swal("อัพเดทผู้ใช้งาน สำเร็จ!", "ระบบกำลังบันทึกข้อมูล...", "success", {
+                       button: false,
+                       closeOnClickOutside: false,
+                     });
+                     setTimeout(function() {
+                       window.location.reload();
+                     }, 1500);
+                   } else {
+                     swal(data.msg, "", "error", {
+                       button: {
+                         className: 'hyper-btn-notoutline-danger',
+                       },
+                       closeOnClickOutside: false,
+                     });
+                   }
+                 }, 600);
+               }
 
-                  });
+             });
 
-                }
-              });
+           }
+         });
 
-          });
-        }
-      </script>
+     });
+   }
+ </script>
 
-      <style>
-        body {
-          background-color: #131315;
-        }
+ <style>
+   body {
+     background-color: #131315;
+   }
 
-        label {
-          color: white;
-        }
+   label {
+     color: white;
+   }
 
-        #datatable_info {
-          color: white;
-        }
+   #datatable_info {
+     color: white;
+   }
 
-        .es:hover {
-          background-color: white;
-        }
+   .es:hover {
+     background-color: white;
+   }
 
-        .table-hover:hover {
-          background-color: #ddd;
-        }
-      </style>
+   .table-hover:hover {
+     background-color: #ddd;
+   }
+ </style>
