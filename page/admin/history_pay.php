@@ -47,7 +47,7 @@
       <script>
         $(document).ready(async () => {
           let isSandbox = window.location.origin == "https://sandbox.dexystore.me";
-          let host = window.location.origin == "http://localhost" ? "http://localhost/dexxystore" : isSandbox ? "https://sandbox.dexystore.me" : "https://dexystore.me";
+          let host = window.location.origin == "http://localhost" ? "http://localhost/dexystore" : isSandbox ? "https://sandbox.dexystore.me" : "https://dexystore.me";
           let url = host + '/plugin/getincome.php';
           let getid = window.location.search.split('id=')[1] || false;
           $.ajax({
