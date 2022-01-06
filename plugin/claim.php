@@ -108,7 +108,6 @@ if (isset($_POST['id'])) {
                                             array_push($line_data, [
                                                 'token' => join(",", $token)
                                             ]);
-                                            $hyper->notify->sendNotify($selled['ac_id'], 39, 'confirm', $selled['selled_id']);
                                             $successMSG = "ส่งเคลม สำเร็จ!";
                                         } else {
                                             $errorMSG = "เคลมไม่สำเร็จ... กรุณาแจ้งแอดมิน (2)";
@@ -214,6 +213,8 @@ if (isset($_POST['id'])) {
                             'token' => join(",", $token)
                         ]);
                         $hyper->notify->sendNotify((int)$uid, (int)$selled['ac_id'], 'confirm', (int)$selled['selled_id']);
+                        $delete_admin_notify = "DELETE FROM notify_log WHERE data_id={$selled['selled_id']} AND isadmin=1";
+                        $hyper->connect->query($delete_admin_notify);
                         $successMSG = "อนุมัติ สำเร็จ!";
                     } else {
                         $errorMSG = "เคลมไม่สำเร็จ... กรุณาติดต่อผู้ดูแลระบบ";
@@ -256,6 +257,8 @@ if (isset($_POST['id'])) {
                                 'token' => join(",", $token)
                             ]);
                             $hyper->notify->sendNotify((int)$uid, (int)$selled['ac_id'], 'reject', (int)$selled['selled_id']);
+                            $delete_admin_notify = "DELETE FROM notify_log WHERE data_id={$selled['selled_id']} AND isadmin=1";
+                            $hyper->connect->query($delete_admin_notify);
                             $successMSG = "ปฏิเสธ สำเร็จ!";
                         } else {
                             $errorMSG = "เกิดข้อผิดพลาด... กรุณาติดต่อผู้ดูแลระบบ";
