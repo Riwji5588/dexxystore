@@ -52,12 +52,13 @@
        success: function(json) {
          if (json.code == 200) {
            const data = json.data;
+           const ban = json.ban;
            let body = $('#body').html();
 
            for (let i = 0; i < data.length; i++) {
              body +=
                `
-                    <tr ${data[i].ban=='0' ? '' : 'style="color: red;"' }>
+                    <tr ${ban['ac'+data[i].ac_id] != undefined && ban['ac'+data[i].ac_id].ac_id == data[i].ac_id ? ban['ac'+data[i].ac_id].buy == 1 || ban['ac'+data[i].ac_id].claim == 1 || ban['ac'+data[i].ac_id].claim_first == 1 ? 'style="color: red;"' : '' : '' }>
                       <td>${i+1}</td>
                       <td>${data[i].username}</td>
                       <td>${data[i].points}</td>
@@ -117,19 +118,98 @@
                                       <option value="999" ${data[i].ban==999 ? 'selected' : '' }>แบนการซื้อและการเคลม</option>
                                     </select>
                                   </div>
-
-                                  <button type="submit" id="updatedata${data[i].ac_id}" class="d-none"></button>
-                                </form>
-
-                              </div>
+                                    <button type="submit" id="updatedata${data[i].ac_id}" class="d-none"></button>
+                                  </form>
+                                  
+                                  </div>
+                                  <div align="center">
+                                  <div class="col-6" >
+                                    <button class="btn mb-3 w-100 hyper-btn-danger btn-sm" data-toggle="modal" data-target="#banmodal${data[i].ac_id}">แบน</button>
+                                  </div>
+                                  </div>
                               <div class="modal-footer p-2 border-0">
-                                <button type="button" onclick="updatedata('${data[i].ac_id}')" class="btn hyper-btn-notoutline-success"><i class="fal fa-plus-square mr-1"></i>อัพเดทข้อมูล</button>
-                                <button type="button" class="btn hyper-btn-notoutline-danger" data-dismiss="modal"><i class="fad fa-times-circle mr-1"></i>ยกเลิก</button>
+                                <button type="button" onclick="updatedata('${data[i].ac_id}')" class="btn btn-success"><i class="fal fa-plus-square mr-1"></i>อัพเดทข้อมูล</button>
+                                <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fad fa-times-circle mr-1"></i>ยกเลิก</button>
                               </div>
                             </div>
                           </div>
                         </div>
                         <!-- End Edit Game Data Modal -->
+
+                        <!-- Ban Modal -->
+                        <div class="modal fade" id="banmodal${data[i].ac_id}"  data-backdrop="static" data-keyboard="false" tabindex="-1" aria-hidden="true">
+                          <div class="modal-dialog modal-dialog-centered modal-lg">
+                              <div class="modal-content">
+                                  <div class="modal-body">
+                                    <div class="card-body">
+                                      <hr>
+                                      <fieldset class="form-group" align="start" style="border: 0;">
+                                        <div class="row">
+                                          <legend class="col-form-label col-sm-4 pt-0">แบน</legend>
+                                          <div class="col-sm-8">
+                                            <div class="form-check">
+                                              <input class="form-check-input" type="checkbox" id="banbuy${data[i].ac_id}" ${ban['ac'+data[i].ac_id] != undefined && ban['ac'+data[i].ac_id].ac_id == data[i].ac_id && ban['ac'+data[i].ac_id].buy == 1 ? 'checked' : ''} >
+                                              <label class="form-check-label" for="banbuy${data[i].ac_id}" style="color: #000">
+                                              แบนการซื้อ
+                                              </label>
+                                            </div>
+                                            <div class="form-check">
+                                              <input class="form-check-input" type="checkbox" id="banclaim${data[i].ac_id}" ${ban['ac'+data[i].ac_id] != undefined && ban['ac'+data[i].ac_id].ac_id == data[i].ac_id && ban['ac'+data[i].ac_id].claim == 1 ? 'checked' : ''}>
+                                              <label class="form-check-label" for="banclaim${data[i].ac_id}" style="color: #000">
+                                              แบนการเคลม
+                                              </label>
+                                            </div>
+                                            <div class="form-check">
+                                              <input class="form-check-input" type="checkbox" id="banclaimfirst${data[i].ac_id}" ${ban['ac'+data[i].ac_id] != undefined && ban['ac'+data[i].ac_id].ac_id == data[i].ac_id && ban['ac'+data[i].ac_id].claim_first == 1 ? 'checked' : ''}>
+                                              <label class="form-check-label" for="banclaimfirst${data[i].ac_id}" style="color: #000">
+                                              แบนการเคลม (ครั้งแรก)
+                                              </label>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </fieldset>
+                                      <hr>
+                                      <fieldset class="form-group" align="start" style="border: 0;">
+                                        <div class="row">
+                                          <legend class="col-form-label col-sm-4 pt-0">แบนออเดอร์</legend>
+                                          <div class="col-sm-8">
+                                            <div class="form-check form-check-inline">
+                                              <input class="form-check-input" type="checkbox" name="gridRadios" id="order1" value="1">
+                                              <label class="form-check-label" for="order1" style="color: #000">
+                                              ออเดอร์ 1
+                                              </label>
+                                            </div>
+                                            <div class="form-check form-check-inline">
+                                              <input class="form-check-input" type="checkbox" name="gridRadios" id="order2" value="2">
+                                              <label class="form-check-label" for="order2" style="color: #000">
+                                              ออเดอร์ 2
+                                              </label>
+                                            </div>
+                                            <div class="form-check form-check-inline">
+                                              <input class="form-check-input" type="checkbox" name="gridRadios" id="order3" value="3">
+                                              <label class="form-check-label" for="order3" style="color: #000">
+                                              ออเดอร์ 3
+                                              </label>
+                                            </div>
+                                            <div class="form-check form-check-inline">
+                                              <input class="form-check-input" type="checkbox" name="gridRadios" id="order4" value="4">
+                                              <label class="form-check-label" for="order4" style="color: #000">
+                                              ออเดอร์ 4
+                                              </label>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </fieldset>
+                                    </div>
+                                  </div>
+                                  <div class="modal-footer px-2 pb-2">
+                                    <button type="button" onclick="updatedata('${data[i].ac_id}')" class="btn btn-success"><i class="fal fa-plus-square mr-1"></i>อัพเดทข้อมูล</button>
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fad fa-times-circle mr-1"></i>ยกเลิก</button>
+                                  </div>
+                              </div>
+                          </div>
+                        </div>
+                        <!-- End Ban Modal -->
 
                       </td>
                     </tr>
@@ -237,13 +317,17 @@
              var point = $('#point' + id).val();
              var email = $('#email' + id).val();
              var role = $('#role' + id).val();
-             var ban = $('#ban' + id).val();
+             var buyChecked = $('#banbuy' + id).is(':checked') ? 1 : 0;
+             var claimChecked = $('#banclaim' + id).is(':checked') ? 1 : 0;
+             var claimfirstChecked = $('#banclaimfirst' + id).is(':checked') ? 1 : 0;
 
              updatedata.append('user_id', uid);
              updatedata.append('point', point);
              updatedata.append('email', email);
              updatedata.append('role', role);
-             updatedata.append('ban', ban);
+             updatedata.append('banbuy', buyChecked);
+             updatedata.append('banclaim', claimChecked);
+             updatedata.append('banclaimfirst', claimfirstChecked);
 
              $.ajax({
 
