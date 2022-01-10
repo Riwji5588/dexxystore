@@ -37,6 +37,7 @@
 
 
  <script>
+   let orders_list = "";
    $(document).ready(async () => {
      let isSandbox = window.location.origin == "https://sandbox.dexystore.me";
      let host = window.location.origin == "http://localhost" ? "http://localhost/dexystore" : isSandbox ? "https://sandbox.dexystore.me" : "https://dexystore.me";
@@ -112,7 +113,7 @@
                                   </div>
                                   <div align="center">
                                   <div class="col-6" >
-                                    <button class="btn mb-3 w-100 hyper-btn-danger btn-sm" data-toggle="modal" data-target="#banmodal${data[i].ac_id}">แบน</button>
+                                    <button class="btn mb-3 w-100 hyper-btn-danger btn-sm" data-toggle="modal" data-target="#banmodal${data[i].ac_id}" onclick="LoadOrder(${data[i].ac_id})">แบน</button>
                                   </div>
                                   </div>
                               <div class="modal-footer p-2 border-0">
@@ -160,31 +161,12 @@
                                       <fieldset class="form-group" align="start" style="border: 0;">
                                         <div class="row">
                                           <legend class="col-form-label col-sm-4 pt-0">แบนออเดอร์</legend>
-                                          <div class="col-sm-8">
-                                            <div class="form-check form-check-inline">
-                                              <input class="form-check-input" type="checkbox" name="gridRadios" id="order1" value="1">
-                                              <label class="form-check-label" for="order1" style="color: #000">
-                                              ออเดอร์ 1
-                                              </label>
+                                          <div id="orderslist${data[i].ac_id}" class="col-sm-8">
+                                            
+                                            <div id="loadingOrder${data[i].ac_id}" class="form-check form-check-inline">
+                                              <div class="spinner-border" role="status"></div>
                                             </div>
-                                            <div class="form-check form-check-inline">
-                                              <input class="form-check-input" type="checkbox" name="gridRadios" id="order2" value="2">
-                                              <label class="form-check-label" for="order2" style="color: #000">
-                                              ออเดอร์ 2
-                                              </label>
-                                            </div>
-                                            <div class="form-check form-check-inline">
-                                              <input class="form-check-input" type="checkbox" name="gridRadios" id="order3" value="3">
-                                              <label class="form-check-label" for="order3" style="color: #000">
-                                              ออเดอร์ 3
-                                              </label>
-                                            </div>
-                                            <div class="form-check form-check-inline">
-                                              <input class="form-check-input" type="checkbox" name="gridRadios" id="order4" value="4">
-                                              <label class="form-check-label" for="order4" style="color: #000">
-                                              ออเดอร์ 4
-                                              </label>
-                                            </div>
+                                                                                     
                                           </div>
                                         </div>
                                       </fieldset>
@@ -214,6 +196,51 @@
      });
 
    })
+
+   function LoadOrder(ac_id) {
+     let isSandbox = window.location.origin == "https://sandbox.dexystore.me";
+     let host = window.location.origin == "http://localhost" ? "http://localhost/dexystore" : isSandbox ? "https://sandbox.dexystore.me" : "https://dexystore.me";
+     let url = host + '/plugin/getuserorder.php';
+     $.ajax({
+       url: url,
+       type: 'POST',
+       dataType: 'json',
+       data: {
+         'action': 'LoadOrder',
+         'ac_id': ac_id
+       },
+       success: function(json) {
+         if (json.code == 200) {
+           const orders_id = json.order_id;
+           let data_append = '';
+           let ordersList = $('#orderslist' + ac_id);
+           orders_id.forEach((order_id) => {
+             data_append += `
+             <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" id="order${order_id}" onclick="addHidden(${order_id})">
+              <label class="form-check-label" for="order${order_id}" style="color: #000">&nbsp;ออเดอร์ ${order_id}</label>
+            </div> `;
+           })
+
+           if (ordersList.children('div.form-check.form-check-inline').length != orders_id.length) {
+             ordersList.html(data_append);
+           }
+
+           $('#loadingOrder' + ac_id).remove();
+         } else {
+           console.log(json.message);
+         }
+       },
+       error: function(data) {
+         console.log(data.responseText);
+       }
+     })
+   }
+
+   function addHidden(order_id) {
+     orders_list += `${order_id},`;
+   }
+
    /** Delete Data */
    function DelUser(id) {
      var id = id.value;
@@ -308,6 +335,7 @@
              var buyChecked = $('#banbuy' + id).is(':checked') ? 1 : 0;
              var claimChecked = $('#banclaim' + id).is(':checked') ? 1 : 0;
              var claimfirstChecked = $('#banclaimfirst' + id).is(':checked') ? 1 : 0;
+             var orders = orders_list.substring(0, orders_list.length - 1);
 
              updatedata.append('user_id', uid);
              updatedata.append('point', point);
@@ -316,6 +344,7 @@
              updatedata.append('banbuy', buyChecked);
              updatedata.append('banclaim', claimChecked);
              updatedata.append('banclaimfirst', claimfirstChecked);
+             updatedata.append('banorders', orders);
 
              $.ajax({
 

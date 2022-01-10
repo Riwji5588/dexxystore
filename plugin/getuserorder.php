@@ -6,7 +6,7 @@ date_default_timezone_set("Asia/Bangkok");
 
 if (isset($_POST)) {
     $ac_id = $_POST['ac_id'];
-    $sellect_order = "SELECT selled_id, exp_date FROM data_selled WHERE ac_id={$ac_id}";
+    $sellect_order = "SELECT selled_id, exp_date FROM data_selled WHERE ac_id={$ac_id} ORDER BY selled_id ASC";
     $result = $hyper->connect->query($sellect_order);
     $row = mysqli_num_rows($result);
     if ($row > 0) {
@@ -24,5 +24,5 @@ if (isset($_POST)) {
             $i++;
         } while ($row > $i);
     }
-    echo json_encode($orders);
+    echo json_encode(['code' => 200, 'order_id' => $orders]);
 }
