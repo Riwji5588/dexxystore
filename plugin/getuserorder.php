@@ -9,19 +9,20 @@ if (isset($_POST)) {
     $sellect_order = "SELECT selled_id, exp_date FROM data_selled WHERE ac_id={$ac_id}";
     $result = $hyper->connect->query($sellect_order);
     $row = mysqli_num_rows($result);
-    $i = 0;
-    do {
-        $order = $result->fetch_assoc();
-        $now = strtotime(date('Y-m-d H:i:s'));
-        $order_date = strtotime(date($order['exp_date']));
+    if ($row > 0) {
+        $i = 0;
+        do {
+            $order = $result->fetch_assoc();
+            $now = strtotime(date('Y-m-d H:i:s'));
+            $order_date = strtotime(date($order['exp_date']));
 
-        $expire = $order_date - $now;
-        if ($expire > 0) {
-            array_push($orders, (int)$order['selled_id']);
-        }
+            $expire = $order_date - $now;
+            if ($expire > 0) {
+                array_push($orders, (int)$order['selled_id']);
+            }
 
-        $i++;
-    } while ($row > $i);
-
+            $i++;
+        } while ($row > $i);
+    }
     echo json_encode($orders);
 }
