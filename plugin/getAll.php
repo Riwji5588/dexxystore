@@ -6,7 +6,7 @@ if (isset($_POST)) {
         $users = [];
         $bans = [];
 
-        $select = "SELECT ac_id, username, email, points, role, ban FROM accounts ORDER BY role DESC";
+        $select = "SELECT ac_id, username, email, points, role FROM accounts ORDER BY role DESC";
         $select_ban = "SELECT * FROM user_ban";
         $query = $hyper->connect->query($select);
         $ban_query = $hyper->connect->query($select_ban);

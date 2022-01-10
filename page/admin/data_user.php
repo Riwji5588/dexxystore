@@ -106,18 +106,6 @@
                                     </select>
                                   </div>
 
-                                  <div class="input-group input-group-sm">
-                                    <div class="input-group-prepend">
-                                      <label class="input-group-text hyper-bg-dark border-dark" for="ban${data[i].ac_id}">แบน</label>
-                                    </div>
-                                    <select id="ban${data[i].ac_id}" class="custom-select hyper-form-control">
-                                      <option value="0" ${data[i].ban==0 ? 'selected' : '' }>-</option>
-                                      <option value="1" ${data[i].ban==1 ? 'selected' : '' }>แบนการซื้อ</option>
-                                      <option value="2" ${data[i].ban==2 ? 'selected' : '' }>แบนการเคลม</option>
-                                      <option value="3" ${data[i].ban==3 ? 'selected' : '' }>แบนการเคลม (ครั้งแรก)</option>
-                                      <option value="999" ${data[i].ban==999 ? 'selected' : '' }>แบนการซื้อและการเคลม</option>
-                                    </select>
-                                  </div>
                                     <button type="submit" id="updatedata${data[i].ac_id}" class="d-none"></button>
                                   </form>
                                   
