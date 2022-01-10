@@ -229,7 +229,9 @@ if (isset($_GET)) {
                                         <?php
                                         endif;
                                         ?>
-                                        <span><a href="#" onclick="renew(<?= $selled['selled_id']; ?>)" style="color: #1a00db;"><br>ต่อวันประกัน +30 วัน คลิกที่นี่!</a></span>
+                                    </div>
+                                    <div class="col-12">
+                                        <a class="btn btn-success btn-sm w-100 text-light" onclick="renew(<?= $selled['selled_id']; ?>)" style="color: #1a00db;">ต่อวันประกัน +30 วัน คลิกที่นี่!</a>
                                     </div>
                                 </div>
                                 <span style="color: #ff0022;" align="center"><br><b>อ่านก่อนเข้าจอ</b> <br></span>
