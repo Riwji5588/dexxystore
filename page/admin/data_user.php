@@ -37,19 +37,16 @@
  <!-- End User  -->
 
 
-
  <script>
    let orders_list = "";
    var isSandbox = window.location.origin == "https://sandbox.dexystore.me";
    var host = window.location.origin == "http://localhost" ? "http://localhost/dexystore" : isSandbox ? "https://sandbox.dexystore.me" : "https://dexystore.me";
    var url = host + '/plugin/getAll.php';
    $(document).ready(async () => {
-
      renderPage(host, url);
-
    })
 
-   function renderPage(host, url) {
+   function renderPage(host, url, type = true) {
      $.ajax({
 
        type: "POST",
@@ -79,9 +76,35 @@
                 </tr>
               `;
            }
-           $('#body').html(body);
-           $('#myTable').DataTable();
-           $('#loading').remove();
+           if (type) {
+             $('#body').html(body);
+             $('#myTable').DataTable();
+             $('#loading').remove();
+
+             //  addCache(host, body);
+           } else {
+             //  addCache(host, body);
+           }
+         }
+       },
+       error: function(data) {
+         console.log(data.responseText);
+       }
+     });
+   }
+
+   function addCache(host, data) {
+     $.ajax({
+       type: "POST",
+       url: host + '/plugin/userCache.php',
+       dataType: "json",
+       data: {
+         action: 'AddCache',
+         table: data
+       },
+       success: function(json) {
+         if (json.code == 200) {
+           console.log(json.message);
          }
        },
        error: function(data) {
@@ -218,6 +241,19 @@
                                   </div>
                                 </div>
                               </fieldset>
+                              <hr>
+                              <fieldset class="form-group" align="start" style="border: 0;">
+                                <div class="row">
+                                  <legend class="col-form-label col-sm-4 pt-0">แบนออเดอร์</legend>
+                                  <div id="orderslist${data[0].ac_id}" class="col-sm-8">
+                                    
+                                    <div id="loadingOrder${data[0].ac_id}" class="form-check form-check-inline">
+                                      <div class="spinner-border" role="status"></div>
+                                    </div>
+                                                                              
+                                  </div>
+                                </div>
+                              </fieldset>
                             </div>
                           </div>
                           <div class="modal-footer px-2 pb-2">
@@ -301,7 +337,7 @@
                      button: false,
                      closeOnClickOutside: false,
                    });
-                   
+                   renderPage(host, url, false);
                    setTimeout(function() {
                      window.location.reload();
                    }, 1500);
@@ -382,7 +418,6 @@
                  });
 
                },
-
                success: function(data) {
                  setTimeout(() => {
                    if (data.code == "200") {
@@ -390,7 +425,7 @@
                        button: false,
                        closeOnClickOutside: false,
                      });
-                     
+                     renderPage(host, url, false);
                      setTimeout(function() {
                        window.location.reload();
                      }, 1500);
