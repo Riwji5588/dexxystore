@@ -19,7 +19,7 @@
        <tr>
          <th scope="col" style="width:120px;">เลขที่บัญชี</th>
          <th scope="col">บัญชีผู้ใช้</th>
-         <th scope="col">บาท</th>
+         <th scope="col">อีเมล์</th>
          <th scope="col">ระดับ</th>
          <th scope="col" style="width: 170px;">เมนู</th>
        </tr>
@@ -27,10 +27,12 @@
      <tbody id="body">
      </tbody>
    </table>
+
    <div id="loading" class="container" style="color: #FFF;" align="center">
      <div class="spinner-border" role="status">
      </div>
    </div>
+
  </div>
  <!-- End User  -->
 
@@ -38,10 +40,16 @@
 
  <script>
    let orders_list = "";
+   var isSandbox = window.location.origin == "https://sandbox.dexystore.me";
+   var host = window.location.origin == "http://localhost" ? "http://localhost/dexystore" : isSandbox ? "https://sandbox.dexystore.me" : "https://dexystore.me";
+   var url = host + '/plugin/getAll.php';
    $(document).ready(async () => {
-     let isSandbox = window.location.origin == "https://sandbox.dexystore.me";
-     let host = window.location.origin == "http://localhost" ? "http://localhost/dexystore" : isSandbox ? "https://sandbox.dexystore.me" : "https://dexystore.me";
-     let url = host + '/plugin/getAll.php';
+
+     renderPage(host, url);
+
+   })
+
+   function renderPage(host, url) {
      $.ajax({
 
        type: "POST",
@@ -54,136 +62,22 @@
          if (json.code == 200) {
            const data = json.data;
            const ban = json.ban;
-           let body = $('#body').html();
+           let [body, modal] = "";
 
            for (let i = 0; i < data.length; i++) {
              body +=
                `
-                    <tr ${ban['ac'+data[i].ac_id] != undefined && ban['ac'+data[i].ac_id].ac_id == data[i].ac_id ? ban['ac'+data[i].ac_id].buy == 1 || ban['ac'+data[i].ac_id].claim == 1 || ban['ac'+data[i].ac_id].claim_first == 1 ? 'style="color: red;"' : '' : '' }>
-                      <td>${i+1}</td>
-                      <td>${data[i].username}</td>
-                      <td>${data[i].points}</td>
-                      ${data[i].role == 779 ? '<td class="text-danger">ผู้ดูแลระบบ</td>' : '<td>ผู้ใช้งาน</td>'}
-                      <td>
-                        <button class="btn btn-sm hyper-btn-notoutline-success" type="button" data-toggle="modal" data-target="#editusermodal${data[i].ac_id}"><i class="fal fa-edit mr-1"></i> แก้ไข</button>
-                        <button onclick="DelUser(this)" value="${data[i].ac_id}" class="btn btn-sm hyper-btn-notoutline-danger my-1 my-sm-0" type="button"><i class="fal fa-trash-alt mr-1"></i> ลบ</button>
-
-                        <!-- Edit Game Data Modal -->
-                        <div class="modal fade" id="editusermodal${data[i].ac_id}" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-hidden="true">
-                          <div class="modal-dialog modal-dialog-centered">
-                            <div class="modal-content border-0 radius-border-2 hyper-bg-white">
-                              <div class="modal-header hyper-bg-dark">
-                                <h6 class="modal-title"><i class="fal fa-plus-square mr-1"></i> อัพเดทข้อมูล</h6>
-                              </div>
-                              <div class="modal-body text-center">
-
-                                <form method="POST" enctype="multipart/form-data">
-
-                                  <img src="assets/img/logoani_236x236.jpg" width="99px" class="img-fluid rounded-circle ml-auto mr-auto mb-2"></br>
-                                  <font class="text-muted">Username</font>
-                                  <h5><b>${data[i].username}</b></h5>
-
-                                  <div class="input-group input-group-sm mb-3 mt-4">
-                                    <div class="input-group-prepend">
-                                      <span class="input-group-text hyper-bg-dark border-dark">E-mail</span>
-                                    </div>
-                                    <input id="email${data[i].ac_id}" value="${data[i].email}" type="email" class="form-control form-control-sm hyper-form-control" placeholder="E-mail" required>
-                                  </div>
-
-                                  <div class="input-group input-group-sm mb-3">
-                                    <div class="input-group-prepend">
-                                      <span class="input-group-text hyper-bg-dark border-dark">บาท</span>
-                                    </div>
-                                    <input id="point${data[i].ac_id}" value="${data[i].points}" type="number" class="form-control form-control-sm hyper-form-control" placeholder="Point" required>
-                                  </div>
-
-                                  <div class="input-group input-group-sm mb-3">
-                                    <div class="input-group-prepend">
-                                      <label class="input-group-text hyper-bg-dark border-dark" for="role${data[i].ac_id}">ระดับผู้ใช้งาน</label>
-                                    </div>
-                                    <select id="role${data[i].ac_id}" class="custom-select hyper-form-control">
-                                      <option ${data[i].role==1 ? 'selected' : '' } value="1">ผู้ใช้งาน</option>
-                                      <option ${data[i].role==779 ? 'selected' : '' } value="779">ผู้ดูแลระบบ</option>
-                                    </select>
-                                  </div>
-
-                                    <button type="submit" id="updatedata${data[i].ac_id}" class="d-none"></button>
-                                  </form>
-                                  
-                                  </div>
-                                  <div align="center">
-                                  <div class="col-6" >
-                                    <button class="btn mb-3 w-100 hyper-btn-danger btn-sm" data-toggle="modal" data-target="#banmodal${data[i].ac_id}" onclick="LoadOrder(${data[i].ac_id})">แบน</button>
-                                  </div>
-                                  </div>
-                              <div class="modal-footer p-2 border-0">
-                                <button type="button" onclick="updatedata('${data[i].ac_id}')" class="btn btn-success"><i class="fal fa-plus-square mr-1"></i>อัพเดทข้อมูล</button>
-                                <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fad fa-times-circle mr-1"></i>ยกเลิก</button>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <!-- End Edit Game Data Modal -->
-
-                        <!-- Ban Modal -->
-                        <div class="modal fade" id="banmodal${data[i].ac_id}"  data-backdrop="static" data-keyboard="false" tabindex="-1" aria-hidden="true">
-                          <div class="modal-dialog modal-dialog-centered modal-lg">
-                              <div class="modal-content">
-                                  <div class="modal-body">
-                                    <div class="card-body">
-                                      <hr>
-                                      <fieldset class="form-group" align="start" style="border: 0;">
-                                        <div class="row">
-                                          <legend class="col-form-label col-sm-4 pt-0">แบน</legend>
-                                          <div class="col-sm-8">
-                                            <div class="form-check">
-                                              <input class="form-check-input" type="checkbox" id="banbuy${data[i].ac_id}" ${ban['ac'+data[i].ac_id] != undefined && ban['ac'+data[i].ac_id].ac_id == data[i].ac_id && ban['ac'+data[i].ac_id].buy == 1 ? 'checked' : ''} >
-                                              <label class="form-check-label" for="banbuy${data[i].ac_id}" style="color: #000">
-                                              แบนการซื้อ
-                                              </label>
-                                            </div>
-                                            <div class="form-check">
-                                              <input class="form-check-input" type="checkbox" id="banclaim${data[i].ac_id}" ${ban['ac'+data[i].ac_id] != undefined && ban['ac'+data[i].ac_id].ac_id == data[i].ac_id && ban['ac'+data[i].ac_id].claim == 1 ? 'checked' : ''}>
-                                              <label class="form-check-label" for="banclaim${data[i].ac_id}" style="color: #000">
-                                              แบนการเคลม
-                                              </label>
-                                            </div>
-                                            <div class="form-check">
-                                              <input class="form-check-input" type="checkbox" id="banclaimfirst${data[i].ac_id}" ${ban['ac'+data[i].ac_id] != undefined && ban['ac'+data[i].ac_id].ac_id == data[i].ac_id && ban['ac'+data[i].ac_id].claim_first == 1 ? 'checked' : ''}>
-                                              <label class="form-check-label" for="banclaimfirst${data[i].ac_id}" style="color: #000">
-                                              แบนการเคลม (ครั้งแรก)
-                                              </label>
-                                            </div>
-                                          </div>
-                                        </div>
-                                      </fieldset>
-                                      <hr>
-                                      <fieldset class="form-group" align="start" style="border: 0;">
-                                        <div class="row">
-                                          <legend class="col-form-label col-sm-4 pt-0">แบนออเดอร์</legend>
-                                          <div id="orderslist${data[i].ac_id}" class="col-sm-8">
-                                            
-                                            <div id="loadingOrder${data[i].ac_id}" class="form-check form-check-inline">
-                                              <div class="spinner-border" role="status"></div>
-                                            </div>
-                                                                                     
-                                          </div>
-                                        </div>
-                                      </fieldset>
-                                    </div>
-                                  </div>
-                                  <div class="modal-footer px-2 pb-2">
-                                    <button type="button" onclick="updatedata('${data[i].ac_id}')" class="btn btn-success"><i class="fal fa-plus-square mr-1"></i>อัพเดทข้อมูล</button>
-                                    <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fad fa-times-circle mr-1"></i>ยกเลิก</button>
-                                  </div>
-                              </div>
-                          </div>
-                        </div>
-                        <!-- End Ban Modal -->
-
-                      </td>
-                    </tr>
-                    `;
+                <tr ${ban['ac'+data[i].ac_id] != undefined && ban['ac'+data[i].ac_id].ac_id == data[i].ac_id ? ban['ac'+data[i].ac_id].buy == 1 || ban['ac'+data[i].ac_id].claim == 1 || ban['ac'+data[i].ac_id].claim_first == 1 ? 'style="color: red;"' : '' : '' }>
+                  <td>${i+1}</td>
+                  <td>${data[i].username}</td>
+                  <td>${data[i].email}</td>
+                  ${data[i].role == 779 ? '<td class="text-danger">ผู้ดูแลระบบ</td>' : '<td>ผู้ใช้งาน</td>'}
+                  <td>
+                    <button id="clickmodal${data[i].ac_id}" class="btn btn-sm hyper-btn-notoutline-success" type="button" data-toggle="modal" data-target="#editusermodal${data[i].ac_id}" onclick="LoadOrder(${data[i].ac_id}, ${false})"><i class="fal fa-edit mr-1"></i> แก้ไข</button>
+                    <button onclick="DelUser(this)" value="${data[i].ac_id}" class="btn btn-sm hyper-btn-notoutline-danger my-1 my-sm-0" type="button"><i class="fal fa-trash-alt mr-1"></i> ลบ</button>
+                  </td>
+                </tr>
+              `;
            }
            $('#body').html(body);
            $('#myTable').DataTable();
@@ -194,39 +88,162 @@
          console.log(data.responseText);
        }
      });
+   }
 
-   })
-
-   function LoadOrder(ac_id) {
+   function LoadOrder(ac_id, type = true) {
      let isSandbox = window.location.origin == "https://sandbox.dexystore.me";
      let host = window.location.origin == "http://localhost" ? "http://localhost/dexystore" : isSandbox ? "https://sandbox.dexystore.me" : "https://dexystore.me";
-     let url = host + '/plugin/getuserorder.php';
+     let url = host + '/plugin/getAll.php';
      $.ajax({
        url: url,
        type: 'POST',
        dataType: 'json',
        data: {
-         'action': 'LoadOrder',
-         'ac_id': ac_id
+         'action': 'getusermodal',
+         'id': ac_id
        },
        success: function(json) {
          if (json.code == 200) {
            const orders_id = json.order_id;
-           let data_append = '';
-           let ordersList = $('#orderslist' + ac_id);
-           orders_id.forEach((order_id) => {
-             data_append += `
-             <div class="form-check form-check-inline">
-              <input class="form-check-input" type="checkbox" id="order${order_id}" onclick="addHidden(${order_id})">
-              <label class="form-check-label" for="order${order_id}" style="color: #000">&nbsp;ออเดอร์ ${order_id}</label>
-            </div> `;
-           })
+           const ban = json.ban;
+           const data = json.data;
+           let modal = '';
 
-           if (ordersList.children('div.form-check.form-check-inline').length != orders_id.length) {
-             ordersList.html(data_append);
+
+           if (type) {
+             let data_append = '';
+             let ordersList = $('#orderslist' + ac_id);
+             orders_id.forEach((order_id) => {
+               data_append += `
+                 <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="checkbox" id="order${order_id}" onclick="addHidden(${order_id})">
+                  <label class="form-check-label" for="order${order_id}" style="color: #000">&nbsp;ออเดอร์ ${order_id}</label>
+                </div> `;
+             })
+
+             if (ordersList.children('div.form-check.form-check-inline').length != orders_id.length) {
+               ordersList.html(data_append);
+             }
+
+             $('#loadingOrder' + ac_id).remove();
+           } else {
+             modal +=
+               `
+                  <!-- Edit Game Data Modal -->
+                    <div class="modal fade" id="editusermodal${data[0].ac_id}" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-hidden="true">
+                      <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content border-0 radius-border-2 hyper-bg-white">
+                          <div class="modal-header hyper-bg-dark">
+                            <h6 class="modal-title"><i class="fal fa-plus-square mr-1"></i> อัพเดทข้อมูล</h6>
+                          </div>
+                          <div class="modal-body text-center">
+  
+                            <form method="POST" enctype="multipart/form-data">
+  
+                              <img src="assets/img/logoani_236x236.jpg" width="99px" class="img-fluid rounded-circle ml-auto mr-auto mb-2"></br>
+                              <font class="text-muted">Username</font>
+                              <h5><b>${data[0].username}</b></h5>
+  
+                              <div class="input-group input-group-sm mb-3 mt-4">
+                                <div class="input-group-prepend">
+                                  <span class="input-group-text hyper-bg-dark border-dark">อีเมล์</span>
+                                </div>
+                                <input id="email${data[0].ac_id}" value="${data[0].email}" type="email" class="form-control form-control-sm hyper-form-control" placeholder="E-mail" required>
+                              </div>
+  
+                              <div class="input-group input-group-sm mb-3">
+                                <div class="input-group-prepend">
+                                  <span class="input-group-text hyper-bg-dark border-dark">เงิน</span>
+                                </div>
+                                <input id="point${data[0].ac_id}" value="${data[0].points}" type="number" class="form-control form-control-sm hyper-form-control" placeholder="Point" required>
+                              </div>
+  
+                              <div class="input-group input-group-sm mb-3">
+                                <div class="input-group-prepend">
+                                  <label class="input-group-text hyper-bg-dark border-dark" for="role${data[0].ac_id}">ระดับผู้ใช้งาน</label>
+                                </div>
+                                <select id="role${data[0].ac_id}" class="custom-select hyper-form-control">
+                                  <option ${data[0].role==1 ? 'selected' : '' } value="1">ผู้ใช้งาน</option>
+                                  <option ${data[0].role==779 ? 'selected' : '' } value="779">ผู้ดูแลระบบ</option>
+                                </select>
+                              </div>
+  
+                                <button type="submit" id="updatedata${data[0].ac_id}" class="d-none"></button>
+                              </form>
+                              
+                              </div>
+                              <div align="center">
+                              <div class="col-6" >
+                                <button class="btn mb-3 w-100 hyper-btn-danger btn-sm" data-toggle="modal" data-target="#banmodal${data[0].ac_id}" onclick="LoadOrder(${data[0].ac_id})">แบน</button>
+                              </div>
+                              </div>
+                          <div class="modal-footer p-2 border-0">
+                            <button type="button" onclick="updatedata('${data[0].ac_id}')" class="btn btn-success"><i class="fal fa-plus-square mr-1"></i>อัพเดทข้อมูล</button>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fad fa-times-circle mr-1"></i>ยกเลิก</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- End Edit Game Data Modal -->
+  
+                    <!-- Ban Modal -->
+                    <div class="modal fade" id="banmodal${data[0].ac_id}"  data-backdrop="static" data-keyboard="false" tabindex="-1" aria-hidden="true">
+                      <div class="modal-dialog modal-dialog-centered modal-lg">
+                        <div class="modal-content">
+                          <div class="modal-body">
+                            <div class="card-body">
+                              <hr>
+                              <fieldset class="form-group" align="start" style="border: 0;">
+                                <div class="row">
+                                  <legend class="col-form-label col-sm-4 pt-0">แบน</legend>
+                                  <div class="col-sm-8">
+                                    <div class="form-check">
+                                      <input class="form-check-input" type="checkbox" id="banbuy${data[0].ac_id}"${ban[0].ac_id == data[0].ac_id && ban[0].buy == 1 ? 'checked' : ''} >
+                                      <label class="form-check-label" for="banbuy${data[0].ac_id}" style="color: #000">
+                                      แบนการซื้อ
+                                      </label>
+                                    </div>
+                                    <div class="form-check">
+                                      <input class="form-check-input" type="checkbox" id="banclaim${data[0].ac_id}"${ban[0].ac_id == data[0].ac_id && ban[0].claim == 1 ? 'checked' : ''}>
+                                      <label class="form-check-label" for="banclaim${data[0].ac_id}" style="color: #000">
+                                      แบนการเคลม
+                                      </label>
+                                    </div>
+                                    <div class="form-check">
+                                      <input class="form-check-input" type="checkbox" id="banclaimfirst${data[0].ac_id}"${ban[0].ac_id == data[0].ac_id && ban[0].claim_first == 1 ? 'checked' : ''}>
+                                      <label class="form-check-label" for="banclaimfirst${data[0].ac_id}" style="color: #000">
+                                      แบนการเคลม (ครั้งแรก)
+                                      </label>
+                                    </div>
+                                  </div>
+                                </div>
+                              </fieldset>
+                            </div>
+                          </div>
+                          <div class="modal-footer px-2 pb-2">
+                            <button type="button" onclick="updatedata('${data[0].ac_id}')" class="btn btn-success"><i class="fal fa-plus-square mr-1"></i>อัพเดทข้อมูล</button>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fad fa-times-circle mr-1"></i>ยกเลิก</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  <!-- End Ban Modal -->
+                  
+                 `
+             // jquery check is have element
+             let checkEdituser = $(`#editusermodal${data[0].ac_id}`).html() != undefined
+             let checkBan = $(`#banmodal${data[0].ac_id}`).html() != undefined
+
+
+             if (!checkEdituser && !checkBan) {
+               $('body').append(modal)
+               console.log('added')
+             } else {
+               console.log('already added')
+             }
            }
 
-           $('#loadingOrder' + ac_id).remove();
+
          } else {
            console.log(json.message);
          }
@@ -284,6 +301,7 @@
                      button: false,
                      closeOnClickOutside: false,
                    });
+                   
                    setTimeout(function() {
                      window.location.reload();
                    }, 1500);
@@ -372,6 +390,7 @@
                        button: false,
                        closeOnClickOutside: false,
                      });
+                     
                      setTimeout(function() {
                        window.location.reload();
                      }, 1500);
