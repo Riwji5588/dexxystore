@@ -59,7 +59,7 @@ if (isset($_POST['id'])) {
                             $selled_id = $selled_id_query->fetch_array();
 
                             if (!$selled_query) {
-                                $errorMSG = 'ซื้อสินค้า ไม่สำเร็จ!';
+                                $errorMSG = 'ซื้อสินค้า ไม่สำเร็จ! (1)';
                             }
                         } else {
                             $errorMSG = 'ซื้อสินค้า ไม่สำเร็จ!';
