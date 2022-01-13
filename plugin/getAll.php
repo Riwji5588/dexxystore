@@ -58,7 +58,7 @@ if (isset($_POST)) {
             $ban_row += 1;
         }
 
-        $sellect_order = "SELECT selled_id, exp_date FROM data_selled WHERE ac_id='" . $_POST['id'] . "' ORDER BY selled_id ASC";
+        $sellect_order = "SELECT selled_id, ban, exp_date FROM data_selled WHERE ac_id='" . $_POST['id'] . "' ORDER BY selled_id ASC";
         $result = $hyper->connect->query($sellect_order);
         $order_row = mysqli_num_rows($result);
         $count = 0;
@@ -71,7 +71,7 @@ if (isset($_POST)) {
 
                 $expire = $order_date - $now;
                 if ($expire > 0) {
-                    array_push($orders, (int)$order['selled_id']);
+                    array_push($orders, ['id' => (int)$order['selled_id'], 'ban' => (int)$order['ban']]);
                     $count++;
                 }
                 $i++;

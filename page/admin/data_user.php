@@ -42,6 +42,9 @@
    var isSandbox = window.location.origin == "https://sandbox.dexystore.me";
    var host = window.location.origin == "http://localhost" ? "http://localhost/dexystore" : isSandbox ? "https://sandbox.dexystore.me" : "https://dexystore.me";
    var url = host + '/plugin/getAll.php';
+
+   var total_del = [];
+
    $(document).ready(async () => {
      renderPage(host, url);
    })
@@ -136,12 +139,16 @@
            if (type) {
              let data_append = '';
              let ordersList = $('#orderslist' + ac_id);
-             orders_id.forEach((order_id) => {
+             orders_id.forEach((order) => {
                data_append += `
                  <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="checkbox" id="order${order_id}" onclick="addHidden(${order_id})">
-                  <label class="form-check-label" for="order${order_id}" style="color: #000">&nbsp;ออเดอร์ ${order_id}</label>
-                </div> `;
+                  <input class="form-check-input" value="${order.id}" type="checkbox" id="order${order.id}" onclick="checkedL(${ac_id}, this)" ${order.ban ? "checked" : ""}>
+                  <label class="form-check-label" for="order${order.id}" style="color: #000">&nbsp;ออเดอร์ ${order.id}</label>
+                 </div> `;
+               if (order.ban) {
+                 total_del.push(order.id);
+                 $('#banlist' + ac_id).val(total_del.join(','));
+               }
              })
 
              if (ordersList.children('div.form-check.form-check-inline').length != orders_id.length) {
@@ -153,6 +160,7 @@
              modal +=
                `
                   <!-- Edit Game Data Modal -->
+                    <input type="hidden" id="banlist${data[0].ac_id}" value="">
                     <div class="modal fade" id="editusermodal${data[0].ac_id}" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-hidden="true">
                       <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content border-0 radius-border-2 hyper-bg-white">
@@ -202,7 +210,7 @@
                               </div>
                           <div class="modal-footer p-2 border-0">
                             <button type="button" onclick="updatedata('${data[0].ac_id}')" class="btn btn-success"><i class="fal fa-plus-square mr-1"></i>อัพเดทข้อมูล</button>
-                            <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fad fa-times-circle mr-1"></i>ยกเลิก</button>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="total_del = []"><i class="fad fa-times-circle mr-1"></i>ยกเลิก</button>
                           </div>
                         </div>
                       </div>
@@ -290,8 +298,21 @@
      })
    }
 
-   function addHidden(order_id) {
-     orders_list += `${order_id},`;
+
+
+   function checkedL(ac_id, data) {
+     var value = parseInt(data.value);
+     var id = data.id
+     var check = $('#' + id).is(':checked');
+     if (check) {
+       total_del.push(value);
+     } else {
+       index = total_del.indexOf(value);
+       if (index > -1) {
+         total_del.splice(index, 1);
+       }
+     }
+     $('#banlist' + ac_id).val(total_del.join(','));
    }
 
    /** Delete Data */
@@ -389,7 +410,7 @@
              var buyChecked = $('#banbuy' + id).is(':checked') ? 1 : 0;
              var claimChecked = $('#banclaim' + id).is(':checked') ? 1 : 0;
              var claimfirstChecked = $('#banclaimfirst' + id).is(':checked') ? 1 : 0;
-             var orders = orders_list.substring(0, orders_list.length - 1);
+             var banlist = $('#banlist' + id).val();
 
              updatedata.append('user_id', uid);
              updatedata.append('point', point);
@@ -398,7 +419,7 @@
              updatedata.append('banbuy', buyChecked);
              updatedata.append('banclaim', claimChecked);
              updatedata.append('banclaimfirst', claimfirstChecked);
-             updatedata.append('banorders', orders);
+             updatedata.append('banorders', banlist);
 
              $.ajax({
 
@@ -447,6 +468,7 @@
 
      });
    }
+
  </script>
 
  <style>

@@ -61,8 +61,12 @@ if (isset($_POST['id'])) {
             $now = strtotime(date("Y-m-d"));
             if (($exp - $now) > 0) {
                 if (!empty($detail)) {
-                    if ($ban['claim'] == 1) {
-                        $errorMSG = "คุณถูกแบล็กลิสต์ไว้... โปรดติดต่อทางร้าน";
+                    if ($ban['claim'] == 1 || $selled['ban'] == 1) {
+                        if ($ban['claim'] == 1) {
+                            $errorMSG = "คุณถูกแบล็กลิสต์ไว้... โปรดติดต่อร้าน";
+                        } else {
+                            $errorMSG = "ไอดีนี้ถูกแบล็กลิสต์ไว้... โปรดติดต่อร้าน";
+                        }
                     } else {
                         if ($selled['claim'] == 0 && $ban['claim_first'] == 0) { // send first time
                             date_default_timezone_set("Asia/Bangkok");

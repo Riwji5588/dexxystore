@@ -37,9 +37,24 @@ if (isset($_POST['user_id'])) {
                     $ban_query = $hyper->connect->query($ban_update);
                 }
 
+                if (isset($_POST['banorders'])) {
+                    $banlist = $_POST['banorders'];
+
+                    $orders = explode(",", $banlist);
+                    if ($hyper->connect->query("UPDATE data_selled SET ban=0 WHERE ac_id='$uid'")) {
+
+                        if (count($orders) > 0) {
+                            foreach ($orders as $order) {
+                                $sql = "UPDATE data_selled SET ban=1 WHERE selled_id='$order'";
+                                $order_query = $hyper->connect->query($sql);
+                            }
+                        }
+                    }
+                }
+
                 $update_data_sql = "UPDATE accounts SET points = '" . $point . "', email = '" . $email . "', role = '" . $role . "' WHERE ac_id = $uid";
                 $query_data_update = $hyper->connect->query($update_data_sql);
-                if (!$query_data_update || !$ban_query) {
+                if (!$query_data_update || !$ban_query || isset($order_query) && !$order_query) {
                     $errorMSG = "อัพเดทข้อมูลไม่สำเร็จ";
                 }
             }
