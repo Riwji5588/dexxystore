@@ -205,8 +205,8 @@ class Notify
 
 class DateThai
 {
-
-    public function DateThai1($strDate)
+    
+        public function DateThai1($strDate)
     {
         $strYear = date("Y", strtotime($strDate)) + 543;
         $strMonth = date("n", strtotime($strDate));
