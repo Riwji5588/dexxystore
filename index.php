@@ -335,6 +335,7 @@ if (isset($_COOKIE['USER_SID'])) {
       } elseif ($page == 'gamedata') {
         if ($data_user['role'] == '779') {
           include('page/admin/game_item/game_data.php');
+          
         } else {
           $page = 'home';
           include('page/welcome.php');
@@ -521,5 +522,7 @@ if (isset($_COOKIE['USER_SID'])) {
     color: #027310;
   }
 </style>
+
+
 
 </html>

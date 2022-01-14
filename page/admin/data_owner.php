@@ -109,7 +109,7 @@
 
                                     <form method="POST" enctype="multipart/form-data">
 
-                                    <img src="assets/img/item/${data.card_img}" width="99px" class="img-fluid rounded-circle ml-auto mr-auto mb-2"></br>
+                                    <img src="assets/img/item/${data.card_img}" width="99px" height="99px" class="ml-auto mr-auto mb-2" style="border-radius: 50%"></br>
                                     <font class="text-muted">${data.card_id == null ? 'Unknow' : data.card_title+" - "+data.card_price}</font>
                                     <div class="row" style="padding: 20px 2px 0px 2px;">
                                       <div class="col-3 col-md-4">
@@ -147,12 +147,13 @@
                                       </div>
                                     </div> 
 
-
                                       <button type="submit" id="updatedata${data.selled_data_id}" class="d-none"></button>
                                     </form>
-
+                                    
+                                    <input type="hidden" id="copy${data.selled_data_id}" value="${data.selled_data_username+":"+password+":"+data.selled_data_display}">
                                   </div>
                                   <div class="modal-footer p-2 border-0">
+                                    <button type="button" class="btn btn-secondary" onclick="copyfile(this,${data.selled_data_id})"><i class="fad fa-times-circle mr-1"></i>คัดลอก</button>
                                     <button type="button" class="btn hyper-btn-notoutline-danger" data-dismiss="modal"><i class="fad fa-times-circle mr-1"></i>ปิด</button>
                                   </div>
                                 </div>
@@ -180,6 +181,21 @@
               console.log('error')
             }
           });
+        }
+
+        function copyfile(input, dataid) {
+          let copyText = document.getElementById(`copy${dataid}`);
+          copyText.type = "text";
+          copyText.select();
+          copyText.setSelectionRange(0, 99999)
+          document.execCommand("copy");
+          copyText.type = "hidden";
+          input.innerHTML = "คัดลอกแล้ว";
+          input.className = "btn btn-success";
+          setTimeout(function() {
+            input.innerHTML = "คัดลอก";
+            input.className = "btn btn-dark";
+          }, 2000);
         }
 
         /** Delete Data */
