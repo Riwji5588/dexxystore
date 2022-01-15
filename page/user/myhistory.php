@@ -251,10 +251,10 @@ $sql_select_selled = "SELECT * FROM data_selled WHERE ac_id = $ac_id ORDER BY se
     copyText.select();
     copyText.setSelectionRange(0, 99999)
     document.execCommand("copy");
-    input.innerHTML = "คัดลอกแล้ว";
+    input.innerHTML = "<i class='far fa-copy'></i> คัดลอกแล้ว";
     input.className = "btn btn-success btn-sm";
     setTimeout(function() {
-      input.innerHTML = "คัดลอก";
+      input.innerHTML = "<i class='far fa-copy'></i> คัดลอก";
       input.className = "btn btn-dark btn-sm";
     }, 2000);
   }

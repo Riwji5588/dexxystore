@@ -185,38 +185,37 @@ if (isset($_GET)) {
                             <div class="modal-body text-left">
                                 <?php if ($expire > 0) : ?>
                                     <div class="row" style="padding: 5px 2px 0px 2px;">
-                                        <div class="col-4">
+                                        <div class="col-3 pr-0">
                                             <span>ชื่อผู้ใช้
                                         </div>
-                                        <div class="col-8">
+                                        <div class="col-9 p-0">
                                             <input type="text" class="hyper-form-control" id="username<?= $selled['selled_id']; ?>1" value="<?= $selled_data['username']; ?>" readonly style="color: #2E4C6D ; background-color: white;border-radius: 0px;border: 0px">
-                                            <button id="username<?= $selled['selled_id']; ?>" class="btn btn-dark btn-sm" onclick="copy(this)"> คัดลอก </button>
-                                            <!-- 'username<?= $selled['selled_id']; ?>' -->
+                                            <button style="margin-left: -25px;" id="username<?= $selled['selled_id']; ?>" class="btn btn-dark btn-sm" onclick="copy(this)"><i class='far fa-copy'></i> คัดลอก</button>
                                         </div>
                                     </div>
                                     <div class="row" style="padding: 5px 2px 0px 2px;">
-                                        <div class="col-4">
+                                        <div class="col-3 pr-0">
                                             <span>รหัสผ่าน</span>
                                         </div>
-                                        <div class="col-8">
+                                        <div class="col-9 p-0">
                                             <input type="text" class="hyper-form-control" id="password<?= $selled['selled_id']; ?>1" value="<?= base64_decode($selled_data['password']); ?>" readonly style="color:#2E4C6D ; background-color: white;border-radius: 0px;border: 0px">
-                                            <button id="password<?= $selled['selled_id']; ?>" class="btn btn-dark btn-sm" onclick="copy(this)"> คัดลอก </button>
+                                            <button style="margin-left: -25px;" id="password<?= $selled['selled_id']; ?>" class="btn btn-dark btn-sm" onclick="copy(this)"><i class='far fa-copy'></i> คัดลอก</button>
                                         </div>
                                     </div>
                                     <div class="row" style="padding: 5px 2px 0px 2px;">
-                                        <div class="col-4">
+                                        <div class="col-3 pr-0">
                                             <span>จอ</span>
                                         </div>
-                                        <div class="col-8">
+                                        <div class="col-9 p-0">
                                             <input type="text" class="hyper-form-control" value="<?= $selled_data['display']; ?>" readonly style="color:#2E4C6D ; background-color: white;border-radius: 0px;border: 0px">
                                         </div>
                                     </div>
                                 <?php endif; ?>
                                 <div class="row" style="padding: 5px 2px 0px 0px;">
-                                    <div class="col-4">
+                                    <div class="col-3 pr-0">
                                         <span>วันหมดอายุ </span>
                                     </div>
-                                    <div class="col-8">
+                                    <div class="col-9 p-0">
                                         <?php
                                         $expire = strtotime($selled['exp_date']) - strtotime('today midnight');
                                         if ($expire > 0) :
