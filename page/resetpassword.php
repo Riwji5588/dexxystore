@@ -84,3 +84,9 @@
 
         });
       </script>
+
+      <style>
+        .btn {
+          color: #000;
+        }
+      </style>
