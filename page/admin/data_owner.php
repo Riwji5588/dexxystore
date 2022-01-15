@@ -116,7 +116,7 @@
                                           <span>ชื่อผู้ใช้งาน</span>
                                       </div>
                                       <div class="col-9 col-md-8">
-                                          <input type="text" id="username${data.selled_data_id}" value="${data.selled_data_username}" readonly style="background-color: #fff;border-radius: 0px;border: 0px">
+                                          <input type="text" id="username${data.selled_data_id}" value="${data.selled_data_username}" onkeyup="revalue(${data.selled_data_id})" style="background-color: #fff;border-radius: 0px;border: 0px">
                                       </div>
                                     </div> 
                                     
@@ -125,7 +125,7 @@
                                           <span>รหัสผ่าน</span>
                                       </div>
                                       <div class="col-9 col-md-8">
-                                          <input type="text" id="password${data.selled_data_id}" value="${password}" readonly style="background-color: #fff;border-radius: 0px;border: 0px">
+                                          <input type="text" id="password${data.selled_data_id}" value="${password}" onkeyup="revalue(${data.selled_data_id})" style="background-color: #fff;border-radius: 0px;border: 0px">
                                       </div>
                                     </div> 
 
@@ -134,7 +134,7 @@
                                           <span>จอ</span>
                                       </div>
                                       <div class="col-9 col-md-8">
-                                          <input type="text" id="display${data.selled_data_id}" value="${data.selled_data_display}" readonly style="background-color: #fff;border-radius: 0px;border: 0px">
+                                          <input type="text" id="display${data.selled_data_id}" value="${data.selled_data_display}" onkeyup="revalue(${data.selled_data_id})" style="background-color: #fff;border-radius: 0px;border: 0px">
                                       </div>
                                     </div> 
 
@@ -147,14 +147,17 @@
                                       </div>
                                     </div> 
 
+                                    
+
                                       <button type="submit" id="updatedata${data.selled_data_id}" class="d-none"></button>
                                     </form>
                                     
                                     <input type="hidden" id="copy${data.selled_data_id}" value="${data.selled_data_username+":"+password+":"+data.selled_data_display}">
                                   </div>
                                   <div class="modal-footer p-2 border-0">
-                                    <button type="button" class="btn btn-secondary" onclick="copyfile(this,${data.selled_data_id})"><i class="fad fa-times-circle mr-1"></i>คัดลอก</button>
-                                    <button type="button" class="btn hyper-btn-notoutline-danger" data-dismiss="modal"><i class="fad fa-times-circle mr-1"></i>ปิด</button>
+                                    <button type="button" class="btn btn-secondary" onclick="copyfile(this,${data.selled_data_id})"><i class="far fa-copy"></i> คัดลอก</button>
+                                    <button type="button" class="btn btn-success" onclick="updatedata(${data.selled_data_id})"><i class="far fa-plus-square"></i> อัพเดทข้อมูล</button>
+                                    <button type="button" class="btn hyper-btn-notoutline-danger" data-dismiss="modal"><i class="fad fa-times-circle mr-1"></i> ปิด</button>
                                   </div>
                                 </div>
                               </div>
@@ -190,12 +193,12 @@
           copyText.setSelectionRange(0, 99999)
           document.execCommand("copy");
           copyText.type = "hidden";
-          input.innerHTML = "คัดลอกแล้ว";
+          input.innerHTML = "<i class='far fa-copy'></i> คัดลอกแล้ว";
           input.className = "btn btn-success";
           setTimeout(function() {
-            input.innerHTML = "คัดลอก";
+            input.innerHTML = "<i class='far fa-copy'></i> คัดลอก";
             input.className = "btn btn-dark";
-          }, 2000);
+          }, 1000);
         }
 
         /** Delete Data */
@@ -261,7 +264,9 @@
             });
         }
 
-
+        function revalue(data_id) {
+          $('#copy' + data_id).val($('#username' + data_id).val() + ":" + $('#password' + data_id).val() + ":" + $('#display' + data_id).val());
+        }
 
         /** Update Data */
         function updatedata(id) {
