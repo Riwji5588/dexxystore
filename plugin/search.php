@@ -213,7 +213,7 @@ if (isset($_GET)) {
                                 <?php endif; ?>
                                 <div class="row" style="padding: 5px 2px 0px 0px;">
                                     <div class="col-3 pr-0">
-                                        <span>วันหมดอายุ </span>
+                                        <span>วันหมดประกัน </span>
                                     </div>
                                     <div class="col-9 p-0">
                                         <?php
