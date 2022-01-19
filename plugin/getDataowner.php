@@ -6,7 +6,7 @@ $errormsg = "";
 if ($_POST) {
     if ($_POST['action'] == 'getdataowner') {
         $exp = $_POST['exp'];
-        if ($exp == 0) {
+        if ($exp == 1) {
             $sql_select_selled = "SELECT * FROM data_selled WHERE exp_date < CURDATE()";
         } else {
             $sql_select_selled = "SELECT * FROM data_selled WHERE exp_date > CURDATE()";
