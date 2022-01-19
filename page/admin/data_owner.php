@@ -64,7 +64,6 @@
               if (json.code == 200) {
                 let body = $('#body').html();
                 const data1 = json.data;
-                let count = 0;
                 for (let i = 0; i < data1.length; i++) {
                   let data = data1[i];
                   body +=
@@ -82,16 +81,10 @@
                         </td>
                       </tr>
                     `;
-                  count++;
                 }
-                let checkhas = $(`#row${data1[0].selled_data_id}`).html() != undefined
-                if (!checkhas) {
-                  $('#body').html(body);
-                  $('#myTable').DataTable();
-                  $('#loading').hide();
-                } else {
-                  console.log('has');
-                }
+                $('#body').html(body);
+                $('#myTable').DataTable();
+                $('#loading').hide();
               } else {
                 console.log(json.message);
               }

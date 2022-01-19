@@ -33,7 +33,7 @@ if ($_POST) {
                 $selled_account = mysqli_fetch_assoc($query_selled_account);
 
                 $expire = strtotime($selled['exp_date']) - strtotime('today midnight');
-                if ($exp == 1 AND (int)$expire < 0) {
+                if ($exp == 1 and (int)$expire < 0) {
                     array_push($data, [
                         'test' => (int)$expire <= 0,
                         // selled
@@ -54,7 +54,7 @@ if ($_POST) {
                         //
                         'expire' => $expire
                     ]);
-                } else if ($exp == 0 AND (int)$expire > 0) {
+                } else if ($exp == 0 and (int)$expire > 0) {
                     array_push($data, [
                         // selled
                         'selled_id' => $selled['selled_id'],
@@ -81,6 +81,11 @@ if ($_POST) {
             $errormsg = "Something wrong";
         }
 
+        if (empty($errormsg)) {
+            echo json_encode(['code' => 200, 'messaeg' => 'success', 'data' => $data]);
+        } else {
+            echo json_encode(['code' => 500, 'message' => $errormsg]);
+        }
     } else if ($_POST['action'] == 'getmodal') {
         $dataid = $_POST['dataid'];
 
@@ -126,10 +131,4 @@ if ($_POST) {
     }
 } else {
     echo json_encode(['code' => 405, 'message' => 'Method Not Allowed']);
-}
-
-if (empty($errormsg)) {
-    echo json_encode(['code' => 200, 'messaeg' => 'success', 'data' => $data]);
-} else {
-    echo json_encode(['code' => 500, 'message' => 'Error']);
 }
