@@ -22,20 +22,11 @@ if (isset($_POST)) {
             $errormsg = "Have error in query";
         }
     } else if ($_POST['action'] == 'todayincome') {
-        if (isset($_POST['type'])) {
-            $type = $_POST['type'];
-            if ($type != "") {
-                if ($type == 0 || $type == 1) {
-                    $today = date("Y-m-d", strtotime("-{$type} day"));
-                    $sdate = $today . ' 00:00:00';
-                    $edate = $today . ' 23:59:59';
-                } else {
-                    $range = date("Y-m-d", strtotime("-{$type} day"));
-                    $today = date("Y-m-d", strtotime("today"));
-                    $sdate = $range . ' 00:00:00';
-                    $edate = $today . ' 23:59:59';
-                }
-                $sql_select_pay = "SELECT username, link, amount, date FROM history_pay WHERE date BETWEEN '" . $sdate . "' AND '" . $edate . "'";
+        if (isset($_POST['start']) && isset($_POST['end'])) {
+            $start = $_POST['start'];
+            $end = $_POST['end'];
+            if ($start != "" && $end != "") {
+                $sql_select_pay = "SELECT username, link, amount, date FROM history_pay WHERE date BETWEEN '" . $start . " 00:00:00" . "' AND '" . $end . " 23:59:59" . "' ORDER BY pay_id ASC";
                 $query_pay = $hyper->connect->query($sql_select_pay);
                 $total_pay_row = mysqli_num_rows($query_pay);
                 $i = 0;
@@ -51,10 +42,10 @@ if (isset($_POST)) {
                     $errormsg = "Have error in query";
                 }
             } else {
-                $errormsg = "Type is empty";
+                $errormsg = "Income data is empty";
             }
         } else {
-            $errormsg = "Invalid Type Request";
+            $errormsg = "Invalid income data Request";
         }
     } else {
         $errormsg = "Invalid Request";
