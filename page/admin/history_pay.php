@@ -1,7 +1,7 @@
       <!-- Data Pay -->
       <h3 class="text-center mt-4 mb-4" style="color: white;">--- ประวัติรายได้ ---</h3>
       <br>
-      <h4 style="color: #fff;text-align:center;">รายได้รวม <span class="sumtoday"></span> บาท</h4>
+      <h4 style="color: #fff;text-align:center;">รายได้ <span class="sumtoday"></span> บาท</h4>
       <br>
       <div class="row">
         <div class="col-12 col-md-6">
