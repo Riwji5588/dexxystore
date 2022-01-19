@@ -45,19 +45,27 @@
         }
       </style>
       <script>
+        let isSandbox = window.location.origin == "https://sandbox.dexystore.me";
+        let host = window.location.origin == "http://localhost" ? "http://localhost/dexystore" : isSandbox ? "https://sandbox.dexystore.me" : "https://dexystore.me";
+        let url = host + '/plugin/getincome.php';
+        let getid = window.location.search.split('id=')[1] || false;
+
         $(document).ready(async () => {
-          let isSandbox = window.location.origin == "https://sandbox.dexystore.me";
-          let host = window.location.origin == "http://localhost" ? "http://localhost/dexystore" : isSandbox ? "https://sandbox.dexystore.me" : "https://dexystore.me";
-          let url = host + '/plugin/getincome.php';
-          let getid = window.location.search.split('id=')[1] || false;
+
+        })
+
+        function todayIncome() {
+
+        }
+
+        function AllIncome() {
           $.ajax({
 
             type: "POST",
             url: url,
             dataType: "json",
             data: {
-              action: 'getincome',
-              type: 1
+              action: 'getincome'
             },
             success: function(json) {
               if (json.code == 200) {
@@ -66,14 +74,14 @@
                 let html = '';
                 for (let i = 0; i < data.length; i++) {
                   body += `
-                  <tr>
-                    <td>${i+1}</th>
-                    <td>${data[i].username}</th>
-                    <td>${data[i].link}</th>
-                    <td>${data[i].amount}</th>
-                    <td>${data[i].date}</th>
-                  </tr>
-                   `;
+                            <tr>
+                              <td>${i+1}</th>
+                              <td>${data[i].username}</th>
+                              <td>${data[i].link}</th>
+                              <td>${data[i].amount}</th>
+                              <td>${data[i].date}</th>
+                            </tr>
+                          `;
                 }
                 $('#body').html(body);
                 $('#myTable').DataTable();
@@ -85,14 +93,13 @@
               $('#myTable').DataTable();
               html =
                 `
-                <tr>
-                    <td colspan="6">ไม่มีข้อมูลในขณะนี้</td>
-                </tr>
+                  <tr>
+                      <td colspan="6">ไม่มีข้อมูลในขณะนี้</td>
+                  </tr>
                 `
               $('#body').html(html);
               $('#loading').remove();
             }
           });
-
-        })
+        }
       </script>

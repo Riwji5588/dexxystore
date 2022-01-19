@@ -13,9 +13,9 @@ $selled_row = $hyper->connect->query($data_selled)->fetch_array();
 $account = "SELECT count(ac_id) AS 'totalaccount' FROM accounts";
 $account_row = $hyper->connect->query($account)->fetch_array();
 
-$date = date("Y-m");
-$sdate = $date . '-01 00:00:01';
-$edate = $date . '-31 23:59:59';
+$today = date("Y-m-d", strtotime("today"));
+$sdate = $today . ' 00:00:00';
+$edate = $today . ' 23:59:59';
 $pay = "SELECT SUM(amount) AS 'totalpay' FROM history_pay WHERE date BETWEEN '$sdate' AND '$edate'";
 $pay_row = $hyper->connect->query($pay)->fetch_array();
 
@@ -79,7 +79,7 @@ $ftalert_row = $hyper->connect->query($ftalert)->fetch_array();
             <div class="card shadow-dark radius-border-6 hyper-bg-white text-center p-3 hyper-card">
                 <h1 class="mt-0 mb-0" style="font-size: 3.5rem;"><i class="fal fa-coins"></i></h1>
                 <h1 class="mt-0 mb-0"><?= number_format($pay_row['totalpay'], 0); ?></h1>
-                <font class="text-muted">รายได้ในเดือนนี้</font>
+                <font class="text-muted">รายได้ในวันนี้</font>
             </div>
         </a>
     </div>
