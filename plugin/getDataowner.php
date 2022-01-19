@@ -6,7 +6,11 @@ $errormsg = "";
 if ($_POST) {
     if ($_POST['action'] == 'getdataowner') {
         $exp = $_POST['exp'];
-        $sql_select_selled = "SELECT * FROM data_selled";
+        if ($exp == 0) {
+            $sql_select_selled = "SELECT * FROM data_selled WHERE exp_date < CURDATE()";
+        } else {
+            $sql_select_selled = "SELECT * FROM data_selled WHERE exp_date > CURDATE()";
+        }
         $query_selled = $hyper->connect->query($sql_select_selled);
         $total_selled_row = mysqli_num_rows($query_selled);
         $i = 0;
@@ -33,48 +37,27 @@ if ($_POST) {
                 $selled_account = mysqli_fetch_assoc($query_selled_account);
 
                 $expire = strtotime($selled['exp_date']) - strtotime('today midnight');
-                if ($exp == 1 and (int)$expire < 0) {
-                    array_push($data, [
-                        'test' => (int)$expire <= 0,
-                        // selled
-                        'selled_id' => $selled['selled_id'],
-                        'selled_date' => $hyper->datethai->DateThai1($selled['selled_date']),
-                        // selled_data
-                        'selled_data_username' => $selled_data['username'],
-                        'selled_data_id' => $selled_data['data_id'],
-                        // 'selled_data_password' => $selled_data['password'],
-                        // 'selled_data_display' => $selled_data['display'],
-                        // 'selled_data_detail' => $selled_data['detail'],
-                        // selled_account
-                        'account_username' => $selled_account['username'],
-                        // cardtype
-                        'card_id' => $cardtype['card_id'],
-                        'card_title' => $cardtype['card_title'],
-                        'card_price' => $cardtype['card_price'],
-                        //
-                        'expire' => $expire
-                    ]);
-                } else if ($exp == 0 and (int)$expire > 0) {
-                    array_push($data, [
-                        // selled
-                        'selled_id' => $selled['selled_id'],
-                        'selled_date' => $hyper->datethai->DateThai1($selled['selled_date']),
-                        // selled_data
-                        'selled_data_username' => $selled_data['username'],
-                        'selled_data_id' => $selled_data['data_id'],
-                        // 'selled_data_password' => $selled_data['password'],
-                        // 'selled_data_display' => $selled_data['display'],
-                        // 'selled_data_detail' => $selled_data['detail'],
-                        // selled_account
-                        'account_username' => $selled_account['username'],
-                        // cardtype
-                        'card_id' => $cardtype['card_id'],
-                        'card_title' => $cardtype['card_title'],
-                        'card_price' => $cardtype['card_price'],
-                        //
-                        'expire' => $expire
-                    ]);
-                }
+
+                array_push($data, [
+                    // selled
+                    'selled_id' => $selled['selled_id'],
+                    'selled_date' => $hyper->datethai->DateThai1($selled['selled_date']),
+                    // selled_data
+                    'selled_data_username' => $selled_data['username'],
+                    'selled_data_id' => $selled_data['data_id'],
+                    // 'selled_data_password' => $selled_data['password'],
+                    // 'selled_data_display' => $selled_data['display'],
+                    // 'selled_data_detail' => $selled_data['detail'],
+                    // selled_account
+                    'account_username' => $selled_account['username'],
+                    // cardtype
+                    'card_id' => $cardtype['card_id'],
+                    'card_title' => $cardtype['card_title'],
+                    'card_price' => $cardtype['card_price'],
+                    //
+                    'expire' => $expire
+                ]);
+
                 $i++;
             } while ($i < $total_selled_row);
         } else {

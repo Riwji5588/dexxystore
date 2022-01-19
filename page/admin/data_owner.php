@@ -26,7 +26,7 @@
               <th scope="col">เจ้าของ</th>
               <th scope="col">วันที่ซื้อ</th>
               <th scope="col">สถานะ</th>
-              <th scope="col" style="width: 170px;">เมนู</th>
+              <th scope="col" style="width: 200px;">เมนู</th>
             </tr>
           </thead>
           <tbody id="body">
@@ -37,6 +37,8 @@
           </div>
         </div>
       </div>
+
+    
       <!-- End Data Owner  -->
       <script>
         const isSandbox = window.location.origin == "https://sandbox.dexystore.me";
@@ -46,6 +48,7 @@
         $(document).ready(async () => {
           getData();
         })
+
 
         function getData(exp = 0) {
           $('#myTable').DataTable().destroy();
@@ -75,9 +78,9 @@
                         <td>${data.account_username}</td>
                         <td>${data.selled_date}</td>
                         <td>${data.expire < 1 ? "หมดประกัน" : "ยังไม่หมดประกัน"}</td>
-                        <td>
-                          <button class="btn btn-sm hyper-btn-notoutline-success" type="button" data-toggle="modal" data-target="#editownermodal${data.selled_data_id}" onclick="LodingModal(${data.selled_data_id})"><i class="fal fa-info-circle mr-1"></i> เพิ่มเติม</button>
-                          <button onclick="DelData(this)" value="${data.selled_id}" class="btn btn-sm hyper-btn-notoutline-danger my-1 my-sm-0" type="button"><i class="fal fa-trash-alt mr-1"></i> ลบ</button>
+                        <td width="100px">
+                            <button class="btn btn-sm hyper-btn-notoutline-success" type="button" data-toggle="modal" data-target="#editownermodal${data.selled_data_id}" onclick="LodingModal(${data.selled_data_id})"><i class="fal fa-info-circle mr-1"></i> เพิ่มเติม</button>
+                            <button onclick="DelData(this)" value="${data.selled_id}" class="btn btn-sm hyper-btn-notoutline-danger my-1 mt-0" type="button"><i class="fal fa-trash-alt mr-1"></i> ลบ</button>
                         </td>
                       </tr>
                     `;
