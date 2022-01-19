@@ -23,9 +23,17 @@ if (isset($_POST)) {
             echo json_encode(['code' => 500, 'data' => 'Error']);
         }
     } else if ($_POST['action'] == 'todayincome') {
-        $today = date("Y-m-d", strtotime("today"));
-        $sdate = $today . ' 00:00:00';
-        $edate = $today . ' 23:59:59';
+        $type = $_POST['type'];
+        if ($type == 0 || $type == 1) {
+            $today = date("Y-m-d", strtotime("-{$type} day"));
+            $sdate = $today . ' 00:00:00';
+            $edate = $today . ' 23:59:59';
+        } else {
+            $range = date("Y-m-d", strtotime("-{$type} day"));
+            $today = date("Y-m-d", strtotime("today"));
+            $sdate = $range . ' 00:00:00';
+            $edate = $today . ' 23:59:59';
+        }
         $sql_select_pay = "SELECT username, link, amount, date FROM history_pay WHERE date BETWEEN '" . $sdate . "' AND '" . $edate . "'";
         $query_pay = $hyper->connect->query($sql_select_pay);
         $total_pay_row = mysqli_num_rows($query_pay);
