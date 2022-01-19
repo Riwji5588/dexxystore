@@ -91,6 +91,7 @@
         function RangeIncome(start, end) {
           $('#myTable').DataTable().destroy();
           $('#body').html('');
+          $('#loading').show();
           $.ajax({
             type: "POST",
             url: url,
@@ -124,7 +125,7 @@
                 $('#myTable').DataTable();
                 $('.dataTables_empty').html('ยังไม่มีรายได้ในขณะนี้');
                 $('.sumtoday').html(total);
-                $('#loading').remove();
+                $('#loading').hide();
               }
             },
             error: function(data) {
@@ -145,6 +146,7 @@
         function AllIncome() {
           $('#myTable').DataTable().destroy();
           $('#body').html('');
+          $('#loading1').show();
           $.ajax({
             type: "POST",
             url: url,
@@ -175,7 +177,7 @@
                 $('#myTable').DataTable();
                 $('.dataTables_empty').html('ยังไม่มีรายได้ในขณะนี้');
                 $('.sumtoday').html(total)
-                $('#loading1').remove();
+                $('#loading1').hide();
               }
             },
             error: function(data) {

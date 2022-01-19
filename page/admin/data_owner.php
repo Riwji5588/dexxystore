@@ -50,6 +50,7 @@
         function getData(exp = 0) {
           $('#myTable').DataTable().destroy();
           $('#body').html('');
+          $('#loading').show();
           $.ajax({
 
             type: "POST",
@@ -87,7 +88,7 @@
                 if (!checkhas) {
                   $('#body').html(body);
                   $('#myTable').DataTable();
-                  $('#loading').remove();
+                  $('#loading').hide();
                 } else {
                   console.log('has');
                 }
