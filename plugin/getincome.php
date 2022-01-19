@@ -66,5 +66,5 @@ if (isset($_POST)) {
 if (empty($errormsg)) {
     echo json_encode(['code' => 200, 'data' => $data]);
 } else {
-    echo json_encode(['code' => 500, 'data' => $errormsg]);
+    echo json_encode(['code' => 500, 'message' => $errormsg]);
 }
