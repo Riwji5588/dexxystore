@@ -124,7 +124,7 @@
                 $('#body').html(body);
                 $('#myTable').DataTable();
                 $('.dataTables_empty').html('ยังไม่มีรายได้ในขณะนี้');
-                $('.sumtoday').html(total);
+                $('.sumtoday').html(new Intl.NumberFormat().format(total));
                 $('#loading').hide();
               }
             },
@@ -176,7 +176,7 @@
                 $('#body').html(body);
                 $('#myTable').DataTable();
                 $('.dataTables_empty').html('ยังไม่มีรายได้ในขณะนี้');
-                $('.sumtoday').html(total)
+                $('.sumtoday').html(new Intl.NumberFormat().format(total))
                 $('#loading1').hide();
               }
             },
