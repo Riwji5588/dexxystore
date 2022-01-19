@@ -1,11 +1,26 @@
       <!-- Data Owner -->
       <h3 class="text-center mt-4 mb-4" style="color: white;">--- ID Netflixถูกจำหน่ายแล้ว ---</h3>
-
+      <div class="row">
+        <div class="col-12 col-md-6">
+          <div class="form-group">
+            <div class="btn btn-success w-100" onclick="getData()">
+              ไอดียังไม่หมดประกัน
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-md-6">
+          <div class="form-group">
+            <div class="btn btn-danger w-100" onclick="getData(1);">
+              ไอดีหมดประกันแล้ว
+            </div>
+          </div>
+        </div>
+      </div>
       <div class="mt-3">
         <table id="myTable" class="table table-hover text-center w-100">
           <thead class="hyper-bg-dark">
             <tr>
-              <th scope="col" style="width:120px;">เลขที่ข้อมูล</th>
+              <th scope="col" style="width:120px;">ออเดอร์ที่</th>
               <th scope="col">สินค้า</th>
               <th scope="col">บัญชีผู้ใช้</th>
               <th scope="col">เจ้าของ</th>
@@ -27,7 +42,14 @@
         const isSandbox = window.location.origin == "https://sandbox.dexystore.me";
         const host = window.location.origin == "http://localhost" ? "http://localhost/dexystore" : isSandbox ? "https://sandbox.dexystore.me" : "https://dexystore.me";
         const url = host + '/plugin/getDataowner.php';
+        var active = expired = false;
         $(document).ready(async () => {
+          getData();
+        })
+
+        function getData(exp = 0) {
+          $('#myTable').DataTable().destroy();
+          $('#body').html('');
           $.ajax({
 
             type: "POST",
@@ -35,31 +57,40 @@
             dataType: "json",
             data: {
               action: 'getdataowner',
+              exp: exp
             },
             success: function(json) {
               if (json.code == 200) {
                 let body = $('#body').html();
                 const data1 = json.data;
-
+                let count = 0;
                 for (let i = 0; i < data1.length; i++) {
                   let data = data1[i];
-                  body += `
-                    <tr>
-                      <td>${data.selled_id}</td>
-                      <td>${data.card_id == null ? 'Unknow' : data.card_title+"-"+data.card_price}</td>
-                      <td>${data.selled_data_username}</td>
-                      <td>${data.account_username}</td>
-                      <td>${data.selled_date}</td>
-                      <td>${data.expire < 1 ? "หมดประกัน" : "ยังไม่หมดประกัน"}</td>
-                      <td>
-                        <button class="btn btn-sm hyper-btn-notoutline-success" type="button" data-toggle="modal" data-target="#editownermodal${data.selled_data_id}" onclick="LodingModal(${data.selled_data_id})"><i class="fal fa-info-circle mr-1"></i> เพิ่มเติม</button>
-                        <button onclick="DelData(this)" value="${data.selled_id}" class="btn btn-sm hyper-btn-notoutline-danger my-1 my-sm-0" type="button"><i class="fal fa-trash-alt mr-1"></i> ลบ</button>
-                      </td>
-                    </tr>`;
+                  body +=
+                    `
+                      <tr id="row${data.selled_id}">
+                        <td>${data.selled_id}</td>
+                        <td>${data.card_id == null ? 'Unknow' : data.card_title+"-"+data.card_price}</td>
+                        <td>${data.selled_data_username}</td>
+                        <td>${data.account_username}</td>
+                        <td>${data.selled_date}</td>
+                        <td>${data.expire < 1 ? "หมดประกัน" : "ยังไม่หมดประกัน"}</td>
+                        <td>
+                          <button class="btn btn-sm hyper-btn-notoutline-success" type="button" data-toggle="modal" data-target="#editownermodal${data.selled_data_id}" onclick="LodingModal(${data.selled_data_id})"><i class="fal fa-info-circle mr-1"></i> เพิ่มเติม</button>
+                          <button onclick="DelData(this)" value="${data.selled_id}" class="btn btn-sm hyper-btn-notoutline-danger my-1 my-sm-0" type="button"><i class="fal fa-trash-alt mr-1"></i> ลบ</button>
+                        </td>
+                      </tr>
+                    `;
+                  count++;
                 }
-                $('#body').html(body);
-                $('#myTable').DataTable();
-                $('#loading').remove();
+                let checkhas = $(`#row${data1[0].selled_data_id}`).html() != undefined
+                if (!checkhas) {
+                  $('#body').html(body);
+                  $('#myTable').DataTable();
+                  $('#loading').remove();
+                } else {
+                  console.log('has');
+                }
               } else {
                 console.log(json.message);
               }
@@ -77,8 +108,7 @@
               $('#loading').remove();
             }
           });
-
-        })
+        }
 
         function LodingModal(dataid) {
           $.ajax({
