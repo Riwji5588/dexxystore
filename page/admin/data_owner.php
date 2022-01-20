@@ -211,7 +211,7 @@
                                         <div class="col-3 pr-0">
                                             <span>ชื่อผู้ใช้งาน</span>
                                         </div>
-                                        <div class="col-9 p-0 pl-3">
+                                        <div class="col-9 p-0">
                                           <input type="text" id="username${data.selled_data_id}" value="${data.selled_data_username}" onkeyup="revalue(${data.selled_data_id})" style="background-color: #fff;border-radius: 0px;border: 0px">
                                           <button style="margin-left: -25px;" class="btn btn-dark btn-sm" type="button" onclick="copy(this,'username${data.selled_data_id}')"><i class='far fa-copy'></i> คัดลอก</button>
                                         </div>
@@ -221,7 +221,7 @@
                                         <div class="col-3 pr-0">
                                             <span>รหัสผ่าน</span>
                                         </div>
-                                        <div class="col-9 p-0 pl-3">
+                                        <div class="col-9 p-0">
                                             <input type="text" id="password${data.selled_data_id}" value="${password}" onkeyup="revalue(${data.selled_data_id})" style="background-color: #fff;border-radius: 0px;border: 0px">
                                             <button style="margin-left: -25px;" class="btn btn-dark btn-sm" type="button" onclick="copy(this,'password${data.selled_data_id}')"><i class='far fa-copy'></i> คัดลอก</button>
                                         </div>
@@ -231,7 +231,7 @@
                                         <div class="col-3 pr-0">
                                             <span>จอ</span>
                                         </div>
-                                        <div class="col-9 p-0 pl-3">
+                                        <div class="col-9 p-0">
                                             <input type="text" id="display${data.selled_data_id}" value="${data.selled_data_display}" onkeyup="revalue(${data.selled_data_id})" style="background-color: #fff;border-radius: 0px;border: 0px">
                                         </div>
                                       </div> 
@@ -240,7 +240,7 @@
                                         <div class="col-3 pr-0">
                                             <span>วันหมดประกัน</span>
                                         </div>
-                                        <div class="col-9 p-0 pl-3">
+                                        <div class="col-9 p-0">
                                             <input type="text" id="exp${data.selled_data_id}" value="${data.expire}" readonly style="background-color: #fff;border-radius: 0px;border: 0px">
                                         </div>
                                       </div> 
