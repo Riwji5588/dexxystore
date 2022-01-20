@@ -66,14 +66,12 @@
         const isSandbox = window.location.origin == "https://sandbox.dexystore.me";
         const host = window.location.origin == "http://localhost" ? "http://localhost/dexystore" : isSandbox ? "https://sandbox.dexystore.me" : "https://dexystore.me";
         const url = host + '/plugin/getDataowner.php';
-        let active = expired = false;
+        let active = false;
         let isexpired = window.location.href.slice(window.location.href.indexOf('&') + 1).split('=')[1] == 'true' ? true : false;
         if (isexpired) {
           active = false;
-          expired = true;
         } else {
           active = true;
-          expired = false;
         }
         $(document).ready(async () => {
           if (active) {
@@ -93,7 +91,6 @@
               $('#active').show();
               $('#expired').hide();
               active = true;
-              expired = false;
               getData();
             } else {
               window.open('./dataowner', '_blank');
@@ -103,7 +100,6 @@
               $('#active').hide();
               $('#expired').show();
               active = false;
-              expired = true;
               getData(1);
             } else {
               window.open('./dataowner?expired=true', '_blank');
