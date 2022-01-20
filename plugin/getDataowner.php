@@ -72,9 +72,11 @@ if ($_POST) {
     } else if ($_POST['action'] == 'getmodal') {
         $dataid = $_POST['dataid'];
 
-        $sql_select_selled = 'SELECT exp_date FROM data_selled WHERE data_id = "' . $dataid . '"';
+        $sql_select_selled = 'SELECT selled_id, exp_date FROM data_selled WHERE data_id = "' . $dataid . '"';
         $query_selled = $hyper->connect->query($sql_select_selled);
-        $exp = mysqli_fetch_assoc($query_selled)['exp_date'];
+        $selled = $query_selled->fetch_assoc();
+        $selled_id = $selled['selled_id'];
+        $exp = $selled['exp_date'];
 
         $sql_select_selled_data = "SELECT * FROM game_data WHERE data_id = '$dataid'";
         $query_selled_data = $hyper->connect->query($sql_select_selled_data);
@@ -93,6 +95,8 @@ if ($_POST) {
         $img = mysqli_fetch_assoc($query_img)['image_name'];
 
         array_push($data, [
+            // selled
+            'selled_id' => $selled_id,
             // selled_data
             'selled_data_username' => $selled_data['username'],
             'selled_data_id' => $selled_data['data_id'],
