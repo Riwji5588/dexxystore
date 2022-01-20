@@ -206,41 +206,45 @@
 
                                     <img src="assets/img/item/${data.card_img}" width="99px" height="99px" class="ml-auto mr-auto mb-2" style="border-radius: 50%"></br>
                                     <font class="text-muted">${data.card_id == null ? 'Unknow' : data.card_title+" - "+data.card_price}</font>
-                                    <div class="row" style="padding: 20px 2px 0px 2px;">
-                                      <div class="col-3 col-md-4">
-                                          <span>ชื่อผู้ใช้งาน</span>
-                                      </div>
-                                      <div class="col-9 col-md-8">
+                                    <div class="container-fluid px-5">
+                                      <div class="row" style="padding: 5px 2px 0px 2px;text-align: left !important;">
+                                        <div class="col-3 pr-0">
+                                            <span>ชื่อผู้ใช้งาน</span>
+                                        </div>
+                                        <div class="col-9 p-0 pl-3">
                                           <input type="text" id="username${data.selled_data_id}" value="${data.selled_data_username}" onkeyup="revalue(${data.selled_data_id})" style="background-color: #fff;border-radius: 0px;border: 0px">
-                                      </div>
-                                    </div> 
-                                    
-                                    <div class="row" style="padding: 5px 2px 0px 2px;">
-                                      <div class="col-3 col-md-4">
-                                          <span>รหัสผ่าน</span>
-                                      </div>
-                                      <div class="col-9 col-md-8">
-                                          <input type="text" id="password${data.selled_data_id}" value="${password}" onkeyup="revalue(${data.selled_data_id})" style="background-color: #fff;border-radius: 0px;border: 0px">
-                                      </div>
-                                    </div> 
+                                          <button style="margin-left: -25px;" class="btn btn-dark btn-sm" type="button" onclick="copy(this,'username${data.selled_data_id}')"><i class='far fa-copy'></i> คัดลอก</button>
+                                        </div>
+                                      </div> 
+                                      
+                                      <div class="row" style="padding: 5px 2px 0px 2px;text-align: left !important;">
+                                        <div class="col-3 pr-0">
+                                            <span>รหัสผ่าน</span>
+                                        </div>
+                                        <div class="col-9 p-0 pl-3">
+                                            <input type="text" id="password${data.selled_data_id}" value="${password}" onkeyup="revalue(${data.selled_data_id})" style="background-color: #fff;border-radius: 0px;border: 0px">
+                                            <button style="margin-left: -25px;" class="btn btn-dark btn-sm" type="button" onclick="copy(this,'password${data.selled_data_id}')"><i class='far fa-copy'></i> คัดลอก</button>
+                                        </div>
+                                      </div> 
 
-                                    <div class="row" style="padding: 5px 2px 0px 2px;">
-                                      <div class="col-3 col-md-4">
-                                          <span>จอ</span>
-                                      </div>
-                                      <div class="col-9 col-md-8">
-                                          <input type="text" id="display${data.selled_data_id}" value="${data.selled_data_display}" onkeyup="revalue(${data.selled_data_id})" style="background-color: #fff;border-radius: 0px;border: 0px">
-                                      </div>
-                                    </div> 
+                                      <div class="row" style="padding: 5px 2px 0px 2px;text-align: left !important;">
+                                        <div class="col-3 pr-0">
+                                            <span>จอ</span>
+                                        </div>
+                                        <div class="col-9 p-0 pl-3">
+                                            <input type="text" id="display${data.selled_data_id}" value="${data.selled_data_display}" onkeyup="revalue(${data.selled_data_id})" style="background-color: #fff;border-radius: 0px;border: 0px">
+                                        </div>
+                                      </div> 
 
-                                    <div class="row" style="padding: 5px 2px 0px 2px;">
-                                      <div class="col-3 col-md-4">
-                                          <span>วันหมดประกัน</span>
-                                      </div>
-                                      <div class="col-9 col-md-8">
-                                          <input type="text" id="exp${data.selled_data_id}" value="${data.expire}" readonly style="background-color: #fff;border-radius: 0px;border: 0px">
-                                      </div>
-                                    </div> 
+                                      <div class="row" style="padding: 5px 2px 0px 2px;text-align: left !important;">
+                                        <div class="col-3 pr-0">
+                                            <span>วันหมดประกัน</span>
+                                        </div>
+                                        <div class="col-9 p-0 pl-3">
+                                            <input type="text" id="exp${data.selled_data_id}" value="${data.expire}" readonly style="background-color: #fff;border-radius: 0px;border: 0px">
+                                        </div>
+                                      </div> 
+                                    </div>
 
                                     
 
@@ -250,10 +254,10 @@
                                     <input type="hidden" id="copy${data.selled_data_id}" value="${data.selled_data_username+":"+password+":"+data.selled_data_display}">
                                   </div>
                                   <div class="modal-footer p-2 border-0">
-                                    <button type="button" class="btn btn-secondary" onclick="copyfile(this,${data.selled_data_id})"><i class="far fa-copy"></i> คัดลอก</button>
-                                    <button type="button" class="btn btn-success" onclick="updatedata(${data.selled_data_id})"><i class="far fa-plus-square"></i> อัพเดทข้อมูล</button>
-                                    <button type="button" class="btn hyper-btn-notoutline-danger" data-dismiss="modal"><i class="fad fa-times-circle mr-1"></i> ปิด</button>
-                                  </div>
+                                    <button type="button" class="btn btn-danger btn-sm mx-2" onclick="DelData(this)" value="${data.selled_id}"><i class="fal fa-trash-alt mr-1"></i> ลบข้อมูล</button>
+                                    <button type="button" class="btn btn-primary btn-sm mx-2" onclick="copyfile(this,${data.selled_data_id})"><i class="far fa-copy"></i> คัดลอก</button>
+                                    <button type="button" class="btn btn-success btn-sm mx-2" onclick="updatedata(${data.selled_data_id})"><i class="far fa-plus-square"></i> อัพเดทข้อมูล</button>
+                                    <button type="button" class="btn btn-secondary btn-sm mx-2" data-dismiss="modal"><i class="fad fa-times-circle mr-1"></i> ปิด</button>
                                 </div>
                               </div>
                             </div>
@@ -289,11 +293,24 @@
           document.execCommand("copy");
           copyText.type = "hidden";
           input.innerHTML = "<i class='far fa-copy'></i> คัดลอกแล้ว";
-          input.className = "btn btn-success";
+          input.className = "btn btn-success btn-sm mx-2";
           setTimeout(function() {
             input.innerHTML = "<i class='far fa-copy'></i> คัดลอก";
-            input.className = "btn btn-dark";
+            input.className = "btn btn-dark btn-sm mx-2";
           }, 1000);
+        }
+
+        function copy(input, id) {
+          var copyText = document.getElementById(id);
+          copyText.select();
+          copyText.setSelectionRange(0, 99999)
+          document.execCommand("copy");
+          input.innerHTML = "<i class='far fa-copy'></i> คัดลอกแล้ว";
+          input.className = "btn btn-success btn-sm";
+          setTimeout(function() {
+            input.innerHTML = "<i class='far fa-copy'></i> คัดลอก";
+            input.className = "btn btn-dark btn-sm";
+          }, 2000);
         }
 
         /** Delete Data */
