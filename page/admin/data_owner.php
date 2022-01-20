@@ -3,20 +3,20 @@
       <div class="row">
         <div class="col-12 col-md-6">
           <div class="form-group">
-            <div class="btn btn-success w-100" onclick="getData()">
+            <div class="btn btn-success w-100" onclick="dosomething('active')">
               ไอดียังไม่หมดประกัน
             </div>
           </div>
         </div>
         <div class="col-12 col-md-6">
           <div class="form-group">
-            <div class="btn btn-danger w-100" onclick="getData(1);">
+            <div class="btn btn-danger w-100" onclick="dosomething('expired')">
               ไอดีหมดประกันแล้ว
             </div>
           </div>
         </div>
       </div>
-      <div class="mt-3">
+      <div id="active" class="mt-3">
         <table id="myTable" class="table table-hover text-center w-100">
           <thead class="hyper-bg-dark">
             <tr>
@@ -38,24 +38,62 @@
         </div>
       </div>
 
-    
+      <div id="expired" class="mt-3">
+        <table id="myTable1" class="table table-hover text-center w-100">
+          <thead class="hyper-bg-dark">
+            <tr>
+              <th scope="col" style="width:120px;">ออเดอร์ที่</th>
+              <th scope="col">สินค้า</th>
+              <th scope="col">บัญชีผู้ใช้</th>
+              <th scope="col">เจ้าของ</th>
+              <th scope="col">วันที่ซื้อ</th>
+              <th scope="col">สถานะ</th>
+              <th scope="col" style="width: 200px;">เมนู</th>
+            </tr>
+          </thead>
+          <tbody id="body1">
+          </tbody>
+        </table>
+        <div id="loading1" class="container" style="color: #FFF;" align="center">
+          <div class="spinner-border" role="status">
+          </div>
+        </div>
+      </div>
+
+
       <!-- End Data Owner  -->
       <script>
         const isSandbox = window.location.origin == "https://sandbox.dexystore.me";
         const host = window.location.origin == "http://localhost" ? "http://localhost/dexystore" : isSandbox ? "https://sandbox.dexystore.me" : "https://dexystore.me";
         const url = host + '/plugin/getDataowner.php';
-        var active = expired = false;
-        $(document).ready(async () => {
+        var active = true;
+        var expired = false;
+        $(document).ready(async () => {0
+          $('#active').show();
+          $('#expired').hide();
           getData();
         })
 
+        function dosomething(type) {
+          if (type == 'active') {
+            $('#active').show();
+            $('#expired').hide();
+            active = true;
+            expired = false;
+            getData();
+          } else if (type == 'expired') {
+            $('#active').hide();
+            $('#expired').show();
+            active = false;
+            expired = true;
+            getData(1);
+          } else {
+            console.log('don\'t have type');
+          }
+        }
 
         function getData(exp = 0) {
-          $('#myTable').DataTable().destroy();
-          $('#body').html('');
-          $('#loading').show();
           $.ajax({
-
             type: "POST",
             url: url,
             dataType: "json",
@@ -65,7 +103,7 @@
             },
             success: function(json) {
               if (json.code == 200) {
-                let body = $('#body').html();
+                let body = '';
                 const data1 = json.data;
                 for (let i = 0; i < data1.length; i++) {
                   let data = data1[i];
@@ -85,9 +123,22 @@
                       </tr>
                     `;
                 }
-                $('#body').html(body);
-                $('#myTable').DataTable();
-                $('#loading').hide();
+                let checkisactive = document.getElementById('row' + json.data[0].selled_id) != null;
+                if (!checkisactive) {
+                  if (active) {
+                    $('#body').html(body);
+                    $('#myTable').DataTable();
+                    $('#loading').hide();
+                  } else {
+                    $('#body1').html(body);
+                    $('#myTable1').DataTable();
+                    $('#loading1').hide();
+                  }
+                  console.log('added');
+                } else {
+                  console.log('already have');
+                }
+
               } else {
                 console.log(json.message);
               }
