@@ -7,7 +7,7 @@ $game_type_row = $hyper->connect->query($game_type)->fetch_array();
 $data_ready_selled = "SELECT count(data_id) AS 'totaldata' FROM game_data WHERE selled = 0";
 $ready_selled_row = $hyper->connect->query($data_ready_selled)->fetch_array();
 
-$data_selled = "SELECT count(data_id) AS 'totalselled' FROM game_data WHERE selled = 1";
+$data_selled = "SELECT count(data_id) AS 'totalselled' FROM data_selled";
 $selled_row = $hyper->connect->query($data_selled)->fetch_array();
 
 $account = "SELECT count(ac_id) AS 'totalaccount' FROM accounts";
