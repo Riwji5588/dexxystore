@@ -138,7 +138,7 @@
                   </tr>
                 `
               $('#body').html(html);
-              $('#loading').remove();
+              $('#loading').hide();
             }
           });
         }
@@ -146,7 +146,7 @@
         function AllIncome() {
           $('#myTable').DataTable().destroy();
           $('#body').html('');
-          $('#loading1').show();
+          $('#loading').show();
           $.ajax({
             type: "POST",
             url: url,
@@ -177,7 +177,7 @@
                 $('#myTable').DataTable();
                 $('.dataTables_empty').html('ยังไม่มีรายได้ในขณะนี้');
                 $('.sumtoday').html(new Intl.NumberFormat().format(total))
-                $('#loading1').hide();
+                $('#loading').hide();
               }
             },
             error: function(data) {
@@ -190,7 +190,7 @@
                   </tr>
                 `
               $('#body').html(html);
-              $('#loading').remove();
+              $('#loading').hide();
             }
           });
         }
