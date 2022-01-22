@@ -43,7 +43,7 @@ if (isset($_POST['id'])) {
 
         if ($_POST['type'] == 1) { // Go to stock
 
-            $update_table = "UPDATE data_claim_first SET confirm=1 WHERE claim_id={$selled['selled_id']}";
+            $update_table = "UPDATE data_claim_first SET confirm=1 WHERE claim_id={$selled['selled_id']} AND confirm=0";
 
             $update_id = "UPDATE game_data SET selled=0 WHERE data_id={$selled['data_id']}"; // back to sell
 
@@ -78,7 +78,7 @@ if (isset($_POST['id'])) {
             }
         } else { // do nothing
 
-            $update_table = "UPDATE data_claim_first SET confirm=2 WHERE claim_id={$selled['selled_id']}";
+            $update_table = "UPDATE data_claim_first SET confirm=2 WHERE claim_id={$selled['selled_id']} AND confirm=0";
 
             if ($hyper->connect->query($update_table)) {
                 $select_admin = "SELECT * FROM accounts WHERE role=779";

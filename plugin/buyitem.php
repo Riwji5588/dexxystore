@@ -65,6 +65,9 @@ if (isset($_POST['id'])) {
                             $errorMSG = 'ซื้อสินค้า ไม่สำเร็จ!';
                         }
                     } else {
+                        date_default_timezone_set("Asia/Bangkok");
+                        $date = date("Y-m-d H:i:s");
+
                         $id = $_POST['selled_id'];
                         $selled_sql = "SELECT * FROM data_selled WHERE selled_id = $id";
                         $selled_query = $hyper->connect->query($selled_sql);
@@ -77,7 +80,12 @@ if (isset($_POST['id'])) {
                         $selled_id_sql = "SELECT selled_id FROM data_selled WHERE selled_id='$id'";
                         $selled_id_query = $hyper->connect->query($selled_id_sql);
                         $selled_id = $selled_id_query->fetch_array();
-                        if (!$updatedata_query) {
+
+                        $data_id = $selled['data_id'];
+
+                        $insert = "INSERT INTO notify_log(data_id, _from, _to, message, isadmin, datetime) VALUE ('$data_id', '$uid', '$uid', '$id', 1, '$date')";
+                        $insert_query = $hyper->connect->query($insert);
+                        if (!$updatedata_query || !$insert_query) {
                             $errorMSG = 'ต่ออายุไม่สำเร็จ!';
                         }
                     }

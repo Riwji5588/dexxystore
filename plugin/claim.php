@@ -88,11 +88,9 @@ if (isset($_POST['id'])) {
                                 $game = $row->fetch_array();
                                 if (mysqli_num_rows($row) == 1) {
 
-
                                     $claim_date = date("Y-m-d H:i:s");
-                                    $sendClaim = "INSERT INTO data_claim(claim_id, data_id, ac_id, detail, claim_date, confirm) VALUES ('{$selled['selled_id']}', '{$selled['data_id']}', '{$selled['ac_id']}', '$detail', '$claim_date', 9)";
                                     $sendClaim_first = "INSERT INTO data_claim_first(claim_id, data_id, ac_id, detail, claim_date, confirm) VALUES ('{$selled['selled_id']}', '{$selled['data_id']}', '{$selled['ac_id']}', '$detail', '$claim_date', 0)";
-                                    if ($hyper->connect->query($sendClaim) && $hyper->connect->query($sendClaim_first)) {
+                                    if ($hyper->connect->query($sendClaim_first)) {
                                         $data_selled_update = "UPDATE data_selled SET claim = 1, data_id = {$game['data_id']} WHERE selled_id = {$selled['selled_id']}";
                                         $data_game_update = "UPDATE game_data SET selled = 1 WHERE data_id = {$game['data_id']}";
 
@@ -243,7 +241,7 @@ if (isset($_POST['id'])) {
 
                 if (mysqli_num_rows($row) == 1) {
 
-                    $confirm = "UPDATE data_claim SET confirm = 1 WHERE claim_id={$selled['selled_id']} OR confirm=9 AND confirm=0";
+                    $confirm = "UPDATE data_claim SET confirm = 1 WHERE claim_id={$selled['selled_id']} AND confirm=0";
                     $data_selled_update = "UPDATE data_selled SET claim = 1, data_id = {$game['data_id']} WHERE selled_id = {$selled['selled_id']} AND claim=2";
                     $data_game_update = "UPDATE game_data SET selled = 1 WHERE data_id = {$game['data_id']}";
 
@@ -288,7 +286,7 @@ if (isset($_POST['id'])) {
                     $response = $_POST['response'];
                     if (!empty($response)) {
 
-                        $reject = "UPDATE data_claim SET confirm = 2 WHERE claim_id={$selled['selled_id']} OR confirm=9 AND confirm=0";
+                        $reject = "UPDATE data_claim SET confirm = 2 WHERE claim_id={$selled['selled_id']} AND confirm=0";
                         $reject_selled = "UPDATE data_selled SET claim = 3, response='$response' WHERE selled_id = {$selled['selled_id']} AND claim=2";
                         if ($hyper->connect->query($reject) && $hyper->connect->query($reject_selled)) {
                             $select_admin = "SELECT * FROM accounts WHERE line_token != ''";
