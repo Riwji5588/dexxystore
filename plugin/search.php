@@ -220,7 +220,7 @@ if (isset($_GET)) {
                                         $expire = strtotime($selled['exp_date']) - strtotime('today midnight');
                                         if ($expire > 0) :
                                         ?>
-                                            <p style="color: #2E4C6D"><?= DateThai($selled['exp_date']) ?></p>
+                                            <p style="color: #2E4C6D"><?= $hyper->datethai->DateThai1($selled['exp_date']) ?></p>
                                         <?php
                                         else :
                                         ?>

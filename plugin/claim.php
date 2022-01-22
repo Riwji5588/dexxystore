@@ -237,10 +237,6 @@ if (isset($_POST['id'])) {
         } else {    // admin confirmed or reject
 
             if ($_POST['type'] == 2) { // admin confirmed
-
-                date_default_timezone_set("Asia/Bangkok");
-                $claim_date = date("Y-m-d H:i:s", strtotime("+30 day"));
-
                 $data_game = "SELECT * FROM game_data WHERE selled=0 AND card_id={$card_id['card_id']} LIMIT 1";
                 $row = $hyper->connect->query($data_game);
                 $game = $row->fetch_array();
@@ -248,7 +244,7 @@ if (isset($_POST['id'])) {
                 if (mysqli_num_rows($row) == 1) {
 
                     $confirm = "UPDATE data_claim SET confirm = 1 WHERE claim_id={$selled['selled_id']} OR confirm=9 AND confirm=0";
-                    $data_selled_update = "UPDATE data_selled SET claim = 1, data_id = {$game['data_id']}, exp_date = '$claim_date' WHERE selled_id = {$selled['selled_id']} AND claim=2";
+                    $data_selled_update = "UPDATE data_selled SET claim = 1, data_id = {$game['data_id']} WHERE selled_id = {$selled['selled_id']} AND claim=2";
                     $data_game_update = "UPDATE game_data SET selled = 1 WHERE data_id = {$game['data_id']}";
 
                     if ($hyper->connect->query($confirm) && $hyper->connect->query($data_selled_update) && $hyper->connect->query($data_game_update)) {
