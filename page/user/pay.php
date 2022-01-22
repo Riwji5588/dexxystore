@@ -1,4 +1,9 @@
       <!-- Pay Form -->
+
+      <!-- <center>
+            <h1 class="text-danger">ปิดระบบเติมเงินชั่วคราว</h1><br>
+            <h4 class="text-warning">กำลังดำเนินการแก้ไขระบบเติมเงิน หากสนใจสามารถติดต่อไลน์ได้ครับ</h4>
+      </center> -->
       <div class="card color radius-border">
             <div class="card-body p-0 text-center pt-4">
 

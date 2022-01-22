@@ -61,7 +61,7 @@ if (isset($_COOKIE['USER_SID'])) {
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>DEXY STORE</title>
+  <title><?= $webname ?></title>
 
   <link rel="shortcut icon" href="assets/img/<?= $webimage; ?>" type="image/png">
   <link href="https://fonts.googleapis.com/css2?family=Kanit&display=swap" rel="stylesheet">
@@ -91,7 +91,7 @@ if (isset($_COOKIE['USER_SID'])) {
   <script src="./assets/js/main.js"></script>
 
 
-  
+
   <!-- <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script> -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
@@ -335,6 +335,7 @@ if (isset($_COOKIE['USER_SID'])) {
       } elseif ($page == 'gamedata') {
         if ($data_user['role'] == '779') {
           include('page/admin/game_item/game_data.php');
+          
         } else {
           $page = 'home';
           include('page/welcome.php');
@@ -521,5 +522,7 @@ if (isset($_COOKIE['USER_SID'])) {
     color: #027310;
   }
 </style>
+
+
 
 </html>

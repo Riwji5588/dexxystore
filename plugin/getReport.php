@@ -5,7 +5,7 @@ $data = [];
 if ($_POST) {
     if ($_POST['action'] == 'getreport') {
         if ($_POST['type'] == 1) {
-            $select_claim = "SELECT * FROM data_claim WHERE confirm!=9 ORDER BY id DESC";
+            $select_claim = "SELECT * FROM data_claim WHERE confirm!=9 ORDER BY id DESC LIMIT 100";
             $claim_result = $hyper->connect->query($select_claim);
             $i = 0;
             $row = mysqli_num_rows($claim_result);
@@ -42,7 +42,7 @@ if ($_POST) {
                 echo json_encode(['code' => 500, 'data' => 'Error']);
             }
         } else {
-            $select_claim = "SELECT * FROM data_claim_first ORDER BY id DESC";
+            $select_claim = "SELECT * FROM data_claim_first WHERE confirm=0 ORDER BY id DESC";
             $claim_result = $hyper->connect->query($select_claim);
             $i = 0;
             $row = mysqli_num_rows($claim_result);

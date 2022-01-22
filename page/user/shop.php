@@ -24,7 +24,7 @@ if ($total_game_row <= 0) {
 
   <!-- Shop ID -->
   <div class="media mt-3 mb-3 pl-2">
-    <img src="assets/img/game/<?= $game['game_image']; ?>" width="80px" class="mr-3 rounded-circle">
+    <img src="assets/img/game/<?= $game['game_image']; ?>" width="80px" height="80px" class="mr-3" style="border-radius: 50% !important;">
     <div class="media-body pt-2" style=" color : white; ">
       <h3 class="mt-0 d-none d-lg-block"><?= $game['game_name']; ?> <font class="ml-2 mr-2">|</font> เงินคงเหลือ <?= $points; ?> บาท</h3>
       <h3 class="mt-0 d-block d-lg-none"><?= $game['game_name']; ?><h5 class="mt-0 d-block d-lg-none">เงิน คงเหลือ <?= $points; ?> บาท</h5>

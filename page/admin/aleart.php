@@ -134,53 +134,59 @@
                                                 </button>
                                             </div>
                                             <div class="modal-body text-left">
-                                                ${data[i].claim_data_confirm == 0 ? `
-                                                    <div class="row" style="position: absolute;right: 0px;padding-right: 30px;z-index:5;">
-                                                        <div class="btn-group" role="group" aria-label="Basic example">
-                                                            <button id="confirmbtn${data.claim_data_id}" type="submit" class="btn btn-success btn-sm" onclick="submit(${data[i].claim_data_id},2)">อนุมัติ</button>
-                                                            <button id="confirmbtnr${data.claim_data_id}" type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#reject${data[i].claim_data_id}">ปฏิเสธ</button>
+                                        ${data[i].claim_data_confirm == 0 ? `
+                                                <div class="row justify-content-end mr-2 mb-1">
+                                                    <div class="btn-group" role="group" aria-label="Basic example">
+                                                        <button id="confirmbtn${data.claim_data_id}" type="button" class="btn btn-success btn-sm p-1 px-2" onclick="submit(${data[i].claim_data_id},2)">อนุมัติ</button>
+                                                        <button id="confirmbtnr${data.claim_data_id}" type="button" class="btn btn-danger btn-sm p-1 px-2" data-toggle="modal" data-target="#reject${data[i].claim_data_id}">ปฏิเสธ</button>
+                                                    </div>
+                                                </div>` : ''}
+                                                <div class="container justify-content-center">
+                                                    <div class="row" style="padding: 5px 2px 0px 2px;">
+                                                        <div class="col-3 col-md-4">
+                                                            <span>ชื่อผู้ใช้งาน</span>
                                                         </div>
-                                                    </div>` : ''}
-                                                <div class="row" style="padding: 5px 2px 0px 2px;">
-                                                    <div class="col-3 col-md-4">
-                                                        <span>ชื่อผู้ใช้งาน</span>
+                                                        <div class="col-9 col-md-8">
+                                                            <input type="text" id="username${data[i].claim_data_id}1" value="${data[i].data_result_username}" readonly style="background-color: #fff;border-radius: 0px;border: 0px">
+                                                            <button style="margin-left: -25px;" class="btn btn-dark btn-sm" type="button" onclick="copy(this,'username${data[i].claim_data_id}1')"><i class='far fa-copy'></i> คัดลอก</button>
+                                                        </div>
                                                     </div>
-                                                    <div class="col-9 col-md-8">
-                                                        <input type="text" id="username${data[i].claim_data_id}1" value="${data[i].data_result_username}" readonly style="background-color: #fff;border-radius: 0px;border: 0px">
+                                                    <div class="row" style="padding: 5px 2px 0px 2px;">
+                                                        <div class="col-3 col-md-4">
+                                                            <span>รหัสผ่าน</span>
+                                                        </div>
+                                                        <div class="col-9 col-md-8">
+                                                            <input type="text" id="password${data[i].claim_data_id}1" value="${data[i].data_result_password}" readonly style="background-color: #fff;border-radius: 0px;border: 0px">
+                                                            <button style="margin-left: -25px;" class="btn btn-dark btn-sm" type="button" onclick="copy(this,'password${data[i].claim_data_id}1')"><i class='far fa-copy'></i> คัดลอก</button>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="row" style="padding: 5px 2px 0px 2px;">
-                                                    <div class="col-3 col-md-4">
-                                                        <span>รหัสผ่าน</span>
+                                                    <div class="row" style="padding: 5px 2px 0px 2px;">
+                                                        <div class="col-3 col-md-4">
+                                                            <span>จอ</span>
+                                                        </div>
+                                                        <div class="col-9 col-md-8">
+                                                            <input type="text" value="${data[i].data_result_display}" readonly style="background-color: #fff;border-radius: 0px;border: 0px">
+                                                        </div>
                                                     </div>
-                                                    <div class="col-9 col-md-8">
-                                                        <input type="text" id="password${data[i].claim_data_id}1" value="${data[i].data_result_password}" readonly style="background-color: #fff;border-radius: 0px;border: 0px">
-                                                    </div>
-                                                </div>
-                                                <div class="row" style="padding: 5px 2px 0px 2px;">
-                                                    <div class="col-3 col-md-4">
-                                                        <span>จอ</span>
-                                                    </div>
-                                                    <div class="col-9 col-md-8">
-                                                        <input type="text" value="${data[i].data_result_display}" readonly style="background-color: #fff;border-radius: 0px;border: 0px">
-                                                    </div>
-                                                </div>
-                                                <div class="row" style="padding: 5px 2px 0px 2px;">
-                                                    <div class="col-3 col-md-4">
-                                                        <span>สาเหตุในการเคลม</span>
-                                                    </div>
-                                                    <div class="col-9 col-md-8">
-                                                        <p>${data[i].claim_data_detail}</p>
+                                                    <div class="row" style="padding: 5px 2px 0px 2px;">
+                                                        <div class="col-3 col-md-4">
+                                                            <span>สาเหตุในการเคลม</span>
+                                                        </div>
+                                                        <div class="col-9 col-md-8">
+                                                            <p>${data[i].claim_data_detail}</p>
+                                                        </div>
                                                     </div>
                                                 </div>
     
                                                 <div class="modal-footer p-2 border-0">
-                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fad fa-times-circle mr-1"></i>ปิด</button>
+                                                
+                                                    <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal"><i class="fad fa-times-circle mr-1"></i>ปิด</button>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+
                                 <!-- sub modal -->
                                 <div class="modal fade" id="reject${data[i].claim_data_id}" data-backdrop="static">
                                     <div class="modal-dialog modal-dialog-centered modal-lg">
@@ -231,6 +237,20 @@
         });
 
     })
+
+    function copy(input, id) {
+        var copyText = document.getElementById(id);
+        copyText.select();
+        copyText.setSelectionRange(0, 99999)
+        document.execCommand("copy");
+        input.innerHTML = "<i class='far fa-copy'></i> คัดลอกแล้ว";
+        input.className = "btn btn-success btn-sm";
+        setTimeout(function() {
+            input.innerHTML = "<i class='far fa-copy'></i> คัดลอก";
+            input.className = "btn btn-dark btn-sm";
+        }, 2000);
+    }
+
 
     async function doConfirm(id) {
         document.getElementById('confirmbtn' + id).disabled = true;
