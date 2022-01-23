@@ -237,6 +237,20 @@
             },
             error: function(xhr, status, error) {
                 console.log(xhr.responseText);
+                $('#detail').html(`
+                <div class="card">
+                    <div class="card-body text-center">
+                        <h4>ไม่มีออเดอร์ที่ ${window.location.href.split('&order=')[1].split('#')[0]} ในระบบ</h4>
+                    </div>
+                </div>
+                `);
+                $('#logs').html(`
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <h4>ไม่มีข้อมูลย้อนหลัง</h4>
+                        </div>
+                    </div>
+                    `);
             }
         })
     }
