@@ -255,6 +255,7 @@
                                   </div>
                                   <div class="modal-footer p-2 border-0">
                                     <button type="button" class="btn btn-danger btn-sm mx-2" onclick="DelData(this)" value="${data.selled_id}"><i class="fal fa-trash-alt mr-1"></i> ลบข้อมูล</button>
+                                    <a class="btn btn-warning btn-sm mx-2" href="./orderlog&order=${data.selled_id}" target="_blank"><i class="fas fa-external-link-alt"></i> ข้อมูลเพิ่มเติม</a>
                                     <button type="button" class="btn btn-primary btn-sm mx-2" onclick="copyfile(this,${data.selled_data_id})"><i class="far fa-copy"></i> คัดลอก</button>
                                     <button type="button" class="btn btn-success btn-sm mx-2" onclick="updatedata(${data.selled_data_id})"><i class="far fa-plus-square"></i> อัพเดทข้อมูล</button>
                                     <button type="button" class="btn btn-secondary btn-sm mx-2" data-dismiss="modal"><i class="fad fa-times-circle mr-1"></i> ปิด</button>

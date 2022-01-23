@@ -110,7 +110,7 @@
                             <div class="form-group">
                                 <label for="selled_date">วันที่ซื้อ</label>
                                 <div class="col-12 p-0">
-                                    <input type="date" class="form-control" id="selled_date" value="Undefine">
+                                    <input type="date" class="form-control" id="selled_date" readonly value="Undefine">
                                 </div>
                             </div>
                         </div>
@@ -149,6 +149,7 @@
 
 <script>
     const data = [];
+    let data_id = 0;
     $(document).ready(function() {
         const check_order = window.location.href.split('&order=')[1] ? true : false;
         if (!check_order) {
@@ -179,6 +180,7 @@
                     data.claim = json.data[0].claim;
                     data.claim_first = json.data[0].claim_first;
                     data.renew = json.data[0].renew;
+                    data_id = present.data_id;
 
                     console.log(present.selled_id);
                     const username = present.username;
@@ -204,6 +206,7 @@
                     $('#exp_date').val(exp_date.toISOString().split('T')[0]);
                 } else {
                     const present = json.present;
+                    data_id = present.data_id;
 
                     const username = present.username;
                     const password = atob(present.password);
@@ -352,6 +355,89 @@
                     });
                 }
             });
+    }
+
+    /** Update Data */
+    function updatedata(id = "") {
+
+        swal({
+                title: 'ต้องการอัพเดทข้อมูล',
+                text: "คุณต้องการอัพเดทข้อมูลใช่หรือไม่",
+                icon: "info",
+                buttons: {
+                    confirm: {
+                        text: 'อัพเดท',
+                        className: 'hyper-btn-notoutline-success'
+                    },
+                    cancel: 'ยกเลิก'
+                },
+                closeOnClickOutside: false,
+            })
+            .then((willDelete) => {
+                if (willDelete) {
+
+                    var updatedata = new FormData();
+                    var did = data_id;
+                    var orderid = window.location.href.split('&order=')[1].split('#')[0];
+                    var username = $('#username').val();
+                    var password = $('#password').val();
+                    var detail = '';
+                    var display = $('#display').val();
+                    var exp_date = $('#exp_date').val();
+
+                    updatedata.append('data_id', did);
+                    updatedata.append('username', username);
+                    updatedata.append('password', password);
+                    updatedata.append('detail', detail);
+                    updatedata.append('display', display);
+                    updatedata.append('exp_date', exp_date);
+                    updatedata.append('orderid', orderid);
+
+                    $.ajax({
+
+                        type: "POST",
+                        url: "plugin/edit_owner_data.php",
+                        dataType: "json",
+                        data: updatedata,
+                        cache: false,
+                        contentType: false,
+                        processData: false,
+
+                        beforeSend: function() {
+                            swal("กำลังอัพเดทข้อมูล กรุณารอสักครู่...", {
+                                button: false,
+                                closeOnClickOutside: false,
+                                timer: 500,
+                            });
+
+                        },
+
+                        success: function(data) {
+                            setTimeout(() => {
+                                if (data.code == "200") {
+                                    swal("อัพเดทข้อมูล สำเร็จ!", "ระบบกำลังบันทึกข้อมูล...", "success", {
+                                        button: false,
+                                        closeOnClickOutside: false,
+                                    });
+                                    setTimeout(function() {
+                                        window.location.reload();
+                                    }, 1500);
+                                } else {
+                                    swal(data.msg, "", "error", {
+                                        button: {
+                                            className: 'hyper-btn-notoutline-danger',
+                                        },
+                                        closeOnClickOutside: false,
+                                    });
+                                }
+                            }, 600);
+                        }
+
+                    });
+
+                }
+            });
+
     }
 </script>
 
