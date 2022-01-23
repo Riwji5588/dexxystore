@@ -51,13 +51,16 @@
                     <div class="row">
                         <div class="col-12 mb-2">
                             <center>
-                                <h4>ข้อมูลปัจจุบันของออเดอร์&nbsp;
-                                    <span id="orderidreq">
-                                        <div class="spinner-border text-primary" role="status">
-                                            <span class="sr-only">Loading...</span>
-                                        </div>
-                                    </span>
-                                </h4>
+                                <h3>
+                                    <b>
+                                        ข้อมูลปัจจุบันของออเดอร์&nbsp;
+                                        <span class="orderidreq">
+                                            <div class="spinner-border text-primary" role="status">
+                                                <span class="sr-only">Loading...</span>
+                                            </div>
+                                        </span>
+                                    </b>
+                                </h3>
                             </center>
                         </div>
                         <div class="col-12 mb-2" align="center">
@@ -144,8 +147,22 @@
                 </div>
             </div>
             <div id="logs" class="card">
-                <div class="card-body">
-                    Hello, Logs
+                <div class="card-body text-center">
+                    <h3><b>
+                            ประวัติย้อนหลังออเดอร์ที่&nbsp;
+                            <span class="orderidreq">
+                                <div class="spinner-border text-primary" role="status">
+                                    <span class="sr-only">Loading...</span>
+                                </div>
+                        </b>
+                        </span>
+                    </h3>
+                    <div style="text-align: start !important;">
+                        <div class="container d-flex justify-content-center">
+                            <div id="stepper" class="stepper d-flex flex-column mt-3 px-5 pt-3">
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -165,7 +182,6 @@
         } else {
             $('.backdroppp').remove();
             const orderid = window.location.href.split('&order=')[1].split('#')[0];
-            console.log(orderid);
             getlog(orderid);
             $('#loader').remove();
         }
@@ -185,12 +201,11 @@
                 if (code == 200) {
                     console.log(json);
                     const present = json.data[0].present;
-                    data.claim = json.data[0].claim;
-                    data.claim_first = json.data[0].claim_first;
-                    data.renew = json.data[0].renew;
+                    data.push(...json.data[0].claim);
+                    data.push(...json.data[0].claim_first);
+                    data.push(...json.data[0].renew);
                     data_id = present.data_id;
 
-                    console.log(present.selled_id);
                     const username = present.username;
                     const password = atob(present.password);
                     const display = present.display;
@@ -201,7 +216,7 @@
                     const owner = present.owner;
 
 
-                    $('#orderidreq').html(present.selled_id)
+                    $('.orderidreq').html(present.selled_id)
 
                     document.getElementById('cardimg').src += present.image_name;
                     $('#carddetail').html(present.card_title + '-' + present.card_price);
@@ -226,7 +241,7 @@
                     const status = (exp_date.getTime() - now.getTime()) > 0 ? 'ยังไม่หมดประกัน' : 'หมดประกัน';
                     const owner = present.owner;
 
-                    $('#orderidreq').html(present.selled_id)
+                    $('.orderidreq').html(present.selled_id)
                     document.getElementById('cardimg').src += present.image_name;
                     $('#carddetail').html(present.card_title + '-' + present.card_price);
                     $('#username').val(username);
@@ -286,6 +301,68 @@
     }
 
     function loadlog() {
+        data.sort((a, b) => a.datetime.localeCompare(b.datetime))
+        let html = '';
+        let i = 0;
+        data.forEach(element => {
+            let message = element.type == "claim" ? `ส่งเคลม` : element.type == "claim_first" ? `ส่งเคลมครั้งแรก` : `ต่อประกัน`;
+            let icon = "";
+            if (element.type == "claim") {
+                if (element.status == 0) {
+                    icon = `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-send" viewBox="0 0 16 16">
+                                <path d="M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576 6.636 10.07Zm6.787-8.201L1.591 6.602l4.339 2.76 7.494-7.493Z"/>
+                            </svg>`;
+                } else if (element.status == 1) {
+                    icon = `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-check-lg" viewBox="0 0 16 16">
+                            <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"/>
+                            </svg>`;
+                } else {
+                    icon = `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                              <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                            </svg>`;
+                }
+            } else if (element.type == "claim_first") {
+                icon = `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-check-lg" viewBox="0 0 16 16">
+                            <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"/>
+                        </svg>`;
+            } else {
+                icon = `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-arrow-repeat" viewBox="0 0 16 16">
+                            <path d="M11.534 7h3.932a.25.25 0 0 1 .192.41l-1.966 2.36a.25.25 0 0 1-.384 0l-1.966-2.36a.25.25 0 0 1 .192-.41zm-11 2h3.932a.25.25 0 0 0 .192-.41L2.692 6.23a.25.25 0 0 0-.384 0L.342 8.59A.25.25 0 0 0 .534 9z"/>
+                            <path fill-rule="evenodd" d="M8 3c-1.552 0-2.94.707-3.857 1.818a.5.5 0 1 1-.771-.636A6.002 6.002 0 0 1 13.917 7H12.9A5.002 5.002 0 0 0 8 3zM3.1 9a5.002 5.002 0 0 0 8.757 2.182.5.5 0 1 1 .771.636A6.002 6.002 0 0 1 2.083 9H3.1z"/>
+                        </svg>`
+            }
+
+            if (i == data.length - 1) {
+                html += `
+                <div class="d-flex mb-1">
+                    <div class="d-flex flex-column pr-4 align-items-center">
+                        <div class="rounded-circle p-1 bg-dark text-white mb-1 w-100">${icon}</div>
+                        <div class="line h-100 d-none"></div>
+                    </div>
+                    <div>
+                        <h5 class="text-dark">${message}</h5>
+                        <p class="lead text-muted pb-3">${element.datetime}</p>
+                    </div>
+                </div>
+            `;
+            } else {
+                html += `
+                <div class="d-flex mb-1">
+                    <div class="d-flex flex-column pr-4 align-items-center">
+                        <div class="rounded-circle p-1 bg-dark text-white mb-1 w-100">${icon}</div>
+                        <div class="line h-100"></div>
+                    </div>
+                    <div>
+                        <h5 class="text-dark">${message}</h5>
+                        <p class="lead text-muted pb-3">${element.datetime}</p>
+                    </div>
+                </div>
+            `;
+            }
+            console.log(i == data.length - 1);
+            i++
+        });
+        $('#stepper').html(html);
         console.log(data);
     }
 
@@ -467,6 +544,15 @@
 </script>
 
 <style>
+    .line {
+        width: 2px;
+        background-color: lightgrey !important;
+    }
+
+    .lead {
+        font-size: 1.1rem;
+    }
+
     .active {
         display: block !important;
     }

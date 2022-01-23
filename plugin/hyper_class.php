@@ -170,7 +170,7 @@ class Notify
 
         global $hyper;
         date_default_timezone_set("Asia/Bangkok");
-        $datetime = date("Y-m-d");
+        $datetime = date("Y-m-d H:i:s");
         $admin = 1;
 
         $to_user = "SELECT * FROM accounts WHERE ac_id='$to'";
@@ -205,8 +205,8 @@ class Notify
 
 class DateThai
 {
-    
-        public function DateThai1($strDate)
+
+    public function DateThai1($strDate)
     {
         $strYear = date("Y", strtotime($strDate)) + 543;
         $strMonth = date("n", strtotime($strDate));

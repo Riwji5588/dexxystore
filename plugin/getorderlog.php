@@ -56,26 +56,28 @@ if ($_POST) {
             ];
 
             // get claim log
-            $sql_select_claim = "SELECT data_id, claim_date, confirm FROM data_claim WHERE claim_id = '" . $orderid . "' ORDER BY id ASC";
+            $sql_select_claim = "SELECT data_id, claim_date as datetime, confirm FROM data_claim WHERE claim_id = '" . $orderid . "' ORDER BY id ASC";
             $query_claim = $hyper->connect->query($sql_select_claim);
             $row = mysqli_num_rows($query_claim);
             $i = 0;
             if ($row > 0) {
                 do {
                     $claim1 = $query_claim->fetch_assoc();
+                    $claim1 += ['type' => 'claim'];
                     array_push($claim, $claim1);
                     $i++;
                 } while ($i < $row);
             }
 
             // get claim_first
-            $sql_select_claim_first = "SELECT data_id, claim_date, confirm FROM data_claim_first WHERE claim_id = '" . $orderid . "' ORDER BY id ASC";
+            $sql_select_claim_first = "SELECT data_id, claim_date as datetime, confirm FROM data_claim_first WHERE claim_id = '" . $orderid . "' ORDER BY id ASC";
             $query_claim_first = $hyper->connect->query($sql_select_claim_first);
             $row = mysqli_num_rows($query_claim_first);
             $i = 0;
             if ($row > 0) {
                 do {
                     $claim_first1 = $query_claim_first->fetch_assoc();
+                    $claim_first1 += ['type' => 'claim_first'];
                     array_push($claim_first, $claim_first1);
                     $i++;
                 } while ($i < $row);
@@ -89,6 +91,7 @@ if ($_POST) {
             if ($row > 0) {
                 do {
                     $renew1 = $query_renew->fetch_assoc();
+                    $renew1 += ['type' => 'renew'];
                     array_push($renew, $renew1);
                     $i++;
                 } while ($i < $row);
@@ -103,12 +106,10 @@ if ($_POST) {
     header("Location: 403.php");
 }
 
-if (count($claim) == 0) $claim = null;
-if (count($claim_first) == 0) $claim_first = null;
-if (count($renew) == 0) $renew = null;
-if ($claim == null && $claim_first == null && $renew == null) {
+if ($claim == [] && $claim_first == [] && $renew == []) {
     $errorMSG = "ไม่พบข้อมูลย้อนหลัง";
 } else {
+
     $data = array([
         'present' => $result_present,
         'claim' => $claim,
