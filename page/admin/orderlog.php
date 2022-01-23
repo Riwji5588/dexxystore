@@ -122,6 +122,14 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="col-12 col-md-6">
+                            <div class="form-group">
+                                <label for="owner">เจ้าของ</label>
+                                <div class="col-12 p-0">
+                                    <input type="text" class="form-control" id="owner" readonly value="Undefine">
+                                </div>
+                            </div>
+                        </div>
                         <div class="col-12">
                             <hr>
                         </div>
@@ -190,7 +198,7 @@
                     const exp_date = new Date(present.exp_date);
                     const now = new Date();
                     const status = (exp_date.getTime() - now.getTime()) > 0 ? 'ยังไม่หมดประกัน' : 'หมดประกัน';
-
+                    const owner = present.owner;
 
 
                     $('#orderidreq').html(present.selled_id)
@@ -204,6 +212,7 @@
                     $('#status').val(status);
                     $('#selled_date').val(selled_date.toISOString().split('T')[0]);
                     $('#exp_date').val(exp_date.toISOString().split('T')[0]);
+                    $('#owner').val(owner);
                 } else {
                     const present = json.present;
                     data_id = present.data_id;
@@ -215,6 +224,7 @@
                     const exp_date = new Date(present.exp_date);
                     const now = new Date();
                     const status = (exp_date.getTime() - now.getTime()) > 0 ? 'ยังไม่หมดประกัน' : 'หมดประกัน';
+                    const owner = present.owner;
 
                     $('#orderidreq').html(present.selled_id)
                     document.getElementById('cardimg').src += present.image_name;
@@ -226,6 +236,7 @@
                     $('#status').val(status);
                     $('#selled_date').val(selled_date.toISOString().split('T')[0]);
                     $('#exp_date').val(exp_date.toISOString().split('T')[0]);
+                    $('#owner').val(owner);
                     $('#logs').html(`
                     <div class="card">
                         <div class="card-body text-center">

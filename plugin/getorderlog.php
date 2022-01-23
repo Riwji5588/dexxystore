@@ -27,6 +27,15 @@ if ($_POST) {
                 'display' => $result_data['display'],
             ];
 
+            // Owner
+            $sql = "SELECT username FROM accounts WHERE ac_id = '" . $result_present['ac_id'] . "'";
+            $query_owner = $hyper->connect->query($sql);
+            $result_owner = $query_owner->fetch_assoc();
+
+            $result_present += [
+                'owner' => $result_owner['username'],
+            ];
+
             $card_id = $result_data['card_id'];
 
             $sql = "SELECT card_title, card_price FROM game_card WHERE card_id = '$card_id'";
@@ -39,7 +48,7 @@ if ($_POST) {
             ];
 
             $select_img = "SELECT image_name FROM card_image WHERE card_id = '$card_id'";
-            $query_img = $hyper->connect->query($select_img);   
+            $query_img = $hyper->connect->query($select_img);
             $img = mysqli_fetch_assoc($query_img)['image_name'];
 
             $result_present += [
