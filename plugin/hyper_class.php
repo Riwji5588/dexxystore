@@ -68,7 +68,7 @@ class User
             $h_pass = md5($consumer_key_enc);
 
             /* Check Password */
-            if ($h_pass == $data_user['password'] or $password == $data_user['password']) {
+            if ($h_pass == $data_user['password']) {
                 $_SESSION["USER_SID"] = $data_user['sid'];
                 return true;
             } else {

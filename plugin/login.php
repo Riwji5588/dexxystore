@@ -15,18 +15,11 @@ if (isset($_POST['username'])) {
             $errorMSG = "กรุณากรอก รหัสผ่าน!";
         } else {
 
-            $remember = $_POST['remember'];
             $username = $_POST['username'];
             $password = $_POST['password'];
 
-
-
             $login = $hyper->user->Login($username, $password);
             if ($login === true) {
-
-                if (!empty($remember)) {
-                    setcookie("remember", base64_encode(base64_encode($_SESSION['USER_SID'])), strtotime('+30 days'), "/");
-                }
                 $errorMSG = "";
             } else {
                 $errorMSG = $login;
@@ -36,7 +29,7 @@ if (isset($_POST['username'])) {
 
     /* result */
     if (empty($errorMSG)) {
-        echo json_encode(['code' => 200, 'remember' => $_POST['remember']]);
+        echo json_encode(['code' => 200]);
     } else {
         echo json_encode(['code' => 500, 'msg' => $errorMSG]);
     }
