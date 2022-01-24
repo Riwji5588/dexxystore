@@ -15,13 +15,6 @@
             </div>
           </div>
         </div>
-        <div class="col-12 col-md-12 d-flex justify-content-end ">
-          <div class="form-group">
-            <div class="btn btn-secondary w-100" data-toggle="modal" data-target="#gentext">
-              Order Generate
-            </div>
-          </div>
-        </div>
       </div>
       <div id="active" class="mt-3">
         <table id="myTable" class="table table-hover text-center w-100">
@@ -69,28 +62,6 @@
         </div>
       </div>
 
-      <!-- Gen text -->
-      <div class="modal fade" id="gentext" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-body">
-              <div class="col-12">
-                <div class="form-group">
-                  <label for="username">Username</label>
-                  <div class="col-12 p-0">
-                    <input type="text" class="form-control" id="genid" placeholder="email:password:display">
-                    <button id="btn-copy" class="btn btn-dark btn-sm w-100" type="button" onclick="gen()"><i class='far fa-copy'></i> คัดลอก</button>
-                    <textarea id="result"></textarea>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fas fa-times"></i> ปิด</button>
-            </div>
-          </div>
-        </div>
-      </div>
 
       <!-- End Data Owner  -->
       <script>
@@ -499,69 +470,6 @@
           });
         }
 
-        function gen() {
-          let datalist = $('#genid').val().split(':');
-          if (datalist.length == 3) {
-            text = `NETFLIX @Dexy_store ! 
-เวลาเปิดร้าน 12.00 - 00.00 ⏳ 
-
-หากทำผิดกฎไม่รับเคลมนะครับ ❌
-อ่านกฎเพื่อรักษาสิทธ์ของคุณลูกค้าเอง
-
-Email: ${datalist[0]}
-
-Pass: ${datalist[1]}
-
-🪔 จอ : ${datalist[2]}
-
-ประกัน : 24 กุมภาพันธ์ 2565
-(ต่อเดือนถัดไป แจ้งก่อน 3 วันนะครับ)
-
-อ่านกฎด้านล่างก่อนเข้าจอนะครับ 
-สำคัญมาก ❕❕❕
-
-1.สินค้าตัวนี้ สามารถเปลี่ยนได้แค่ 📌
-ซับและเสียงพากย์ขณะเล่นคลิปเท่านั้น
-
-2.นอกจากซับและเสียงพากย์ 🎏
-ห้ามเปลี่ยนทุกอย่าง ❌
-เช่น
-❌ชื่อจอ
-❌รูปจอ
-❌ภาษาของเมนู
-❌หรือล๊อคจอ
-
-3.ห้ามนำรหัสไปหารต่อนะครับ หากตรวจพบบล๊อคทันที 😥
-
-4.ในคอมแนะนำดูผ่าน แอพNetflix จาก
-Microsoft store
- -----------------
-
-ในวันธรรมดา อาจมีตอบช้า-ตอบเร็ว
-รอนิดนึงนะครับ พ่อค้ามีเรียน🩺
-คุณลูกค้าสามารถรีวิวเพื่อเป็นกำลังใจให้พ่อค้าได้ที่ #reviewdexy`
-            $('#result').val(text);
-            copyToClipboard();
-          } else {
-            alert('รูปแบบข้อมูลไม่ถูกต้อง');
-          }
-        }
-
-        function copyToClipboard() {
-          let copytext = document.getElementById('result');
-          let input = document.getElementById('btn-copy');
-          copytext.style.display = "block";
-          copytext.select();
-          copytext.setSelectionRange(0, 99999)
-          document.execCommand("copy");
-          copytext.style.display = "none";
-          input.innerHTML = "<i class='far fa-copy'></i> คัดลอกแล้ว";
-          input.className = "btn btn-success btn-sm w-100";
-          setTimeout(function() {
-            input.innerHTML = "<i class='far fa-copy'></i> คัดลอก";
-            input.className = "btn btn-dark btn-sm w-100";
-          }, 2000);
-        }
       </script>
       <style>
         body {

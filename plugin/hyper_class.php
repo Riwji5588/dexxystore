@@ -205,6 +205,34 @@ class Notify
 
 class DateThai
 {
+    function DateThai2($strDate)
+    {
+        $strYear = date("Y", strtotime($strDate)) + 543;
+        $strMonth = date("n", strtotime($strDate));
+        $strDay = date("j", strtotime($strDate));
+        $strHour = date("H", strtotime($strDate));
+        $strMinute = date("i", strtotime($strDate));
+        $strday = date("l", strtotime($strDate));
+        $strMonthCut = array("", "มกราคม", "กุมพภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน", "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม");
+        $strdayCut = array("", "วันจันทร์ที่", "วันอังคารที่", "วันพุธที่", "วันพฤหัสบดีที่", "วันศุกร์ที่", "วันเสาร์ที่", "วันอาทิตย์ที่");
+        if ($strday == "Monday") {
+            $strdayThai = $strdayCut[1];
+        } elseif ($strday == "Tuesday") {
+            $strdayThai = $strdayCut[2];
+        } elseif ($strday == "Wednesday") {
+            $strdayThai = $strdayCut[3];
+        } elseif ($strday == "Thursday") {
+            $strdayThai = $strdayCut[4];
+        } elseif ($strday == "Friday") {
+            $strdayThai = $strdayCut[5];
+        } elseif ($strday == "Saturday") {
+            $strdayThai = $strdayCut[6];
+        } elseif ($strday == "Sunday") {
+            $strdayThai = $strdayCut[7];
+        }
+        $strMonthThai = $strMonthCut[$strMonth];
+        return "$strDay $strMonthThai $strYear";
+    }
 
     public function DateThai1($strDate)
     {
