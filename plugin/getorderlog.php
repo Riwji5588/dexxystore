@@ -34,6 +34,8 @@ if ($_POST) {
 
             $result_present += [
                 'owner' => $result_owner['username'],
+                'selled_date_thai' => $hyper->datethai->DateThai1($result_present['selled_date']),
+                'exp_date_thai' => $hyper->datethai->DateThai1($result_present['exp_date']),
             ];
 
             $card_id = $result_data['card_id'];
@@ -63,7 +65,7 @@ if ($_POST) {
             if ($row > 0) {
                 do {
                     $claim1 = $query_claim->fetch_assoc();
-                    $claim1 += ['type' => 'claim'];
+                    $claim1 += ['type' => 'claim', 'datethai' => $hyper->datethai->DateThai1($claim1['datetime'])];
                     array_push($claim, $claim1);
                     $i++;
                 } while ($i < $row);
@@ -77,7 +79,7 @@ if ($_POST) {
             if ($row > 0) {
                 do {
                     $claim_first1 = $query_claim_first->fetch_assoc();
-                    $claim_first1 += ['type' => 'claim_first'];
+                    $claim_first1 += ['type' => 'claim_first', 'datethai' => $hyper->datethai->DateThai1($claim_first1['datetime'])];
                     array_push($claim_first, $claim_first1);
                     $i++;
                 } while ($i < $row);
@@ -91,7 +93,7 @@ if ($_POST) {
             if ($row > 0) {
                 do {
                     $renew1 = $query_renew->fetch_assoc();
-                    $renew1 += ['type' => 'renew'];
+                    $renew1 += ['type' => 'renew', 'datethai' => $hyper->datethai->DateThai1($renew1['datetime'])];
                     array_push($renew, $renew1);
                     $i++;
                 } while ($i < $row);
@@ -106,17 +108,14 @@ if ($_POST) {
     header("Location: 403.php");
 }
 
-if ($claim == [] && $claim_first == [] && $renew == []) {
-    $errorMSG = "ไม่พบข้อมูลย้อนหลัง";
-} else {
 
-    $data = array([
-        'present' => $result_present,
-        'claim' => $claim,
-        'claim_first' => $claim_first,
-        'renew' => $renew
-    ]);
-}
+$data = array([
+    'present' => $result_present,
+    'claim' => $claim,
+    'claim_first' => $claim_first,
+    'renew' => $renew
+]);
+
 if (empty($errorMSG)) {
     echo json_encode(['code' => 200, 'data' => $data]);
 } else {

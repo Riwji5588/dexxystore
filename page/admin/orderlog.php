@@ -158,7 +158,7 @@
                         </span>
                     </h3>
                     <div style="text-align: start !important;">
-                        <div class="container d-flex justify-content-center">
+                        <div class="container d-flex justify-content-center" style="height: 500px;overflow-y: scroll;;">
                             <div id="stepper" class="stepper d-flex flex-column mt-3 px-5 pt-3">
                             </div>
                         </div>
@@ -204,6 +204,11 @@
                     data.push(...json.data[0].claim);
                     data.push(...json.data[0].claim_first);
                     data.push(...json.data[0].renew);
+                    data.push({
+                        datetime: present.selled_date,
+                        datethai: present.selled_date_thai,
+                        type: 'selled_date'
+                    });
                     data_id = present.data_id;
 
                     const username = present.username;
@@ -215,6 +220,11 @@
                     const status = (exp_date.getTime() - now.getTime()) > 0 ? 'ยังไม่หมดประกัน' : 'หมดประกัน';
                     const owner = present.owner;
 
+                    status == 'หมดประกัน' ? data.push({
+                        datetime: present.exp_date,
+                        datethai: present.exp_date_thai,
+                        type: 'exp_date'
+                    }) : false;
 
                     $('.orderidreq').html(present.selled_id)
 
@@ -305,33 +315,48 @@
         let html = '';
         let i = 0;
         data.forEach(element => {
-            let message = element.type == "claim" ? `ส่งเคลม` : element.type == "claim_first" ? `ส่งเคลมครั้งแรก` : `ต่อประกัน`;
+            let message = element.type == "claim" ? `ส่งเคลม` : element.type == "claim_first" ? `ส่งเคลมครั้งแรก` : element.type == 'selled_date' ? `ซื้อสินค้า` : element.type == 'exp_date' ? `หมดประกัน` : `ต่อประกัน`;
             let icon = "";
+            let status = "";
             if (element.type == "claim") {
-                if (element.status == 0) {
+                if (element.confirm == 0) {
                     icon = `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-send" viewBox="0 0 16 16">
                                 <path d="M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576 6.636 10.07Zm6.787-8.201L1.591 6.602l4.339 2.76 7.494-7.493Z"/>
                             </svg>`;
-                } else if (element.status == 1) {
+                    status = "สถานะ: รอดำเนินการ";
+                } else if (element.confirm == 1) {
                     icon = `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-check-lg" viewBox="0 0 16 16">
                             <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"/>
                             </svg>`;
+                    status = "สถานะ: อนุมัติ";
                 } else {
                     icon = `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
                               <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
                             </svg>`;
+                    status = "สถานะ: ปฏิเสธ";
                 }
             } else if (element.type == "claim_first") {
                 icon = `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-check-lg" viewBox="0 0 16 16">
                             <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"/>
                         </svg>`;
             } else {
-                icon = `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-arrow-repeat" viewBox="0 0 16 16">
+                if (element.type == "selled_date") {
+                    icon = `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-currency-dollar" viewBox="0 0 16 16">
+                             <path d="M4 10.781c.148 1.667 1.513 2.85 3.591 3.003V15h1.043v-1.216c2.27-.179 3.678-1.438 3.678-3.3 0-1.59-.947-2.51-2.956-3.028l-.722-.187V3.467c1.122.11 1.879.714 2.07 1.616h1.47c-.166-1.6-1.54-2.748-3.54-2.875V1H7.591v1.233c-1.939.23-3.27 1.472-3.27 3.156 0 1.454.966 2.483 2.661 2.917l.61.162v4.031c-1.149-.17-1.94-.8-2.131-1.718H4zm3.391-3.836c-1.043-.263-1.6-.825-1.6-1.616 0-.944.704-1.641 1.8-1.828v3.495l-.2-.05zm1.591 1.872c1.287.323 1.852.859 1.852 1.769 0 1.097-.826 1.828-2.2 1.939V8.73l.348.086z"/>
+                            </svg>`;
+                } else if (element.type == "exp_date") {
+                    icon = `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-clock" viewBox="0 0 16 16">
+                                <path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"/>
+                                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z"/>
+                            </svg>`;
+                } else {
+                    icon = `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-arrow-repeat" viewBox="0 0 16 16">
                             <path d="M11.534 7h3.932a.25.25 0 0 1 .192.41l-1.966 2.36a.25.25 0 0 1-.384 0l-1.966-2.36a.25.25 0 0 1 .192-.41zm-11 2h3.932a.25.25 0 0 0 .192-.41L2.692 6.23a.25.25 0 0 0-.384 0L.342 8.59A.25.25 0 0 0 .534 9z"/>
                             <path fill-rule="evenodd" d="M8 3c-1.552 0-2.94.707-3.857 1.818a.5.5 0 1 1-.771-.636A6.002 6.002 0 0 1 13.917 7H12.9A5.002 5.002 0 0 0 8 3zM3.1 9a5.002 5.002 0 0 0 8.757 2.182.5.5 0 1 1 .771.636A6.002 6.002 0 0 1 2.083 9H3.1z"/>
                         </svg>`
-            }
 
+                }
+            }
             if (i == data.length - 1) {
                 html += `
                 <div class="d-flex mb-1">
@@ -340,8 +365,8 @@
                         <div class="line h-100 d-none"></div>
                     </div>
                     <div>
-                        <h5 class="text-dark">${message}</h5>
-                        <p class="lead text-muted pb-3">${element.datetime}</p>
+                        <h5 class="text-dark">${message}&nbsp;&nbsp;<small class="text-muted" style="font-size: 10pt;font-weight: bold;">${status}</small> </h5>
+                        <p class="lead text-muted pb-3">${element.datethai}</p>
                     </div>
                 </div>
             `;
@@ -353,8 +378,8 @@
                         <div class="line h-100"></div>
                     </div>
                     <div>
-                        <h5 class="text-dark">${message}</h5>
-                        <p class="lead text-muted pb-3">${element.datetime}</p>
+                        <h5 class="text-dark">${message}&nbsp;&nbsp;<small class="text-muted" style="font-size: 10pt;font-weight: bold;">${status}</small> </h5> 
+                        <p class="lead text-muted pb-3">${element.datethai}</p>
                     </div>
                 </div>
             `;
@@ -544,6 +569,11 @@
 </script>
 
 <style>
+    .scroll {
+        overflow-y: scroll;
+        height: 400px;
+    }
+
     .line {
         width: 2px;
         background-color: lightgrey !important;
