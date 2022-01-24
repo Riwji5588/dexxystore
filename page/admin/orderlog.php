@@ -294,13 +294,7 @@
     $("#form").submit(function(e) {
         e.preventDefault();
         orderid = $("#orderid").val();
-        if (orderid.match(/\d+/g) != null) {
-            window.location.href = "./orderlog&order=" + orderid;
-        } else {
-            alert('กรุณากรอกหมายเลขออเดอร์ให้ถูกต้อง');
-            searchFromEmail(orderid)
-        }
-
+        window.location.href = "./orderlog&order=" + orderid;
     });
 
     function opentab(tab) {
@@ -572,9 +566,24 @@
 
     }
 
-    function searchFromEmail(email) {
+    // function getorderid(email) {
+    //     $.ajax({
+    //         url: "plugin/getorderlog.php",
+    //         type: "POST",
+    //         dataType: "json",
+    //         data: {
+    //             action: "getorderid",
+    //             email: email
+    //         },
+    //         success: function(json) {
 
-    }
+    //         },
+    //         error: function() {
+
+    //         }
+    //     })
+    // }
+    
 </script>
 
 <style>

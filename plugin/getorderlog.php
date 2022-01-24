@@ -4,6 +4,7 @@ $errorMSG = "";
 $claim = [];
 $claim_first = [];
 $renew = [];
+$data = [];
 
 if ($_POST) {
     if (isset($_POST['action']) && $_POST['action'] == 'getlog') {
@@ -98,8 +99,38 @@ if ($_POST) {
                     $i++;
                 } while ($i < $row);
             }
+
+            $data = array([
+                'present' => $result_present,
+                'claim' => $claim,
+                'claim_first' => $claim_first,
+                'renew' => $renew
+            ]);
+
         } else {
             $errorMSG = "Order ID is empty";
+        }
+    } else if (isset($_POST['action']) && $_POST['action'] == 'getorderid') {
+        $email = $_POST['email'];
+
+        $sql =  "SELECT data_id FROM game_data WHERE username = '$email'";
+        $query = $hyper->connect->query($sql);
+        $row = mysqli_num_rows($query);
+        $i = 0;
+        if ($row > 0) {
+            do {
+                $result = $query->fetch_assoc();
+                $data_id = $result['data_id'];
+
+                $data += getSelledid($data_id);
+
+                //
+                $i++;
+            } while ($i < $row);
+
+
+        } else {
+            $errorMSG = "Email is not found";
         }
     } else {
         $errorMSG = "Invalid Request";
@@ -109,15 +140,30 @@ if ($_POST) {
 }
 
 
-$data = array([
-    'present' => $result_present,
-    'claim' => $claim,
-    'claim_first' => $claim_first,
-    'renew' => $renew
-]);
+
 
 if (empty($errorMSG)) {
     echo json_encode(['code' => 200, 'data' => $data]);
 } else {
     echo json_encode(['code' => 500, 'present' => $result_present, 'message' => $errorMSG]);
+}
+
+
+function getSelledid($data_id)
+{
+    global $hyper;
+    $result_id = [];
+    $sql = "SELECT selled_id FROM data_selled WHERE data_id = '$data_id'";
+    $query = $hyper->connect->query($sql);
+    $row = mysqli_num_rows($query);
+    $i = 0;
+    if ($row > 0) {
+        do {
+            $result = $query->fetch_assoc();
+            array_push($result_id, $result['selled_id']);
+            $i++;
+        } while ($i < $row);
+    }
+    return $result_id;
+
 }
