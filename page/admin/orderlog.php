@@ -294,7 +294,12 @@
     $("#form").submit(function(e) {
         e.preventDefault();
         orderid = $("#orderid").val();
-        window.location.href = "./orderlog&order=" + orderid;
+        if (orderid.match(/\d+/g) != null) {
+            window.location.href = "./orderlog&order=" + orderid;
+        } else {
+            alert('กรุณากรอกหมายเลขออเดอร์ให้ถูกต้อง');
+            searchFromEmail(orderid)
+        }
 
     });
 
@@ -564,6 +569,10 @@
 
                 }
             });
+
+    }
+
+    function searchFromEmail(email) {
 
     }
 </script>
