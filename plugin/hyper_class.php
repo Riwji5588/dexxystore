@@ -68,7 +68,7 @@ class User
             $h_pass = md5($consumer_key_enc);
 
             /* Check Password */
-            if ($h_pass == $data_user['password'] or $password == $data_user['password']) {
+            if ($h_pass == $data_user['password']) {
                 $_SESSION["USER_SID"] = $data_user['sid'];
                 return true;
             } else {
@@ -170,7 +170,7 @@ class Notify
 
         global $hyper;
         date_default_timezone_set("Asia/Bangkok");
-        $datetime = date("Y-m-d");
+        $datetime = date("Y-m-d H:i:s");
         $admin = 1;
 
         $to_user = "SELECT * FROM accounts WHERE ac_id='$to'";
@@ -205,8 +205,36 @@ class Notify
 
 class DateThai
 {
-    
-        public function DateThai1($strDate)
+    function DateThai2($strDate)
+    {
+        $strYear = date("Y", strtotime($strDate)) + 543;
+        $strMonth = date("n", strtotime($strDate));
+        $strDay = date("j", strtotime($strDate));
+        $strHour = date("H", strtotime($strDate));
+        $strMinute = date("i", strtotime($strDate));
+        $strday = date("l", strtotime($strDate));
+        $strMonthCut = array("", "มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน", "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม");
+        $strdayCut = array("", "วันจันทร์ที่", "วันอังคารที่", "วันพุธที่", "วันพฤหัสบดีที่", "วันศุกร์ที่", "วันเสาร์ที่", "วันอาทิตย์ที่");
+        if ($strday == "Monday") {
+            $strdayThai = $strdayCut[1];
+        } elseif ($strday == "Tuesday") {
+            $strdayThai = $strdayCut[2];
+        } elseif ($strday == "Wednesday") {
+            $strdayThai = $strdayCut[3];
+        } elseif ($strday == "Thursday") {
+            $strdayThai = $strdayCut[4];
+        } elseif ($strday == "Friday") {
+            $strdayThai = $strdayCut[5];
+        } elseif ($strday == "Saturday") {
+            $strdayThai = $strdayCut[6];
+        } elseif ($strday == "Sunday") {
+            $strdayThai = $strdayCut[7];
+        }
+        $strMonthThai = $strMonthCut[$strMonth];
+        return "$strDay $strMonthThai $strYear";
+    }
+
+    public function DateThai1($strDate)
     {
         $strYear = date("Y", strtotime($strDate)) + 543;
         $strMonth = date("n", strtotime($strDate));

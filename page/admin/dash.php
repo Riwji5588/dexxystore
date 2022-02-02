@@ -25,14 +25,23 @@ $alert_row = $hyper->connect->query($alert)->fetch_array();
 $ftalert = "SELECT count(id) AS 'totalfirstalert' FROM data_claim_first WHERE confirm = 0";
 $ftalert_row = $hyper->connect->query($ftalert)->fetch_array();
 
+$plusdate = $hyper->datethai->DateThai2(date("Y-m-d", strtotime("+30 day")));
 ?>
 
 <!-- Dashboard -->
 
 <h3 class="text-center mt-4" style="color: white;">--- เมนูการจัดการเว็บไซต์ ---</h3>
 
+<div class="col-12 col-md-12 d-flex justify-content-end ">
+    <div class="form-group">
+        <div id="modalbackdrop" class="btn btn-secondary px-3 py-2 w-100" data-toggle="modal" data-target="#gentext">
+            <i class="fas fa-keyboard"></i> ฟอร์มคัดลอก
+        </div>
+    </div>
+</div>
+
 <!-- Menu Bar -->
-<div class="row no-gutters mt-4">
+<div class="row no-gutters mt-1">
 
     <div class="col-6 col-lg-4 p-2">
         <a href="gametype">
@@ -116,8 +125,155 @@ $ftalert_row = $hyper->connect->query($ftalert)->fetch_array();
 <!-- End Menu Bar -->
 
 <!-- End Dashboard -->
+
+<!-- Gen text -->
+<div class="modal fade" id="gentext" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="form-group">
+                            <div class="col-12 p-0">
+                                <input type="text" class="form-control" id="genid" placeholder="email:password:display">
+                                <textarea id="result"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <div class="form-group">
+                            <label for="btn-copy">ฟอร์มส่งลูกค้า</label>
+                            <div class="col-12 p-0">
+                                <button id="btn-copy" class="btn btn-dark btn-sm w-100" type="button" onclick="gen(1)"><i class='far fa-copy'></i> คัดลอก</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <div class="form-group">
+                            <label for="btn-copy">ฟอร์มเคลม</label>
+                            <div class="col-12 p-0">
+                                <button id="btn-copy2" class="btn btn-dark btn-sm w-100" type="button" onclick="gen(2)"><i class='far fa-copy'></i> คัดลอก</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="closebackdrop" type="button" class="btn btn-danger" data-dismiss="modal"><i class="fas fa-times"></i> ปิด</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="backdroppp"></div>
 <style>
     body {
         background-color: #131315;
     }
+
+    .backdroppp {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 1030;
+    }
+
+    @media screen and (max-width: 576px) {
+        .backdroppp {
+            display: block;
+        }
+    }
 </style>
+
+<script>
+    $(document).ready(() => {
+        $('#result').hide();
+        $('.backdroppp').hide();
+        if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+            // true for mobile device
+            $('#modalbackdrop').on('click', () => {
+                $('.backdroppp').show();
+            });
+
+            $('#closebackdrop').on('click', () => {
+                $('.backdroppp').hide();
+            });
+        }
+
+    })
+
+    function gen(type) {
+        let datalist = $('#genid').val().split(':');
+        if (datalist.length == 3) {
+            text1 = `NETFLIX @Dexy_store ! 
+เวลาเปิดร้าน 12.00 - 00.00 ⏳ 
+
+หากทำผิดกฎไม่รับเคลมนะครับ ❌
+อ่านกฎเพื่อรักษาสิทธ์ของคุณลูกค้าเอง
+
+Email: ${datalist[0]}
+
+Pass: ${datalist[1]}
+
+🪔 จอ : ${datalist[2]}
+
+ประกัน : <?= $plusdate ?> 
+(ต่อเดือนถัดไป แจ้งก่อน 3 วันนะครับ)
+
+อ่านกฎด้านล่างก่อนเข้าจอนะครับ 
+สำคัญมาก ❕❕❕
+
+1.สินค้าตัวนี้ สามารถเปลี่ยนได้แค่ 📌
+ซับและเสียงพากย์ขณะเล่นคลิปเท่านั้น
+
+2.นอกจากซับและเสียงพากย์ 🎏
+ห้ามเปลี่ยนทุกอย่าง ❌
+เช่น
+❌ชื่อจอ
+❌รูปจอ
+❌ภาษาของเมนู
+❌หรือล๊อคจอ
+
+3.ห้ามนำรหัสไปหารต่อนะครับ หากตรวจพบบล๊อคทันที 😥
+
+4.ในคอมแนะนำดูผ่าน แอพNetflix จาก
+Microsoft store
+ -----------------
+
+ในวันธรรมดา อาจมีตอบช้า-ตอบเร็ว
+รอนิดนึงนะครับ พ่อค้ามีเรียน🩺
+คุณลูกค้าสามารถรีวิวเพื่อเป็นกำลังใจให้พ่อค้าได้ที่ #reviewdexy`
+
+            text2 = `Mail: ${datalist[0]}
+
+Pass: ${datalist[1]}
+
+จอ: ${datalist[2]}`;
+            $('#result').val(type == 1 ? text1 : text2);
+            copyToClipboard(type);
+        } else {
+            alert('รูปแบบข้อมูลไม่ถูกต้อง');
+        }
+    }
+
+    function copyToClipboard(type) {
+        let copytext = document.getElementById('result');
+        let input = document.getElementById(type == 1 ? 'btn-copy' : 'btn-copy2');
+        copytext.style.display = "block";
+        copytext.select();
+        copytext.setSelectionRange(0, 99999)
+        document.execCommand("copy");
+        copytext.style.display = "none";
+        input.innerHTML = "<i class='far fa-copy'></i> คัดลอกแล้ว";
+        input.className = "btn btn-success btn-sm w-100";
+        setTimeout(function() {
+            input.innerHTML = "<i class='far fa-copy'></i> คัดลอก";
+            input.className = "btn btn-dark btn-sm w-100";
+        }, 2000);
+        $('#genid').val("");
+        $('#result').val("");
+    }
+</script>

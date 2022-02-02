@@ -20,10 +20,11 @@
         <table id="myTable" class="table table-hover text-center w-100">
           <thead class="hyper-bg-dark">
             <tr>
-              <th scope="col" style="width:120px;">ออเดอร์ที่</th>
+              <th scope="col" style="width:100px;">ออเดอร์ที่</th>
               <th scope="col">สินค้า</th>
               <th scope="col">บัญชีผู้ใช้</th>
               <th scope="col">เจ้าของ</th>
+              <th scope="col">จำนวนการเคลม</th>
               <th scope="col">วันที่ซื้อ</th>
               <th scope="col">สถานะ</th>
               <th scope="col" style="width: 200px;">เมนู</th>
@@ -42,10 +43,11 @@
         <table id="myTable1" class="table table-hover text-center w-100">
           <thead class="hyper-bg-dark">
             <tr>
-              <th scope="col" style="width:120px;">ออเดอร์ที่</th>
+              <th scope="col" style="width:100px;">ออเดอร์ที่</th>
               <th scope="col">สินค้า</th>
               <th scope="col">บัญชีผู้ใช้</th>
               <th scope="col">เจ้าของ</th>
+              <th scope="col">จำนวนการเคลม</th>
               <th scope="col">วันที่ซื้อ</th>
               <th scope="col">สถานะ</th>
               <th scope="col" style="width: 200px;">เมนู</th>
@@ -74,6 +76,7 @@
           active = true;
         }
         $(document).ready(async () => {
+          $('#result').hide();
           if (active) {
             $('#active').show();
             $('#expired').hide();
@@ -131,6 +134,7 @@
                         <td>${data.card_id == null ? 'Unknow' : data.card_title+"-"+data.card_price}</td>
                         <td>${data.selled_data_username}</td>
                         <td>${data.account_username}</td>
+                        <td>${data.claim_count}</td>
                         <td>${data.selled_date}</td>
                         <td>${data.expire < 1 ? "หมดประกัน" : "ยังไม่หมดประกัน"}</td>
                         <td width="100px">
@@ -255,6 +259,7 @@
                                   </div>
                                   <div class="modal-footer p-2 border-0">
                                     <button type="button" class="btn btn-danger btn-sm mx-2" onclick="DelData(this)" value="${data.selled_id}"><i class="fal fa-trash-alt mr-1"></i> ลบข้อมูล</button>
+                                    <a class="btn btn-warning btn-sm mx-2" href="./orderlog&order=${data.selled_id}" target="_blank"><i class="fas fa-external-link-alt"></i> ข้อมูลเพิ่มเติม</a>
                                     <button type="button" class="btn btn-primary btn-sm mx-2" onclick="copyfile(this,${data.selled_data_id})"><i class="far fa-copy"></i> คัดลอก</button>
                                     <button type="button" class="btn btn-success btn-sm mx-2" onclick="updatedata(${data.selled_data_id})"><i class="far fa-plus-square"></i> อัพเดทข้อมูล</button>
                                     <button type="button" class="btn btn-secondary btn-sm mx-2" data-dismiss="modal"><i class="fad fa-times-circle mr-1"></i> ปิด</button>
@@ -464,6 +469,7 @@
 
           });
         }
+
       </script>
       <style>
         body {

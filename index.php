@@ -79,6 +79,7 @@ if (isset($_COOKIE['USER_SID'])) {
   <link href="assets/css/hyper.css" rel="stylesheet">
   <link href="./assets/css/textanimation.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js" integrity="sha384-VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2" crossorigin="anonymous"></script>
 
@@ -93,7 +94,6 @@ if (isset($_COOKIE['USER_SID'])) {
 
 
   <!-- <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script> -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
   <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
@@ -335,7 +335,6 @@ if (isset($_COOKIE['USER_SID'])) {
       } elseif ($page == 'gamedata') {
         if ($data_user['role'] == '779') {
           include('page/admin/game_item/game_data.php');
-          
         } else {
           $page = 'home';
           include('page/welcome.php');
@@ -378,6 +377,13 @@ if (isset($_COOKIE['USER_SID'])) {
       } elseif ($page == 'reportfirst') {
         if ($data_user['role'] == '779') {
           include('page/admin/aleartfirst.php');
+        } else {
+          $page = 'home';
+          include('page/welcome.php');
+        }
+      } elseif ($page == 'orderlog') {
+        if ($data_user['role'] == '779') {
+          include('page/admin/orderlog.php');
         } else {
           $page = 'home';
           include('page/welcome.php');

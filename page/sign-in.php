@@ -6,23 +6,9 @@
    </script>
  <?php
   }
-  if (isset($_COOKIE['remember'])) {
-    include('./plugin/hyper_api.php');
-
-    $remember = base64_decode(base64_decode($_COOKIE['remember']));
-
-    $sql = "SELECT * FROM accounts WHERE sid='{$remember}'";
-    $query = $hyper->connect->query($sql);
-    $stmt = $query->fetch_array();
-    $row = $query->num_rows;
-
-    $username = $stmt['username'];
-    $password = $stmt['password'];
 
   ?>
- <?php
-  }
-  ?>
+
  <!-- Sign-in Form -->
  <div class="card mt-4 shadow-dark radius-border hyper-bg-white ml-auto mr-auto" style="max-width:500px;">
    <div class="card-body">
@@ -33,20 +19,18 @@
          <div class="input-group-prepend">
            <span class="input-group-text hyper-bg-dark border-dark"><i class="fal fa-user"></i></span>
          </div>
-         <input value="<?php if (isset($_COOKIE['remember'])) : echo $username;
-                        endif; ?>" id="username" type="text" maxlength="16" class="form-control form-control-sm hyper-form-control" placeholder="Username ( ชื่อผู้ใช้งาน )" required>
+         <input value="" id="username" type="text" maxlength="16" class="form-control form-control-sm hyper-form-control" placeholder="Username ( ชื่อผู้ใช้งาน )" required>
        </div>
 
        <div class="input-group mb-4">
          <div class="input-group-prepend">
            <span class="input-group-text hyper-bg-dark border-dark"><i class="fal fa-key"></i></span>
          </div>
-         <input value="<?php if (isset($_COOKIE['remember'])) : echo $password;
-                        endif; ?>" id="password" type="password" maxlength="16" class="form-control form-control-sm hyper-form-control" placeholder="Password ( รหัสผ่าน )" required>
+         <input value="" id="password" type="password" maxlength="16" class="form-control form-control-sm hyper-form-control" placeholder="Password ( รหัสผ่าน )" required>
        </div>
 
        <div class="float-left  mt-3 mb-2">
-         <input type="checkbox" name="remember" id="reme" <?php if (isset($_COOKIE['remember'])) : echo "checked"; endif; ?>><span onclick="$('#reme').click()" style="cursor: default;">&nbsp;&nbsp;จดจำฉันไว้</span>
+         <input type="checkbox" name="remember" id="reme"><span onclick="$('#reme').click()" style="cursor: default;">&nbsp;&nbsp;จดจำฉันไว้</span>
        </div>
        <a href="resetpassword">
          <div class="float-right mt-3 mb-2" style="font-size: 0.9rem;"> ลืมรหัสผ่าน ?</div>
@@ -61,6 +45,15 @@
 
 
  <script>
+   $(document).ready(() => {
+
+     const isremember = localStorage.getItem('remember');
+     if (isremember == 'true') {
+        $('#username').val(localStorage.getItem('username'));
+        $('#password').val(atob(localStorage.getItem('password')));
+        $('#reme').prop('checked', true);
+     }
+   })
    /* Sign-In script */
    $('#signin').click(function(signin) {
      signin.preventDefault();
@@ -95,6 +88,15 @@
                button: false,
                closeOnClickOutside: false,
              });
+             if (remember == 'checked') {
+               window.localStorage.setItem('username', username);
+               window.localStorage.setItem('password', btoa(password));
+               window.localStorage.setItem('remember', true);
+             } else {
+               window.localStorage.removeItem('username');
+               window.localStorage.removeItem('password');
+               window.localStorage.removeItem('remember');
+             }
              setTimeout(function() {
                console.log(data.remember);
                window.location.reload();

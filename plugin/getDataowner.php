@@ -21,6 +21,7 @@ if ($_POST) {
                 $selled = mysqli_fetch_assoc($query_selled);
                 $selled_data_id = $selled['data_id'];
                 $selled_account_id = $selled['ac_id'];
+                $selled_id = $selled['selled_id'];
 
                 $sql_select_selled_data = "SELECT * FROM game_data WHERE data_id = '$selled_data_id'";
                 $query_selled_data = $hyper->connect->query($sql_select_selled_data);
@@ -37,6 +38,16 @@ if ($_POST) {
                 $selled_account = mysqli_fetch_assoc($query_selled_account);
 
                 $expire = strtotime($selled['exp_date']) - strtotime('today midnight');
+
+                $sql_select_claim_count = "SELECT COUNT(*) AS claim_count FROM data_claim WHERE claim_id = '$selled_id'";
+                $query_claim_count = $hyper->connect->query($sql_select_claim_count);
+                $claim_count = (int)mysqli_fetch_assoc($query_claim_count)['claim_count'];
+
+                $sql_select_claim_count = "SELECT COUNT(*) AS claim_count FROM data_claim_first WHERE claim_id = '$selled_id'";
+                $query_claim_count = $hyper->connect->query($sql_select_claim_count);
+                $claim_first_count = (int)mysqli_fetch_assoc($query_claim_count)['claim_count'];
+
+
 
                 array_push($data, [
                     // selled
@@ -55,6 +66,7 @@ if ($_POST) {
                     'card_title' => $cardtype['card_title'],
                     'card_price' => $cardtype['card_price'],
                     //
+                    'claim_count' => $claim_count + $claim_first_count,
                     'expire' => $expire
                 ]);
 
