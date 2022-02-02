@@ -101,7 +101,7 @@ if (isset($_GET)) {
             $noti_row = $notify->num_rows;
             $row = $notify->fetch_assoc();
 
-            $exptime = strtotime($selled['exp_date']) - strtotime('today +3 day');
+            $exptime = strtotime($selled['exp_date']) - strtotime('today -3 day');
 
 
             if (strpos($selled['selled_id'], $word) !== false || strpos($str, $word) !== false || $_GET['search'] === 'ttt' && $exptime > 0) :
@@ -117,6 +117,7 @@ if (isset($_GET)) {
                                                                                         echo $selled_card['card_title'] . " - " . $selled_card['card_price'];
                                                                                     } ?></b> </span><br>
                         <span>วันที่ซื้อสินค้า : <b><?= DateThai1($selled['selled_date']); ?></b></span><br>
+                        <span>วันหมดประกัน : <b><?= DateThai1($selled['exp_date']); ?></b></span><br>
                         <?php
                         if ($row == null) {
                             $datetime = 0;
