@@ -1,4 +1,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<div class="br-icon1 text-center btn btn-danger" onclick="selectAll()">
+    <span>เลือกทั้งหมด</span>
+</div>
 <div class="table-responsive mt-3">
 
     <div id="delAll" class="br-icon1 text-center btn btn-danger" style="display: none;" onclick="delAll()">
@@ -78,6 +81,7 @@
 </style>
 
 <script>
+    const canSelect = [];
     $(document).ready(async () => {
         let isSandbox = window.location.origin == "https://sandbox.dexystore.me";
         let host = window.location.origin == "http://localhost" ? "http://localhost/dexystore" : isSandbox ? "https://sandbox.dexystore.me" : "https://dexystore.me";
@@ -98,10 +102,12 @@
                     let body = $('#body').html();
                     let html = '';
                     for (let i = 0; i < data.length; i++) {
+                        data[i].data_result_password != "N/A" ? data[i].data_result_password = atob(data[i].data_result_password) : data[i].data_result_password = "N/A";
+                        data[i].claim_data_confirm != 0 ? canSelect.push(data[i].id) : '';
                         body += `
                         <tr ${data[i].claim_data_confirm != 0 ? 'style="background-color: #DADDE2;"' : getid && getid == data[i].claim_data_id ? 'style="background-color: #E7B91F"' : ''}>
                             <td>
-                            ${data[i].claim_data_confirm != 0 ? `<input type="checkbox" id="check${data[i].claim_data_id}" name="check${data[i].claim_data_id}" value="${data[i].id}" onclick="checkedL(this)">` : '-'}
+                            ${data[i].claim_data_confirm != 0 ? `<input type="checkbox" id="check${data[i].id}" name="check${data[i].claim_data_id}" value="${data[i].id}" onclick="checkedL(this)">` : '-'}
                             </td>
                             <td>
                                 ${data[i].claim_data_confirm != 0 ? i+1 : '-'}
@@ -404,5 +410,12 @@
             }
 
         });
+    }
+    function selectAll() {
+        total_del = canSelect
+        total_del.forEach(function(value) {
+            $('#check' + value).prop('checked', true);
+        });
+        $('#delAll').show()
     }
 </script>

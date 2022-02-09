@@ -1,4 +1,7 @@
 <?php
+
+use function PHPSTORM_META\type;
+
 include("hyper_api.php");
 $data = [];
 
@@ -17,7 +20,7 @@ if ($_POST) {
                     $username = $hyper->connect->query($select_user)->fetch_assoc();
 
                     $data_result = $hyper->connect->query($select_data)->fetch_assoc();
-                    $data_result['password'] = base64_decode($data_result['password']);
+
 
                     array_push($data, [
                         // claim_data
@@ -27,9 +30,9 @@ if ($_POST) {
                         'claim_data_date' => $hyper->datethai->DateThai1($claim_data['claim_date']),
                         'claim_data_detail' => $claim_data['detail'],
                         // data_result
-                        'data_result_username' => $data_result['username'],
-                        'data_result_password' => $data_result['password'],
-                        'data_result_display' => $data_result['display'],
+                        'data_result_username' => $data_result['username'] ?? "N/A",
+                        'data_result_password' => $data_result['password'] ?? "N/A",
+                        'data_result_display' => $data_result['display'] ?? "N/A",
                         // username
                         'username' => $username['username'],
                     ]);
@@ -54,7 +57,7 @@ if ($_POST) {
                     $username = $hyper->connect->query($select_user)->fetch_assoc();
 
                     $data_result = $hyper->connect->query($select_data)->fetch_assoc();
-                    $data_result['password'] = base64_decode($data_result['password']);
+
                     array_push($data, [
                         // claim_data
                         'id' => $claim_data['id'],
@@ -63,9 +66,9 @@ if ($_POST) {
                         'claim_data_date' => $hyper->datethai->DateThai1($claim_data['claim_date']),
                         'claim_data_detail' => $claim_data['detail'],
                         // data_result
-                        'data_result_username' => $data_result['username'],
-                        'data_result_password' => $data_result['password'],
-                        'data_result_display' => $data_result['display'],
+                        'data_result_username' => $data_result['username'] ?? "N/A",
+                        'data_result_password' => $data_result['password'] ?? "N/A",
+                        'data_result_display' => $data_result['display'] ?? "N/A",
                         // username
                         'username' => $username['username'],
                     ]);
