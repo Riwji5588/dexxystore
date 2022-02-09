@@ -142,7 +142,7 @@
                                                                     <span>ออเดอร์</span>
                                                                 </div>
                                                                 <div class="col-9 col-md-8">
-                                                                    <input type="text" id="id${data[i].id}" value="${data[i].id}" readonly style="background-color: #fff;border-radius: 0px;border: 0px">
+                                                                    <input type="text" id="id${data[i].claim_data_id}" value="${data[i].claim_data_id}" readonly style="background-color: #fff;border-radius: 0px;border: 0px">
                                                                 </div>
                                                             </div>
                                                         </div>
