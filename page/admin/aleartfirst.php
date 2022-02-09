@@ -134,7 +134,7 @@
                                         </div>
                                         <div class="modal-body text-left">
                                             <div class="row">
-                                                    <div class="col-8">
+                                                    <div class="col-7">
                                                         <div class="container justify-content-center">
                                                             <div class="row" style="padding: 5px 2px 0px 2px;">
                                                                 <div class="col-3 col-md-4">
@@ -146,12 +146,12 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-4">
+                                                    <div class="col-5">
                                                 ${data[i].claim_data_confirm == 0 ? `
                                                         <div class="mr-2 mb-1">
                                                             <div class="btn-group" role="group" aria-label="Basic example">
-                                                                <button id="confirmbtn${data.claim_data_id}" type="button" class="btn btn-success btn-sm p-1 px-2" onclick="submit(${data[i].claim_data_id},2)">อนุมัติ</button>
-                                                                <button id="confirmbtnr${data.claim_data_id}" type="button" class="btn btn-danger btn-sm p-1 px-2" data-toggle="modal" data-target="#reject${data[i].claim_data_id}">ปฏิเสธ</button>
+                                                                <button id="confirmbtn${data[i].claim_data_id}" type="submit" class="btn btn-success btn-sm p-1 px-2" onclick="doConfirm(${data[i].claim_data_id})">เข้าสต๊อก</button>
+                                                                <button id="rejectbtn${data[i].claim_data_id}" type="submit" class="btn btn-danger btn-sm p-1 px-2" onclick="doReject(${data[i].claim_data_id})">ตรวจแล้ว</button>
                                                             </div>
                                                         </div>` : ''}
                                                     </div>
