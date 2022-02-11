@@ -21,6 +21,11 @@ if ($_POST) {
 
                     $data_result = $hyper->connect->query($select_data)->fetch_assoc();
 
+                    $select_selled_date = "SELECT selled_date FROM data_selled WHERE selled_id={$claim_data['claim_id']}";
+                    $selled_date = $hyper->connect->query($select_selled_date)->fetch_assoc()['selled_date'];
+
+                    $select_count_claim = "SELECT COUNT(*) AS count_claim FROM data_claim WHERE claim_id={$claim_data['claim_id']} AND confirm!=9";
+                    $count_claim = (int)$hyper->connect->query($select_count_claim)->fetch_assoc()['count_claim'];
 
                     array_push($data, [
                         // claim_data
@@ -29,6 +34,9 @@ if ($_POST) {
                         'claim_data_confirm' => $claim_data['confirm'],
                         'claim_data_date' => $hyper->datethai->DateThai1($claim_data['claim_date']),
                         'claim_data_detail' => $claim_data['detail'],
+                        'count_claim' => $count_claim,
+                        // selled_data
+                        'selled_date' => $hyper->datethai->DateThai1($selled_date),
                         // data_result
                         'data_result_username' => $data_result['username'] ?? "N/A",
                         'data_result_password' => $data_result['password'] ?? "N/A",
@@ -58,13 +66,19 @@ if ($_POST) {
 
                     $data_result = $hyper->connect->query($select_data)->fetch_assoc();
 
+                    $select_selled_date = "SELECT selled_date FROM data_selled WHERE selled_id={$claim_data['claim_id']}";
+                    $selled_date = $hyper->connect->query($select_selled_date)->fetch_assoc()['selled_date'] ?? "N/A";
+
+
                     array_push($data, [
                         // claim_data
                         'id' => $claim_data['id'],
                         'claim_data_id' => $claim_data['claim_id'],
                         'claim_data_confirm' => $claim_data['confirm'],
                         'claim_data_date' => $hyper->datethai->DateThai1($claim_data['claim_date']),
-                        'claim_data_detail' => $claim_data['detail'],
+                        'claim_data_detail' => $claim_data['detail'] ,
+                        // selled_data
+                        'selled_date' => $selled_date == 'N/A' ? $selled_date : $hyper->datethai->DateThai1($selled_date),
                         // data_result
                         'data_result_username' => $data_result['username'] ?? "N/A",
                         'data_result_password' => $data_result['password'] ?? "N/A",
