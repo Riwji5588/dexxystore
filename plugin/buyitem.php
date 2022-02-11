@@ -30,13 +30,12 @@ if (isset($_POST['id'])) {
             $errorMSG = "เงินไม่เพียงพอ กรุณาเติมเงิน";
         } else {
 
-            $updateuser = "UPDATE accounts SET points = '" . $p . "' WHERE ac_id = $uid";
-            $updateuser_query = $hyper->connect->query($updateuser);
-            if ($updateuser_query) {
-
-                if ($ban['buy'] == 1) {
-                    $errorMSG = "กรุณายืนยันตัวตน... โปรดติดต่อร้าน";
-                } else {
+            if ($ban['buy'] == 1) {
+                $errorMSG = "กรุณายืนยันตัวตน... โปรดติดต่อร้าน";
+            } else {
+                $updateuser = "UPDATE accounts SET points = '" . $p . "' WHERE ac_id = $uid";
+                $updateuser_query = $hyper->connect->query($updateuser);
+                if ($updateuser_query) {
                     if ($_POST['type'] == 1) {
                         date_default_timezone_set("Asia/Bangkok");
                         $date = date("Y-m-d H:i:s");
@@ -89,9 +88,9 @@ if (isset($_POST['id'])) {
                             $errorMSG = 'ต่ออายุไม่สำเร็จ!';
                         }
                     }
+                } else {
+                    $errorMSG = 'เกิดข้อผิดพลาด...กรุณาติดต่อแอดมิน';
                 }
-            } else {
-                $errorMSG = 'เกิดข้อผิดพลาด...กรุณาติดต่อแอดมิน';
             }
         }
     } else {
