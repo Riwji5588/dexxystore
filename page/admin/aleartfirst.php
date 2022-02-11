@@ -191,6 +191,14 @@
                                                 </div>
                                                 <div class="row" style="padding: 5px 2px 0px 2px;">
                                                     <div class="col-3 col-md-4">
+                                                        <span>วันที่ซื้อ</span>
+                                                    </div>
+                                                    <div class="col-9 col-md-8">
+                                                        <input type="text" value="${data[i].selled_date}" readonly style="background-color: #fff;border-radius: 0px;border: 0px">
+                                                    </div>
+                                                </div>
+                                                <div class="row" style="padding: 5px 2px 0px 2px;">
+                                                    <div class="col-3 col-md-4">
                                                         <span>สาเหตุในการเคลม</span>
                                                     </div>
                                                     <div class="col-9 col-md-8">
