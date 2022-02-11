@@ -35,7 +35,7 @@ if (isset($_POST['id'])) {
             if ($updateuser_query) {
 
                 if ($ban['buy'] == 1) {
-                    $errorMSG = "คุณถูกแบล็กลิสต์ไว้... โปรดติดต่อร้าน";
+                    $errorMSG = "กรุณายืนยันตัวตน... โปรดติดต่อร้าน";
                 } else {
                     if ($_POST['type'] == 1) {
                         date_default_timezone_set("Asia/Bangkok");
