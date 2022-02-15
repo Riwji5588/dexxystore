@@ -510,6 +510,7 @@
                                     </div>
                                 `;
                             }
+                            i++;
                         })
 
                         $('#imgindicators' + id).html(html);
