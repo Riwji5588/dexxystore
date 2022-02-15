@@ -77,6 +77,7 @@ if ($_POST) {
                     $errorMSG = 'ไม่สารมารถลบรูปภาพได้ (อัตโนมัติ)';
                     break;
                 }
+                array_push($data, array('id' => (int)$id));
                 $i++;
             } while ($i < $row);
             if (empty($errorMSG)) {

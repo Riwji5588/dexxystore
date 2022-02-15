@@ -529,6 +529,22 @@ if (isset($_COOKIE['USER_SID'])) {
   }
 </style>
 
-
+<script>
+  $(document).ready(function() {
+    $.ajax({
+      type: 'POST',
+      url: 'plugin/claim_img.php',
+      dataType: 'json',
+      data: {
+        action: 'autodel'
+      },
+      success: function(json) {
+        if (json.code != 200) {
+          console.log(json)
+        }
+      }
+    })
+  });
+</script>
 
 </html>
