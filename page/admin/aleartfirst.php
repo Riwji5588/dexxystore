@@ -122,7 +122,7 @@
                                 '-'}
                             </td>
                             <td>
-                                <button class="btn btn-sm hyper-btn-notoutline-success" type="button" data-toggle="modal" data-target="#editusermodal${i}"><i class="fal fa-info-circle mr-1"></i> แสดงไอดี</button>
+                                <button class="btn btn-sm hyper-btn-notoutline-success" type="button" data-toggle="modal" data-target="#editusermodal${i}" onclick="loadimg(${data[i].claim_data_id}, ${data[i].id})"><i class="fal fa-info-circle mr-1"></i> แสดงไอดี</button>
                                 ${data[i].claim_data_confirm != 0 ? `<button onclick="DelLog(${data[i].id})" class="btn btn-sm hyper-btn-notoutline-danger my-1 my-sm-0" type="button"><i class="fal fa-trash-alt mr-1"></i> ลบ</button>` : ''}
                             </td>
                         </tr>
@@ -205,6 +205,14 @@
                                                         <p>${data[i].claim_data_detail}</p>
                                                     </div>
                                                 </div>
+                                                <div class="row" style="padding: 5px 2px 0px 2px;">
+                                                    <div class="col-3 col-md-4">
+                                                        <span>รูปภาพที่อัพโหลด</span>
+                                                    </div>
+                                                    <div class="col-9 col-md-8">
+                                                    <button id="showimgbtn${data[i].id}" class="btn btn-sm btn-warning" type="button" data-toggle="modal" data-target="#showimg${data[i].id}" onclick="loadimg(${data[i].claim_data_id}, ${data[i].id})">เปิดรูป</button>
+                                                    </div>
+                                                </div>
                                             </div>
 
                                             <div class="modal-footer p-2 border-0">
@@ -213,7 +221,45 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>`;
+                            </div>
+                            
+                        <!-- img modal -->
+                            <div class="modal fade" id="showimg${data[i].id}" data-backdrop="static">
+                                <div class="modal-dialog modal-dialog-centered modal-lg">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">รูปภาพที่อัพโหลด</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="row">
+                                                <div class="col-12">
+                                                <div id="carouselExampleIndicators${data[i].id}" class="carousel slide" data-ride="carousel">
+                                                    <ol class="carousel-indicators" id="imgindicators${data[i].id}">
+                                                    </ol>
+                                                    <div class="carousel-inner" id="imgcarousel${data[i].id}">
+                                                    </div>
+                                                    <button class="carousel-control-prev" type="button" data-target="#carouselExampleIndicators${data[i].id}" data-slide="prev">
+                                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                                        <span class="sr-only">Previous</span>
+                                                    </button>
+                                                    <button class="carousel-control-next" type="button" data-target="#carouselExampleIndicators${data[i].id}" data-slide="next">
+                                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                                        <span class="sr-only">Next</span>
+                                                    </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-danger" data-dismiss="modal">ปิด</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            `;
                     }
                     $('#body').html(body);
                     $('body').append(html);
@@ -419,11 +465,64 @@
 
         });
     }
+
     function selectAll() {
         total_del = canSelect
         total_del.forEach(function(value) {
             $('#check' + value).prop('checked', true);
         });
         $('#delAll').show()
+    }
+
+    function loadimg(claim_id, id) {
+        $.ajax({
+            type: "POST",
+            url: "plugin/claim_img.php",
+            dataType: "json",
+            data: {
+                action: 'getimg',
+                type: 1,
+                claim_id: claim_id
+            },
+            success: function(data) {
+                if (data.code == "200") {
+                    if (data.data.length > 0) {
+                        let html = '';
+                        let inner = '';
+                        let i = 0;
+                        data.data.forEach((img) => {
+                            if (i == 0) {
+                                html += `
+                                        <li data-target="#carouselExampleIndicators${id}" data-slide-to="${i}" class="active"></li>
+                                    `;
+                                inner += `
+                                        <div class="carousel-item active">
+                                            <img src="${img.image_name}" class="d-block w-100">
+                                        </div>
+                                `;
+                            } else {
+                                html += `
+                                        <li data-target="#carouselExampleIndicators${id}" data-slide-to="${i}"></li>
+                                    `;
+                                inner += `
+                                    <div class="carousel-item">
+                                        <img src="${img.image_name}" class="d-block w-100">
+                                    </div>
+                                `;
+                            }
+                        })
+
+                        $('#imgindicators' + id).html(html);
+                        $('#imgcarousel' + id).html(inner);
+                    } else {
+                        $('#showimgbtn' + id).attr('disabled', true);
+                        document.getElementById('showimgbtn' + id).innerHTML = 'ไม่มีรูปภาพ';
+                    }
+                } else {
+                    // $('#img').html('<div class="text-center"><h5>ไม่มีรูปภาพ</h5></div>');
+                    console.log(data.message);
+                }
+            }
+        });
     }
 </script>
