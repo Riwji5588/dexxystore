@@ -300,6 +300,15 @@ if (isset($_GET)) {
                                                 </table>
                                             </div>
                                             <div class="form-group" align="center">
+                                                <form method="POST" enctype="multipart/form-data">
+                                                    <input type="file" id="files<?= $selled['selled_id']; ?>" name="files[]" multiple="multiple" accept="image/*" onchange="uploadfile(this, <?= $selled['selled_id']; ?>)">
+                                                </form>
+                                            </div>
+                                            <div class="container" id="warpimg<?= $selled['selled_id']; ?>" style="display: none;">
+                                                <span>ไฟล์ที่อัพโหลด</span>
+                                                <ul id="imglist<?= $selled['selled_id']; ?>" style="list-style-type: none;"></ul>
+                                            </div>
+                                            <div class="form-group" align="center">
                                                 <textarea id="detail<?= $selled['selled_id']; ?>" class="form-control" style="width: 88%;min-height: 100px" placeholder="ระบุปัญหาและรายละเอียด" autofocus></textarea>
                                             </div>
                                             <span style="color: green;" align="center"><b>การเคลมสินค้ามีปัญหา ไอดีใหม่จะแสดงแทนที่อันเดิมใน </b><br align="center"><b>" ออเดอร์ที่แจ้งปัญหา "</b></span>

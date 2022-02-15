@@ -126,9 +126,11 @@ $sql_select_selled = "SELECT * FROM data_selled WHERE ac_id = $ac_id ORDER BY se
 </div>
 
 <script>
+  var imgs_id = []
   // on Ready Load history Data
   $(document).ready(function() {
     search($('#search'), '<?= $sql_select_selled ?>');
+
   });
 
   async function dosomething(id) {
@@ -245,6 +247,7 @@ $sql_select_selled = "SELECT * FROM data_selled WHERE ac_id = $ac_id ORDER BY se
       });
   }
 
+
   function copy(input) {
     let id = input.id + '1';
     var copyText = document.getElementById(id);
@@ -264,16 +267,20 @@ $sql_select_selled = "SELECT * FROM data_selled WHERE ac_id = $ac_id ORDER BY se
     var checkdetail = document.getElementById("detail" + id).value;
     // check detail if empty
     detail = checkdetail.substring(0, 2) == " " || checkdetail.substring(0, 1) == " " || checkdetail == "" ? "" : checkdetail;
+    var formData = new FormData();
+    formData.append("id", id);
+    formData.append("detail", detail);
+    formData.append("type", 1);
+    formData.append("img_id", imgs_id.join(','));
     $.ajax({
 
       type: "POST",
       url: "plugin/claim.php",
       dataType: "json",
-      data: {
-        id: id,
-        detail: detail,
-        type: 1
-      },
+      data: formData,
+      cache: false,
+      contentType: false,
+      processData: false,
 
       beforeSend: function() {
         swal("กำลังส่งเคลม กรุณารอสักครู่...", {
@@ -303,6 +310,81 @@ $sql_select_selled = "SELECT * FROM data_selled WHERE ac_id = $ac_id ORDER BY se
 
       }
 
+    });
+  }
+
+  function uploadfile(input, id) {
+    var form_data = new FormData();
+
+    // Read selected files
+    var totalfiles = document.getElementById('files' + id).files.length;
+    for (var index = 0; index < totalfiles; index++) {
+      form_data.append("files[]", document.getElementById('files' + id).files[index]);
+    }
+
+    form_data.append("action", 'addimg');
+    form_data.append("claim_id", id);
+
+    // AJAX request
+    $.ajax({
+      url: 'plugin/claim_img.php',
+      type: 'post',
+      data: form_data,
+      dataType: 'json',
+      contentType: false,
+      processData: false,
+      success: function(response) {
+
+        if (response.code == 200) {
+          $data = response.data;
+          if ($data.length > 0) {
+            $('#warpimg' + id).show();
+            let html = '';
+            $data.forEach((img) => {
+              html += `<li id="img${img.id}">
+                          <button class="btn btn-sm" style="color: red;" onclick="delimg(${id}, ${img.id}, '${img.image_name}')"><i class="fas fa-trash"></i></button>&nbsp;&nbsp;
+                          <a href="${img.url}" target="_blank">${img.image_name}</a>
+                        </li>
+                      `;
+              imgs_id.push(img.id);
+            })
+            $('#imglist' + id).append(html);
+          }
+        } else {
+          console.log(response);
+        }
+
+      }
+    });
+  }
+
+  function delimg(warpid, id, image_name) {
+    // AJAX request
+    $.ajax({
+      type: "POST",
+      url: "plugin/claim_img.php",
+      dataType: "json",
+      data: {
+        action: 'delimg',
+        id: id,
+        image_name: image_name
+      },
+      success: function(response) {
+
+        if (response.code == 200) {
+          $('#img' + id).remove();
+          imgs_id.splice(imgs_id.indexOf(id), 1);
+          if ($('#imglist' + warpid).children().length < 1) {
+            $('#warpimg' + warpid).hide();
+          }
+        } else {
+          console.log(response);
+        }
+
+      },
+      error: function(response) {
+        console.log(response);
+      }
     });
   }
 </script>
