@@ -25,6 +25,7 @@
 *.pem
 
 # test
+/assets/img/claim_img/
 
 # debug
 npm-debug.log*
