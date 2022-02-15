@@ -352,6 +352,12 @@ $sql_select_selled = "SELECT * FROM data_selled WHERE ac_id = $ac_id ORDER BY se
           }
         } else {
           console.log(response);
+          swal(response.message, '', "error", {
+            button: {
+              className: 'hyper-btn-notoutline-danger',
+            },
+            closeOnClickOutside: false,
+          });
         }
 
       }
