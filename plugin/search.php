@@ -191,7 +191,7 @@ if (isset($_GET)) {
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text hyper-bg-dark border-dark">ชื่อผู้ใช้</span>
                                             </div>
-                                            <input id="username<?= $selled['selled_id']; ?>1" type="text" value="<?= $selled_data['username']; ?>" class="form-control form-control-sm hyper-form-control" placeholder="ชื่อผู้ใช้งาน" readonly autocomplete="off">
+                                            <input id="username<?= $selled['selled_id']; ?>1" type="text" value="<?= $selled_data['username']; ?>" class="form-control form-control-sm hyper-form-control" placeholder="ชื่อผู้ใช้งาน" readonly autocomplete="off" style="background-color: #fff;">
                                         </div>
                                         <div class="input-group input-group-sm col-4">
                                             <button style="margin-left: -25px;" id="username<?= $selled['selled_id']; ?>" class="btn btn-dark btn-sm" onclick="copy(this)"><i class='far fa-copy'></i> คัดลอก</button>
@@ -202,7 +202,7 @@ if (isset($_GET)) {
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text hyper-bg-dark border-dark">รหัสผ่าน</span>
                                             </div>
-                                            <input id="password<?= $selled['selled_id']; ?>1" type="text" value="<?= base64_decode($selled_data['password']); ?>" class="form-control form-control-sm hyper-form-control" placeholder="รหัสผ่าน" readonly autocomplete="off">
+                                            <input id="password<?= $selled['selled_id']; ?>1" type="text" value="<?= base64_decode($selled_data['password']); ?>" class="form-control form-control-sm hyper-form-control" placeholder="รหัสผ่าน" readonly autocomplete="off" style="background-color: #fff;">
                                         </div>
                                         <div class="input-group input-group-sm col-4">
                                             <button style="margin-left: -25px;" id="password<?= $selled['selled_id']; ?>" class="btn btn-dark btn-sm" onclick="copy(this)"><i class='far fa-copy'></i> คัดลอก</button>
@@ -213,7 +213,7 @@ if (isset($_GET)) {
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text hyper-bg-dark border-dark">จอ</span>
                                             </div>
-                                            <input id="display<?= $selled['selled_id']; ?>1" type="text" value="<?= $selled_data['display']; ?>" class="form-control form-control-sm hyper-form-control" placeholder="จอ" readonly autocomplete="off">
+                                            <input id="display<?= $selled['selled_id']; ?>1" type="text" value="<?= $selled_data['display']; ?>" class="form-control form-control-sm hyper-form-control" placeholder="จอ" readonly autocomplete="off" style="background-color: #fff;">
                                         </div>
                                     </div>
                                 <?php endif; ?>
@@ -226,9 +226,9 @@ if (isset($_GET)) {
                                         $expire = strtotime($selled['exp_date']) - strtotime('today midnight');
                                         if ($expire > 0) :
                                         ?>
-                                            <input id="expire<?= $selled['selled_id']; ?>1" type="text" value="<?= $hyper->datethai->DateThai1($selled['exp_date']) ?>" class="form-control form-control-sm hyper-form-control" readonly placeholder="วันหมดประกัน" required autocomplete="off">
+                                            <input id="expire<?= $selled['selled_id']; ?>1" type="text" value="<?= $hyper->datethai->DateThai1($selled['exp_date']) ?>" class="form-control form-control-sm hyper-form-control" readonly placeholder="วันหมดประกัน" required autocomplete="off" style="background-color: #fff;">
                                         <?php else : ?>
-                                            <input id="expire<?= $selled['selled_id']; ?>1" type="text" value="หมดอายุแล้ว" class="form-control form-control-sm hyper-form-control" placeholder="วันหมดประกัน" readonly autocomplete="off">
+                                            <input id="expire<?= $selled['selled_id']; ?>1" type="text" value="หมดอายุแล้ว" class="form-control form-control-sm hyper-form-control" placeholder="วันหมดประกัน" readonly autocomplete="off" style="background-color: #fff;">
                                         <?php endif; ?>
                                     </div>
                                     <div class="col-12 mt-3">
