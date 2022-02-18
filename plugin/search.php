@@ -367,21 +367,3 @@ if (isset($_GET)) {
 }
 
 ?>
-
-
-<!-- TEMPLATE -->
-<!-- <div class='card col-10 col-md-3'>
-    <div class='card-body'>
-      <span>Order : <b>111</b> </span>
-      <span>สินค้า : <b>111</b> </span><br>
-      <span>วันที่ซื้อสินค้า : <b>111</b> </span>
-      <p> สถานะ : ยังไม่หมดอายุ</p>
-      <button class='btn btn-success btn-sm' type='button' data-toggle='modal' data-target='#datamodal<?= $selled['selled_id']; ?>'>แสดงไอดี</button>
-      <button class='btn btn-warning btn-sm' type='button' data-toggle='modal' data-target='#datamodal1<?= $selled['selled_id']; ?>' style='color: ;'><i class='fas fa-exclamation-triangle'></i> แจ้งปัญหา</button>
-    </div>
-  </div>
-</div> -->
-
-<script>
-    $('data').a
-</script>
