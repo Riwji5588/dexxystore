@@ -139,19 +139,27 @@ if ($total_game_row <= 0) {
                       <div class="modal-body text-center">
 
                         <form method="POST" enctype="multipart/form-data">
-
-                          <div class="input-group input-group-sm mb-3 mt-4">
-                            <div class="input-group-prepend">
-                              <span class="input-group-text hyper-bg-dark border-dark">อีเมล์</span>
+                          <div class="row mb-3">
+                            <div class="input-group input-group-sm col-8">
+                              <div class="input-group-prepend">
+                                <span class="input-group-text hyper-bg-dark border-dark">อีเมล์</span>
+                              </div>
+                              <input id="username<?= $data['data_id']; ?>" type="text" value="<?= $data['username']; ?>" class="form-control form-control-sm hyper-form-control" placeholder="ชื่อผู้ใช้งาน" required autocomplete="off">
                             </div>
-                            <input id="username<?= $data['data_id']; ?>" type="text" value="<?= $data['username']; ?>" class="form-control form-control-sm hyper-form-control" placeholder="ชื่อผู้ใช้งาน" required autocomplete="off">
+                            <div class="input-group input-group-sm col-4">
+                              <button style="margin-left: -25px;" id="username<?= $data['data_id']; ?>1" value="username<?= $data['data_id']; ?>" class="btn btn-dark btn-sm" onclick="copy(this)" type="button"><i class='far fa-copy'></i> คัดลอก</button>
+                            </div>
                           </div>
-
-                          <div class="input-group input-group-sm mb-3">
-                            <div class="input-group-prepend">
-                              <span class="input-group-text hyper-bg-dark border-dark">รหัสผ่าน</span>
+                          <div class="row mb-3">
+                            <div class="input-group input-group-sm col-8">
+                              <div class="input-group-prepend">
+                                <span class="input-group-text hyper-bg-dark border-dark">รหัสผ่าน</span>
+                              </div>
+                              <input id="password<?= $data['data_id']; ?>" type="text" value="<?= base64_decode($data['password']); ?>" class="form-control form-control-sm hyper-form-control" placeholder="รหัสผ่าน" required autocomplete="off">
                             </div>
-                            <input id="password<?= $data['data_id']; ?>" type="text" value="<?= base64_decode($data['password']); ?>" class="form-control form-control-sm hyper-form-control" placeholder="รหัสผ่าน" required autocomplete="off">
+                            <div class="input-group input-group-sm col-4">
+                              <button style="margin-left: -25px;" id="password<?= $data['data_id']; ?>1" value="password<?= $data['data_id']; ?>" class="btn btn-dark btn-sm" onclick="copy(this)" type="button"><i class='far fa-copy'></i> คัดลอก</button>
+                            </div>
                           </div>
                           <div class="input-group input-group-sm mb-3">
                             <div class="input-group-prepend">
@@ -446,6 +454,20 @@ if ($total_game_row <= 0) {
           });
 
       });
+    }
+
+    function copy(input) {
+      let id = input.value;
+      var copyText = document.getElementById(id);
+      copyText.select();
+      copyText.setSelectionRange(0, 99999)
+      document.execCommand("copy");
+      input.innerHTML = "<i class='far fa-copy'></i> คัดลอกแล้ว";
+      input.className = "btn btn-success btn-sm";
+      setTimeout(function() {
+        input.innerHTML = "<i class='far fa-copy'></i> คัดลอก";
+        input.className = "btn btn-dark btn-sm";
+      }, 2000);
     }
   </script>
   <!-- End Game Data -->
