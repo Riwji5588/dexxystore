@@ -21,49 +21,6 @@ $sql_select_selled = "SELECT * FROM data_selled WHERE ac_id = $ac_id ORDER BY se
 <!-- DATA can be change in plugin/search.php! -->
 <div id="result" class="row justify-content-center" style="width: 100%;"></div>
 
-<!-- add img modal -->
-<div class="modal fade" id="addimg" data-backdrop="static">
-  <div class="modal-dialog modal-dialog-centered modal-xl">
-    <div class="modal-content">
-      <div class="modal-body">
-        <div class="row">
-          <div class="col-12">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <br>
-          <div class="col-12">
-            <div id="inaddimg" class="carousel slide" data-ride="carousel" style="padding: 10px;">
-              <ol class="carousel-indicators">
-                <li data-target="#inaddimg" data-slide-to="0" class="active"></li>
-              </ol>
-              <div class="carousel-inner">
-                <div class="carousel-item active" align="center">
-                  <img src="assets/img/img.gif" class="d-block w-100" alt="...">
-                </div>
-              </div>
-              <button class="carousel-control-prev" type="button" data-target="#inaddimg" data-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="sr-only">Previous</span>
-              </button>
-              <button class="carousel-control-next" type="button" data-target="#inaddimg" data-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="sr-only">Next</span>
-              </button>
-            </div>
-          </div>
-        </div>
-
-      </div>
-      <div class="modal-footer">
-        <a class="btn btn-primary" href="https://img.in.th" target="_blank">ไปที่เว็บ</a>
-        <button type="button" class="btn btn-danger" data-dismiss="modal">ปิด</button>
-      </div>
-    </div>
-  </div>
-</div>
-
 <!-- sub modal -->
 <div class="modal fade" id="sub" data-backdrop="static">
   <div class="modal-dialog modal-dialog-centered">

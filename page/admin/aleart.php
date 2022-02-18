@@ -123,7 +123,7 @@
                                     '-'}
                                 </td>
                                 <td>
-                                    <button class="btn btn-sm hyper-btn-notoutline-success" type="button" data-toggle="modal" data-target="#editusermodal${i}" onclick="loadimg(${data[i].claim_data_id}, ${data[i].id})"><i class="fal fa-info-circle mr-1"></i> แสดงไอดี</button>
+                                    <button class="btn btn-sm hyper-btn-notoutline-success" type="button" data-toggle="modal" data-target="#editusermodal${i}" onclick="loadimg(${data[i].id})"><i class="fal fa-info-circle mr-1"></i> แสดงไอดี</button>
                                     ${data[i].claim_data_confirm != 0 ? `<button onclick="DelLog(${data[i].id})" class="btn btn-sm hyper-btn-notoutline-danger my-1 my-sm-0" type="button"><i class="fal fa-trash-alt mr-1"></i> ลบ</button>` : ''}
                                 </td>
                             </tr>
@@ -515,7 +515,8 @@
         $('#delAll').show()
     }
 
-    function loadimg(claim_id, id) {
+    function loadimg(id) {
+        console.log(id);
         $.ajax({
             type: "POST",
             url: "plugin/claim_img.php",
@@ -523,10 +524,11 @@
             data: {
                 action: 'getimg',
                 type: 2,
-                claim_id: claim_id
+                claim_id: id
             },
             success: function(data) {
                 if (data.code == "200") {
+                    console.log(data.data);
                     if (data.data.length > 0) {
                         let html = '';
                         let inner = '';

@@ -287,29 +287,20 @@ if (isset($_GET)) {
                                                 <li>ไอดีหมดอายุ ขึ้นให้จ่าย / Update Payment</li>
                                                 <li>จอซ้อน / หน้าจอเต็ม</li>
                                             </ol>
-                                            <div class="form-group align-items-center">
-                                                <table style="width: 100%;">
-                                                    <tr align="center">
-                                                        <td>
-                                                            <span>วิธีแนบรูปภาพสำหรับช่องเหตุผล</span>
-                                                        </td>
-                                                        <td>
-                                                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#addimg">คลิก</button>
-                                                        </td>
-                                                    </tr>
-                                                </table>
-                                            </div>
-                                            <div class="form-group" align="center">
-                                                <form method="POST" enctype="multipart/form-data">
-                                                    <input type="file" id="files<?= $selled['selled_id']; ?>" name="files[]" multiple="multiple" accept="image/*" onchange="uploadfile(this, <?= $selled['selled_id']; ?>)">
-                                                </form>
-                                            </div>
-                                            <div class="container" id="warpimg<?= $selled['selled_id']; ?>" style="display: none;">
-                                                <span>ไฟล์ที่อัพโหลด</span>
-                                                <ul id="imglist<?= $selled['selled_id']; ?>" style="list-style-type: none;"></ul>
-                                            </div>
-                                            <div class="form-group" align="center">
-                                                <textarea id="detail<?= $selled['selled_id']; ?>" class="form-control" style="width: 88%;min-height: 100px" placeholder="ระบุปัญหาและรายละเอียด" autofocus></textarea>
+                                            <div class="container mb-3" >
+                                                <fieldset align="center" style="border-radius: 3px;">
+                                                    <h5>อัพโหลดรูปภาพ</h5>
+                                                    <form method="POST" enctype="multipart/form-data">
+                                                        <input type="file" id="files<?= $selled['selled_id']; ?>" name="files[]" multiple="multiple" accept="image/*" onchange="uploadfile(this, <?= $selled['selled_id']; ?>)">
+                                                    </form>
+                                                    <div class="mt-3" id="warpimg<?= $selled['selled_id']; ?>" style="display: none;" align="start">
+                                                        <span>ไฟล์ที่อัพโหลด</span>
+                                                        <ul id="imglist<?= $selled['selled_id']; ?>" style="list-style-type: none;"></ul>
+                                                    </div>
+                                                    <div class="form-group mt-4" align="center">
+                                                        <textarea id="detail<?= $selled['selled_id']; ?>" class="form-control" style="width: 88%;min-height: 100px" placeholder="ระบุปัญหาและรายละเอียด" autofocus></textarea>
+                                                    </div>
+                                                </fieldset>
                                             </div>
                                             <span style="color: green;" align="center"><b>การเคลมสินค้ามีปัญหา ไอดีใหม่จะแสดงแทนที่อันเดิมใน </b><br align="center"><b>" ออเดอร์ที่แจ้งปัญหา "</b></span>
                                             <span style="color: red;">

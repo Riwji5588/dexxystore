@@ -87,25 +87,24 @@ if (isset($_POST['id'])) {
                                 $row = $hyper->connect->query($data_game);
                                 $game = $row->fetch_array();
                                 if (mysqli_num_rows($row) == 1) {
-
-                                    if (isset($_POST['img_id']) && !empty($_POST['img_id'])) {
-                                        $img_id = $_POST['img_id'];
-                                        $img_list = explode(',', $img_id);
-
-                                        foreach ($img_list as $key => $value) {
-                                            $sql = "UPDATE claim_image SET type=1 WHERE id = $value";
-                                            $Update_type = $hyper->connect->query($sql);
-                                        }
-                                    } else {
-                                        $Update_type = true;
-                                    }
-
                                     $claim_date = date("Y-m-d H:i:s");
                                     $sendClaim_first = "INSERT INTO data_claim_first(claim_id, data_id, ac_id, detail, claim_date, confirm) VALUES ('{$selled['selled_id']}', '{$selled['data_id']}', '{$selled['ac_id']}', '$detail', '$claim_date', 0)";
                                     if ($hyper->connect->query($sendClaim_first)) {
                                         $data_selled_update = "UPDATE data_selled SET claim = 1, data_id = {$game['data_id']} WHERE selled_id = {$selled['selled_id']}";
                                         $data_game_update = "UPDATE game_data SET selled = 1 WHERE data_id = {$game['data_id']}";
+                                        $select_claim_id = "SELECT id FROM data_claim_first ORDER BY id DESC LIMIT 1";
+                                        $claim_id = $hyper->connect->query($select_claim_id)->fetch_assoc()['id'];
+                                        if (isset($_POST['img_id']) && !empty($_POST['img_id'])) {
+                                            $img_id = $_POST['img_id'];
+                                            $img_list = explode(',', $img_id);
 
+                                            foreach ($img_list as $key => $value) {
+                                                $sql = "UPDATE claim_image SET type=1, claim_id=$claim_id WHERE id = $value";
+                                                $Update_type = $hyper->connect->query($sql);
+                                            }
+                                        } else {
+                                            $Update_type = true;
+                                        }
                                         if ($hyper->connect->query($data_selled_update) && $hyper->connect->query($data_game_update) && $Update_type) {
                                             $select_admin = "SELECT * FROM accounts WHERE line_token != ''";
                                             $admin_query = $hyper->connect->query($select_admin);
@@ -149,23 +148,23 @@ if (isset($_POST['id'])) {
                             } else {
                                 date_default_timezone_set("Asia/Bangkok");
                                 $claim_date = date("Y-m-d H:i:s");
-
-                                if (isset($_POST['img_id']) && !empty($_POST['img_id'])) {
-                                    $img_id = $_POST['img_id'];
-                                    $img_list = explode(',', $img_id);
-
-                                    for ($i = 0; $i < count($img_list); $i++) {
-                                        $sql = "UPDATE claim_image SET type=2 WHERE id = '$img_list[$i]'";
-                                        $Update_type = $hyper->connect->query($sql);
-                                    }
-                                } else {
-                                    $Update_type = true;
-                                }
-
                                 $sendClaim = "INSERT INTO data_claim(claim_id, data_id, ac_id, detail, claim_date) VALUES ('{$selled['selled_id']}', '{$selled['data_id']}', '{$selled['ac_id']}', '$detail', '$claim_date')";
-                                if ($hyper->connect->query($sendClaim) && $Update_type) {
+                                if ($hyper->connect->query($sendClaim)) {
                                     $data_selled_update = "UPDATE data_selled SET claim = 2 WHERE selled_id = {$selled['selled_id']}"; // set claim 2 = send claim and waiting for confirm
-                                    if ($hyper->connect->query($data_selled_update)) {
+                                    $select_claim_id = "SELECT id FROM data_claim ORDER BY id DESC LIMIT 1";
+                                    $claim_id = $hyper->connect->query($select_claim_id)->fetch_assoc()['id'];
+                                    if (isset($_POST['img_id']) && !empty($_POST['img_id'])) {
+                                        $img_id = $_POST['img_id'];
+                                        $img_list = explode(',', $img_id);
+
+                                        foreach ($img_list as $key => $value) {
+                                            $sql = "UPDATE claim_image SET type=2, claim_id=$claim_id WHERE id = $value";
+                                            $Update_type = $hyper->connect->query($sql);
+                                        }
+                                    } else {
+                                        $Update_type = true;
+                                    }
+                                    if ($hyper->connect->query($data_selled_update) && $Update_type) {
                                         $select_admin = "SELECT * FROM accounts WHERE line_token != ''";
                                         $admin_query = $hyper->connect->query($select_admin);
                                         $admin_num = mysqli_num_rows($admin_query);
@@ -211,22 +210,23 @@ if (isset($_POST['id'])) {
                             date_default_timezone_set("Asia/Bangkok");
                             $claim_date = date("Y-m-d H:i:s");
 
-                            if (isset($_POST['img_id']) && !empty($_POST['img_id'])) {
-                                $img_id = $_POST['img_id'];
-                                $img_list = explode(',', $img_id);
-
-                                for ($i = 0; $i < count($img_list); $i++) {
-                                    $sql = "UPDATE claim_image SET type=2 WHERE id = '$img_list[$i]'";
-                                    $Update_type = $hyper->connect->query($sql);
-                                }
-                            } else {
-                                $Update_type = true;
-                            }
-
                             $sendClaim = "INSERT INTO data_claim(claim_id, data_id, ac_id, detail, claim_date) VALUES ('{$selled['selled_id']}', '{$selled['data_id']}', '{$selled['ac_id']}', '$detail', '$claim_date')";
-                            if ($hyper->connect->query($sendClaim) && $Update_type) {
+                            if ($hyper->connect->query($sendClaim)) {
                                 $data_selled_update = "UPDATE data_selled SET claim = 2 WHERE selled_id = {$selled['selled_id']}"; // set claim 2 = send claim and waiting for confirm
-                                if ($hyper->connect->query($data_selled_update)) {
+                                $select_claim_id = "SELECT id FROM data_claim ORDER BY id DESC LIMIT 1";
+                                $claim_id = $hyper->connect->query($select_claim_id)->fetch_assoc()['id'];
+                                if (isset($_POST['img_id']) && !empty($_POST['img_id'])) {
+                                    $img_id = $_POST['img_id'];
+                                    $img_list = explode(',', $img_id);
+
+                                    foreach ($img_list as $key => $value) {
+                                        $sql = "UPDATE claim_image SET type=2, claim_id=$claim_id WHERE id = $value";
+                                        $Update_type = $hyper->connect->query($sql);
+                                    }
+                                } else {
+                                    $Update_type = true;
+                                }
+                                if ($hyper->connect->query($data_selled_update) && $Update_type) {
                                     $select_admin = "SELECT * FROM accounts WHERE line_token != ''";
                                     $admin_query = $hyper->connect->query($select_admin);
                                     $admin_num = mysqli_num_rows($admin_query);
