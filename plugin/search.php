@@ -184,54 +184,54 @@ if (isset($_GET)) {
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
-                            <div class="modal-body text-left">
+                            <div class="modal-body">
                                 <?php if ($expire > 0) : ?>
-                                    <div class="row" style="padding: 5px 2px 0px 2px;">
-                                        <div class="col-3 pr-0">
-                                            <span>ชื่อผู้ใช้
+                                    <div class="row mb-3">
+                                        <div class="input-group input-group-sm col-8" >
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text hyper-bg-dark border-dark">ชื่อผู้ใช้</span>
+                                            </div>
+                                            <input id="username<?= $selled['selled_id']; ?>1" type="text" value="<?= $selled_data['username']; ?>" class="form-control form-control-sm hyper-form-control" placeholder="ชื่อผู้ใช้งาน" readonly autocomplete="off">
                                         </div>
-                                        <div class="col-9 p-0">
-                                            <input type="text" class="hyper-form-control" id="username<?= $selled['selled_id']; ?>1" value="<?= $selled_data['username']; ?>" readonly style="color: #2E4C6D ; background-color: white;border-radius: 0px;border: 0px">
+                                        <div class="input-group input-group-sm col-4">
                                             <button style="margin-left: -25px;" id="username<?= $selled['selled_id']; ?>" class="btn btn-dark btn-sm" onclick="copy(this)"><i class='far fa-copy'></i> คัดลอก</button>
                                         </div>
                                     </div>
-                                    <div class="row" style="padding: 5px 2px 0px 2px;">
-                                        <div class="col-3 pr-0">
-                                            <span>รหัสผ่าน</span>
+                                    <div class="row mb-3">
+                                        <div class="input-group input-group-sm col-8">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text hyper-bg-dark border-dark">รหัสผ่าน</span>
+                                            </div>
+                                            <input id="password<?= $selled['selled_id']; ?>1" type="text" value="<?= base64_decode($selled_data['password']); ?>" class="form-control form-control-sm hyper-form-control" placeholder="รหัสผ่าน" readonly autocomplete="off">
                                         </div>
-                                        <div class="col-9 p-0">
-                                            <input type="text" class="hyper-form-control" id="password<?= $selled['selled_id']; ?>1" value="<?= base64_decode($selled_data['password']); ?>" readonly style="color:#2E4C6D ; background-color: white;border-radius: 0px;border: 0px">
+                                        <div class="input-group input-group-sm col-4">
                                             <button style="margin-left: -25px;" id="password<?= $selled['selled_id']; ?>" class="btn btn-dark btn-sm" onclick="copy(this)"><i class='far fa-copy'></i> คัดลอก</button>
                                         </div>
                                     </div>
-                                    <div class="row" style="padding: 5px 2px 0px 2px;">
-                                        <div class="col-3 pr-0">
-                                            <span>จอ</span>
-                                        </div>
-                                        <div class="col-9 p-0">
-                                            <input type="text" class="hyper-form-control" value="<?= $selled_data['display']; ?>" readonly style="color:#2E4C6D ; background-color: white;border-radius: 0px;border: 0px">
+                                    <div class="row mb-3">
+                                        <div class="input-group input-group-sm col-8">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text hyper-bg-dark border-dark">จอ</span>
+                                            </div>
+                                            <input id="display<?= $selled['selled_id']; ?>1" type="text" value="<?= $selled_data['display']; ?>" class="form-control form-control-sm hyper-form-control" placeholder="จอ" readonly autocomplete="off">
                                         </div>
                                     </div>
                                 <?php endif; ?>
-                                <div class="row" style="padding: 5px 2px 0px 0px;">
-                                    <div class="col-3 pr-0">
-                                        <span>วันหมดประกัน </span>
-                                    </div>
-                                    <div class="col-9 p-0">
+                                <div class="row mb-3">
+                                    <div class="input-group input-group-sm col-8">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text hyper-bg-dark border-dark">วันหมดประกัน</span>
+                                        </div>
                                         <?php
                                         $expire = strtotime($selled['exp_date']) - strtotime('today midnight');
                                         if ($expire > 0) :
                                         ?>
-                                            <p style="color: #2E4C6D"><?= $hyper->datethai->DateThai1($selled['exp_date']) ?></p>
-                                        <?php
-                                        else :
-                                        ?>
-                                            <p style="color: #ff0022"><u>หมดอายุแล้ว</u></p>
-                                        <?php
-                                        endif;
-                                        ?>
+                                            <input id="expire<?= $selled['selled_id']; ?>1" type="text" value="<?= $hyper->datethai->DateThai1($selled['exp_date']) ?>" class="form-control form-control-sm hyper-form-control" readonly placeholder="วันหมดประกัน" required autocomplete="off">
+                                        <?php else : ?>
+                                            <input id="expire<?= $selled['selled_id']; ?>1" type="text" value="หมดอายุแล้ว" class="form-control form-control-sm hyper-form-control" placeholder="วันหมดประกัน" readonly autocomplete="off">
+                                        <?php endif; ?>
                                     </div>
-                                    <div class="col-12">
+                                    <div class="col-12 mt-3">
                                         <a class="btn btn-success btn-sm w-100 text-light" onclick="renew(<?= $selled['selled_id']; ?>)" style="color: #1a00db;">ต่อวันประกัน +30 วัน คลิกที่นี่!</a>
                                     </div>
                                 </div>
@@ -287,7 +287,7 @@ if (isset($_GET)) {
                                                 <li>ไอดีหมดอายุ ขึ้นให้จ่าย / Update Payment</li>
                                                 <li>จอซ้อน / หน้าจอเต็ม</li>
                                             </ol>
-                                            <div class="container mb-3" >
+                                            <div class="container mb-3">
                                                 <fieldset align="center" style="border-radius: 3px;">
                                                     <h5>อัพโหลดรูปภาพ</h5>
                                                     <form method="POST" enctype="multipart/form-data">
