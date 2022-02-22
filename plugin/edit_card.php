@@ -21,11 +21,12 @@ if (isset($_POST['cid'])) {
             $cardtitle = $_POST['title'];
             $price = $_POST['price'];
             $detail = $_POST['detail'];
+            $isactive = $_POST['isactive'];
 
             /* image empty */
             if (empty($_FILES["img"]) || $_FILES["img"]["error"] != 0) {
 
-                $update_game_sql = "UPDATE game_card SET card_title = '" . $cardtitle . "', card_price = '" . $price . "', card_detail = '" . $detail . "' WHERE card_id = $cid";
+                $update_game_sql = "UPDATE game_card SET card_title = '" . $cardtitle . "', card_price = '" . $price . "', card_detail = '" . $detail . "', isactive = '" . $isactive . "'  WHERE card_id = $cid";
                 $query_game_update = $hyper->connect->query($update_game_sql);
                 if (!$query_game_update) {
                     $errorMSG = "อัพเดทการ์ดแสดงสินค้าไม่สำเร็จ";

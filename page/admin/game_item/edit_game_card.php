@@ -223,6 +223,15 @@
                           <textarea id="detail<?= $card['card_id'] ?>" class="form-control form-control-sm hyper-form-control" style="height: 100px;min-height: 100px;max-height: 100px;"><?= $card['card_detail'] ?></textarea>
                         </div>
 
+                        <div class="input-group input-group-sm mb-3" align="start">
+                          <div class="custom-control custom-switch custom-switch-md w-100">
+                            <input type="checkbox" class="custom-control-input" id="customSwitch1" <?php if ($card['isactive'] == '1') {
+                                                                                                      echo "checked";
+                                                                                                    } ?> onchange="checkeds()">
+                            <label class="custom-control-label pt-1" for="customSwitch1" style="position: absolute;">ระบบเคลมครั้งแรกอัตโนมัติ</label>
+                          </div>
+                        </div>
+
                         <input type="hidden" id="gameid<?= $card['card_id'] ?>" name="gameid<?= $card['card_id'] ?>" value="<?= $card['game_id']; ?>" />
                         <button type="submit" id="updatedata<?= $card['card_id'] ?>" class="d-none"></button>
 
@@ -384,11 +393,13 @@
                     var name = $('#title' + id).val();
                     var price = $('#price' + id).val();
                     var detail = $('#detail' + id).val();
+                    var isactive = $('#customSwitch1').is(':checked') ? '1' : '0';
                     updatedata.append('cid', cid);
                     updatedata.append('img', imagefile);
                     updatedata.append('title', name);
                     updatedata.append('price', price);
                     updatedata.append('detail', detail);
+                    updatedata.append('isactive', isactive);
 
                     $.ajax({
 
@@ -562,11 +573,40 @@
                 }
               });
           }
+
+          function checkeds() {
+            if ($('#customSwitch1').is(':checked')) {
+              $('#timerange').show();
+            } else {
+              $('#timerange').hide();
+            }
+          }
         </script>
 
       <?php } ?>
       <style>
         body {
           background-color: #131315;
+        }
+
+        .custom-switch.custom-switch-md .custom-control-label {
+          padding-left: 2rem;
+          padding-bottom: 1.5rem;
+        }
+
+        .custom-switch.custom-switch-md .custom-control-label::before {
+          height: 1.5rem;
+          width: calc(2rem + 0.75rem);
+          border-radius: 3rem;
+        }
+
+        .custom-switch.custom-switch-md .custom-control-label::after {
+          width: calc(1.5rem - 4px);
+          height: calc(1.5rem - 4px);
+          border-radius: calc(2rem - (1.5rem / 2));
+        }
+
+        .custom-switch.custom-switch-md .custom-control-input:checked~.custom-control-label::after {
+          transform: translateX(calc(1.5rem - 0.25rem));
         }
       </style>
