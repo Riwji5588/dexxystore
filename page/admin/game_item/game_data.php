@@ -93,10 +93,20 @@ if ($total_game_row <= 0) {
   </div>
   <!-- End Add Game Data Modal -->
 
+  <div class="br-icon1 text-center btn btn-danger" onclick="selectAll()">
+    <span>เลือกทั้งหมด</span>
+  </div>
+
   <div class="table-responsive mt-3">
+
+    <div id="delAll" class="br-icon1 text-center btn btn-danger" style="display: none;" onclick="delAll()">
+      <span>ลบที่เลือก</span>
+    </div>
+
     <table id="myTable" class="table table-hover text-center w-100">
       <thead class="hyper-bg-dark">
         <tr>
+          <th scope="col">เลือก</th>
           <th scope="col" style="width:120px;">เลขที่ข้อมูล</th>
           <th scope="col">บัญชีผู้ใช้</th>
           <th scope="col">ที่อยู่การ์ด</th>
@@ -107,6 +117,7 @@ if ($total_game_row <= 0) {
 
         <?php
         $loaddata = 0;
+        $canselcet = [];
         $sql_select_data = "SELECT * FROM game_data WHERE game_id = '$id' AND selled = 0";
         $query_data = $hyper->connect->query($sql_select_data);
         $total_data_row = mysqli_num_rows($query_data);
@@ -115,7 +126,11 @@ if ($total_game_row <= 0) {
           $data = mysqli_fetch_array($query_data);
           do {
         ?>
+            <?php
+            array_push($canselcet, $data['data_id']);
+            ?>
             <tr>
+              <td><input type="checkbox" id="check<?= $data['data_id']; ?>" name="check${data[i].claim_data_id}" value="<?= $data['data_id']; ?>" onclick="checkedL(this)"></td>
               <td><?= $data['data_id']; ?></td>
               <td><?= $data['username']; ?></td>
               <?php
@@ -237,6 +252,12 @@ if ($total_game_row <= 0) {
       </tbody>
     </table>
   </div>
+
+  <input type="hidden" id="del" name="del" value="">
+
+  <?php
+  $tostr = join(",", $canselcet);
+  ?>
 
   <script>
     $(document).ready(async () => {
@@ -468,6 +489,107 @@ if ($total_game_row <= 0) {
         input.innerHTML = "<i class='far fa-copy'></i> คัดลอก";
         input.className = "btn btn-dark btn-sm";
       }, 2000);
+    }
+
+    var total_del = [];
+
+    function checkedL(data) {
+      var value = data.value;
+      var id = data.id
+      var check = $('#' + id).is(':checked');
+      if (check) {
+        total_del.push(value);
+        $('#delAll').show()
+        document.getElementById('delAll').style.animation = "fadeIn 300ms";
+
+      } else {
+        index = total_del.indexOf(value);
+        if (index > -1) {
+          total_del.splice(index, 1);
+        }
+
+        if (total_del.length == 0) {
+          document.getElementById('delAll').style.animation = "fadeOut 1s";
+          $('#delAll').hide();
+        }
+      }
+      // console.log(total_del);
+    }
+
+    function delAll() {
+      document.getElementById('del').value = total_del.join(',');
+      // console.log($('#del').val());
+      let title = total_del.length > 1 ? 'คุณต้องการลบ ' + total_del.length + ' ข้อมูลนี้หรือไม่?' : 'คุณต้องการลบข้อมูลนี้หรือไม่?'
+      DelLog($('#del').val(), title);
+    }
+
+    function DelLog(id, title = 'คุณต้องการลบข้อมูลนี้หรือไม่?') {
+      swal({
+          title: title,
+          text: "ถ้าลบแล้วจำไม่สามารถกู้กลับมาได้",
+          icon: "warning",
+          buttons: {
+            confirm: {
+              text: 'ลบข้อมูล',
+              className: 'hyper-btn-notoutline-danger'
+            },
+            cancel: 'ยกเลิก'
+          },
+          closeOnClickOutside: false,
+        })
+        .then((willDelete) => {
+          if (willDelete) {
+            $.ajax({
+
+              type: "POST",
+              url: "plugin/del_log.php",
+              dataType: "json",
+              data: {
+                id: id,
+                table: "game_data"
+              },
+
+              beforeSend: function() {
+                swal("กำลังลบข้อมูล กรุณารอสักครู่...", {
+                  button: false,
+                  closeOnClickOutside: false,
+                  timer: 500,
+                });
+
+              },
+
+              success: function(data) {
+                setTimeout(() => {
+                  if (data.code == "200") {
+                    swal("ลบข้อมูล สำเร็จ!", "ระบบกำลังพาท่านไป...", "success", {
+                      button: false,
+                      closeOnClickOutside: false,
+                    });
+                    setTimeout(function() {
+                      window.location.reload();
+                    }, 2000);
+                  } else {
+                    swal(data.msg, "", "error", {
+                      button: {
+                        className: 'hyper-btn-notoutline-danger',
+                      },
+                      closeOnClickOutside: false,
+                    });
+                  }
+                }, 600)
+              }
+
+            });
+          }
+        });
+    }
+
+    function selectAll() {
+      total_del = '<?= $tostr ?>'.split(',');
+      total_del.forEach(function(value) {
+        $('#check' + value).prop('checked', true);
+      });
+      $('#delAll').show()
     }
   </script>
   <!-- End Game Data -->

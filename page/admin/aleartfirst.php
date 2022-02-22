@@ -359,7 +359,6 @@
         // console.log($('#del').val());
         let title = total_del.length > 1 ? 'คุณต้องการลบ ' + total_del.length + ' ข้อมูลนี้หรือไม่?' : 'คุณต้องการลบข้อมูลนี้หรือไม่?'
         DelLog($('#del').val(), title);
-
     }
 
     function DelLog(id, title = 'คุณต้องการลบข้อมูลนี้หรือไม่?') {
