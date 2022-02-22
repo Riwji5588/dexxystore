@@ -215,9 +215,10 @@ if ($total_game_row <= 0) {
 
                           <button type="submit" id="updatedata<?= $data['data_id']; ?>" class="d-none"></button>
                         </form>
-
+                        <input type="hidden" id="copy<?= $data['data_id']; ?>" value="<?= $data['username']; ?>:<?= base64_decode($data['password']); ?>:<?= $data['display']; ?>">
                       </div>
                       <div class="modal-footer p-2 border-0">
+                        <button type="button" class="btn btn-dark" onclick="copyfile(this,<?= $data['data_id']; ?>)"><i class="far fa-copy"></i> คัดลอก</button>
                         <button type="button" onclick="updatedata('<?= $data['data_id']; ?>')" class="btn hyper-btn-notoutline-success"><i class="fal fa-plus-square mr-1"></i>อัพเดทข้อมูล</button>
                         <button type="button" class="btn hyper-btn-notoutline-danger" data-dismiss="modal"><i class="fad fa-times-circle mr-1"></i>ยกเลิก</button>
                       </div>
@@ -590,6 +591,21 @@ if ($total_game_row <= 0) {
         $('#check' + value).prop('checked', true);
       });
       $('#delAll').show()
+    }
+
+    function copyfile(input, dataid) {
+      let copyText = document.getElementById(`copy${dataid}`);
+      copyText.type = "text";
+      copyText.select();
+      copyText.setSelectionRange(0, 99999)
+      document.execCommand("copy");
+      copyText.type = "hidden";
+      input.innerHTML = "<i class='far fa-copy'></i> คัดลอกแล้ว";
+      input.className = "btn btn-success";
+      setTimeout(function() {
+        input.innerHTML = "<i class='far fa-copy'></i> คัดลอก";
+        input.className = "btn btn-dark";
+      }, 1000);
     }
   </script>
   <!-- End Game Data -->
