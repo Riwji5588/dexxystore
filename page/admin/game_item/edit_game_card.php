@@ -228,7 +228,7 @@
                             <input type="checkbox" class="custom-control-input" id="customSwitch1" <?php if ($card['isactive'] == '1') {
                                                                                                       echo "checked";
                                                                                                     } ?> onchange="checkeds()">
-                            <label class="custom-control-label pt-1" for="customSwitch1" style="position: absolute;">ระบบเคลมครั้งแรกอัตโนมัติ</label>
+                            <label class="custom-control-label pt-1" for="customSwitch1" style="position: absolute;">พร้อมส่ง</label>
                           </div>
                         </div>
 
