@@ -19,6 +19,10 @@
   $total_game_row = mysqli_num_rows($query_game);
   $game = mysqli_fetch_array($query_game);
 
+
+
+
+
   if ($total_game_row <= 0) {
   ?>
     <h4 class="text-center w-100 mt-4">ไม่มีเกมในขณะนี้</h4>
@@ -29,6 +33,9 @@
       $data_ready_selled = "SELECT count(data_id) AS 'totaldata' FROM game_data WHERE game_id = $gid AND selled = 0";
       $ready_selled_row = $hyper->connect->query($data_ready_selled)->fetch_array();
 
+      $sql_select_count = "SELECT COUNT(isactive) as isactive FROM game_card WHERE isactive = '1' AND game_id = $gid";
+      $card_count = $hyper->connect->query($sql_select_count)->fetch_assoc();
+
       if ($ready_selled_row['totaldata'] > 0) {
 
     ?>
@@ -38,7 +45,11 @@
               <img src="assets/img/game/<?= $game['game_image']; ?>" class="card-img-top img-fluid" style="border-top-left-radius: 0.6rem !important;border-top-right-radius: 0.6rem !important;">
               <div class="card-body">
                 <h4 class="mt-0 mb-2" id="title<?= $game['game_id']; ?>"><?= $game['game_name']; ?></h4>
-                <h5 style="color: green;" class="text-left"> พร้อมส่ง ! </h5>
+                <?php if ($card_count['isactive'] > 0) : ?>
+                  <h5 style="color: green;" class="text-left"> พร้อมส่ง ! </h5>
+                <?php elseif ($card_count['isactive'] == 0) : ?>
+                  <h5 style="color: red;" class="text-left"> ไม่พร้อมส่ง </h5>
+                <?php endif; ?>
               </div>
             </div>
           </a>

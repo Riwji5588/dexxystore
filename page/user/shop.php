@@ -91,7 +91,11 @@ if ($total_game_row <= 0) {
               <div class="card-body">
                 <h5 class="mt-0 mb-2" id="title<?= $card['card_id'] ?>"><?= $card['card_title'] ?></h5>
                 <h5 class="mt-0" id="price<?= $card['card_id'] ?>">ราคา <?= number_format($card['card_price'], 0) ?> บาท</h5>
-                <h6 class="mt-0" style="color: green;">พร้อมส่ง</h6>
+                <?php if ($card['isactive'] == '1') : ?>
+                  <h6 class="mt-0" style="color: green;">พร้อมส่ง</h6>
+                <?php elseif ($card['isactive'] == '0') : ?>
+                  <h6 class="mt-0" style="color: red;">ไม่พร้อมส่ง</h6>
+                <?php endif; ?>
                 <div class="row no-gutters ml-auto mr-auto mt-3">
                   <button id="click<?= $card['card_id'] ?>" class="btn btn-sm hyper-btn-success col-12" type="button" data-toggle="modal" data-target="#detail<?= $card['card_id'] ?>" style=" color: black;"><i class="fal fa-shopping-cart mr-1"></i>ซื้อสินค้า</button>
                 </div>
@@ -142,7 +146,7 @@ if ($total_game_row <= 0) {
                   </pre>
                   <div class="modal-footer p-2 border-0 row">
 
-                    <button onclick="BuyItem(this)" value="<?= $card['card_id'] ?>" class="btn  hyper-btn-buy mb-2 mb-md-0 mr-0 mr-md-2 "><i class="fal fa-shopping-cart mr-1"></i>ซื้อสินค้า</button>
+                    <button <?php if ($card['isactive'] == '1') : ?> onclick="BuyItem(this)" <?php elseif ($card['isactive'] == '0') : ?> onclick="notActive()" <?php endif; ?> value="<?= $card['card_id'] ?>" class="btn  hyper-btn-buy mb-2 mb-md-0 mr-0 mr-md-2 "><i class="fal fa-shopping-cart mr-1"></i>ซื้อสินค้า</button>
                     <button type="button" class="btn  hyper-btn-notoutline-danger  mb-2 mb-md-0 mr-0 mr-md-2" data-dismiss="modal"><i class="fad fa-times-circle mr-1"></i>ปิดหน้าต่าง</button>
 
                   </div>
@@ -263,6 +267,20 @@ if ($total_game_row <= 0) {
           }
         });
 
+    }
+
+    function notActive() {
+      swal({
+        title: 'สินค้าไม่พร้อมส่ง',
+        icon: "error",
+        buttons: {
+          confirm: {
+            text: 'ตกลง',
+            className: 'hyper-btn-notoutline-success'
+          },
+        },
+        closeOnClickOutside: false,
+      })
     }
   </script>
 
