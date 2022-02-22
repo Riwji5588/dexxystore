@@ -225,10 +225,8 @@
 
                         <div class="input-group input-group-sm mb-3" align="start">
                           <div class="custom-control custom-switch custom-switch-md w-100">
-                            <input type="checkbox" class="custom-control-input" id="customSwitch1" <?php if ($card['isactive'] == '1') {
-                                                                                                      echo "checked";
-                                                                                                    } ?> onchange="checkeds()">
-                            <label class="custom-control-label pt-1" for="customSwitch1" style="position: absolute;">พร้อมส่ง</label>
+                            <input type="checkbox" class="custom-control-input" id="customSwitch<?= $card['card_id'] ?>" <?php if ($card['isactive'] == '1') : ?> checked <?php endif; ?>>
+                            <label class="custom-control-label pt-1" for="customSwitch<?= $card['card_id'] ?>" style="position: absolute;">พร้อมส่ง</label>
                           </div>
                         </div>
 
@@ -393,7 +391,10 @@
                     var name = $('#title' + id).val();
                     var price = $('#price' + id).val();
                     var detail = $('#detail' + id).val();
-                    var isactive = $('#customSwitch1').is(':checked') ? '1' : '0';
+                    var isactive = $('#customSwitch' + id).is(':checked') ? '1' : '0';
+
+                    console.log(isactive);
+
                     updatedata.append('cid', cid);
                     updatedata.append('img', imagefile);
                     updatedata.append('title', name);
