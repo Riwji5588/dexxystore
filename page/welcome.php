@@ -6,7 +6,7 @@
     <span>บริการ 24 ชั่วโมง !</span>
   </div>
 </h1><br>
-<h1 class="text-center mb-2" style="color: white;">
+<h1 id="titleOrder" class="text-center mb-2" style="color: white;">
   <div class="sign text-center" align="center">
     <span class="fast-flicker">สิน</span>ค้า<span class="flicker">แนะนำ</span>
   </div>
@@ -21,13 +21,12 @@
 
 
 
-
-
   if ($total_game_row <= 0) {
   ?>
-    <h4 class="text-center w-100 mt-4">ไม่มีเกมในขณะนี้</h4>
+    <h4 class="text-center w-100 mt-4">ไม่มีสินค้าในขณะนี้</h4>
     <?php
   } else {
+    $allCount = 0;
     do {
       $gid = $game['game_id'];
       $data_ready_selled = "SELECT count(data_id) AS 'totaldata' FROM game_data WHERE game_id = $gid AND selled = 0";
@@ -36,8 +35,9 @@
       $sql_select_count = "SELECT COUNT(isactive) as isactive FROM game_card WHERE isactive = '1' AND game_id = $gid";
       $card_count = $hyper->connect->query($sql_select_count)->fetch_assoc();
 
+      
       if ($ready_selled_row['totaldata'] > 0) {
-
+        $allCount +=$ready_selled_row['totaldata'];
     ?>
         <div class="col-10 col-md-6 col-lg-4 p-2">
           <a href="shop&gameid=<?= $game['game_id']; ?>">
@@ -57,6 +57,15 @@
 
   <?php }
     } while ($game = mysqli_fetch_array($query_game));
+
+    if ($allCount == 0) {
+      ?>
+      <h3 class="text-center w-100 mt-4 text-light">ไม่มีสินค้าในขณะนี้</h3>
+      <script>
+        $('#titleOrder').hide();
+      </script>
+      <?php
+    }
   } ?>
 
 

@@ -22,7 +22,7 @@ if ($_POST) {
                     $data_result = $hyper->connect->query($select_data)->fetch_assoc();
 
                     $select_selled_date = "SELECT selled_date FROM data_selled WHERE selled_id={$claim_data['claim_id']}";
-                    $selled_date = $hyper->connect->query($select_selled_date)->fetch_assoc()['selled_date'];
+                    $selled_date = $hyper->connect->query($select_selled_date)->fetch_assoc()['selled_date'] ?? 'Null';
 
                     $select_count_claim = "SELECT COUNT(*) AS count_claim FROM data_claim WHERE claim_id={$claim_data['claim_id']} AND confirm=1";
                     $count_claim = (int)$hyper->connect->query($select_count_claim)->fetch_assoc()['count_claim'];

@@ -87,6 +87,9 @@
         let host = window.location.origin == "http://localhost" ? "http://localhost/dexystore" : isSandbox ? "https://sandbox.dexystore.me" : "https://dexystore.me";
         let url = host + '/plugin/getReport.php';
         let getid = window.location.search.split('id=')[1] || false;
+
+        console.log(url)
+
         $.ajax({
 
             type: "POST",
