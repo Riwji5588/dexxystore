@@ -78,7 +78,7 @@
                                           success: function(data) {
                                                 setTimeout(() => {
                                                       if (data.code == "200") {
-                                                            swal("ทำรายการ สำเร็จ!", "ระบบกำลังพาท่านไป...", "success", {
+                                                            swal("เติมเงิน สำเร็จ!", "จำนวน " + data.amount + " บาท", "success", {
                                                                   button: false,
                                                                   closeOnClickOutside: false,
                                                             });

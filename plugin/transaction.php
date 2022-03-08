@@ -38,6 +38,8 @@ if (isset($_POST['ref'])) {
 
                     $sql_log = "INSERT INTO history_pay (username, link, amount, date) VALUES ('$username', '$link', '$money', '$date')";
                     $log_query = $hyper->connect->query($sql_log);
+
+                    $result['amount'] = $money;
                 } else {
                     $errorMSG = 'ระบบเติมเงินมีปัญหา ติดต่อแอดมิน';
                 }
