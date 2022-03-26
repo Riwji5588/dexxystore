@@ -210,7 +210,7 @@
                               </div>
                           <div class="modal-footer p-2 border-0">
                             <button type="button" onclick="updatedata('${data[0].ac_id}')" class="btn btn-success"><i class="fal fa-plus-square mr-1"></i>อัพเดทข้อมูล</button>
-                            <button type="button" data-toggle="modal" data-target="#topupmodal${data[0].ac_id}" class="btn btn-success"><i class="fal fa-plus-circle mr-1"></i>เติมเงิน</button>
+                            <button type="button" data-toggle="modal" data-target="#topupmodal${data[0].ac_id}" class="btn btn-warning"><i class="fal fa-plus-circle mr-1"></i>เติมเงิน</button>
                             <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="total_del = []"><i class="fad fa-times-circle mr-1"></i>ยกเลิก</button>
                           </div>
                         </div>
