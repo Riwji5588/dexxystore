@@ -210,6 +210,7 @@
                               </div>
                           <div class="modal-footer p-2 border-0">
                             <button type="button" onclick="updatedata('${data[0].ac_id}')" class="btn btn-success"><i class="fal fa-plus-square mr-1"></i>อัพเดทข้อมูล</button>
+                            <button type="button" data-toggle="modal" data-target="#topupmodal${data[0].ac_id}" class="btn btn-success"><i class="fal fa-plus-circle mr-1"></i>เติมเงิน</button>
                             <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="total_del = []"><i class="fad fa-times-circle mr-1"></i>ยกเลิก</button>
                           </div>
                         </div>
@@ -272,6 +273,26 @@
                       </div>
                     </div>
                   <!-- End Ban Modal -->
+
+                  <!-- Topup Modal -->
+                    <div class="modal fade" id="topupmodal${data[0].ac_id}"  data-backdrop="static" data-keyboard="false" tabindex="-1" aria-hidden="true">
+                      <div class="modal-dialog modal-dialog-centered modal-lg">
+                        <div class="modal-content">
+                          <div class="modal-body">
+                            <div class="card-body">
+                            <div class="form-group">
+                              <input type="number" id="addtopup${data[0].ac_id}" class="form-control" placeholder="จำนวนเงินที่เติม" /> 
+                            </div>
+                            </div>
+                          </div>
+                          <div class="modal-footer px-2 pb-2">
+                            <button type="button" onclick="topup(${data[0].ac_id})" class="btn btn-success"><i class="fal fa-plus-circle mr-1"></i>เติมเงิน</button>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fad fa-times-circle mr-1"></i>ยกเลิก</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  <!-- End Topup Modal -->
                   
                  `
              // jquery check is have element
@@ -469,6 +490,69 @@
      });
    }
 
+   function topup(id) {
+
+     var updatedata = new FormData();
+     var ac_id = id;
+     var amount = $('#addtopup' + id).val()
+
+     updatedata.append('ac_id', ac_id);
+     updatedata.append('amount', amount);
+     updatedata.append('action', 'admin');
+
+     swal({
+       icon: "info",
+       title: `เติมเงินจำนวน ${$('#addtopup' + id).val()} บาท`,
+       text: "คุณต้องการเติมเงินจำนวนเงินนี้ใช่หรือไม่",
+       buttons: {
+         confirm: {
+           text: 'เติมเงิน',
+           className: 'hyper-btn-notoutline-success'
+         },
+         cancel: 'ยกเลิก'
+       },
+       closeOnClickOutside: false,
+     }).then((data) => {
+       if (data) {
+         $.ajax({
+           type: "POST",
+           url: "plugin/transaction.php",
+           dataType: "json",
+           data: updatedata,
+           cache: false,
+           contentType: false,
+           processData: false,
+           
+           success: function(data) {
+             setTimeout(() => {
+               if (data.code == 200) {
+                 swal("เติมเงิน สำเร็จ!", "จำนวน " + data.amount + " บาท", "success", {
+                   button: false,
+                   closeOnClickOutside: false,
+                 });
+                 renderPage(host, url, false);
+                 setTimeout(function() {
+                   window.location.reload();
+                 }, 1500);
+               } else {
+                 swal(data.msg, "", "error", {
+                   button: {
+                     className: 'hyper-btn-notoutline-danger',
+                   },
+                   closeOnClickOutside: false,
+                 });
+               }
+             }, 600);
+           },
+
+           error: function(data) {
+             console.log(data.responseText);
+           }
+
+         });
+       }
+     })
+   }
  </script>
 
  <style>

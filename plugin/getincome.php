@@ -5,7 +5,7 @@ $errormsg = "";
 
 if (isset($_POST)) {
     if ($_POST['action'] == 'getincome') {
-        $sql_select_pay = "SELECT username, link, amount, date FROM history_pay";
+        $sql_select_pay = "SELECT username, link, amount, date, isadmin FROM history_pay";
         $query_pay = $hyper->connect->query($sql_select_pay);
         $total_pay_row = mysqli_num_rows($query_pay);
         $i = 0;
@@ -26,7 +26,7 @@ if (isset($_POST)) {
             $start = $_POST['start'];
             $end = $_POST['end'];
             if ($start != "" && $end != "") {
-                $sql_select_pay = "SELECT username, link, amount, date FROM history_pay WHERE date BETWEEN '" . $start . " 00:00:00" . "' AND '" . $end . " 23:59:59" . "' ORDER BY pay_id ASC";
+                $sql_select_pay = "SELECT username, link, amount, date, isadmin FROM history_pay WHERE date BETWEEN '" . $start . " 00:00:00" . "' AND '" . $end . " 23:59:59" . "' ORDER BY pay_id ASC";
                 $query_pay = $hyper->connect->query($sql_select_pay);
                 $total_pay_row = mysqli_num_rows($query_pay);
                 $i = 0;

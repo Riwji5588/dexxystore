@@ -59,6 +59,44 @@ if (isset($_POST['ref'])) {
     } else {
         echo json_encode(['code' => 500, 'msg' => $errorMSG]);
     }
+} else if (isset($_POST['action']) && $_POST['action'] == 'admin') {
+    $ac_id = $_POST['ac_id'];
+    $point = $_POST['amount'];
+
+    $user = "SELECT * FROM accounts WHERE ac_id = '" . $ac_id . "' ";
+    $user_query = $hyper->connect->query($user);
+
+    if (mysqli_num_rows($user_query) == 1) {
+        $data_user = $hyper->connect->query($user)->fetch_array();
+        $username = $data_user['username'];
+        $add = $data_user['points'] + $point;
+
+        $update_user_sql = "UPDATE accounts SET points = $add WHERE ac_id = '" . $ac_id . "' ";
+        $update_user_query = $hyper->connect->query($update_user_sql);
+        if ($update_user_query) {
+
+            date_default_timezone_set("Asia/Bangkok");
+            $date = date("Y-m-d H:i:s");
+
+            $sql_log = "INSERT INTO history_pay (username, link, amount, date, isadmin) VALUES ('$username', 'เติมโดย ADMIN', '$point', '$date', 1)";
+            $log_query = $hyper->connect->query($sql_log);
+
+            $result['code'] = 200;
+            $result['amount'] = (int)$point;
+        } else {
+            $errorMSG = 'ระบบเติมเงินมีปัญหา ติดต่อแอดมิน';
+        }
+    } else {
+        $errorMSG = $result['msg'];
+    }
+
+
+    /* result */
+    if (empty($errorMSG)) {
+        echo json_encode($result);
+    } else {
+        echo json_encode(['code' => 500, 'msg' => $errorMSG]);
+    }
 } else {
     header("Location: 403.php");
 }

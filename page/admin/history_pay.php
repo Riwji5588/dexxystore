@@ -2,6 +2,7 @@
       <h3 class="text-center mt-4 mb-4" style="color: white;">--- ประวัติรายได้ ---</h3>
       <br>
       <h4 style="color: #fff;text-align:center;">รายได้ <span class="sumtoday"></span> บาท</h4>
+      <h6 style="color: #fff;text-align:center;">( <span class="sumdetail"></span> )</h6>
       <br>
       <div class="row">
         <div class="col-12 col-md-6">
@@ -108,6 +109,8 @@
                 let body = $('#body').html();
                 let html = '';
                 let total = 0;
+                let user = 0;
+                let admin = 0;
                 for (let i = 0; i < data.length; i++) {
                   body += `
                   <tr>
@@ -118,13 +121,18 @@
                     <td>${data[i].date}</th>
                   </tr>
                 `;
-                  total += parseInt(data[i].amount);
+                  if (data[i].isadmin == 1) {
+                    admin += parseInt(data[i].amount);
+                  } else {
+                    user += parseInt(data[i].amount);
+                  }
                 }
 
                 $('#body').html(body);
                 $('#myTable').DataTable();
                 $('.dataTables_empty').html('ยังไม่มีรายได้ในขณะนี้');
-                $('.sumtoday').html(new Intl.NumberFormat().format(total));
+                $('.sumtoday').html(new Intl.NumberFormat().format(user+admin));
+                $('.sumdetail').html(`฿${new Intl.NumberFormat().format(user)} + ฿${new Intl.NumberFormat().format(admin)}`);
                 $('#loading').hide();
               }
             },
@@ -161,6 +169,8 @@
                 let body = $('#body').html();
                 let html = '';
                 let total = 0;
+                let user = 0;
+                let admin = 0;
                 for (let i = 0; i < data.length; i++) {
                   body += `
                             <tr>
@@ -171,12 +181,17 @@
                               <td>${data[i].date}</th>
                             </tr>
                           `;
-                  total += parseInt(data[i].amount);
+                  if (data[i].isadmin == 1) {
+                    admin += parseInt(data[i].amount);
+                  } else {
+                    user += parseInt(data[i].amount);
+                  }
                 }
                 $('#body').html(body);
                 $('#myTable').DataTable();
                 $('.dataTables_empty').html('ยังไม่มีรายได้ในขณะนี้');
-                $('.sumtoday').html(new Intl.NumberFormat().format(total))
+                $('.sumtoday').html(new Intl.NumberFormat().format(user+admin));
+                $('.sumdetail').html(`฿${new Intl.NumberFormat().format(user)} + ฿${new Intl.NumberFormat().format(admin)}`);
                 $('#loading').hide();
               }
             },
