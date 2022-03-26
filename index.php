@@ -65,18 +65,18 @@ if (isset($_COOKIE['USER_SID'])) {
 
   <link rel="shortcut icon" href="assets/img/<?= $webimage; ?>" type="image/png">
   <link href="https://fonts.googleapis.com/css2?family=Kanit&display=swap" rel="stylesheet">
-  <link href="assets/css/bootstrap.css" rel="stylesheet">
+  <link href="./assets/css/bootstrap.css" rel="stylesheet">
   <link href="./assets/css/main.css" rel="stylesheet">
 
   <link rel="stylesheet" type="text/css" href="assets/css/jquery.dataTables.min.css">
   <link rel="stylesheet" type="text/css" href="assets/css/dataTables.bootstrap4.min.css">
 
-  <link href="assets/css/animate.css" rel="stylesheet">
-  <script src="assets/js/sweetalert.min.js"></script>
+  <link href="./assets/css/animate.css" rel="stylesheet">
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
-  <link href="assets/css/hyper.css" rel="stylesheet">
+  <link href="./assets/css/hyper.css" rel="stylesheet">
   <link href="./assets/css/textanimation.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -424,7 +424,7 @@ if (isset($_COOKIE['USER_SID'])) {
   <!-- Container End -->
   <a href="https://lin.ee/4YASD6R" align="center">
     <div class="br-icon justify-content-center">
-      <img class="logo" src="assets/img/LINE.png">
+      <img class="logo" src="./assets/img/linelogo.png">
       <span style="font-size:13px;width:100%">Line</span>
     </div>
   </a>

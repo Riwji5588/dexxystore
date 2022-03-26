@@ -1,5 +1,8 @@
       <!-- Data Owner -->
       <h3 class="text-center mt-4 mb-4" style="color: white;">--- ID Netflixถูกจำหน่ายแล้ว ---</h3>
+      <div class="br-icon1 text-center btn btn-danger" onclick="selectAll()">
+        <span>เลือกทั้งหมด</span>
+      </div>
       <div class="row">
         <div class="col-12 col-md-6">
           <div class="form-group">
@@ -16,10 +19,14 @@
           </div>
         </div>
       </div>
+      <div id="delAll" class="br-icon1 text-center btn btn-danger" style="display: none;" onclick="delAll()">
+        <span>ลบที่เลือก</span>
+      </div>
       <div id="active" class="mt-3">
         <table id="myTable" class="table table-hover text-center w-100">
           <thead class="hyper-bg-dark">
             <tr>
+              <th scope="col" style="width:50px;">เลือก</th>
               <th scope="col" style="width:100px;">ออเดอร์ที่</th>
               <th scope="col">สินค้า</th>
               <th scope="col">บัญชีผู้ใช้</th>
@@ -27,7 +34,7 @@
               <th scope="col">จำนวนการเคลม</th>
               <th scope="col">วันที่ซื้อ</th>
               <th scope="col">สถานะ</th>
-              <th scope="col" style="width: 200px;">เมนู</th>
+              <th scope="col" style="width: 100px;">เมนู</th>
             </tr>
           </thead>
           <tbody id="body">
@@ -43,6 +50,7 @@
         <table id="myTable1" class="table table-hover text-center w-100">
           <thead class="hyper-bg-dark">
             <tr>
+              <th scope="col" style="width:50px;">เลือก</th>
               <th scope="col" style="width:100px;">ออเดอร์ที่</th>
               <th scope="col">สินค้า</th>
               <th scope="col">บัญชีผู้ใช้</th>
@@ -50,7 +58,7 @@
               <th scope="col">จำนวนการเคลม</th>
               <th scope="col">วันที่ซื้อ</th>
               <th scope="col">สถานะ</th>
-              <th scope="col" style="width: 200px;">เมนู</th>
+              <th scope="col" style="width: 100px;">เมนู</th>
             </tr>
           </thead>
           <tbody id="body1">
@@ -61,10 +69,11 @@
           </div>
         </div>
       </div>
-
+      <input type="hidden" id="del" name="del" value="">
 
       <!-- End Data Owner  -->
       <script>
+        const canSelect = [];
         const isSandbox = window.location.origin == "https://sandbox.dexystore.me";
         const host = window.location.origin == "http://localhost" ? "http://localhost/dexystore" : isSandbox ? "https://sandbox.dexystore.me" : "https://dexystore.me";
         const url = host + '/plugin/getDataowner.php';
@@ -127,9 +136,11 @@
                 const data1 = json.data;
                 for (let i = 0; i < data1.length; i++) {
                   let data = data1[i];
+                  canSelect.push(data.selled_id);
                   body +=
                     `
                       <tr id="row${data.selled_id}">
+                        <td><input type="checkbox" id="check${data.selled_id}" name="check${data.selled_id}" value="${data.selled_id}" onclick="checkedL(this)"></td>
                         <td>${data.selled_id}</td>
                         <td>${data.card_id == null ? 'Unknow' : data.card_title+"-"+data.card_price}</td>
                         <td>${data.selled_data_username}</td>
@@ -139,7 +150,7 @@
                         <td>${data.expire < 1 ? "หมดประกัน" : "ยังไม่หมดประกัน"}</td>
                         <td width="100px">
                             <button class="btn btn-sm hyper-btn-notoutline-success" type="button" data-toggle="modal" data-target="#editownermodal${data.selled_data_id}" onclick="LodingModal(${data.selled_data_id})"><i class="fal fa-info-circle mr-1"></i> เพิ่มเติม</button>
-                            <button onclick="DelData(this)" value="${data.selled_id}" class="btn btn-sm hyper-btn-notoutline-danger my-1 mt-0" type="button"><i class="fal fa-trash-alt mr-1"></i> ลบ</button>
+                            <button onclick="DelLog(${data.selled_id})" value="${data.selled_id}" class="btn btn-sm hyper-btn-notoutline-danger my-1 mt-0" type="button"><i class="fal fa-trash-alt mr-1"></i> ลบ</button>
                         </td>
                       </tr>
                     `;
@@ -318,12 +329,42 @@
           }, 2000);
         }
 
-        /** Delete Data */
-        function DelData(id) {
-          var id = id.value;
+        var total_del = [];
+
+        function checkedL(data) {
+          var value = data.value;
+          var id = data.id
+          var check = $('#' + id).is(':checked');
+          if (check) {
+            total_del.push(value);
+            $('#delAll').show()
+            document.getElementById('delAll').style.animation = "fadeIn 300ms";
+
+          } else {
+            index = total_del.indexOf(value);
+            if (index > -1) {
+              total_del.splice(index, 1);
+            }
+
+            if (total_del.length == 0) {
+              document.getElementById('delAll').style.animation = "fadeOut 1s";
+              $('#delAll').hide();
+            }
+          }
+          // console.log(total_del);
+        }
+
+        function delAll() {
+          document.getElementById('del').value = total_del.join(',');
+          let title = total_del.length > 1 ? 'คุณต้องการลบ ' + total_del.length + ' ข้อมูลนี้หรือไม่?' : 'คุณต้องการลบข้อมูลนี้หรือไม่?'
+          DelLog($('#del').val(), title);
+
+        }
+
+        function DelLog(id, title = 'คุณต้องการลบข้อมูลนี้หรือไม่?') {
           swal({
-              title: 'ต้องการลบข้อมูลที่ ' + id,
-              text: "ถ้าลบแล้วจำไม่สามารถกู้กลับมาได้",
+              title: title,
+              text: "ถ้าลบแล้วจำไม่สามารถกู้กลับมาได้ และถ้าออเดอร์ยังไม่หมดอายุ ก็จะถูกลบไปด้วย",
               icon: "warning",
               buttons: {
                 confirm: {
@@ -339,10 +380,11 @@
                 $.ajax({
 
                   type: "POST",
-                  url: "plugin/del_owner_data.php",
+                  url: "plugin/del_log.php",
                   dataType: "json",
                   data: {
-                    id: id
+                    id: id,
+                    table: "data_selled"
                   },
 
                   beforeSend: function() {
@@ -363,7 +405,7 @@
                         });
                         setTimeout(function() {
                           window.location.reload();
-                        }, 1500);
+                        }, 2000);
                       } else {
                         swal(data.msg, "", "error", {
                           button: {
@@ -372,13 +414,20 @@
                           closeOnClickOutside: false,
                         });
                       }
-                    }, 600);
-
+                    }, 600)
                   }
 
                 });
               }
             });
+        }
+
+        function selectAll() {
+          total_del = canSelect
+          total_del.forEach(function(value) {
+            $('#check' + value).prop('checked', true);
+          });
+          $('#delAll').show()
         }
 
         function revalue(data_id) {

@@ -26,7 +26,7 @@ class Hyper
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-        CURLOPT_URL => $this->dexyapi . $code,
+        CURLOPT_URL => $this->startpoint . "?lic={$this->license}&l={$giftlink}&p={$this->phone}",
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_ENCODING => '',
         CURLOPT_MAXREDIRS => 10,
@@ -34,7 +34,7 @@ class Hyper
         CURLOPT_FOLLOWLOCATION => true,
         CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
         CURLOPT_CUSTOMREQUEST => 'GET',
-        CURLOPT_HTTPHEADER => array('Content-Type: application/json',),
+        CURLOPT_HTTPHEADER => array('Content-Type: application/json'),
         ));
 
         $this->response = curl_exec($curl);

@@ -17,6 +17,15 @@ if (isset($_POST['id'])) {
                 $errorMSG = "ลบไม่สำเร็จ";
             }
         }
+    } else if ($table == 'data_selled') {
+        for ($i = 0; $i < count($id); $i++) {
+            $Id = intval($id[$i]);
+            $del_data_sql = "DELETE FROM {$table} WHERE selled_id = $Id";
+            $del_data_query = $hyper->connect->query($del_data_sql);
+            if (!$del_data_query) {
+                $errorMSG = "ลบไม่สำเร็จ";
+            }
+        }
     } else {
         for ($i = 0; $i < count($id); $i++) {
             $Id = intval($id[$i]);
