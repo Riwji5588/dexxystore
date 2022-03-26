@@ -11,8 +11,9 @@
     <table id="myTable" class="table table-hover text-center w-100">
         <thead class="hyper-bg-dark">
             <tr>
-                <th>เลือก</th>
-                <th scope="col" style="width:120px;">ลำดับการเคลม</th>
+                <th style="width:50px;">เลือก</th>
+                <th scope="col" style="width:100px;">ลำดับการเคลม</th>
+                <th scope="col" style="width:85px;">ออเดอร์ที่</th>
                 <th scope="col">ผู้เคลม</th>
                 <th scope="col">วันที่เคลม</th>
                 <th scope="col">สถานะ</th>
@@ -116,6 +117,7 @@
                                 <td>
                                     ${data[i].claim_data_confirm != 0 ? i+1 : '-'}
                                 </td>
+                                <td>${data[i].claim_data_id}</td>
                                 <td>${data[i].username}</td>
                                 <td>${data[i].claim_data_date}</td>
                                 <td>${getid && 
