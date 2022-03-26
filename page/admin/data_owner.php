@@ -27,7 +27,7 @@
           <thead class="hyper-bg-dark">
             <tr>
               <th scope="col" style="width:50px;">เลือก</th>
-              <th scope="col" style="width:100px;">ออเดอร์ที่</th>
+              <th scope="col" style="width:85px;">ออเดอร์ที่</th>
               <th scope="col">สินค้า</th>
               <th scope="col">บัญชีผู้ใช้</th>
               <th scope="col">เจ้าของ</th>
@@ -51,7 +51,7 @@
           <thead class="hyper-bg-dark">
             <tr>
               <th scope="col" style="width:50px;">เลือก</th>
-              <th scope="col" style="width:100px;">ออเดอร์ที่</th>
+              <th scope="col" style="width:85px;">ออเดอร์ที่</th>
               <th scope="col">สินค้า</th>
               <th scope="col">บัญชีผู้ใช้</th>
               <th scope="col">เจ้าของ</th>
