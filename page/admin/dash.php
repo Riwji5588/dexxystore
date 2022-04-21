@@ -120,7 +120,15 @@ $plusdate = $hyper->datethai->DateThai2(date("Y-m-d", strtotime("+30 day")));
             </div>
         </a>
     </div>
-
+    <div class="col-6 col-lg-4 p-2">
+        <a href="dellog">
+            <div class="card shadow-dark radius-border-6 hyper-bg-white text-center p-3 hyper-card">
+                <h1 class="mt-0 mb-0" style="font-size: 3.5rem;"><i class="far fa-trash-alt"></i></h1>
+                <h1 class="mt-0 mb-0">ถังขยะ</h1>
+                <font class="text-muted">ประการลบ</font>
+            </div>
+        </a>
+    </div>
 </div>
 <!-- End Menu Bar -->
 

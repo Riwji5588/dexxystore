@@ -8,13 +8,13 @@ if (isset($_POST)) {
     if (!isset($_POST['action']) || $_POST['action'] == "") {
         $errormsg = "Invalid Request";
     } else {
-        define('action', $_POST['action']);
+        $action = $_POST['action'];
 
         if (isset($_POST['id']) && isset($_POST['table'])) {
             $id = $_POST['id'];
             $id = explode(",", $id);
             $table = $_POST['table'];
-            if (action == 'restore') {
+            if ($action == 'restore') {
                 if ($table == 'game_data') {
                     for ($i = 0; $i < count($id); $i++) {
                         $Id = intval($id[$i]);
@@ -33,7 +33,11 @@ if (isset($_POST)) {
                             $errorMSG = "ลบไม่สำเร็จ";
                         }
                     }
-                } else {
+
+                    // get firt 5 character of $table
+
+                } else if (substr($table, 0, 5) == 'claim') {
+                    $table = 'data_' . $table;
                     for ($i = 0; $i < count($id); $i++) {
                         $Id = intval($id[$i]);
                         $update = "UPDATE {$table} SET isDelete = 0 WHERE id = $Id";
@@ -42,8 +46,10 @@ if (isset($_POST)) {
                             $errorMSG = "ลบไม่สำเร็จ";
                         }
                     }
+                } else {
+                    $errorMSG = "Do not have table";
                 }
-            } else if (action == 'delete') {
+            } else if ($action == 'delete') {
                 if ($table == 'game_data') {
                     for ($i = 0; $i < count($id); $i++) {
                         $Id = intval($id[$i]);
@@ -82,7 +88,8 @@ if (isset($_POST)) {
 
     if (!$errormsg) {
         echo json_encode([
-            'code' => 200
+            'code' => 200,
+            'msg' => $Id
         ]);
     } else {
         echo json_encode([

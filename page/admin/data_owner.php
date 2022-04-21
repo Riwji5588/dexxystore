@@ -84,6 +84,7 @@
         } else {
           active = true;
         }
+        
         $(document).ready(async () => {
           $('#result').hide();
           if (active) {

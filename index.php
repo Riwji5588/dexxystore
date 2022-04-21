@@ -388,6 +388,13 @@ if (isset($_COOKIE['USER_SID'])) {
           $page = 'home';
           include('page/welcome.php');
         }
+      } else if ($page == 'dellog') {
+        if ($data_user['role'] == '779') {
+          include('page/admin/history_del.php');
+        } else {
+          $page = 'home';
+          include('page/welcome.php');
+        }
       } else {
         $page = 'home';
         include('page/welcome.php');
