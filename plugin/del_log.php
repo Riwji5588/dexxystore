@@ -29,7 +29,7 @@ if (isset($_POST['id'])) {
     } else {
         for ($i = 0; $i < count($id); $i++) {
             $Id = intval($id[$i]);
-            $update = "UPDATE {$table} SET isDelete = 0 WHERE id = $Id";
+            $update = "UPDATE {$table} SET isDelete = 1 WHERE id = $Id";
             $del_data_query = $hyper->connect->query($update);
             if (!$del_data_query) {
                 $errorMSG = "ลบไม่สำเร็จ";
