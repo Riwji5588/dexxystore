@@ -312,25 +312,16 @@
 
     async function sendline(message, token) {
         let tokenList = token.split(',');
-        const urlLine = 'https://linenotifyapi.herokuapp.com/';
+        const urlLine = "https://dexystore.me/api/line/linemessage.php?token=" + token + "&message=" + message;
         $.ajax({
             url: urlLine,
-            type: 'POST',
-            headers: {
-                'Access-Control-Allow-Origin': '*',
-                'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
-                'Access-Control-Allow-Headers': 'Content-Type, Authorization, X-Requested-With',
-            },
-            data: {
-                message: message,
-                token: tokenList
-            }
         }).then(function() {
             setTimeout(() => {
                 window.location.reload();
             }, 100);
         });
     }
+
     var total_del = [];
 
     function checkedL(data) {

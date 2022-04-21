@@ -7,9 +7,9 @@ if ($_POST) {
     if ($_POST['action'] == 'getdataowner') {
         $exp = $_POST['exp'];
         if ($exp == 1) {
-            $sql_select_selled = "SELECT * FROM data_selled WHERE exp_date < CURDATE()";
+            $sql_select_selled = "SELECT * FROM data_selled WHERE exp_date < CURDATE() AND isDelete = 0";
         } else {
-            $sql_select_selled = "SELECT * FROM data_selled WHERE exp_date > CURDATE()";
+            $sql_select_selled = "SELECT * FROM data_selled WHERE exp_date > CURDATE() AND isDelete = 0";
         }
         $query_selled = $hyper->connect->query($sql_select_selled);
         $total_selled_row = mysqli_num_rows($query_selled);

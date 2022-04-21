@@ -96,19 +96,12 @@ $sql_select_selled = "SELECT * FROM data_selled WHERE ac_id = $ac_id ORDER BY se
   }
 
   async function sendline(message, token) {
-    let tokenList = token.split(',');
-    const urlLine = 'https://linenotifyapi.herokuapp.com/';
+    const urlLine = "https://dexystore.me/api/line/linemessage.php?token=" + token + "&message=" + message;
     $.ajax({
       url: urlLine,
-      type: 'POST',
-      headers: {
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
-        'Access-Control-Allow-Headers': 'Content-Type, Authorization, X-Requested-With',
-      },
-      data: {
-        message: message,
-        token: tokenList
+
+      success: function(result) {
+        console.log(result);
       }
     }).then(function() {
       setTimeout(() => {
