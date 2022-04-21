@@ -121,16 +121,16 @@ if ($total_game_row <= 0) {
                       </ol>
                       <div class="carousel-inner align-items-center">
                         <div class="carousel-item active" align="center">
-                          <img src="../../assets/img/img1.png" class="d-block w-70 carousel" alt="...">
+                          <img src="https://dexystore.me/assets/img/img11.png" class="d-block w-70 carousel" alt="...">
                         </div>
                         <div class="carousel-item" align="center">
-                          <img src="../../assets/img/img1.png" class="d-block w-70 carousel" alt="...">
+                          <img src="https://dexystore.me/assets/img/img2.png" class="d-block w-70 carousel" alt="...">
                         </div>
                         <div class="carousel-item" align="center">
-                          <img src="../../assets/img/img1.png" class="d-block w-70 carousel" alt="...">
+                          <img src="https://dexystore.me/assets/img/img33.png" class="d-block w-70 carousel" alt="...">
                         </div>
                         <div class="carousel-item" align="center">
-                          <img src="../../assets/img/img1.png" class="d-block w-70 carousel" alt="...">
+                          <img src="https://dexystore.me/assets/img/img4.png" class="d-block w-70 carousel" alt="...">
                         </div>
                       </div>
                       <button class="carousel-control-prev" type="button" data-target="#insub" data-slide="prev">
