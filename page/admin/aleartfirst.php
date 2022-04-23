@@ -444,7 +444,11 @@
                         closeOnClickOutside: false,
                     });
                     // console.log(data.line);
-                    sendline(data.line[0].massage, data.line[1].token);
+                    sendline(data.line[0].massage, data.line[1].token).then(() => {
+                        setTimeout(function() {
+                            window.location.reload();
+                        }, 1000);
+                    });
                 } else {
                     swal(data.msg, "\n", "error", {
                         button: {

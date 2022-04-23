@@ -84,6 +84,11 @@ $sql_select_selled = "SELECT * FROM data_selled WHERE ac_id = $ac_id ORDER BY se
 
 <script>
   var imgs_id = []
+
+  let isSandbox = window.location.origin == "https://sandbox.dexystore.me";
+  let host = window.location.origin == "http://localhost" ? "http://localhost/dexystore" : isSandbox ? "https://sandbox.dexystore.me" : "https://dexystore.me";
+  let url = host + '/api/line/linemessage.php';
+
   // on Ready Load history Data
   $(document).ready(function() {
     search($('#search'), '<?= $sql_select_selled ?>');
@@ -93,21 +98,6 @@ $sql_select_selled = "SELECT * FROM data_selled WHERE ac_id = $ac_id ORDER BY se
   async function dosomething(id) {
     document.getElementById('claimbtn' + id).disabled = true;
     await claim(id)
-  }
-
-  async function sendline(message, token) {
-    const urlLine = "https://dexystore.me/api/line/linemessage.php?token=" + token + "&message=" + message;
-    $.ajax({
-      url: urlLine,
-
-      success: function(result) {
-        console.log(result);
-      }
-    }).then(function() {
-      setTimeout(() => {
-        window.location.reload();
-      }, 100);
-    });
   }
 
   // search with ajax
@@ -239,13 +229,17 @@ $sql_select_selled = "SELECT * FROM data_selled WHERE ac_id = $ac_id ORDER BY se
           timer: 500,
         });
       },
-      success: function(data) {
+      success: async function(data) {
         if (data.code == "200") {
           swal(data.msg, '\n', "success", {
             button: false,
             closeOnClickOutside: false,
           });
-          sendline(data.line[0].massage, data.line[1].token);
+          await sendline(data.line[0].massage, data.line[1].token).then(() => {
+            setTimeout(function() {
+              window.location.reload();
+            }, 1000);
+          });
         } else {
           swal(data.msg, "\n", "error", {
             button: {

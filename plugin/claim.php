@@ -120,12 +120,12 @@ if (isset($_POST['id'])) {
                                                 $admin_num = mysqli_num_rows($admin_query);
 
                                                 // msg
-                                                $message = "\n=== ระบบเคลมอัตโนมัติ ===\n";
-                                                $message .= "‼️ ถึงแอดมิน ‼️ \n";
-                                                $message .= "ออเดอร์ที่ : " . $selled['selled_id'] . "\n";
-                                                $message .= "สถานะ : ส่งเคลม (ครั้งแรก)\n";
-                                                $message .= "โดย : " . $data_user['username'] . "\n";
-                                                $message .= "เหตุผล : " . $detail . "\n";
+                                                $message = "%0A=== ระบบเคลมอัตโนมัติ ===%0A";
+                                                $message .= "‼️ ถึงแอดมิน ‼️ %0A";
+                                                $message .= "ออเดอร์ที่ : " . $selled['selled_id'] . "%0A";
+                                                $message .= "สถานะ : ส่งเคลม (ครั้งแรก)%0A";
+                                                $message .= "โดย : " . $data_user['username'] . "%0A";
+                                                $message .= "เหตุผล : " . $detail . "%0A";
                                                 $message .= "ไปที่เว็บ : " . $hyper->url . "/reportfirst" . "&" . "id={$selled['selled_id']}";
 
                                                 array_push($line_data, [
@@ -180,15 +180,15 @@ if (isset($_POST['id'])) {
 
                                             // msg
                                             if ($web['isenable'] == '0') {
-                                                $message = "\n=== ปิดระบบเคลมอัตโนมัติ ===\n";
+                                                $message = "%0A=== ปิดระบบเคลมอัตโนมัติ ===%0A";
                                             } else {
-                                                $message = "\n=== ไม่อยู่ในช่วงเวลาที่กำหนด ===\n";
+                                                $message = "%0A=== ไม่อยู่ในช่วงเวลาที่กำหนด ===%0A";
                                             }
-                                            $message .= "‼️ ถึงแอดมิน ‼️ \n";
-                                            $message .= "ออเดอร์ที่ : " . $selled['selled_id'] . "\n";
-                                            $message .= "สถานะ : ส่งเคลม (ครั้งแรก)\n";
-                                            $message .= "โดย : " . $data_user['username'] . "\n";
-                                            $message .= "เหตุผล : " . $detail . "\n";
+                                            $message .= "‼️ ถึงแอดมิน ‼️ %0A";
+                                            $message .= "ออเดอร์ที่ : " . $selled['selled_id'] . "%0A";
+                                            $message .= "สถานะ : ส่งเคลม (ครั้งแรก)%0A";
+                                            $message .= "โดย : " . $data_user['username'] . "%0A";
+                                            $message .= "เหตุผล : " . $detail . "%0A";
                                             $message .= "ไปที่เว็บ : " . $hyper->url . "/report" . "&" . "id={$selled['selled_id']}";
 
                                             array_push($line_data, [
@@ -240,11 +240,11 @@ if (isset($_POST['id'])) {
                                         $admin_num = mysqli_num_rows($admin_query);
 
                                         // msg
-                                        $message = "\n‼️ ถึงแอดมิน ‼️ \n";
-                                        $message .= "ออเดอร์ที่ : " . $selled['selled_id'] . "\n";
-                                        $message .= "สถานะ : ส่งเคลม \n";
-                                        $message .= "โดย : " . $data_user['username'] . "\n";
-                                        $message .= "เหตุผล : " . $detail . "\n";
+                                        $message = "%0A‼️ ถึงแอดมิน ‼️ %0A";
+                                        $message .= "ออเดอร์ที่ : " . $selled['selled_id'] . "%0A";
+                                        $message .= "สถานะ : ส่งเคลม %0A";
+                                        $message .= "โดย : " . $data_user['username'] . "%0A";
+                                        $message .= "เหตุผล : " . $detail . "%0A";
                                         $message .= "ไปที่เว็บ : " . $hyper->url . "/report" . "&" . "id={$selled['selled_id']}";
 
                                         array_push($line_data, [
@@ -330,10 +330,10 @@ if (isset($_POST['id'])) {
                         $admin_num = mysqli_num_rows($admin_query);
 
                         // msg
-                        $message = "\n‼️ ถึงแอดมิน ‼️ \n";
-                        $message .= "ออเดอร์ที่ : " . $selled['selled_id'] . "\n";
-                        $message .= "สถานะ : อนุมัติ \n";
-                        $message .= "โดย : " . $data_user['username'] . "\n";
+                        $message = "%0A‼️ ถึงแอดมิน ‼️ %0A";
+                        $message .= "ออเดอร์ที่ : " . $selled['selled_id'] . "%0A";
+                        $message .= "สถานะ : อนุมัติ %0A";
+                        $message .= "โดย : " . $data_user['username'] . "%0A";
                         $message .= "ไปที่เว็บ : " . $hyper->url . "/report" . "&" . "id={$selled['selled_id']}";
 
                         array_push($line_data, [
@@ -373,11 +373,11 @@ if (isset($_POST['id'])) {
                             $admin_num = mysqli_num_rows($admin_query);
 
                             // msg
-                            $message = "\n‼️ ถึงแอดมิน ‼️ \n";
-                            $message .= "ออเดอร์ที่ : " . $selled['selled_id'] . "\n";
-                            $message .= "สถานะ : ปฏิเสธ \n";
-                            $message .= "หมายเหตุ : " . $response . "\n";
-                            $message .= "โดย : " . $data_user['username'] . "\n";
+                            $message = "%0A‼️ ถึงแอดมิน ‼️ %0A";
+                            $message .= "ออเดอร์ที่ : " . $selled['selled_id'] . "%0A";
+                            $message .= "สถานะ : ปฏิเสธ %0A";
+                            $message .= "หมายเหตุ : " . $response . "%0A";
+                            $message .= "โดย : " . $data_user['username'] . "%0A";
                             $message .= "ไปที่เว็บ : " . $hyper->url . "/report" . "&" . "id={$selled['selled_id']}";
 
                             array_push($line_data, [

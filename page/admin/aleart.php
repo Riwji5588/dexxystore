@@ -89,8 +89,6 @@
         let url = host + '/plugin/getReport.php';
         let getid = window.location.search.split('id=')[1] || false;
 
-        console.log(url)
-
         $.ajax({
 
             type: "POST",
@@ -354,18 +352,6 @@
         await submit(id, 3, $('#response' + id).val())
     }
 
-    async function sendline(message, token) {
-        let tokenList = token.split(',');
-        const urlLine = "https://dexystore.me/api/line/linemessage.php?token=" + token + "&message=" + message;
-        $.ajax({
-            url: urlLine,
-        }).then(function() {
-            setTimeout(() => {
-                window.location.reload();
-            }, 100);
-        });
-    }
-
     var total_del = [];
 
     function checkedL(data) {
@@ -482,13 +468,17 @@
 
             },
 
-            success: function(data) {
+            success: async function(data) {
                 if (data.code == "200") {
                     swal(data.msg, '\n', "success", {
                         button: false,
                         closeOnClickOutside: false,
                     });
-                    sendline(data.line[0].massage, data.line[1].token);
+                    await sendline(data.line[0].massage, data.line[1].token).then(() => {
+                        setTimeout(function() {
+                            window.location.reload();
+                        }, 1000);
+                    });
                 } else {
                     swal(data.msg, "\n", "error", {
                         button: {
@@ -511,7 +501,6 @@
     }
 
     function loadimg(id) {
-        console.log(id);
         $.ajax({
             type: "POST",
             url: "plugin/claim_img.php",
@@ -523,7 +512,6 @@
             },
             success: function(data) {
                 if (data.code == "200") {
-                    console.log(data.data);
                     if (data.data.length > 0) {
                         let html = '';
                         let inner = '';
