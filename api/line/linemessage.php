@@ -38,6 +38,8 @@
 
         $.ajax({
             url: options.url,
+            type: "GET",
+            crossDomain: true,
             success: function(data) {
                 console.log(data);
             },
